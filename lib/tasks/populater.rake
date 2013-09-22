@@ -38,15 +38,15 @@ namespace :populater do
     end
   end
 
-  desc "Wipes the db"
-  task wipe: :environment do
-  	config = ActiveRecord::Base.configurations[::Rails.env]
-	  connection = ActiveRecord::Base.connection
-	  connection.disable_referential_integrity do
-    connection.tables.each do |table_name|
-      next if connection.select_value("SELECT count(*) FROM #{table_name}") == 0
-        connection.execute("TRUNCATE #{table_name}")
-	    end
-	  end
-	end
+ #  desc "Wipes the db"
+ #  task wipe: :environment do
+ #  	config = ActiveRecord::Base.configurations[::Rails.env]
+	#   connection = ActiveRecord::Base.connection
+	#   connection.disable_referential_integrity do
+ #    connection.tables.each do |table_name|
+ #      next if connection.select_value("SELECT count(*) FROM #{table_name}") == 0
+ #        connection.execute("TRUNCATE #{table_name}")
+	#     end
+	#   end
+	# end
 end

@@ -7,7 +7,6 @@
     <%= link_to "Wipe", wiper_path, :method => 'put', :class => "button" %>
   </div>
 </div>
-
 <center>
 <table id="articles">
 <div class="row">
@@ -25,9 +24,6 @@
     <tr>
       <th width="200">Title</th>
       <th width="500">Text Body</th>
-      <th width="50"></th>
-      <th width="50"></th>
-      <th width="50"></th>
     </tr>
   </thead>
   <tbody>
@@ -35,9 +31,6 @@
       <tr>
         <td><%= article.title %></td>
         <td><%= article.body %></td>
-        <td><%= link_to 'Show', article %></td>
-        <td><%= link_to 'Edit', edit_article_path(article) %></td>
-        <td><%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
 <ul>

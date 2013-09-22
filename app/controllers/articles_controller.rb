@@ -3,12 +3,13 @@ class ArticlesController < ApplicationController
 
   def populater
     system "rake populater:populate &"
-    flash[:notice] = "Populating"
+    sleep 4
+    redirect_to articles_url
   end  
 
   def wiper
     Article.delete_all
-    flash[:notice] = "Wiping"
+    redirect_to articles_url
   end
 
   # GET /articles
