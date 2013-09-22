@@ -1,0 +1,52 @@
+<div class="row">
+  <div class="large-1 columns">
+    <h1>Articles</h1>
+  </div>
+  <div class="large-1 large-offset-10 columns">
+    <%= link_to "Populate", populater_path, :method => 'put', :class => "button" %>
+    <%= link_to "Wipe", wiper_path, :method => 'put', :class => "button" %>
+  </div>
+</div>
+
+<center>
+<table id="articles">
+<div class="row">
+  <div class="small-6 large-centered columns">
+    <%= form_for(Article.new, remote: true) do |f| %>
+      <%= f.label :title, "Article title:" %>
+      <%= f.text_field :title %><br />
+      <%= f.label :body, "Body:" %>
+      <%= f.text_area :body, :rows => 8 %><br />
+      <%= f.submit "Add comment" %>
+    <% end %>    
+  </div>
+</div>
+  <thead>
+    <tr>
+      <th width="200">Title</th>
+      <th width="500">Text Body</th>
+      <th width="50"></th>
+      <th width="50"></th>
+      <th width="50"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @articles.each do |article| %>
+      <tr>
+        <td><%= article.title %></td>
+        <td><%= article.body %></td>
+        <td><%= link_to 'Show', article %></td>
+        <td><%= link_to 'Edit', edit_article_path(article) %></td>
+        <td><%= link_to 'Destroy', article, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+<ul>
+</div>
+</div>
+
+</ul> 
+  </tbody>
+</table>
+</center>
+<br>
+

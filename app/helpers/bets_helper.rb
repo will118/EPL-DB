@@ -1,0 +1,2 @@
+module BetsHelper
+end

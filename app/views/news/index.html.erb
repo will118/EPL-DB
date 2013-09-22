@@ -1,0 +1,21 @@
+
+<div class="row">
+<div class="small-11 small-centered columns">
+		<% @articles.each do |article| %>
+
+		<h1 class="subheader"><%= article.title %></h1>
+<div class="row">
+  <div class="small-6 large-centered columns">
+  	
+		<%= image_tag(article.url) %> 
+  	
+  </div>
+</div>
+								<br>
+
+		<p><%= simple_format(article.body) %></p>
+
+		<% end %>
+		</div>
+</div>
+
