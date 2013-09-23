@@ -25,6 +25,6 @@ Then(/^the page should have notice message "(.*?)"$/) do |message|
   page.should have_xpath('//center[1]/div', :text => message)
 end
 
-Then(/^the page should automatically update with the newest entry$/) do
-  page.should have_text("This is my title")
+Then(/^the article should immediately appear on the page$/) do
+  page.should have_xpath('//center[2]/table', :text => "Article textbody")
 end

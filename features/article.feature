@@ -20,4 +20,4 @@ Feature: Add article
         And I fill in "article_title" with "This is my title"
         And I fill in "article_body" with "Article textbody"
         When I press "Add comment"
-        Then the page should automatically update with the newest entry
+        Then the article should immediately appear on the page
