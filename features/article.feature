@@ -13,3 +13,11 @@ Feature: Add article
         Given I am on the articles page
         And I click "Wipe"
         Then the page should have notice message "So delete"
+
+    @javascript
+    Scenario: Instant update when quick adding an article
+        Given I am on the articles page
+        And I fill in "article_title" with "This is my title"
+        And I fill in "article_body" with "Article textbody"
+        When I press "Add comment"
+        Then the page should automatically update with the newest entry

@@ -6,10 +6,12 @@ Given(/^I am on the new article page$/) do
   visit '/articles/new'
 end
 
-Given(/^I fill in "(.*?)" with "(.*?)"$/) do |article_title, article_body|
-  fill_in 'article_title', with: article_title
-  fill_in 'article_body', with: article_body
+Given(/^I fill in "(.*?)" with "(.*?)"$/) do |fieldname, text|
+  fill_in fieldname, with: text
 end
+
+
+# not very DRY but different methods...
 
 Given(/^I click "(.*?)"$/) do |button|
   click_on button
@@ -21,4 +23,8 @@ end
 
 Then(/^the page should have notice message "(.*?)"$/) do |message|
   page.should have_xpath('//center[1]/div', :text => message)
+end
+
+Then(/^the page should automatically update with the newest entry$/) do
+  page.should have_text("This is my title")
 end

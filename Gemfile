@@ -4,7 +4,8 @@ source 'https://rubygems.org'
 gem 'rails', '4.0.0'
 
 gem 'nokogiri' 
-gem 'mechanize'  
+gem 'mechanize'
+gem 'httparty'  
 
 gem 'zurb-foundation'
 
