@@ -33,6 +33,9 @@
       <li><%= link_to "Articles Load", articles_path %></li>
   </div>
 </nav>
+<center><% flash.each do |name, msg| -%>
+      <%= content_tag :div, msg, class: name %>
+    <% end -%></center>  
     <%= yield %>
 
     

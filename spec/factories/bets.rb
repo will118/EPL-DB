@@ -4,7 +4,7 @@ FactoryGirl.define do
   factory :bet do
     homescore 1
     awayscore 1
-    homeodds "9.99"
-    awayodds "9.99"
+    homeodds "2.09"
+    awayodds "4.99"
   end
 end

@@ -3,13 +3,13 @@ class ArticlesController < ApplicationController
 
   def populater
     system "rake populater:populate &"
-    sleep 4
-    redirect_to articles_url
+    sleep 7
+    redirect_to news_url 
   end  
 
   def wiper
     Article.delete_all
-    redirect_to articles_url
+    redirect_to articles_url, notice: "So delete"
   end
 
   # GET /articles
@@ -39,7 +39,7 @@ class ArticlesController < ApplicationController
 
     respond_to do |format|
       if @article.save
-        format.html { redirect_to @article, notice: 'Article was successfully created.' }
+        format.html { redirect_to articles_url, notice: "Your article was successfully addded." }
         format.json { render action: 'show', status: :created, location: @article }
         format.js
       else
