@@ -1,12 +1,12 @@
 namespace :populater do
   desc "Populates the db"
-  task populate: :environment do
+  task arscom: :environment do
   
   require 'nokogiri'  
   require 'mechanize'  
   require 'open-uri' 
 
-  rejection_criteria = ["matchdayshowlive", "report", "Theclockendpodcast", "features", "highlights", "pictures", "photocall"]
+  rejection_criteria = ["matchdayshowlive", "report", "lotto", "train-ahead", "Theclockendpodcast", "features", "highlights", "pictures", "photocall"]
   uri = "http://www.arsenal.com"
  
   agent = Mechanize.new
@@ -28,7 +28,6 @@ namespace :populater do
     nokogiri = Nokogiri::HTML(open("#{uri}#{urls}")) 
     nokogiri.css('script').remove 
     nokogiri.xpath('/html/body/div[3]/div/article/section[1]/small').remove 
-    @nokogiri_article = Article.new
     article = Article.new 
     article.title = nokogiri.css("h1")[0].text
     article.body = nokogiri.xpath('/html/body/div[3]/div/article/section[1]').inner_text
@@ -37,6 +36,35 @@ namespace :populater do
     article.save
     end
   end
+
+
+
+  desc "Populates teams"
+  task hometeam: :environment do
+
+  require 'nokogiri'  
+  require 'open-uri'
+
+    BB2= "http://polling.bbc.co.uk/sport/shared/football/oppm/line-up/3643937"
+    
+    document = Nokogiri::HTML(open(BB2))
+      
+     ht = document.xpath('//li').map do |player|
+        p = player.inner_text.strip.split(' ')
+        {name: p[1], number: p[0].to_i, subbed: p[2..4].join}
+        end
+
+    hometeam = ht[0..10]
+
+    hometeam.each do |xx|
+    homexi = HomeXi.new
+    homexi.number = xx[:number] 
+    homexi.name = xx[:name] 
+    homexi.subbed = xx[:subbed].delete('(')
+    homexi.save 
+    end   
+  end
+
 
  #  desc "Wipes the db"
  #  task wipe: :environment do

@@ -1,6 +1,20 @@
 <h1>Listing bets</h1>
+<!--
+<script type="text/javascript">
 
-<table>
+  window.onload = function () {
+
+  var paper = Raphael(300, 400, 800, 8000);
+  var circle = paper.circle(300, 400, 80);
+  var rectangle = paper.rect(500, 200, 250, 100);
+  circle.attr("fill", "#527423");
+  circle.attr("stroke", "#fff");
+  rectangle.attr("fill", "#527423");
+  rectangle.attr("stroke", "#fff");
+  };
+</script>
+-->
+ <table>
   <thead>
     <tr>
       <th>Homescore</th>
@@ -27,7 +41,7 @@
     <% end %>
   </tbody>
 </table>
-
 <br>
 
 <%= link_to 'New Bet', new_bet_path %>
+  

@@ -14,6 +14,7 @@
   	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   	<title><%= content_for?(:title) ? yield(:title) : "NFSW" %></title>
+    <%= include_gon %>
 
   	<%= stylesheet_link_tag    "application" %>
   	<%= javascript_include_tag "vendor/custom.modernizr" %>
@@ -31,6 +32,8 @@
     <ul class="right">
       <li class="divider"></li>
       <li><%= link_to "Articles Load", articles_path %></li>
+      <li><%= link_to "Fixtures", fixtures_path %></li>
+      <li><%= link_to "HomeXI", home_xis_path %></li>
   </div>
 </nav>
 <center><% flash.each do |name, msg| -%>

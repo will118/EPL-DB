@@ -1,0 +1,80 @@
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<%= javascript_include_tag "chartkick" %>
+  <div class="row">
+    <div class="large-12 columns">
+      <div class="row">
+        <div class="large-12 hide-for-small"> 
+<%= line_chart({20.day.ago => 5, 19.day.ago => 4, 18.day.ago => 5, 17.day.ago => 7}) %>
+              <p> 
+      </div>
+    </div> 
+     <div class="row">
+        <div class="large-12 columns">
+          <div class="row">
+
+            <div class="large-3 small-6 columns">
+ 
+              <h4>Upcoming Fixtures</h4><hr>
+              <div class="row">
+              
+ 
+                <div class="large-9 columns">
+                    <h5 class="subheader"><div id="venue1"></div>  </h5>
+                </div>
+              </div><hr>
+ 
+              <div class="hide-for-small">
+                <div class="row">
+                  <div class="large-9 columns">
+                    <h5 class="subheader"><div id="venue2"></div>  </h5>
+                  </div>
+                </div><hr>
+                <div class="row">
+ 
+                  <div class="large-9 columns">
+                    <h5 class="subheader"><div id="venue3"></div>  </h5>
+                  </div>
+                </div><hr>
+ 
+                <div class="row"> 
+                 <div class="large-9 columns">
+                    <h5 class="subheader"><div id="venue4"></div>  </h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+ 
+            <div class="large-3 small-4 columns">
+               <h4><div id="team1"></div>  </h4>
+               <br>
+               <h4><div id="team2"></div>  </h4>
+               <h2><div id="possession"></div>  </h4>
+            </div>
+            <div class="large-3 small-4 columns">
+             <%= pie_chart [["ARS", 7], ["WBA", 6]] %>
+            </div>
+            <div class="large-3 small-10 columns">
+          
+              <h4>League Table</h4>
+              
+            
+                
+                <table id="pltable">
+                    <tr>
+                        <th>Team</th>
+                        <th>Pl.</th>
+                        <th>W</th>
+                        <th>D</th>
+                        <th>L</th>
+                        <th>GD</th>
+                        <th>Points</th>
+                    </tr>
+                </table>
+ 
+ 
+            </div> 
+          </div>
+        </div>
+      </div>
+ 

@@ -1,0 +1,33 @@
+<h1>Listing home_xis</h1>
+<div class="large-1 large-offset-10 columns">
+    <%= link_to "Populate", hmpopulate_path, :method => 'put', :class => "button" %>
+  </div>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Number</th>
+      <th>Subbed</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @home_xis.each do |home_xi| %>
+      <tr>
+        <td><%= home_xi.name %></td>
+        <td><%= home_xi.number %></td>
+        <td><%= home_xi.subbed %></td>
+        <td><%= link_to 'Show', home_xi %></td>
+        <td><%= link_to 'Edit', edit_home_xi_path(home_xi) %></td>
+        <td><%= link_to 'Destroy', home_xi, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Home xi', new_home_xi_path %>

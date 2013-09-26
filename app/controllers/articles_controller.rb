@@ -2,7 +2,7 @@ class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy, :populate]
 
   def populater
-    system "rake populater:populate &"
+    system "rake populater:arscom &"
     sleep 7
     redirect_to news_url 
   end  

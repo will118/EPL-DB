@@ -1,4 +1,8 @@
 AAAAMILNE::Application.routes.draw do
+  resources :home_xis
+
+  resources :fixtures
+
   resources :bets
 
   get "news/index"
@@ -6,6 +10,7 @@ AAAAMILNE::Application.routes.draw do
   put 'populater' => 'articles#populater', as: :populater
   put 'wiper' => 'articles#wiper', as: :wiper
   
+  put 'hmpopulater' => 'home_xis#populate', as: :hmpopulate
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

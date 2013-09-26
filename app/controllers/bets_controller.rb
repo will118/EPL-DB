@@ -4,7 +4,8 @@ class BetsController < ApplicationController
   # GET /bets
   # GET /bets.json
   def index
-    @bets = Bet.all
+    @bets = Bet.all 
+    gon.bets = Bet.first(4)
   end
 
   # GET /bets/1
@@ -16,6 +17,7 @@ class BetsController < ApplicationController
   def new
     @bet = Bet.new
   end
+
 
   # GET /bets/1/edit
   def edit

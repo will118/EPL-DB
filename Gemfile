@@ -5,9 +5,12 @@ gem 'rails', '4.0.0'
 
 gem 'nokogiri' 
 gem 'mechanize'
-gem 'httparty'  
-
+gem 'httparty'
+gem 'gon' 
+gem 'capybara'
+gem 'poltergeist'
 gem 'zurb-foundation'
+gem 'chartkick'
 
 group :development, :test do
 	gem "rspec-rails", "~> 2.14.0"
@@ -20,7 +23,6 @@ end
 group :test do
 	gem "faker", "~> 1.1.2"
   gem 'cucumber-rails', :require => false
-	gem "capybara", "~> 2.1.0"
 	gem "database_cleaner", "~> 1.0.1"
 	gem "launchy", "~> 2.3.0"
 	gem "selenium-webdriver", "~> 2.35.1"
