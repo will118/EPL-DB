@@ -49,20 +49,58 @@ namespace :populater do
     
     document = Nokogiri::HTML(open(BB2))
       
-     ht = document.xpath('//li').map do |player|
-        p = player.inner_text.strip.split(' ')
-        {name: p[1], number: p[0].to_i, subbed: p[2..4].join}
+        allplayers = document.xpath('//li').map do |player|
+          p = player.inner_text.strip.split(' ')
+          {name: p[1], number: p[0].to_i, subbed: p[2..4].join}
         end
 
-    hometeam = ht[0..10]
+    hometeam = allplayers[0..10]
+    awayteam = allplayers[18..28]
+
 
     hometeam.each do |xx|
     homexi = HomeXi.new
-    homexi.number = xx[:number] 
-    homexi.name = xx[:name] 
+    y1 = xx[:number] 
+    y2 = xx[:name] 
+    homexi.name = "#{y2} (#{y1})" 
     homexi.subbed = xx[:subbed].delete('(')
     homexi.save 
+    end
+
+    awayteam.each do |xx|
+    awayxi = AwayXi.new
+    y1 = xx[:number] 
+    y2 = xx[:name] 
+    awayxi.name = "#{y2} (#{y1})" 
+    awayxi.subbed = xx[:subbed].delete('(')
+    awayxi.save 
     end   
+  end
+
+  desc "squawka"
+  task squawka: :environment do
+
+  sqwkurl = "http://www.squawka.com/wp-content/themes/squawka_web/stats_process.php?club_id=31&team_type=all&min=1&max=10&competition_id=64"
+
+  parsed = JSON.parse HTTParty.get(sqwkurl).response.body
+      
+    parsed["avgpossession"].each do |posses|
+      data = posses[1]
+      possession = Possession.new
+      possession.date = data["date"]
+      possession.possession = data["total"]
+      possession.save
+    end
+
+    parsed["keypasses_ot"].each do |accu|
+      kp = accu[1]
+      pass = Passing.new
+      pass.assists = kp["assist"]
+      pass.keypasses = kp["keypass"]
+      pass.totalpasses = kp["total"]
+      pass.date = kp["date"]
+      pass.save
+    end
   end
 
 

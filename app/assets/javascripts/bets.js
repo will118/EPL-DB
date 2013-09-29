@@ -1,10 +1,9 @@
 window.onload = function () {
-    var table = gon.table
-    var fixtures = gon.fixtures
+    var table = gon.table;
+    var fixtures = gon.fixtures;
     var matchdata = gon.match_data.data.payload.Match[0];
-    console.log(matchdata.stats.possession.away);
         var tr;
-        for (var i = 0; i < 10; i++) {
+        for (var i = 0; i < 11; i++) {
             tr = $('<tr/>');
             tr.append("<td>" + table[i].team + "</td>");
             tr.append("<td>" + table[i].played + "</td>");

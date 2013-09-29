@@ -5,6 +5,7 @@ class HomeXisController < ApplicationController
   # GET /home_xis.json
   def index
     @home_xis = HomeXi.all
+    @away_xis = AwayXi.all
   end
 
   def populate

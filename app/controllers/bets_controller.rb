@@ -1,11 +1,15 @@
 class BetsController < ApplicationController
   before_action :set_bet, only: [:show, :edit, :update, :destroy]
 
+JASON = [{"key"=>"Accuracy", "values"=>[{"x"=>1, "y"=>1}, {"x"=>2, "y"=>2}, {"x"=>3, "y"=>3}, {"x"=>4, "y"=>4}, {"x"=>5, "y"=>5}, {"x"=>6, "y"=>6}, {"x"=>7, "y"=>7}, {"x"=>8, "y"=>8}, {"x"=>9, "y"=>9}, {"x"=>10, "y"=>10}]}, {"key"=>"Possession", "values"=>[{"x"=>1, "y"=>2}, {"x"=>2, "y"=>4}, {"x"=>3, "y"=>6}, {"x"=>4, "y"=>7}, {"x"=>5, "y"=>8}, {"x"=>6, "y"=>9}, {"x"=>7, "y"=>7}, {"x"=>8, "y"=>10}, {"x"=>9, "y"=>11}, {"x"=>10, "y"=>14}]}, {"key"=>"Duels Won", "values"=>[{"x"=>1, "y"=>6}, {"x"=>2, "y"=>4}, {"x"=>3, "y"=>6}, {"x"=>4, "y"=>7}, {"x"=>5, "y"=>18}, {"x"=>6, "y"=>9}, {"x"=>7, "y"=>17}, {"x"=>8, "y"=>10}, {"x"=>9, "y"=>14}, {"x"=>10, "y"=>5}]}]
   # GET /bets
   # GET /bets.json
   def index
     @bets = Bet.all 
+    @possession = Possession.all
+    @passing = Passing.all
     gon.bets = Bet.first(4)
+    gon.d3 = JASON
   end
 
   # GET /bets/1

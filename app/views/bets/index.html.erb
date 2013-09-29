@@ -1,47 +1,62 @@
-<h1>Listing bets</h1>
-<!--
-<script type="text/javascript">
+<%= javascript_include_tag "d3.v3.js" %>
+<%= javascript_include_tag "nv.d3.js" %>
+<!DOCTYPE html>
+<meta charset="utf-8">
 
-  window.onload = function () {
+<style>
 
-  var paper = Raphael(300, 400, 800, 8000);
-  var circle = paper.circle(300, 400, 80);
-  var rectangle = paper.rect(500, 200, 250, 100);
-  circle.attr("fill", "#527423");
-  circle.attr("stroke", "#fff");
-  rectangle.attr("fill", "#527423");
-  rectangle.attr("stroke", "#fff");
-  };
+body {
+  overflow-y:scroll;
+}
+
+text {
+  font: 12px sans-serif;
+}
+
+svg {
+  display: block;
+}
+
+#chart1 svg {
+  height: 50px;
+  min-width: 100px;
+  min-height: 100px;
+}
+
+</style>
+<body>
+
+  <div id="chart" class='with-3d-shadow with-transitions'>
+    <svg style="height: 500px;"></svg>
+  </div>
+
+<script>
+
+
+nv.addGraph(function() {
+  var chart = nv.models.lineWithFocusChart();
+
+ chart.transitionDuration(500);
+  chart.xAxis
+      .tickFormat(d3.format(',f'));
+  chart.x2Axis
+      .tickFormat(d3.format(',f'));
+
+  chart.yAxis
+      .tickFormat(d3.format(',.2f'));
+  chart.y2Axis
+      .tickFormat(d3.format(',.2f'));
+
+  d3.select('#chart svg')
+      .datum(gon.d3)
+      .call(chart);
+
+  nv.utils.windowResize(chart.update);
+
+  return chart;
+});
+
+
+
+
 </script>
--->
- <table>
-  <thead>
-    <tr>
-      <th>Homescore</th>
-      <th>Awayscore</th>
-      <th>Homeodds</th>
-      <th>Awayodds</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @bets.each do |bet| %>
-      <tr>
-        <td><%= bet.homescore %></td>
-        <td><%= bet.awayscore %></td>
-        <td><%= bet.homeodds %></td>
-        <td><%= bet.awayodds %></td>
-        <td><%= link_to 'Show', bet %></td>
-        <td><%= link_to 'Edit', edit_bet_path(bet) %></td>
-        <td><%= link_to 'Destroy', bet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-<br>
-
-<%= link_to 'New Bet', new_bet_path %>
-  

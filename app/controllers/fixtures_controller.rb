@@ -16,10 +16,13 @@ class FixturesController < ApplicationController
   APIGET= "http://api.statsfc.com/#{COMP}/fixtures.json?key=#{API_KEY}&team=#{TEAM}&from=#{FROM_DATE}&to=#{TO_DATE}&timezone=#{TIMEZONE}&limit=#{LIMIT}"
   APIGET2= "http://api.statsfc.com/#{COMP}/table.json?key=#{API_KEY}"
   BBCGET= "http://polling.bbc.co.uk/sport/shared/football/oppm/json/3643937"
+
   # GET /fixtures
   # GET /fixtures.json
   def index
     @fixtures = Fixture.all
+    @home_xis = HomeXi.all
+    @away_xis = AwayXi.all
     gon.fixtures = JSON.parse HTTParty.get(APIGET).response.body
     gon.table = JSON.parse HTTParty.get(APIGET2).response.body
     gon.match_data = JSON.parse HTTParty.get(BBCGET).response.body.delete('(').delete(');')
