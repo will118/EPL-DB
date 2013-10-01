@@ -56,7 +56,7 @@ production:
   encoding: unicode
   database: aaaamilne_production
   pool: 5
-  username: parsedb
+  username: aaaamilne
   password:
 
 cucumber:
