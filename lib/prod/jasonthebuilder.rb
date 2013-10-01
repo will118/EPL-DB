@@ -1,6 +1,6 @@
 require 'json'
 require 'httparty'
-require 'jsonPath'
+require 'jsonpath'
 
 class JasonTheBuilder
 
