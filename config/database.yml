@@ -20,7 +20,7 @@ development:
   database: aaaamilne_development
   host: localhost
   pool: 5
-  username: aaaamilne
+  username: aamilne
   password:
 
   # Connect on a TCP socket. Omitted by default since the client uses a
@@ -50,7 +50,7 @@ test: &test
   database: aaaamilne_test
   host: localhost
   pool: 5
-  username: aaaamilne
+  username: aamilne
   password:
 
 production:
@@ -59,7 +59,7 @@ production:
   database: aaaamilne_production
   host: localhost
   pool: 5
-  username: aaaamilne
+  username: aamilne
   password:
 
 cucumber:
