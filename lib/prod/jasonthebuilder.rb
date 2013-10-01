@@ -1,5 +1,5 @@
 require 'json'
-require 'HTTParty'
+require 'httparty'
 require 'JsonPath'
 
 class JasonTheBuilder
