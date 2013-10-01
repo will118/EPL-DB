@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130927120836) do
+ActiveRecord::Schema.define(version: 20130930194003) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,9 +82,9 @@ ActiveRecord::Schema.define(version: 20130927120836) do
 
   create_table "passings", force: true do |t|
     t.date     "date"
-    t.integer  "assists"
-    t.integer  "keypasses"
     t.integer  "totalpasses"
+    t.integer  "keypasses"
+    t.integer  "assists"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -92,6 +92,20 @@ ActiveRecord::Schema.define(version: 20130927120836) do
   create_table "possessions", force: true do |t|
     t.date     "date"
     t.integer  "possession"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "supermodels", force: true do |t|
+    t.date     "date"
+    t.integer  "matchid"
+    t.integer  "avgpossession"
+    t.integer  "shotaccuracy"
+    t.integer  "passaccuracy"
+    t.integer  "attackscore"
+    t.integer  "defencescore"
+    t.integer  "possesionscore"
+    t.integer  "optascore"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -7,10 +7,11 @@ gem 'nokogiri'
 gem 'mechanize'
 gem 'httparty'
 gem 'gon' 
+gem 'jsonpath'
 gem 'capybara'
 gem 'poltergeist'
 gem 'zurb-foundation'
-gem 'chartkick'
+
 
 group :development, :test do
 	gem "rspec-rails", "~> 2.14.0"

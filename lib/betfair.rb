@@ -13,7 +13,7 @@ YEAR= "2013"
 TIMEZONE= "UTC"
 TEAM= "arsenal"
 # FROM_DATE= "2013-09-22"
-TO_DATE= "2013-10-22"
+TO_DATE= "2013-11-22"
 LIMIT= "5"
 time = Time.new
 FROM_DATE= time.strftime("%Y-%m-%d")
@@ -34,6 +34,29 @@ TO_DATE_PRESENT= FROM_DATE
 #FIXTURES - this works.
 APIGET= "http://api.statsfc.com/#{COMP}/fixtures.json?key=#{API_KEY}&team=#{TEAM}&from=#{FROM_DATE}&to=#{TO_DATE}&timezone=#{TIMEZONE}&limit=#{LIMIT}"
 
+STFCFORM = "http://api.statsfc.com/#{COMP}/form.json?key=#{API_KEY}&team=#{TEAM}"
+
+  
+  @form0 = JSON.parse HTTParty.get(APIGET).response.body
+  @form = JSON.parse HTTParty.get(STFCFORM).response.body
+
+
+  away = @form0.first.fetch('homepath')
+  awayname = @form0.first.fetch('homeshort')
+
+ homeform = Hash.new
+ awayform = Hash.new
+  @form.each { |x| 
+    if x.has_value?('arsenal')
+      homeform["team"] = 'Arsenal'
+      homeform["form"] = x.fetch('form') 
+    elsif x.has_value?(away)
+      awayform["team"] = awayname
+      awayform["form"] = x.fetch('form') end
+    }
+
+p homeform
+p awayform
 
 # APIGET3= "http://api.statsfc.com/premier-league/form.json?key=#{API_KEY}&year=#{YEAR}"
 # APIGET4= "http://api.statsfc.com/top-scorers.json?key=#{API_KEY}&competition=#{COMP}&team=#{TEAM}&year=#{YEAR}"
@@ -86,35 +109,35 @@ BBCGET= "http://polling.bbc.co.uk/sport/shared/football/oppm/json/3643937"
 
 
 
-  rejection_criteria = ["matchdayshowlive", "report", "lotto", "train-ahead", "Theclockendpodcast", "features", "highlights", "pictures", "photocall"]
-  uri = "http://www.arsenal.com"
+  # rejection_criteria = ["matchdayshowlive", "report", "lotto", "train-ahead", "Theclockendpodcast", "features", "highlights", "pictures", "photocall"]
+  # uri = "http://www.arsenal.com"
  
-  agent = Mechanize.new
-  agent.user_agent_alias = 'Mac Safari'
+  # agent = Mechanize.new
+  # agent.user_agent_alias = 'Mac Safari'
 
 
-  @links = [] 
-  page = agent.get("#{uri}/news/news-archive?category=first")
-  page.parser.xpath('/html/body/div[5]/div/div/article/*/ul/*/*').each do | links | 
-  @links << links.attribute('href')
-  end
+  # @links = [] 
+  # page = agent.get("#{uri}/news/news-archive?category=first")
+  # page.parser.xpath('/html/body/div[5]/div/div/article/*/ul/*/*').each do | links | 
+  # @links << links.attribute('href')
+  # end
 
-  rejection_criteria.each do |word|
-    @links -= @links.grep(/#{word}/)
-  end
+  # rejection_criteria.each do |word|
+  #   @links -= @links.grep(/#{word}/)
+  # end
 
 
-  @links.each do | urls | 
-    nokogiri = Nokogiri::HTML(open("#{uri}#{urls}")) 
-    nokogiri.css('script').remove 
-    nokogiri.xpath('/html/body/div[3]/div/article/section[1]/small').remove 
-    article = Article.new 
-    article.title = nokogiri.css("h1")[0].text
-    article.body = nokogiri.xpath('/html/body/div[3]/div/article/section[1]').inner_text
-    src = (nokogiri.at_xpath '//img/@src').to_s
-    article.url = src.chars.first == "/" ? "http://www.arsenal.com" + src : src
-    article.save
-    end
+  # @links.each do | urls | 
+  #   nokogiri = Nokogiri::HTML(open("#{uri}#{urls}")) 
+  #   nokogiri.css('script').remove 
+  #   nokogiri.xpath('/html/body/div[3]/div/article/section[1]/small').remove 
+  #   article = Article.new 
+  #   article.title = nokogiri.css("h1")[0].text
+  #   article.body = nokogiri.xpath('/html/body/div[3]/div/article/section[1]').inner_text
+  #   src = (nokogiri.at_xpath '//img/@src').to_s
+  #   article.url = src.chars.first == "/" ? "http://www.arsenal.com" + src : src
+  #   article.save
+  #   end
 
 
 

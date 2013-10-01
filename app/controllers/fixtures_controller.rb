@@ -23,6 +23,7 @@ class FixturesController < ApplicationController
     @fixtures = Fixture.all
     @home_xis = HomeXi.all
     @away_xis = AwayXi.all
+    gon.d3 = JasonTheBuilder.new.jason 
     gon.fixtures = JSON.parse HTTParty.get(APIGET).response.body
     gon.table = JSON.parse HTTParty.get(APIGET2).response.body
     gon.match_data = JSON.parse HTTParty.get(BBCGET).response.body.delete('(').delete(');')

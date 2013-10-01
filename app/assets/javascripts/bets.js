@@ -1,4 +1,4 @@
-window.onload = function () {
+$(document).ready(function () {
     var table = gon.table;
     var fixtures = gon.fixtures;
     var matchdata = gon.match_data.data.payload.Match[0];
@@ -18,8 +18,6 @@ window.onload = function () {
           $("#venue2").append("<a>" + fixtures[1].home + " vs. " + fixtures[1].away + "<br>" + fixtures[1].date + "</a>");
           $("#venue3").append("<a>" + fixtures[2].home + " vs. " + fixtures[2].away + "<br>" + fixtures[2].date + "</a>");
           $("#venue4").append("<a>" + fixtures[3].home + " vs. " + fixtures[3].away + "<br>" + fixtures[3].date + "</a>");
-          
-          // $("#team1").append( "FT " + matchdata.homeScore + " - " + matchdata.awayScore );
-          // $("#team2").append( matchdata.halfTimeScore );
 
-  };
+
+  });

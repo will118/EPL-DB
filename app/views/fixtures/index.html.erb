@@ -1,15 +1,63 @@
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <%= javascript_include_tag "chartkick" %>
+<%= javascript_include_tag "d3.v3.js" %>
+<%= javascript_include_tag "nv.d3.js" %>
   <div class="row">
     <div class="large-12 columns">
       <div class="row">
         <div class="large-12 hide-for-small"> 
-          <%= line_chart({20.day.ago => 5, 19.day.ago => 4, 18.day.ago => 5, 17.day.ago => 7, 16.day.ago => 4, 15.day.ago => 5, 14.day.ago => 7}) %> 
-          <br>
-          <br>
-          <br>
-          <br>
+        <style>
 
+          body {
+            overflow-y:scroll;
+          }
+
+          text {
+            font: 12px sans-serif;
+          }
+
+          svg {
+            display: block;
+          }
+
+          #chart1 svg {
+            height: 50px;
+            min-width: 100px;
+            min-height: 100px;
+          }
+
+          </style>
+          <body>
+
+            <div id="chart" class='with-3d-shadow with-transitions'>
+              <svg style="height: 500px;"></svg>
+            </div>
+
+          <script>
+
+
+          nv.addGraph(function() {
+            var chart = nv.models.lineWithFocusChart();
+
+           chart.transitionDuration(500);
+            chart.xAxis
+                .tickFormat(d3.format(',f'));
+            chart.x2Axis
+                .tickFormat(d3.format(',f'));
+
+            chart.yAxis
+                .tickFormat(d3.format(',.2f'));
+            chart.y2Axis
+                .tickFormat(d3.format(',.2f'));
+
+            d3.select('#chart svg')
+                .datum(gon.d3)
+                .call(chart);
+
+            nv.utils.windowResize(chart.update);
+
+            return chart;
+          });
+          </script>
+          <br>    
       </div>
     </div> 
      <div class="row">
@@ -82,7 +130,7 @@
                 </table>
             </div>
             <div class="large-2 columns">
-             <%= pie_chart [["ARS", 7], ["WBA", 6]], :height => "420px" %>
+            
             </div>
             <div class="large-3 columns">    
                 <table id="pltable">
