@@ -4,17 +4,14 @@ class FixturesController < ApplicationController
   require 'httparty'
   require "json"
   
-
-  API_KEY= "iBmMBLP17gwhhpqtgZlM9Cf3MGIhijoQJ7Z9t0AT"
-
   COMP= "premier-league"
-  TIMEZONE= "UTC"
+  TIMEZONE= "Europe/London"
   TEAM= "arsenal"
   TO_DATE= "2013-12-22"
   LIMIT= "5"
   FROM_DATE= Time.new.strftime("%Y-%m-%d")
-  APIGET= "http://api.statsfc.com/#{COMP}/fixtures.json?key=#{API_KEY}&team=#{TEAM}&from=#{FROM_DATE}&to=#{TO_DATE}&timezone=#{TIMEZONE}&limit=#{LIMIT}"
-  APIGET2= "http://api.statsfc.com/#{COMP}/table.json?key=#{API_KEY}"
+  APIGET= "http://api.statsfc.com/#{COMP}/fixtures.json?key=#{ENV["STATS_KEY"]}&team=#{TEAM}&from=#{FROM_DATE}&to=#{TO_DATE}&timezone=#{TIMEZONE}&limit=#{LIMIT}"
+  APIGET2= "http://api.statsfc.com/#{COMP}/table.json?key=#{ENV["STATS_KEY"]}"
   BBCGET= "http://polling.bbc.co.uk/sport/shared/football/oppm/json/3643937"
 
   # GET /fixtures
@@ -23,6 +20,7 @@ class FixturesController < ApplicationController
     @fixtures = Fixture.all
     @home_xis = HomeXi.all
     @away_xis = AwayXi.all
+    gon.form = JasonTheBuilder.new.form
     gon.d3 = JasonTheBuilder.new.jason 
     gon.fixtures = JSON.parse HTTParty.get(APIGET).response.body
     gon.table = JSON.parse HTTParty.get(APIGET2).response.body

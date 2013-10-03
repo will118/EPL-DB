@@ -36,33 +36,71 @@ APIGET= "http://api.statsfc.com/#{COMP}/fixtures.json?key=#{API_KEY}&team=#{TEAM
 
 STFCFORM = "http://api.statsfc.com/#{COMP}/form.json?key=#{API_KEY}&team=#{TEAM}"
 
+
+    from_date = Time.new.strftime("%Y-%m-%d")
+    to_date = "2013-11-22"
+
+    fixtures = "http://api.statsfc.com/premier-league/fixtures.json?key=#{API_KEY}&team=arsenal&from=#{from_date}&to=#{to_date}&timezone=Europe/London&limit=5"
+
+    teamform = "http://api.statsfc.com/premier-league/form.json?key=#{API_KEY}&team=arsenal"
+
+    
+    @form0 = JSON.parse HTTParty.get(fixtures).response.body
+    @form = JSON.parse HTTParty.get(teamform).response.body
+
+
+    away = @form0.first.fetch('homepath')
+    awayname = @form0.first.fetch('homeshort')
+
+    form = []
+
+    @form.each { |x| 
+       if x.has_value?('arsenal')
+        h = {team: 'Arsenal', form: ''}
+         h[:form] = x.fetch('form')
+         form << h 
+      elsif x.has_value?(away)
+        h2 = {team: awayname, form: ''}
+        h2[:form] = x.fetch('form')
+        form << h2
+      end
+      } 
+
+
+      p form
+
+
+
+
+
+
   
-  @form0 = JSON.parse HTTParty.get(APIGET).response.body
-  @form = JSON.parse HTTParty.get(STFCFORM).response.body
+#   @form0 = JSON.parse HTTParty.get(APIGET).response.body
+#   @form = JSON.parse HTTParty.get(STFCFORM).response.body
 
 
-  away = @form0.first.fetch('homepath')
-  awayname = @form0.first.fetch('homeshort')
+#   away = @form0.first.fetch('homepath')
+#   awayname = @form0.first.fetch('homeshort')
 
- homeform = Hash.new
- awayform = Hash.new
-  @form.each { |x| 
-    if x.has_value?('arsenal')
-      homeform["team"] = 'Arsenal'
-      homeform["form"] = x.fetch('form') 
-    elsif x.has_value?(away)
-      awayform["team"] = awayname
-      awayform["form"] = x.fetch('form') end
-    }
+#  homeform = Hash.new
+#  awayform = Hash.new
+#   @form.each { |x| 
+#     if x.has_value?('arsenal')
+#       homeform["team"] = 'Arsenal'
+#       homeform["form"] = x.fetch('form') 
+#     elsif x.has_value?(away)
+#       awayform["team"] = awayname
+#       awayform["form"] = x.fetch('form') end
+#     }
 
-p homeform
-p awayform
+# p homeform
+# p awayform
 
 # APIGET3= "http://api.statsfc.com/premier-league/form.json?key=#{API_KEY}&year=#{YEAR}"
 # APIGET4= "http://api.statsfc.com/top-scorers.json?key=#{API_KEY}&competition=#{COMP}&team=#{TEAM}&year=#{YEAR}"
 # APIGET2= "http://api.statsfc.com/#{COMP}/results.json?key=#{API_KEY}&year=#{YEAR}&team=#{TEAM}&from=#{FROM_DATE_PAST}&to=#{TO_DATE}&timezone=#{TIMEZONE}&limit=#{LIMIT}"
 # p JSON.parse HTTParty.get("#{APIGET}").response.body
-BBCGET= "http://polling.bbc.co.uk/sport/shared/football/oppm/json/3643937"
+# BBCGET= "http://polling.bbc.co.uk/sport/shared/football/oppm/json/3643937"
 # p JSON.parse HTTParty.get(BBCGET).response.body.delete('(').delete(');')
 # p HTTParty.get(BB2).response.body
 

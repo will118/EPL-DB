@@ -102,7 +102,7 @@ namespace :populater do
       poss = passacc[key].fetch('success')
       poss2 = passacc[key].fetch('unsuccess')
       gisele.passaccuracy = (poss - poss2)  
-      gisele.avgpossession = avgpos[key].fetch('total')
+      gisele.avgpossession = (avgpos[key].fetch('total')) * 5
       total = shotacc[key].fetch('total')
       total2 = shotacc[key].fetch('offtarget')
       gisele.shotaccuracy = (total / total2)*50
@@ -116,4 +116,6 @@ namespace :populater do
     end
   end
 
+task :all => ["populater:arscom", "populater:hometeam", "populater:squawka"]
 end
+

@@ -94,7 +94,7 @@ class JasonTheBuilder
 		from_date = Time.new.strftime("%Y-%m-%d")
 		to_date = "2013-11-22"
 
-		fixtures = "http://api.statsfc.com/premier-league/fixtures.json?key=#{ENV["STATS_KEY"]}&team=arsenal&from=#{from_date}&to=#{to_date}&timezone=UTC&limit=5"
+		fixtures = "http://api.statsfc.com/premier-league/fixtures.json?key=#{ENV["STATS_KEY"]}&team=arsenal&from=#{from_date}&to=#{to_date}&timezone=Europe/London&limit=5"
 
 		teamform = "http://api.statsfc.com/premier-league/form.json?key=#{ENV["STATS_KEY"]}&team=arsenal"
 
@@ -106,14 +106,19 @@ class JasonTheBuilder
 	  away = @form0.first.fetch('homepath')
 	  awayname = @form0.first.fetch('homeshort')
 
-	 
-	  @form.each { |x| 
-	    if x.has_value?('arsenal')
-	      puts 'Arsenal'
-	      p x.fetch('form') 
-	    elsif x.has_value?(away)
-	      puts awayname
-	      p x.fetch('form') end
-	    }	
+	    form = []
+
+    @form.each do |x| 
+       if x.has_value?('arsenal')
+        h = {team: 'Arsenal', form: ''}
+         h[:form] = x.fetch('form')
+         form << h 
+      elsif x.has_value?(away)
+        h2 = {team: awayname, form: ''}
+        h2[:form] = x.fetch('form')
+        form << h2
+      end
+     end
+			return form
 		end
 end

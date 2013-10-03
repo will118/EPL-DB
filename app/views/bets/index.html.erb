@@ -1,17 +1,19 @@
+<h3>gon.form</h3>
 
-  <thead>
-    <tr>
-      <th width="200">Title</th>
-      <th width="200">Text Body</th>
-      <th width="200">Text Body</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @supermodel.each do |supermodels| %>
-      <tr>
-        <td><%= supermodels.matchid %></td>
-        <td><%= supermodels.avgpossession %></td>
-        <td><%= supermodels.shotaccuracy %></td>
-      </tr>
-    <% end %>
-    </tbody>
+<div class="large-3 columns">
+              <div class="row">
+                <div class="large-9 columns">
+                    <h5 class="subheader"><div id="hometeamform"></div>  </h5>
+                </div>
+              </div><hr>
+ 
+              <div class="hide-for-small">
+                <div class="row">
+                  <div class="large-9 columns">
+                    <h5 class="subheader"><div id="awayteamform"></div>  </h5>
+                  </div>
+                </div><hr>
+
+                </div>
+              </div>
+            </div>
