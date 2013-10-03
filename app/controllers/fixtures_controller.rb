@@ -12,7 +12,7 @@ class FixturesController < ApplicationController
   FROM_DATE= Time.new.strftime("%Y-%m-%d")
   APIGET= "http://api.statsfc.com/#{COMP}/fixtures.json?key=#{ENV["STATS_KEY"]}&team=#{TEAM}&from=#{FROM_DATE}&to=#{TO_DATE}&timezone=#{TIMEZONE}&limit=#{LIMIT}"
   APIGET2= "http://api.statsfc.com/#{COMP}/table.json?key=#{ENV["STATS_KEY"]}"
-  BBCGET= "http://polling.bbc.co.uk/sport/shared/football/oppm/json/3643937"
+  BBCSTATS= "http://polling.bbc.co.uk/sport/shared/football/oppm/json/EFBO726890"
 
   # GET /fixtures
   # GET /fixtures.json
@@ -24,7 +24,7 @@ class FixturesController < ApplicationController
     gon.d3 = JasonTheBuilder.new.jason 
     gon.fixtures = JSON.parse HTTParty.get(APIGET).response.body
     gon.table = JSON.parse HTTParty.get(APIGET2).response.body
-    gon.match_data = JSON.parse HTTParty.get(BBCGET).response.body.delete('(').delete(');')
+    gon.pie = JSON.parse HTTParty.get(BBCSTATS).response.body.delete('(').delete(');')
   end
 
   # GET /fixtures/1

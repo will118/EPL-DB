@@ -2,7 +2,6 @@ $(document).ready(function () {
     var table = gon.table;
     var fixtures = gon.fixtures;
     var form = gon.form;
-    var matchdata = gon.match_data.data.payload.Match[0];
     var tr;
     for (var i = 0; i < 11; i++) {
         tr = $('<tr/>');

@@ -9,17 +9,7 @@
 </div>
 <center>
 <table id="articles">
-<div class="row">
-  <div class="small-6 large-centered columns">
-    <%= form_for(Article.new, remote: true) do |f| %>
-      <%= f.label :title, "Article title:" %>
-      <%= f.text_field :title %><br />
-      <%= f.label :body, "Body:" %>
-      <%= f.text_area :body, :rows => 8 %><br />
-      <%= f.submit "Add comment" %>
-    <% end %>    
-  </div>
-</div>
+
   <thead>
     <tr>
       <th width="200">Title</th>

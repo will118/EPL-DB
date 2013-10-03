@@ -23,6 +23,9 @@
             min-width: 100px;
             min-height: 100px;
           }
+          #chart svg {
+            height: 400px;
+          }
 
           </style>
           <body>
@@ -53,7 +56,22 @@
             return chart;
           });
           </script>
-  
+           <script>
+            var pie = gon.pie.data.payload.Match[0].stats;
+            nv.addGraph(function() {
+              var chart = nv.models.pieChart()
+                  .x(function(d) { return d.label })
+                  .y(function(d) { return d.value })
+                  .showLabels(true);
+
+                d3.select("#chart svg")
+                    .datum(gon.pypy)
+                  .transition().duration(1200)
+                    .call(chart);
+
+              return chart;
+            });
+           </script>
       </div>
     </div> 
      <div class="row">
@@ -128,6 +146,9 @@
             <div class="large-2 columns">
             <h5 class="subheader"><div id="hometeamform"></div>  </h5>
              <h5 class="subheader"><div id="awayteamform"></div>  </h5>
+            <div id="chart">
+              <svg></svg>
+            </div>
             </div>
             <div class="large-3 columns">    
                 <table id="pltable">

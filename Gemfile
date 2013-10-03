@@ -12,6 +12,7 @@ gem 'capybara'
 gem 'poltergeist'
 gem 'zurb-foundation'
 gem 'figaro'
+gem 'puma'
 
 
 group :development, :test do
