@@ -24,7 +24,7 @@ class FixturesController < ApplicationController
     gon.d3 = JasonTheBuilder.new.jason 
     gon.fixtures = JSON.parse HTTParty.get(APIGET).response.body
     gon.table = JSON.parse HTTParty.get(APIGET2).response.body
-    gon.pie = JSON.parse HTTParty.get(BBCSTATS).response.body.delete('(').delete(');')
+    gon.bbc = JasonTheBuilder.new.bbc
   end
 
   # GET /fixtures/1
