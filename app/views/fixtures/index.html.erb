@@ -35,19 +35,15 @@
 
 
           nv.addGraph(function() {
-            var chart = nv.models.lineWithFocusChart();
+            var chart = nv.models.lineChart();
 
            chart.transitionDuration(500);
             chart.xAxis
                 .tickFormat(d3.format(',f'));
-            chart.x2Axis
-                .tickFormat(d3.format(',f'));
-
+           
             chart.yAxis
                 .tickFormat(d3.format(',.2f'));
-            chart.y2Axis
-                .tickFormat(d3.format(',.2f'));
-
+           
             d3.select('#chart svg')
                 .datum(gon.d3)
                 .call(chart);
@@ -57,7 +53,7 @@
             return chart;
           });
           </script>
-          <br>    
+  
       </div>
     </div> 
      <div class="row">

@@ -11,6 +11,7 @@ gem 'jsonpath'
 gem 'capybara'
 gem 'poltergeist'
 gem 'zurb-foundation'
+gem 'figaro'
 
 
 group :development, :test do

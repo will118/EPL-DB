@@ -4,11 +4,8 @@ class BetsController < ApplicationController
   # GET /bets
   # GET /bets.json
   def index
-    @bets = Bet.all 
-    @possession = Possession.all
-    @passing = Passing.all
-    gon.bets = Bet.first(4)
-    gon.d3 = JasonTheBuilder.new.jason 
+    @supermodel = Supermodel.all
+    gon.form = JasonTheBuilder.new.form 
   end
 
   # GET /bets/1

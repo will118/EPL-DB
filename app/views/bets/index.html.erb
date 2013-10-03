@@ -1,58 +1,17 @@
-<%= javascript_include_tag "d3.v3.js" %>
-<%= javascript_include_tag "nv.d3.js" %>
-<!DOCTYPE html>
-<meta charset="utf-8">
 
-<style>
-
-body {
-  overflow-y:scroll;
-}
-
-text {
-  font: 12px sans-serif;
-}
-
-svg {
-  display: block;
-}
-
-#chart1 svg {
-  height: 50px;
-  min-width: 100px;
-  min-height: 100px;
-}
-
-</style>
-<body>
-
-  <div id="chart" class='with-3d-shadow with-transitions'>
-    <svg style="height: 500px;"></svg>
-  </div>
-
-<script>
-
-
-nv.addGraph(function() {
-  var chart = nv.models.lineWithFocusChart();
-
- chart.transitionDuration(500);
-  chart.xAxis
-      .tickFormat(d3.format(',f'));
-  chart.x2Axis
-      .tickFormat(d3.format(',f'));
-
-  chart.yAxis
-      .tickFormat(d3.format(',.2f'));
-  chart.y2Axis
-      .tickFormat(d3.format(',.2f'));
-
-  d3.select('#chart svg')
-      .datum(gon.d3)
-      .call(chart);
-
-  nv.utils.windowResize(chart.update);
-
-  return chart;
-});
-</script>
+  <thead>
+    <tr>
+      <th width="200">Title</th>
+      <th width="200">Text Body</th>
+      <th width="200">Text Body</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @supermodel.each do |supermodels| %>
+      <tr>
+        <td><%= supermodels.matchid %></td>
+        <td><%= supermodels.avgpossession %></td>
+        <td><%= supermodels.shotaccuracy %></td>
+      </tr>
+    <% end %>
+    </tbody>

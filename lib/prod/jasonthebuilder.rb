@@ -1,46 +1,28 @@
-require 'json'
-require 'httparty'
-require 'jsonpath'
-
 class JasonTheBuilder
-
-SQWK = "http://www.squawka.com/wp-content/themes/squawka_web/stats_process.php?club_id=31&team_type=all&min=1&max=100&competition_id=64"
 
 	def jason
 
-	@parsed = JSON.parse HTTParty.get(SQWK).response.body
-
-
-		path = JsonPath.new('$..performance')
-		avgposs = JsonPath.new('$..avgpossession')
-		opta = path.on(@parsed)
-
-		mixarray1 = []
-		mixarray2 = []
-		mixarray3 = []
-		mixarray4 = []
-
-		avgposs.on(@parsed).each do |x|
-		  x.each {|k, h| mixarray4 << h.fetch('total') }
-		end
-
-		opta.each do |x|
-		  x.each {|k, h| 
-		   mixarray1 << h.fetch('possesion')
-		   mixarray2 << h.fetch('attack')
-		   mixarray3 << h.fetch('defence')
-		       }
-		 end
-
+		mixarray1 = Supermodel.all.map(&:avgpossession)
+		mixarray2 = Supermodel.all.map(&:shotaccuracy)
+		mixarray3 = Supermodel.all.map(&:passaccuracy)
+		mixarray4 = Supermodel.all.map(&:attackscore)
+		mixarray5 = Supermodel.all.map(&:defencescore)
+		mixarray6 = Supermodel.all.map(&:possesionscore)
+		mixarray7 = Supermodel.all.map(&:optascore)
+		
+		 # How many objects are in the array I know its 6 for now but... think of a better way.
 		matchnumber = (1..6).to_a
 
 
-		barray = matchnumber.zip mixarray1
+		barray1 = matchnumber.zip mixarray1
 		barray2 = matchnumber.zip mixarray2
 		barray3 = matchnumber.zip mixarray3
 		barray4 = matchnumber.zip mixarray4
+		barray5 = matchnumber.zip mixarray5
+		barray6 = matchnumber.zip mixarray6
+		barray7 = matchnumber.zip mixarray7
 
-		newarray = barray.map do |x, y|
+		newarray1 = barray1.map do |x, y|
 		  { "x"=> x, "y"=> y }
 		end
 		newarray2 = barray2.map do |x, y|
@@ -52,23 +34,44 @@ SQWK = "http://www.squawka.com/wp-content/themes/squawka_web/stats_process.php?c
 		newarray4 = barray4.map do |x, y|
 		  { "x"=> x, "y"=> y }
 		end
+		newarray5 = barray5.map do |x, y|
+		  { "x"=> x, "y"=> y }
+		end
+		newarray6 = barray6.map do |x, y|
+		  { "x"=> x, "y"=> y }
+		end
+		newarray7 = barray7.map do |x, y|
+		  { "x"=> x, "y"=> y }
+		end
 
 		jj = Hash.new {|k,v| k[v]}
 		jj2 = Hash.new {|k,v| k[v]}
 		jj3 = Hash.new {|k,v| k[v]}
 		jj4 = Hash.new {|k,v| k[v]}
+		jj5 = Hash.new {|k,v| k[v]}
+		jj6 = Hash.new {|k,v| k[v]}
+		jj7 = Hash.new {|k,v| k[v]}
 
-		jj["key"] = "Possesion Score"
-		jj["values"] = newarray
+		jj["key"] = "Average Possesion"
+		jj["values"] = newarray1
 
-		jj2["key"] = "Attack Score"
+		jj2["key"] = "Shot Accuracy"
 		jj2["values"] = newarray2
 
-		jj3["key"] = "Defence Score"
+		jj3["key"] = "Pass Accuracy"
 		jj3["values"] = newarray3
 
-		jj4["key"] = "Possesion %"
+		jj4["key"] = "Attack Score"
 		jj4["values"] = newarray4
+
+		jj5["key"] = "Defence Score"
+		jj5["values"] = newarray5
+
+		jj6["key"] = "Possession Score"
+		jj6["values"] = newarray6
+
+		jj7["key"] = "Opta Score"
+		jj7["values"] = newarray7
 
 
 		final = []
@@ -77,6 +80,9 @@ SQWK = "http://www.squawka.com/wp-content/themes/squawka_web/stats_process.php?c
 		final << jj2
 		final << jj3
 		final << jj4
+		final << jj5
+		final << jj6
+		final << jj7
 
 
 		return final
@@ -84,26 +90,30 @@ SQWK = "http://www.squawka.com/wp-content/themes/squawka_web/stats_process.php?c
 	end
 
 	def form
-	fixtures= "http://api.statsfc.com/#{COMP}/fixtures.json?key=#{API_KEY}&team=#{TEAM}&from=#{FROM_DATE}&to=#{TO_DATE}&timezone=#{TIMEZONE}&limit=#{LIMIT}"
 
-	teamform = "http://api.statsfc.com/#{COMP}/form.json?key=#{API_KEY}&team=#{TEAM}"
+		from_date = Time.new.strftime("%Y-%m-%d")
+		to_date = "2013-11-22"
 
-  
-  @form0 = JSON.parse HTTParty.get(fixtures).response.body
-  @form = JSON.parse HTTParty.get(teamform).response.body
+		fixtures = "http://api.statsfc.com/premier-league/fixtures.json?key=#{ENV["STATS_KEY"]}&team=arsenal&from=#{from_date}&to=#{to_date}&timezone=UTC&limit=5"
+
+		teamform = "http://api.statsfc.com/premier-league/form.json?key=#{ENV["STATS_KEY"]}&team=arsenal"
+
+	  
+	  @form0 = JSON.parse HTTParty.get(fixtures).response.body
+	  @form = JSON.parse HTTParty.get(teamform).response.body
 
 
-  away = @form0.first.fetch('homepath')
-  awayname = @form0.first.fetch('homeshort')
+	  away = @form0.first.fetch('homepath')
+	  awayname = @form0.first.fetch('homeshort')
 
- 
-  @form.each { |x| 
-    if x.has_value?('arsenal')
-      puts 'Arsenal'
-      p x.fetch('form') 
-    elsif x.has_value?(away)
-      puts awayname
-      p x.fetch('form') end
-    }	
-	end
+	 
+	  @form.each { |x| 
+	    if x.has_value?('arsenal')
+	      puts 'Arsenal'
+	      p x.fetch('form') 
+	    elsif x.has_value?(away)
+	      puts awayname
+	      p x.fetch('form') end
+	    }	
+		end
 end

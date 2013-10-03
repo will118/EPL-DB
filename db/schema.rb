@@ -99,6 +99,7 @@ ActiveRecord::Schema.define(version: 20130930194003) do
   create_table "supermodels", force: true do |t|
     t.date     "date"
     t.integer  "matchid"
+    t.text     "teamname"
     t.integer  "avgpossession"
     t.integer  "shotaccuracy"
     t.integer  "passaccuracy"

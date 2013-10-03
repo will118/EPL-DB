@@ -1,6 +1,5 @@
 require 'json'
 require 'HTTParty'
-require 'JsonPath'
 require "pp"
 
 
@@ -9,74 +8,51 @@ SQWK = "http://www.squawka.com/wp-content/themes/squawka_web/stats_process.php?c
 
   @parsed = JSON.parse HTTParty.get(SQWK).response.body
 
+avgpos = @parsed.assoc('avgpossession')[1]
+shotacc = @parsed.assoc('shotaccuracy_ot')[1]
+opta = @parsed.assoc('performance')[1]
 
-performance = JsonPath.new('$..performance')
-avgposs = JsonPath.new('@avgpossession')
-  
-parsed = performance.on(@parsed)
-# pp parsed2
-a = []
-b = []
-c = []
+ids = []
 
-
-# pp @parsed
-
-p @parsed.fetch('performance')
-puts "============"
-p @parsed.fetch('avgpossession')
-puts "============"
-p @parsed.fetch('pass_acc_ot')
-puts "============"
-p @parsed.fetch('shotaccuracy_ot')
-puts "============"
-
-
-# @parsed.each do |x|
-# puts x.fetch('performance')
-# end
-	 
-	# gisele = Supermodel.new
-	# x.each do |k, v| 
-	# 	puts k 
-	# 	puts v 
-	# 	puts
-
-	# end
-	
-
-
-
-# avgposs.on(@parsed).each do |x|
-#   x.each {|k, h| puts h.fetch('total') }
-# end
-# matchunion = ["2199", "2207", "2221", "2232", "1337", "2237", "2253"]
-
-
-parsed.each do |x| 
-	x.each do |k, h| 
-		# puts k
-		# puts "--------------"
-		# puts h
-		# puts
-
-
-	end 
-
+avgpos.each do |k, v|
+	ids << k
 end
 
-      # gisele.date = 
-      # gisele.matchid = 
-      # gisele.teamname = 
+ids.each do 
+	|key| 
+		gisele.matchid = key
+		gisele.avgpossession = avgpos[key].fetch('total')
+		total = shotacc[key].fetch('total')
+		total2 = shotacc[key].fetch('offtarget')
+		gisele.shotaccuracy = (total / total2)*50
+		h = opta[key]
+	  gisele.attackscore = h.fetch('attack')
+	  gisele.defencescore = h.fetch('defence')
+	  gisele.possesionscore = h.fetch('possesion')
+	  gisele.optascore = h.fetch('total')
+	  gisele.date = h.fetch('date')
+		gisele.save
+end
+# end
+
+# @parsed.each do |x| 
+	# p x
+# 	# gisele = Supermodel.new
+# 	# 	x.each do |k, h|
+# 	# 		puts "k = #{k}"
+# 	# 		puts "h = #{h}"
+# 	# 		# gisele.matchid = k 
+# 	# 	 #  gisele.save
+
+# 	# end 
+# end
+
+# shotaccuracy.each do |sa| 
+
+      # gisele2.shotaccuracy = 
+
       # gisele.avgpossession = 
-      # gisele.shotaccuracy = 
       # gisele.passaccuracy =
-      # gisele.attackscore =
-      # gisele.defencescore = 
-      # gisele.possesionscore = 
-      # gisele.optascore =
-
-
 
 	puts "<=========>"	
 # p matchids | matchunion
@@ -88,3 +64,33 @@ end
 #    c << h.fetch('defence')
 #        }
 #  end
+# performance = @parsed.fetch('performance')
+# # puts "============"
+# avgpossession = @parsed.fetch('avgpossession')
+# # puts "============"
+# passaccuracy = @parsed.fetch('pass_acc_ot')
+# # puts "============"
+# shotaccuracy = @parsed.fetch('shotaccuracy_ot')
+# # puts "============"
+# # p shotaccuracy
+# p @parsed.assoc('performance')
+# ids.length.times do |x|
+# 	 [x] 
+# end
+
+# ids.each do |key| 
+# 	puts key
+# 	puts avgpos[key].fetch('total')
+# 	total = shotacc[key].fetch('total')
+# 	total2 = shotacc[key].fetch('offtarget')
+# 	accuracy = (total / total2)*50
+# 	p "accuracy #{accuracy}"
+# 	h = opta[key]
+#   puts h.fetch('attack')
+#   puts h.fetch('defence')
+#   puts h.fetch('possesion')
+#   puts h.fetch('total')
+#   puts h.fetch('date')
+#   puts "----------------------------"
+	
+# end

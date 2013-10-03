@@ -45,7 +45,7 @@ namespace :populater do
   require 'nokogiri'  
   require 'open-uri'
 
-    BB2= "http://polling.bbc.co.uk/sport/shared/football/oppm/line-up/3643937"
+    BB2= "http://polling.bbc.co.uk/sport/shared/football/oppm/line-up/EFBO726890"
     
     document = Nokogiri::HTML(open(BB2))
       
@@ -80,39 +80,40 @@ namespace :populater do
   desc "squawka"
   task squawka: :environment do
 
-  sqwkurl = "http://www.squawka.com/wp-content/themes/squawka_web/stats_process.php?club_id=31&team_type=all&min=1&max=10&competition_id=64"
+  SQWK = "http://www.squawka.com/wp-content/themes/squawka_web/stats_process.php?club_id=31&team_type=all&min=1&max=100&competition_id=64"
 
-  parsed = JSON.parse HTTParty.get(sqwkurl).response.body
-      
-    parsed["avgpossession"].each do |posses|
-      data = posses[1]
-      possession = Possession.new
-      possession.date = data["date"]
-      possession.possession = data["total"]
-      possession.save
-    end
+  @parsed = JSON.parse HTTParty.get(SQWK).response.body
 
-    parsed["keypasses_ot"].each do |accu|
-      kp = accu[1]
-      pass = Passing.new
-      pass.assists = kp["assist"]
-      pass.keypasses = kp["keypass"]
-      pass.totalpasses = kp["total"]
-      pass.date = kp["date"]
-      pass.save
+  avgpos = @parsed.assoc('avgpossession')[1]
+  shotacc = @parsed.assoc('shotaccuracy_ot')[1]
+  opta = @parsed.assoc('performance')[1]
+  passacc = @parsed.assoc('pass_acc_ot')[1]
+
+  ids = []
+
+  avgpos.each do |k, v|
+    ids << k
+  end
+
+  ids.each do 
+    |key|
+      gisele = Supermodel.new 
+      gisele.matchid = key
+      poss = passacc[key].fetch('success')
+      poss2 = passacc[key].fetch('unsuccess')
+      gisele.passaccuracy = (poss - poss2)  
+      gisele.avgpossession = avgpos[key].fetch('total')
+      total = shotacc[key].fetch('total')
+      total2 = shotacc[key].fetch('offtarget')
+      gisele.shotaccuracy = (total / total2)*50
+      h = opta[key]
+      gisele.attackscore = h.fetch('attack')
+      gisele.defencescore = h.fetch('defence')
+      gisele.possesionscore = h.fetch('possesion')
+      gisele.optascore = h.fetch('total')
+      gisele.date = h.fetch('date')
+      gisele.save
     end
   end
 
-
- #  desc "Wipes the db"
- #  task wipe: :environment do
- #  	config = ActiveRecord::Base.configurations[::Rails.env]
-	#   connection = ActiveRecord::Base.connection
-	#   connection.disable_referential_integrity do
- #    connection.tables.each do |table_name|
- #      next if connection.select_value("SELECT count(*) FROM #{table_name}") == 0
- #        connection.execute("TRUNCATE #{table_name}")
-	#     end
-	#   end
-	# end
 end
