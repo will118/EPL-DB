@@ -3,6 +3,7 @@ Parsenal
 
 ### An assortment of Arsenal parsers
 
+
 Basically, scrapes articles I want off of Arsenal.com which was a few hours of work.
 
 Then where most of the work is the "second screen" one-page thing. 
@@ -22,15 +23,17 @@ I wanted marginally relevant information to have on my other/second screen durin
 - BBC Sport  
 - Squawka...
 
+
 > Please don't use this by the way, I feel it's kind of deep already when it's just me. 
 
 ## Stuff used worth mentioning:
 
 - [NVD3(D3.js)](https://github.com/novus/nvd3)
+- [Mike Bostock for actual D3](http://bost.ocks.org/mike/)
 - [Shout out to the HTTParty animals](https://github.com/jnunemaker/httparty/)
-- Nokogiri I like. 
-- Foundation too, I haven't really shown its awesome though.
-- William Playfair
+- [Nokogiri I like.](http://nokogiri.org/) 
+- [Foundation too, I haven't really shown its awesome though.](http://foundation.zurb.com/)
+- [William Playfair](http://en.wikipedia.org/wiki/William_Playfair)
 
 ## Dependencies/Requirements:
 
