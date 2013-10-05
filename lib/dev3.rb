@@ -39,5 +39,10 @@ require 'json'
 		fixtures = "http://api.statsfc.com/premier-league/fixtures.json?key=#{ENV["STATS_KEY"]}&team=arsenal&from=#{from_date}&to=#{to_date}&timezone=Europe/London&limit=5"
 # p HTTParty.get(fixtures).response.body
 
-
-p JSON.parse HTTParty.get("http://polling.bbc.co.uk/sport/shared/football/oppm/json/3643937").response.body.delete('(').delete(');')
+bbcst= "http://polling.bbc.co.uk/sport/shared/football/oppm/json/EFBO726890"
+		rawbbc = JSON.parse HTTParty.get(bbcst).response.body.delete('(').delete(');')
+		midway = rawbbc['data']['payload']['Match']
+		result = []
+		midway.each { |x| result = x.assoc('stats') }
+		p result[1]
+# p JSON.parse HTTParty.get("http://polling.bbc.co.uk/sport/shared/football/oppm/json/3643937").response.body.delete('(').delete(');')

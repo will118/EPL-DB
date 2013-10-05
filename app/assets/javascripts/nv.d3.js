@@ -3,7 +3,7 @@
 var nv = window.nv || {};
 
 
-nv.version = '1.1.11b';
+nv.version = '1.1.13b';
 nv.dev = true //set false when in production
 
 window.nv = nv;
@@ -130,44 +130,44 @@ the rectangle. The dispatch is given one object which contains the mouseX/Y loca
 It also has 'pointXValue', which is the conversion of mouseX to the x-axis scale.
 */
 nv.interactiveGuideline = function() {
-	"use strict";
-	var tooltip = nv.models.tooltip();
-	//Public settings
-	var width = null
-	, height = null
+  "use strict";
+  var tooltip = nv.models.tooltip();
+  //Public settings
+  var width = null
+  , height = null
     //Please pass in the bounding chart's top and left margins
     //This is important for calculating the correct mouseX/Y positions.
-	, margin = {left: 0, top: 0}
-	, xScale = d3.scale.linear()
-	, yScale = d3.scale.linear()
-	, dispatch = d3.dispatch('elementMousemove', 'elementMouseout','elementDblclick')
-	, showGuideLine = true
-	, svgContainer = null  
+  , margin = {left: 0, top: 0}
+  , xScale = d3.scale.linear()
+  , yScale = d3.scale.linear()
+  , dispatch = d3.dispatch('elementMousemove', 'elementMouseout','elementDblclick')
+  , showGuideLine = true
+  , svgContainer = null  
     //Must pass in the bounding chart's <svg> container.
     //The mousemove event is attached to this container.
-	;
+  ;
 
-	//Private variables
-	var isMSIE = navigator.userAgent.indexOf("MSIE") !== -1  //Check user-agent for Microsoft Internet Explorer.
-	;
+  //Private variables
+  var isMSIE = navigator.userAgent.indexOf("MSIE") !== -1  //Check user-agent for Microsoft Internet Explorer.
+  ;
 
 
-	function layer(selection) {
-		selection.each(function(data) {
-				var container = d3.select(this);
-				
-				var availableWidth = (width || 960), availableHeight = (height || 400);
+  function layer(selection) {
+    selection.each(function(data) {
+        var container = d3.select(this);
+        
+        var availableWidth = (width || 960), availableHeight = (height || 400);
 
-				var wrap = container.selectAll("g.nv-wrap.nv-interactiveLineLayer").data([data]);
-				var wrapEnter = wrap.enter()
-								.append("g").attr("class", " nv-wrap nv-interactiveLineLayer");
-								
-				
-				wrapEnter.append("g").attr("class","nv-interactiveGuideLine");
-				
-				if (!svgContainer) {
-					return;
-				}
+        var wrap = container.selectAll("g.nv-wrap.nv-interactiveLineLayer").data([data]);
+        var wrapEnter = wrap.enter()
+                .append("g").attr("class", " nv-wrap nv-interactiveLineLayer");
+                
+        
+        wrapEnter.append("g").attr("class","nv-interactiveGuideLine");
+        
+        if (!svgContainer) {
+          return;
+        }
 
                 function mouseHandler() {
                       var d3mouse = d3.mouse(this);
@@ -199,7 +199,7 @@ nv.interactiveGuideline = function() {
                             subtractMargin = false;
 
                          if (d3.event.target.className.baseVal.match("nv-legend"))
-                         	mouseOutAnyReason = true;
+                          mouseOutAnyReason = true;
                           
                       }
 
@@ -217,13 +217,13 @@ nv.interactiveGuideline = function() {
                         || mouseOutAnyReason
                         ) 
                       {
-                      		if (isMSIE) {
-                      			if (d3.event.relatedTarget 
-                      				&& d3.event.relatedTarget.ownerSVGElement === undefined
-                      				&& d3.event.relatedTarget.className.match(tooltip.nvPointerEventsClass)) {
-                      				return;
-                      			}
-                      		}
+                          if (isMSIE) {
+                            if (d3.event.relatedTarget 
+                              && d3.event.relatedTarget.ownerSVGElement === undefined
+                              && d3.event.relatedTarget.className.match(tooltip.nvPointerEventsClass)) {
+                              return;
+                            }
+                          }
                             dispatch.elementMouseout({
                                mouseX: mouseX,
                                mouseY: mouseY
@@ -249,75 +249,75 @@ nv.interactiveGuideline = function() {
                       }
                 }
 
-				svgContainer
-				      .on("mousemove",mouseHandler, true)
-				      .on("mouseout" ,mouseHandler,true)
+        svgContainer
+              .on("mousemove",mouseHandler, true)
+              .on("mouseout" ,mouseHandler,true)
                       .on("dblclick" ,mouseHandler)
-				      ;
+              ;
 
-				 //Draws a vertical guideline at the given X postion.
-				layer.renderGuideLine = function(x) {
-				 	if (!showGuideLine) return;
-				 	var line = wrap.select(".nv-interactiveGuideLine")
-				 	      .selectAll("line")
-				 	      .data((x != null) ? [nv.utils.NaNtoZero(x)] : [], String);
+         //Draws a vertical guideline at the given X postion.
+        layer.renderGuideLine = function(x) {
+          if (!showGuideLine) return;
+          var line = wrap.select(".nv-interactiveGuideLine")
+                .selectAll("line")
+                .data((x != null) ? [nv.utils.NaNtoZero(x)] : [], String);
 
-				 	line.enter()
-				 		.append("line")
-				 		.attr("class", "nv-guideline")
-				 		.attr("x1", function(d) { return d;})
-				 		.attr("x2", function(d) { return d;})
-				 		.attr("y1", availableHeight)
-				 		.attr("y2",0)
-				 		;
-				 	line.exit().remove();
+          line.enter()
+            .append("line")
+            .attr("class", "nv-guideline")
+            .attr("x1", function(d) { return d;})
+            .attr("x2", function(d) { return d;})
+            .attr("y1", availableHeight)
+            .attr("y2",0)
+            ;
+          line.exit().remove();
 
-				}
-		});
-	}
+        }
+    });
+  }
 
-	layer.dispatch = dispatch;
-	layer.tooltip = tooltip;
+  layer.dispatch = dispatch;
+  layer.tooltip = tooltip;
 
-	layer.margin = function(_) {
-	    if (!arguments.length) return margin;
-	    margin.top    = typeof _.top    != 'undefined' ? _.top    : margin.top;
-	    margin.left   = typeof _.left   != 'undefined' ? _.left   : margin.left;
-	    return layer;
+  layer.margin = function(_) {
+      if (!arguments.length) return margin;
+      margin.top    = typeof _.top    != 'undefined' ? _.top    : margin.top;
+      margin.left   = typeof _.left   != 'undefined' ? _.left   : margin.left;
+      return layer;
     };
 
-	layer.width = function(_) {
-		if (!arguments.length) return width;
-		width = _;
-		return layer;
-	};
+  layer.width = function(_) {
+    if (!arguments.length) return width;
+    width = _;
+    return layer;
+  };
 
-	layer.height = function(_) {
-		if (!arguments.length) return height;
-		height = _;
-		return layer;
-	};
+  layer.height = function(_) {
+    if (!arguments.length) return height;
+    height = _;
+    return layer;
+  };
 
-	layer.xScale = function(_) {
-		if (!arguments.length) return xScale;
-		xScale = _;
-		return layer;
-	};
+  layer.xScale = function(_) {
+    if (!arguments.length) return xScale;
+    xScale = _;
+    return layer;
+  };
 
-	layer.showGuideLine = function(_) {
-		if (!arguments.length) return showGuideLine;
-		showGuideLine = _;
-		return layer;
-	};
+  layer.showGuideLine = function(_) {
+    if (!arguments.length) return showGuideLine;
+    showGuideLine = _;
+    return layer;
+  };
 
-	layer.svgContainer = function(_) {
-		if (!arguments.length) return svgContainer;
-		svgContainer = _;
-		return layer;
-	};
+  layer.svgContainer = function(_) {
+    if (!arguments.length) return svgContainer;
+    svgContainer = _;
+    return layer;
+  };
 
 
-	return layer;
+  return layer;
 };
 
 /* Utility class that uses d3.bisect to find the index in a given array, where a search value can be inserted.
@@ -334,7 +334,7 @@ Has the following known issues:
    * Won't work if there are duplicate x coordinate values.
 */
 nv.interactiveBisect = function (values, searchVal, xAccessor) {
-	  "use strict";
+    "use strict";
       if (! values instanceof Array) return null;
       if (typeof xAccessor !== 'function') xAccessor = function(d,i) { return d.x;}
 
@@ -10370,9 +10370,9 @@ nv.models.pie = function() {
                        d.innerRadius = arcRadius + 15; // Set Inner Coordinate
                        var rotateAngle = (d.startAngle + d.endAngle) / 2 * (180 / Math.PI);
                        if ((d.startAngle+d.endAngle)/2 < Math.PI) {
-                       	 rotateAngle -= 90;
+                         rotateAngle -= 90;
                        } else {
-                       	 rotateAngle += 90;
+                         rotateAngle += 90;
                        }
                        return 'translate(' + labelsArc.centroid(d) + ') rotate(' + rotateAngle + ')';
                      } else {
@@ -10397,7 +10397,7 @@ nv.models.pie = function() {
 
           slices.select(".nv-label").transition()
             .attr('transform', function(d) {
-            	if (labelSunbeamLayout) {
+              if (labelSunbeamLayout) {
                   d.outerRadius = arcRadius + 10; // Set Outer Coordinate
                   d.innerRadius = arcRadius + 15; // Set Inner Coordinate
                   var rotateAngle = (d.startAngle + d.endAngle) / 2 * (180 / Math.PI);
@@ -12895,7 +12895,7 @@ nv.models.sparkline = function() {
               var yValues = data.map(function(d, i) { return getY(d,i); });
               function pointIndex(index) {
                   if (index != -1) {
-	              var result = data[index];
+                var result = data[index];
                       result.pointIndex = index;
                       return result;
                   } else {
@@ -13368,7 +13368,7 @@ nv.models.stackedArea = function() {
 
       //------------------------------------------------------------
 
-
+      var dataRaw = data;
       // Injecting point index into each point because d3.layout.stack().out does not give index
       data = data.map(function(aseries, i) {
                aseries.seriesIndex = i;
@@ -13520,6 +13520,29 @@ nv.models.stackedArea = function() {
       });
 
       //============================================================
+      //Special offset functions
+      chart.d3_stackedOffset_stackPercent = function(stackData) {
+          var n = stackData.length,    //How many series 
+          m = stackData[0].length,     //how many points per series
+          k = 1 / n,
+           i, 
+           j,
+           o,
+           y0 = [];
+
+          for (j = 0; j < m; ++j) { //Looping through all points
+            for (i = 0, o = 0; i < dataRaw.length; i++)  //looping through series'
+                o += getY(dataRaw[i].values[j])   //total value of all points at a certian point in time.
+
+            if (o) for (i = 0; i < n; i++)
+               stackData[i][j][1] /= o; 
+            else 
+              for (i = 0; i < n; i++) 
+               stackData[i][j][1] = k;
+          }
+          for (j = 0; j < m; ++j) y0[j] = 0;
+          return y0;
+      };
 
     });
 
@@ -13544,7 +13567,6 @@ nv.models.stackedArea = function() {
   });
 
   //============================================================
-
 
   //============================================================
   // Global getters and setters
@@ -13637,15 +13659,19 @@ nv.models.stackedArea = function() {
         chart.offset('expand');
         chart.order('default');
         break;
+      case 'stack_percent':
+        chart.offset(chart.d3_stackedOffset_stackPercent);
+        chart.order('default');
+        break;
     }
 
     return chart;
   };
 
   chart.interpolate = function(_) {
-	    if (!arguments.length) return interpolate;
-	    interpolate = _;
-	    return chart;
+      if (!arguments.length) return interpolate;
+      interpolate = _;
+      return chart;
   };
   //============================================================
 
@@ -13691,6 +13717,7 @@ nv.models.stackedAreaChart = function() {
     , dispatch = d3.dispatch('tooltipShow', 'tooltipHide', 'stateChange', 'changeState')
     , controlWidth = 250
     , cData = ['Stacked','Stream','Expanded']
+    , controlLabels = {}
     , transitionDuration = 250
     ;
 
@@ -13829,15 +13856,36 @@ nv.models.stackedAreaChart = function() {
 
       if (showControls) {
         var controlsData = [
-          { key: 'Stacked', disabled: stacked.offset() != 'zero' },
-          { key: 'Stream', disabled: stacked.offset() != 'wiggle' },
-          { key: 'Expanded', disabled: stacked.offset() != 'expand' }
+          {
+            key: controlLabels.stacked || 'Stacked', 
+            metaKey: 'Stacked', 
+            disabled: stacked.style() != 'stack', 
+            style: 'stack' 
+          },
+          {
+            key: controlLabels.stream || 'Stream', 
+            metaKey: 'Stream', 
+            disabled: stacked.style() != 'stream', 
+            style: 'stream' 
+          },
+          {
+            key: controlLabels.expanded || 'Expanded', 
+            metaKey: 'Expanded', 
+            disabled: stacked.style() != 'expand', 
+            style: 'expand' 
+          },
+          {
+            key: controlLabels.stack_percent || 'Stack %', 
+            metaKey: 'Stack_Percent', 
+            disabled: stacked.style() != 'stack_percent', 
+            style: 'stack_percent' 
+          }
         ];
 
         controlWidth = (cData.length/3) * 260;
 
         controlsData = controlsData.filter(function(d) {
-          return cData.indexOf(d.key) > -1;
+          return cData.indexOf(d.metaKey) !== -1;
         })
 
         controls
@@ -13919,7 +13967,8 @@ nv.models.stackedAreaChart = function() {
           .scale(y)
           .ticks(stacked.offset() == 'wiggle' ? 0 : availableHeight / 36)
           .tickSize(-availableWidth, 0)
-          .setTickFormat(stacked.offset() == 'expand' ? d3.format('%') : yAxisTickFormat);
+          .setTickFormat( (stacked.style() == 'expand' || stacked.style() == 'stack_percent') 
+                ? d3.format('%') : yAxisTickFormat);
 
         g.select('.nv-y.nv-axis')
           .transition().duration(0)
@@ -13966,17 +14015,8 @@ nv.models.stackedAreaChart = function() {
         });
         d.disabled = false;
 
-        switch (d.key) {
-          case 'Stacked':
-            stacked.style('stack');
-            break;
-          case 'Stream':
-            stacked.style('stream');
-            break;
-          case 'Expanded':
-            stacked.style('expand');
-            break;
-        }
+        stacked.style(d.style);
+    
 
         state.style = stacked.style();
         dispatch.stateChange(state);
@@ -14000,9 +14040,12 @@ nv.models.stackedAreaChart = function() {
               if (typeof point === 'undefined') return;
               if (typeof singlePoint === 'undefined') singlePoint = point;
               if (typeof pointXLocation === 'undefined') pointXLocation = chart.xScale()(chart.x()(point,pointIndex));
+
+              //If we are in 'expand' mode, use the stacked percent value instead of raw value.
+              var tooltipValue = (stacked.style() == 'expand') ? point.display.y : chart.y()(point,pointIndex);
               allData.push({
                   key: series.key,
-                  value: chart.y()(point, pointIndex),
+                  value: tooltipValue,
                   color: color(series,series.seriesIndex),
                   stackedValue: point.display
               });
@@ -14026,13 +14069,16 @@ nv.models.stackedAreaChart = function() {
           }
 
           var xValue = xAxis.tickFormat()(chart.x()(singlePoint,pointIndex));
+
+          //If we are in 'expand' mode, force the format to be a percentage.
+          var valueFormatter = (stacked.style() == 'expand') ? 
+               function(d,i) {return d3.format(".1%")(d);} :
+               function(d,i) {return yAxis.tickFormat()(d); };
           interactiveLayer.tooltip
                   .position({left: pointXLocation + margin.left, top: e.mouseY + margin.top})
                   .chartContainer(that.parentNode)
                   .enabled(tooltips)
-                  .valueFormatter(function(d,i) {
-                     return yAxis.tickFormat()(d);
-                  })
+                  .valueFormatter(valueFormatter)
                   .data(
                       {
                         value: xValue,
@@ -14240,6 +14286,13 @@ nv.models.stackedAreaChart = function() {
   chart.controlsData = function(_) {
     if (!arguments.length) return cData;
     cData = _;
+    return chart;
+  };
+
+  chart.controlLabels = function(_) {
+    if (!arguments.length) return controlLabels;
+    if (typeof _ !== 'object') return controlLabels;
+    controlLabels = _;
     return chart;
   };
 

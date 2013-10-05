@@ -2,6 +2,7 @@ AAAAMILNE::Application.routes.draw do
   resources :home_xis
 
   resources :fixtures
+  get 'bbcjson' => 'fixtures#bbcjson'
 
   resources :bets
 

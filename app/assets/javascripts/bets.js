@@ -23,3 +23,60 @@ $(document).ready(function () {
     $("#venue4").append("<a>" + fixtures[3].home + " vs. " + fixtures[3].away + "<br>" + fixtures[3].date + "</a>");
 
   });
+
+
+
+
+$(document).ready(function (loadagain) {
+
+    var bbcj = $.getJSON("http://192.168.1.65:3000/bbcjson", function(pypy){
+        
+
+        
+nv.addGraph(function() {
+    var width = 220,
+        height = 220;
+
+    var chart = nv.models.pieChart()
+        .x(function(d) { return d.key })
+        .y(function(d) { return d.y })
+        .color(d3.scale.category10().range())
+        .width(width)
+        .height(height);
+
+      d3.select("#pypy1")
+          .datum(pypy)
+        .transition().duration(1200)
+          .attr('width', width)
+          .attr('height', height)
+          .call(chart);
+
+    chart.dispatch.on('stateChange', function(e) { nv.log('New State:', JSON.stringify(e)); });
+
+    nv.utils.windowResize(chart.update);
+
+    return chart;
+    })
+    });
+});
+
+$(document).ready(function () {
+ nv.addGraph(function() {
+            var chart = nv.models.lineChart();
+
+           chart.transitionDuration(500);
+            chart.xAxis
+                .tickFormat(d3.format(',f'));
+           
+            chart.yAxis
+                .tickFormat(d3.format(',.2f'));
+           
+            d3.select('#chart svg')
+                .datum(gon.d3)
+                .call(chart);
+
+            nv.utils.windowResize(chart.update);
+
+            return chart;
+          });
+});

@@ -6,7 +6,7 @@ namespace :populater do
   require 'mechanize'  
   require 'open-uri' 
 
-  rejection_criteria = ["matchdayshowlive", "report", "lotto", "train-ahead", "Theclockendpodcast", "features", "highlights", "pictures", "photocall"]
+  rejection_criteria = ["matchdayshowlive", "report", "pressconference", "international-watch", "lotto", "train-ahead", "Theclockendpodcast", "features", "highlights", "pictures", "photocall", "goalofthemonth"]
   uri = "http://www.arsenal.com"
  
   agent = Mechanize.new
@@ -30,7 +30,9 @@ namespace :populater do
     nokogiri.xpath('/html/body/div[3]/div/article/section[1]/small').remove 
     article = Article.new 
     article.title = nokogiri.css("h1")[0].text
-    article.body = nokogiri.xpath('/html/body/div[3]/div/article/section[1]').inner_text
+    dirtybody = nokogiri.xpath('/html/body/div[3]/div/article/section[1]').inner_text
+    nearlyclean = dirtybody.gsub(/(Flash Player)(.*)(Play again)/m, '') 
+    article.body = nearlyclean.gsub(/^\s{5,}/, "\n")
     src = (nokogiri.at_xpath '//img/@src').to_s
     article.url = src.chars.first == "/" ? "http://www.arsenal.com" + src : src
     article.save

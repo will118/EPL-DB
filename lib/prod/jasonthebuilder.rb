@@ -122,15 +122,5 @@ class JasonTheBuilder
 			return form
 		end
 
-
-
-
-	def bbc
-		bbcst= "http://polling.bbc.co.uk/sport/shared/football/oppm/json/EFBO726890"
-		rawbbc = JSON.parse HTTParty.get(bbcst).response.body.delete('(').delete(');')
-		midway = rawbbc['data']['payload']['Match']
-		result = []
-		midway.each { |x| result = x.assoc('stats') }
-		return result[1]
-	end
 end
+

@@ -18,13 +18,24 @@
             display: block;
           }
 
-          #chart1 svg {
-            height: 50px;
-            min-width: 100px;
-            min-height: 100px;
-          }
           #chart svg {
             height: 400px;
+          }
+
+          .teams {
+            display: inline-block;
+            margin-right: 20px;
+          }
+          .teams:last-child {
+            margin-right: 0px;
+          }
+
+          #pltable {
+            float:right;
+          }
+
+          #bars {
+            float: left;
           }
 
           </style>
@@ -33,73 +44,34 @@
             <div id="chart" class='with-3d-shadow with-transitions'>
               <svg style="height: 500px;"></svg>
             </div>
-
-          <script>
-
-
-          nv.addGraph(function() {
-            var chart = nv.models.lineChart();
-
-           chart.transitionDuration(500);
-            chart.xAxis
-                .tickFormat(d3.format(',f'));
-           
-            chart.yAxis
-                .tickFormat(d3.format(',.2f'));
-           
-            d3.select('#chart svg')
-                .datum(gon.d3)
-                .call(chart);
-
-            nv.utils.windowResize(chart.update);
-
-            return chart;
-          });
-          </script>
-           <script>
-            var pie = gon.pie.data.payload.Match[0].stats;
-            nv.addGraph(function() {
-              var chart = nv.models.pieChart()
-                  .x(function(d) { return d.label })
-                  .y(function(d) { return d.value })
-                  .showLabels(true);
-
-                d3.select("#chart svg")
-                    .datum(gon.pypy)
-                  .transition().duration(1200)
-                    .call(chart);
-
-              return chart;
-            });
-           </script>
-      </div>
+        </div>
     </div> 
      <div class="row">
         <div class="large-12 columns">
           <div class="row">
 
-            <div class="large-3 columns">
+            <div class="large-2 columns">
               <div class="row">
-                <div class="large-9 columns">
+                <div class="large-12 columns">
                     <h5 class="subheader"><div id="venue1"></div>  </h5>
                 </div>
               </div><hr>
  
               <div class="hide-for-small">
                 <div class="row">
-                  <div class="large-9 columns">
+                  <div class="large-12 columns">
                     <h5 class="subheader"><div id="venue2"></div>  </h5>
                   </div>
                 </div><hr>
 
                 <div class="row">
-                  <div class="large-9 columns">
+                  <div class="large-12 columns">
                     <h5 class="subheader"><div id="venue3"></div>  </h5>
                   </div>
                 </div><hr>
  
                 <div class="row"> 
-                 <div class="large-9 columns">
+                 <div class="large-12 columns">
                     <h5 class="subheader"><div id="venue4"></div>  </h5>
                   </div>
                 </div>
@@ -107,9 +79,9 @@
             </div>
 
  
-            <div class="large-2 columns">
-                <br>
-                  <table>
+            <div class="large-3 columns">
+          
+                  <table class='teams'>
                     <thead>
                       <tr>
                       </tr>
@@ -124,15 +96,13 @@
                       <% end %>
                     </tbody>
                   </table>
-                  </div>
-              <div class="large-2 columns">
-                <br>
-                <table>
+                
+          
+                <table class='teams'>
                   <thead>
                     <tr> 
                     </tr>
                   </thead>
-
                   <tbody>
                     <% @away_xis.each do |away_xi| %>
                       <tr>
@@ -142,14 +112,15 @@
                     <% end %>
                   </tbody>
                 </table>
-            </div>
+                  </div>
             <div class="large-2 columns">
             <h5 class="subheader"><div id="hometeamform"></div>  </h5>
              <h5 class="subheader"><div id="awayteamform"></div>  </h5>
-            <div id="chart">
-              <svg></svg>
+              <svg id="pypy1" class="mypiechart"></svg>
             </div>
-            </div>
+            <div id='bars' class="large-2 columns">LOREM IPSUMMMMMMMMMMMMM
+            MMMMMMMMMMMMMMMMMMMMMMM
+            MMMMMMMMMMMMMMMMMMMMMMMMMMM </div>
             <div class="large-3 columns">    
                 <table id="pltable">
                     <tr>

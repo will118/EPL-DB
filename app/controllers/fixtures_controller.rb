@@ -13,6 +13,10 @@ class FixturesController < ApplicationController
   APIGET= "http://api.statsfc.com/#{COMP}/fixtures.json?key=#{ENV["STATS_KEY"]}&team=#{TEAM}&from=#{FROM_DATE}&to=#{TO_DATE}&timezone=#{TIMEZONE}&limit=#{LIMIT}"
   APIGET2= "http://api.statsfc.com/#{COMP}/table.json?key=#{ENV["STATS_KEY"]}"
   BBCSTATS= "http://polling.bbc.co.uk/sport/shared/football/oppm/json/EFBO726890"
+  
+  def bbcjson
+    render :json => BBC.new.possession
+  end
 
   # GET /fixtures
   # GET /fixtures.json
@@ -24,13 +28,14 @@ class FixturesController < ApplicationController
     gon.d3 = JasonTheBuilder.new.jason 
     gon.fixtures = JSON.parse HTTParty.get(APIGET).response.body
     gon.table = JSON.parse HTTParty.get(APIGET2).response.body
-    gon.bbc = JasonTheBuilder.new.bbc
+    gon.pypy = BBC.new.possession
   end
 
   # GET /fixtures/1
   # GET /fixtures/1.json
   def show
   end
+
 
   # GET /fixtures/new
   def new
