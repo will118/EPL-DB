@@ -30,6 +30,7 @@ I wanted marginally relevant information to have on my other/second screen durin
 - [Shout out to the HTTParty animals](https://github.com/jnunemaker/httparty/)
 - Nokogiri I like. 
 - Foundation too, I haven't really shown its awesome though.
+- William Playfair
 
 ## Dependencies/Requirements:
 
@@ -57,4 +58,28 @@ That actually means they need more or less info I can't remember which. I.e. the
 
 #### BBC Sport
 
-So the situation here is bonafide-ish JSONs and CORS. The JSONs seem to be nested in 1 too many array/hashes so if you're trying to deal with these JSONs for some reason. One sec I'm just going to try embed pictures in GH md.
+So the situation here is bonafide-ish JSONs and CORS. The JSONs seem to be nested in 1 too many array/hashes so if you're trying to deal with these JSONs for some reason then be sure to check them on a JSON validator. As for my personal use, currently I get/serve a JSON for a possession pie chart, and then also scrape the starting XI's for the match. 
+
+This is tragically hardcoded right now, which is only upsetting because it would be cooler if I started checking for this information in the hour leading up to kickoff. Doesn't seem too hard at all really but its always a slow hour anyway and I want to get my live/real-time/dynamic D3 graphs working first because that's actually useful. I'm planning on using the BBC for this data too, their JS gets updates every 30seconds which would mean a minimum of 180 data points per match I think that's fine to be honest. 
+
+#### Squawka 
+
+Don't really know what to say here, from their placement on Opta's own site and the data they show on their site it seems like they have Opta's data or data as good as. As far as I can tell... I have a few theories and no facts, the only thing I can say with any certainty is that whoever is responsible has been aware from when they first wrote it. 
+
+Maybe I'm missing something but it seems pretty much like an open API. 
+
+
+
+### Work in Progress/TODO
+
+I've pretty much just detailed why I'm only githubbing now. I was quite impressed with my first ultran00b foray into regex this just now and it got the original scraper looking quite good. (Not behind the scenes I'm sure)
+
+Anyway what I'm doing next, in order (at least in theory):
+
+- Live D3js graphs of:
+-- Shots on target of both teams
+-- Possession % of both teams
+-- Corners
+-- Cards/tackles
+
+- Nothing seems as good on paper as it does in my head.
