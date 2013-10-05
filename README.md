@@ -47,6 +47,8 @@ As soon as I have the last of the JS polished/done I will finish the RSpec and C
 
 If you check out populater.rake, the "arscom" task here is a mechanize/nokogiri scraper that is probably better explained by my proceedural ruby... Grep to delete links I dont want, regex on the inner_text nokogiri then goes and gets.
 
+![Parser](/ss/1.jpg "Nokogiri bit")
+
 #### Stats FC
 
 So while their API is great, I found the docs among the worst even out of the limited APIs I've come across. I think its because they look so good, you expect them to work. However the actual samples they have are unhelpful because most of them don't work, and return "premier-league" competition could not be found. 
