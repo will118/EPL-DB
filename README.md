@@ -38,11 +38,6 @@ I wanted marginally relevant information to have on my other/second screen durin
 - Pretty sure that's it. 
 - Bundle obviously.
 
-## Tests..
-
-Under development, seriously... As in actually seriously not sarcastic. 
-
-As soon as I have the last of the JS polished/done I will finish the RSpec and Capycumbers with Selenium, don't think I'll bother with PhantomJS although it's very cool. 
 
 #### Arsenal.com scraping
 
@@ -70,16 +65,23 @@ Maybe I'm missing something but it seems pretty much like an open API.
 
 
 
-### Work in Progress/TODO
+## Work in Progress
 
 I've pretty much just detailed why I'm only githubbing now. I was quite impressed with my first ultran00b foray into regex this just now and it got the original scraper looking quite good. (Not behind the scenes I'm sure)
 
+### Todo
+
 Anyway what I'm doing next, in order (at least in theory):
 
-- Live D3js graphs of:
--- Shots on target of both teams
--- Possession % of both teams
--- Corners
--- Cards/tackles
-
+Live D3js graphs of:
+- Shots on target of both teams
+- Possession % of both teams
+- Corners
+- Cards/tackles
 - Nothing seems as good on paper as it does in my head.
+
+### Tests..
+
+Under development, seriously... As in actually seriously not sarcastic. 
+
+As soon as I have the last of the JS polished/done I will finish the RSpec and Capycumbers with Selenium, don't think I'll bother with PhantomJS although it's very cool. 
