@@ -34,6 +34,7 @@ I wanted marginally relevant information to have on my other/second screen durin
 - [Nokogiri I like.](http://nokogiri.org/) 
 - [Foundation too, I haven't really shown its awesome though.](http://foundation.zurb.com/)
 - [William Playfair](http://en.wikipedia.org/wiki/William_Playfair)
+- Rails and Ruby. I suppose JS/jQuery but I can't pretend the love affair is even close.
 
 ## Dependencies/Requirements:
 
@@ -82,6 +83,8 @@ Live D3js graphs of:
 - Corners
 - Cards/tackles
 - Nothing seems as good on paper as it does in my head.
+
+Also bear in mind that from the get-go this has been a one page site, by one guy, intended for the same guy. It's like the volcanic springs of code smell.
 
 ### Tests..
 
