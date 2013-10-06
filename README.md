@@ -21,7 +21,8 @@ I wanted marginally relevant information to have on my other/second screen durin
 - Arsenal.com
 - Stats FC API
 - BBC Sport  
-- Squawka...
+- Squawka/Opta
+- FourFourTwo/Opta
 
 
 > Please don't use this by the way, I feel it's kind of deep already when it's just me.
