@@ -8,6 +8,7 @@ AAAAMILNE::Application.routes.draw do
 
   get "news/index"
   resources :articles
+  put 'opta' => 'articles#opta'
   put 'populater' => 'articles#populater', as: :populater
   put 'wiper' => 'articles#wiper', as: :wiper
   

@@ -4,7 +4,7 @@ require "HTTParty"
 class BBC
 
 	def initialize
-		@data = get_json
+		@statsjson = get_json
 	end
 
 	def get_json
@@ -17,16 +17,16 @@ class BBC
 	end
 
 	def possession
-		home = @data['possession']['home']
-		away = @data['possession']['away']
+		home = @statsjson['possession']['home']
+		away = @statsjson['possession']['away']
 		comboarray = []
 	  homehash = {'key'=> 'Home', 'y'=> home}
 	  comboarray << homehash 
 	  aw = {'key'=> 'Away', 'y'=> away}
 	  comboarray << aw
-	 
 	  return comboarray
-
 	end
+
+	
 		
 end

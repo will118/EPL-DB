@@ -1,6 +1,7 @@
 $(document).ready(function () {
     var table = gon.table;
     var fixtures = gon.fixtures;
+    var prematch = gon.prematch
     var form = gon.form;
     var tr;
     for (var i = 0; i < 11; i++) {
@@ -22,14 +23,42 @@ $(document).ready(function () {
     $("#venue3").append("<a>" + fixtures[2].home + " vs. " + fixtures[2].away + "<br>" + fixtures[2].date + "</a>");
     $("#venue4").append("<a>" + fixtures[3].home + " vs. " + fixtures[3].away + "<br>" + fixtures[3].date + "</a>");
 
-  });
+    var list = [];
 
+    $(prematch).each(function(i, obj) {
+     list.push(obj.text);
+    });
+
+    var final_list =  _.reject(list, function(num){ return num.length  == 1; });
+
+    var $target;
+    var loadContentIndex = 0;
+
+    $(function() {
+        $target = $('#update');
+        loadContent(); 
+        window.setInterval(loadContent, 6000); 
+    });
+
+    function loadContent() {
+        $target.fadeOut(function() { 
+            $target.text(final_list[loadContentIndex]); 
+            $target.fadeIn(); 
+        });
+
+        loadContentIndex++; 
+        if (final_list.length == loadContentIndex) { 
+            loadContentIndex = 0;
+        }
+    }
+ 
+  });
 
 
 
 $(document).ready(function (loadagain) {
 
-    var bbcj = $.getJSON("http://192.168.1.65:3000/bbcjson", function(pypy){
+    var bbcj = $.getJSON("http://0.0.0.0:3000/bbcjson", function(pypy){
         
 
         

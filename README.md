@@ -24,10 +24,12 @@ I wanted marginally relevant information to have on my other/second screen durin
 - Squawka...
 
 
-> Please don't use this by the way, I feel it's kind of deep already when it's just me. 
+> Please don't use this by the way, I feel it's kind of deep already when it's just me.
+> rake populater:all is the scraper though  
 
 ## Stuff used worth mentioning:
 
+- [Underscore.js](http://underscorejs.org/)
 - [NVD3(D3.js)](https://github.com/novus/nvd3)
 - [Mike Bostock for actual D3](http://bost.ocks.org/mike/)
 - [Shout out to the HTTParty animals](https://github.com/jnunemaker/httparty/)

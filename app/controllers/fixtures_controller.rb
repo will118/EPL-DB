@@ -15,6 +15,7 @@ class FixturesController < ApplicationController
   BBCSTATS= "http://polling.bbc.co.uk/sport/shared/football/oppm/json/EFBO726890"
   
   def bbcjson
+    # render :json => BBCmodel.last(1)
     render :json => BBC.new.possession
   end
 
@@ -22,13 +23,14 @@ class FixturesController < ApplicationController
   # GET /fixtures.json
   def index
     @fixtures = Fixture.all
+    @prematch = Prematch.all
+    gon.prematch = Prematch.all
     @home_xis = HomeXi.all
     @away_xis = AwayXi.all
     gon.form = JasonTheBuilder.new.form
     gon.d3 = JasonTheBuilder.new.jason 
     gon.fixtures = JSON.parse HTTParty.get(APIGET).response.body
     gon.table = JSON.parse HTTParty.get(APIGET2).response.body
-    gon.pypy = BBC.new.possession
   end
 
   # GET /fixtures/1

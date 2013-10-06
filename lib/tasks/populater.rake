@@ -1,10 +1,6 @@
 namespace :populater do
   desc "Populates the db"
   task arscom: :environment do
-  
-  require 'nokogiri'  
-  require 'mechanize'  
-  require 'open-uri' 
 
   rejection_criteria = ["matchdayshowlive", "report", "pressconference", "international-watch", "lotto", "train-ahead", "Theclockendpodcast", "features", "highlights", "pictures", "photocall", "goalofthemonth"]
   uri = "http://www.arsenal.com"
@@ -43,9 +39,6 @@ namespace :populater do
 
   desc "Populates teams"
   task hometeam: :environment do
-
-  require 'nokogiri'  
-  require 'open-uri'
 
     BB2= "http://polling.bbc.co.uk/sport/shared/football/oppm/line-up/EFBO726890"
     
@@ -118,6 +111,13 @@ namespace :populater do
     end
   end
 
-task :all => ["populater:arscom", "populater:hometeam", "populater:squawka"]
+
+  desc "opta"
+  task opta: :environment do
+    FourFourTwo.new.opta_text
+  end
+
+
+task :all => ["populater:arscom", "populater:hometeam", "populater:squawka", "populater:opta"]
 end
 
