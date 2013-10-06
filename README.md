@@ -20,7 +20,7 @@ I wanted marginally relevant information to have on my other/second screen durin
 
 - Arsenal.com
 - Stats FC API
-- BBC Sport  
+- BBC Sport[Lol](http://www.bbc.co.uk/sport/0/24067715)  
 - Squawka/Opta
 - FourFourTwo/Opta
 
@@ -86,6 +86,7 @@ Live D3js graphs of:
 - Corners
 - Cards/tackles
 - Nothing seems as good on paper as it does in my head.
+- Also there's some encoding mismatch I'm guessing it's not UTF, anyway it's from the BBC lineup where it looks fine, then when I scrape it I get stuff like "\u00C3\u0096zil" which gets lost somewhere. I haven't looked into it.
 
 Also bear in mind that from the get-go this has been a one page site, by one guy, intended for the same guy. It's like the volcanic springs of code smell.
 

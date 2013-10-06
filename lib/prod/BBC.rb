@@ -1,14 +1,27 @@
 require "json"
 require "HTTParty"
+require "open-uri"
 
 class BBC
 
 	def initialize
 		@statsjson = get_json
+		@rawlink = get_bbc
+	end
+
+	def get_bbc
+
+		uri = "http://www.bbc.co.uk/sport/football/premier-league/fixtures"
+		doc = Nokogiri::HTML(open("#{uri}"))
+	  doc1 = doc.xpath('html/body/div[3]/div/div/div[1]/div[3]/div[2]/div')
+	  arsenalmentions = doc1.search "[text()*='Arsenal']"
+	  arsenalmatch = arsenalmentions.first.parent.parent.parent.parent
+		return arsenalmatch.css('a').last['href']
+		
 	end
 
 	def get_json
-		bbcst= "http://polling.bbc.co.uk/sport/shared/football/oppm/json/EFBO726890"
+		bbcst= "http://polling.bbc.co.uk/sport/shared/football/oppm/json/EFBO694970"
 		rawbbc = JSON.parse HTTParty.get(bbcst).response.body.delete('(').delete(');')
 		midway = rawbbc['data']['payload']['Match']
 		result = []
@@ -26,7 +39,5 @@ class BBC
 	  comboarray << aw
 	  return comboarray
 	end
-
-	
 		
 end

@@ -15,9 +15,13 @@ class FixturesController < ApplicationController
   BBCSTATS= "http://polling.bbc.co.uk/sport/shared/football/oppm/json/EFBO726890"
   
   def bbcjson
-    # render :json => BBCmodel.last(1)
     render :json => BBC.new.possession
   end
+
+  def livepossjson
+    render :json => JasonTheBuilder.new.live_possession
+  end
+
 
   # GET /fixtures
   # GET /fixtures.json
@@ -29,6 +33,7 @@ class FixturesController < ApplicationController
     @away_xis = AwayXi.all
     gon.form = JasonTheBuilder.new.form
     gon.d3 = JasonTheBuilder.new.jason 
+    gon.liveposs = JasonTheBuilder.new.live_possession 
     gon.fixtures = JSON.parse HTTParty.get(APIGET).response.body
     gon.table = JSON.parse HTTParty.get(APIGET2).response.body
   end

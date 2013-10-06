@@ -3,6 +3,7 @@ AAAAMILNE::Application.routes.draw do
 
   resources :fixtures
   get 'bbcjson' => 'fixtures#bbcjson'
+  get 'livepossjson' => 'fixtures#livepossjson'
 
   resources :bets
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131006085714) do
+ActiveRecord::Schema.define(version: 20131006120000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,11 +56,25 @@ ActiveRecord::Schema.define(version: 20131006085714) do
     t.datetime "updated_at"
   end
 
+  create_table "corners", force: true do |t|
+    t.integer  "home"
+    t.integer  "away"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "fixtures", force: true do |t|
     t.string   "hometeam"
     t.string   "awayteam"
     t.datetime "kickoff"
     t.string   "competition"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "fouls", force: true do |t|
+    t.integer  "home"
+    t.integer  "away"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -89,6 +103,13 @@ ActiveRecord::Schema.define(version: 20131006085714) do
     t.datetime "updated_at"
   end
 
+  create_table "posses", force: true do |t|
+    t.integer  "homeposs"
+    t.integer  "awayposs"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "possessions", force: true do |t|
     t.date     "date"
     t.integer  "possession"
@@ -98,6 +119,13 @@ ActiveRecord::Schema.define(version: 20131006085714) do
 
   create_table "prematches", force: true do |t|
     t.text     "text"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "shots", force: true do |t|
+    t.integer  "homeshots"
+    t.integer  "awayshots"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -113,6 +141,13 @@ ActiveRecord::Schema.define(version: 20131006085714) do
     t.integer  "defencescore"
     t.integer  "possesionscore"
     t.integer  "optascore"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "targets", force: true do |t|
+    t.integer  "homeshots"
+    t.integer  "awayshots"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -39,8 +39,9 @@ namespace :populater do
 
   desc "Populates teams"
   task hometeam: :environment do
-
-    BB2= "http://polling.bbc.co.uk/sport/shared/football/oppm/line-up/EFBO726890"
+    HomeXi.delete_all
+    AwayXi.delete_all
+    BB2= "http://polling.bbc.co.uk/sport/shared/football/oppm/line-up/EFBO694970"
     
     document = Nokogiri::HTML(open(BB2))
       
@@ -115,6 +116,38 @@ namespace :populater do
   desc "opta"
   task opta: :environment do
     FourFourTwo.new.opta_text
+  end
+
+  desc "bbc"
+  task bbc: :environment do
+   
+    data = BBC.new.get_json
+ 
+    poss = Poss.new
+    poss.homeposs = data['possession']['home']
+    poss.awayposs = data['possession']['away']
+    poss.save
+
+    targets = Target.new
+    targets.homeshots = data['shotsOnTarget']['home']
+    targets.awayshots = data['shotsOnTarget']['away']
+    targets.save
+
+    shots = Shot.new
+    shots.homeshots = data['shots']['home']
+    shots.awayshots = data['shots']['away']
+    shots.save
+
+    corners = Corner.new
+    corners.home = data['corners']['home']
+    corners.away = data['corners']['away']
+    corners.save
+
+    fouls = Foul.new
+    fouls.home = data['fouls']['home']
+    fouls.away = data['fouls']['away']
+    fouls.save
+
   end
 
 

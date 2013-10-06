@@ -1,5 +1,6 @@
 class JasonTheBuilder
-
+# OK so I am probably going to make jason more clevererer so he can do the live graph jobs too.
+# Oooh maybe he can be a module.
 	def jason
 
 		mixarray1 = Supermodel.all.map(&:avgpossession)
@@ -10,8 +11,9 @@ class JasonTheBuilder
 		mixarray6 = Supermodel.all.map(&:possesionscore)
 		mixarray7 = Supermodel.all.map(&:optascore)
 		
-		 # How many objects are in the array I know its 6 for now but... think of a better way.
-		matchnumber = (1..6).to_a
+		length_of_models = mixarray7.length
+
+		matchnumber = * '1'.."#{length_of_models}"
 
 
 		barray1 = matchnumber.zip mixarray1
@@ -120,6 +122,42 @@ class JasonTheBuilder
       end
      end
 			return form
+		end
+
+
+		def live_possession
+
+			away_array = Poss.all.map(&:awayposs)
+			home_array = Poss.all.map(&:homeposs)
+			x_range = home_array.length
+			x_axis_array = * '1'.."#{x_range}"
+				
+			array1 = x_axis_array.zip home_array
+			array2 = x_axis_array.zip away_array		
+			
+			newarray1 = array1.map do |x, y|
+			  { "x"=> x, "y"=> y }
+			end
+			newarray2 = array2.map do |x, y|
+			  { "x"=> x, "y"=> y }
+			end
+
+			jj = Hash.new {|k,v| k[v]}
+			jj2 = Hash.new {|k,v| k[v]}
+
+			jj["key"] = "Home Possession"
+			jj["values"] = newarray1
+
+			jj2["key"] = "Away Possession"
+			jj2["values"] = newarray2
+
+			final = []
+
+			final << jj
+			final << jj2
+
+			return final
+
 		end
 
 end
