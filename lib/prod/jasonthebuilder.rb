@@ -1,7 +1,124 @@
 class JasonTheBuilder
-# OK so I am probably going to make jason more clevererer so he can do the live graph jobs too.
-# Oooh maybe he can be a module.
+
+	def initialize
+		@home = []
+		@away = []
+	end
+
+
+	def form
+
+		from_date = Time.new.strftime("%Y-%m-%d")
+		to_date = "2013-11-22"
+
+		fixtures = "http://api.statsfc.com/premier-league/fixtures.json?key=#{ENV["STATS_KEY"]}&team=arsenal&from=#{from_date}&to=#{to_date}&timezone=Europe/London&limit=5"
+
+		teamform = "http://api.statsfc.com/premier-league/form.json?key=#{ENV["STATS_KEY"]}&team=arsenal"
+
+	  
+	  @form0 = JSON.parse HTTParty.get(fixtures).response.body
+	  @form = JSON.parse HTTParty.get(teamform).response.body
+
+	  away = @form0.first.fetch('homepath')
+	  awayname = @form0.first.fetch('homeshort')
+
+	    form = []
+
+    @form.each do |x| 
+       if x.has_value?('arsenal')
+        h = {team: 'Arsenal', form: ''}
+         h[:form] = x.fetch('form')
+         form << h 
+      elsif x.has_value?(away)
+        h2 = {team: awayname, form: ''}
+        h2[:form] = x.fetch('form')
+        form << h2
+      end
+     end
+			return form
+		end
+
+		def possession_json
+			@away = Poss.all.map(&:awayposs)
+			@home = Poss.all.map(&:homeposs)
+			live_array_builder("Home Possession", "Away Possession")
+		end
+
+		def targets_json
+			@away = Target.all.map(&:awayshots)
+			@home = Target.all.map(&:homeshots)
+			live_array_builder("Home Shots on Target", "Away Shots on Target")
+		end
+
+		def corners_json
+			@away = Corner.all.map(&:away)
+			@home = Corner.all.map(&:home)
+			live_array_builder("Home Corners", "Away Corners")
+		end
+
+		def shots_json
+			@away = Shot.all.map(&:awayshots)
+			@home = Shot.all.map(&:homeshots)
+			live_array_builder("Home Shots", "Away Shots")
+		end
+
+		def fouls_json
+			@away = Foul.all.map(&:away)
+			@home = Foul.all.map(&:home)
+			live_array_builder("Home Fouls", "Away Fouls")
+		end
+
+		def live_array_builder(home, away)
+
+			away_array = @away
+			home_array = @home
+			x_range = home_array.length
+			x_axis_array = * 1..x_range
+				
+			array1 = x_axis_array.zip home_array
+			array2 = x_axis_array.zip away_array		
+			
+			@home = array1.map do |x, y|
+			  { "x"=> x, "y"=> y }
+			end
+			@away = array2.map do |x, y|
+			  { "x"=> x, "y"=> y }
+			end
+
+
+			return hash_composer(home, away)
+			
+		end
+
+
+		def hash_composer(home, away)
+
+			jj = Hash.new {|k,v| k[v]}
+			jj2 = Hash.new {|k,v| k[v]}
+
+			jj["key"] = home
+			jj["values"] = @home
+
+			jj2["key"] = away
+			jj2["values"] = @away
+
+			final = []
+
+			final << jj
+			final << jj2
+
+			return final
+
+		end
+
+
+
 	def jason
+
+		# This code ain't great but it kind of just has to do one specific task 
+		# that is nice to have in a controller rather than rake.
+		#
+		# I don't really envisage it ever being helpful to change it now.
 
 		mixarray1 = Supermodel.all.map(&:avgpossession)
 		mixarray2 = Supermodel.all.map(&:shotaccuracy)
@@ -91,74 +208,4 @@ class JasonTheBuilder
 
 	end
 
-	def form
-
-		from_date = Time.new.strftime("%Y-%m-%d")
-		to_date = "2013-11-22"
-
-		fixtures = "http://api.statsfc.com/premier-league/fixtures.json?key=#{ENV["STATS_KEY"]}&team=arsenal&from=#{from_date}&to=#{to_date}&timezone=Europe/London&limit=5"
-
-		teamform = "http://api.statsfc.com/premier-league/form.json?key=#{ENV["STATS_KEY"]}&team=arsenal"
-
-	  
-	  @form0 = JSON.parse HTTParty.get(fixtures).response.body
-	  @form = JSON.parse HTTParty.get(teamform).response.body
-
-
-	  away = @form0.first.fetch('homepath')
-	  awayname = @form0.first.fetch('homeshort')
-
-	    form = []
-
-    @form.each do |x| 
-       if x.has_value?('arsenal')
-        h = {team: 'Arsenal', form: ''}
-         h[:form] = x.fetch('form')
-         form << h 
-      elsif x.has_value?(away)
-        h2 = {team: awayname, form: ''}
-        h2[:form] = x.fetch('form')
-        form << h2
-      end
-     end
-			return form
-		end
-
-
-		def live_possession
-
-			away_array = Poss.all.map(&:awayposs)
-			home_array = Poss.all.map(&:homeposs)
-			x_range = home_array.length
-			x_axis_array = * 1..x_range
-				
-			array1 = x_axis_array.zip home_array
-			array2 = x_axis_array.zip away_array		
-			
-			newarray1 = array1.map do |x, y|
-			  { "x"=> x, "y"=> y }
-			end
-			newarray2 = array2.map do |x, y|
-			  { "x"=> x, "y"=> y }
-			end
-
-			jj = Hash.new {|k,v| k[v]}
-			jj2 = Hash.new {|k,v| k[v]}
-
-			jj["key"] = "Home Possession"
-			jj["values"] = newarray1
-
-			jj2["key"] = "Away Possession"
-			jj2["values"] = newarray2
-
-			final = []
-
-			final << jj
-			final << jj2
-
-			return final
-
-		end
-
 end
-

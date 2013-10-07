@@ -1,6 +1,8 @@
+// PIE CHART
+
 $(document).ready(function () {
 
-    var bbcj = $.getJSON("http://0.0.0.0:3000/bbcjson", function(pypy){
+    var bbcj = $.getJSON("/bbcjson", function(pypy){
                     
     nv.addGraph(function() {
         var width = 220,
@@ -29,6 +31,8 @@ $(document).ready(function () {
     });
 });
 
+// BIG CHART AT TOP
+
 $(document).ready(function () {
   nv.addGraph(function() {
             var chart = nv.models.lineChart();
@@ -50,9 +54,11 @@ $(document).ready(function () {
           });
 });
 
+// LIVE POSSESSION
+
 $(document).ready(function () {
       
-    $.getJSON("http://0.0.0.0:3000/livepossjson", function(liveposs){
+    $.getJSON("/livepossjson", function(liveposs){
 
      nv.addGraph(function() {
             var chart = nv.models.lineChart();
@@ -76,6 +82,7 @@ $(document).ready(function () {
           });
 });
 
+// API STUFF
 
 $(document).ready(function () {
     var table = gon.table;
@@ -101,6 +108,8 @@ $(document).ready(function () {
     $("#hometeamform").append("<a>" + form[0].team + "<br>" + form[0].form + "</a>");
     // $("#awayteamform").append("<a>" + form[1].team + "<br>" + form[1].form + "</a>");
 });
+
+// PREMATCH QUOTES
 
 $(document).ready(function () {
     var prematch = gon.prematch

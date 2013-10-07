@@ -19,21 +19,35 @@ class FixturesController < ApplicationController
   end
 
   def livepossjson
-    render :json => JasonTheBuilder.new.live_possession
+    render :json => JasonTheBuilder.new.possession_json
+  end  
+
+  def liveshotjson
+    render :json => JasonTheBuilder.new.shots_json
+  end  
+
+  def livetargetjson
+    render :json => JasonTheBuilder.new.targets_json
+  end  
+
+  def livecornerjson
+    render :json => JasonTheBuilder.new.corners_json
+  end  
+
+  def livefouljson
+    render :json => JasonTheBuilder.new.fouls_json
   end
 
 
   # GET /fixtures
   # GET /fixtures.json
   def index
-    @fixtures = Fixture.all
-    @prematch = Prematch.all
     gon.prematch = Prematch.all
     @home_xis = HomeXi.all
     @away_xis = AwayXi.all
     gon.form = JasonTheBuilder.new.form
     gon.d3 = JasonTheBuilder.new.jason 
-    gon.liveposs = JasonTheBuilder.new.live_possession 
+    gon.liveposs = JasonTheBuilder.new.possession_json 
     gon.fixtures = JSON.parse HTTParty.get(APIGET).response.body
     gon.table = JSON.parse HTTParty.get(APIGET2).response.body
   end
