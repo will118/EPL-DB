@@ -5,24 +5,22 @@ $(document).ready(function () {
     var bbcj = $.getJSON("/bbcjson", function(pypy){
                     
     nv.addGraph(function() {
-        var width = 220,
-            height = 220;
+
 
     var chart = nv.models.pieChart()
-        .x(function(d) { return d.key })
-        .y(function(d) { return d.y })
-        .color(d3.scale.category10().range())
-        .width(width)
-        .height(height);
+        
+       .x(function(d) { return d.key })
+       .y(function(d) { return d.y })
+       .showLabels(true)
+       .labelThreshold(.05)
+       .donut(true);
 
-      d3.select("#pypy1")
+      d3.select("#pypy1 svg")
           .datum(pypy)
         .transition().duration(1200)
-          .attr('width', width)
-          .attr('height', height)
           .call(chart);
 
-    chart.dispatch.on('stateChange', function(e) { nv.log('New State:', JSON.stringify(e)); });
+   
 
     nv.utils.windowResize(chart.update);
 
@@ -179,7 +177,7 @@ $(document).ready(function () {
             d3.select('#livetargetschart svg')
                 .datum(livetarget)
                 .call(chart);
-                
+
             nv.utils.windowResize(chart.update);
 
             return chart;
