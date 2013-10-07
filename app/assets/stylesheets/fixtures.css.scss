@@ -29,34 +29,34 @@
 }
 
 
-          body {
-            overflow-y:scroll;
-          }
+  body {
+    overflow-y:scroll;
+  }
 
-          text {
-            font: 12px sans-serif;
-          }
+  text {
+    font: 12px sans-serif;
+  }
 
-          svg {
-            display: block;
-          }
+  svg {
+    display: block;
+  }
 
-          #chart svg {
-            height: 400px;
-          }
+  #chart svg {
+    height: 400px;
+  }
 
-          .teams {
-            display: inline-block;
-            margin-right: 20px;
-          }
-          .teams:last-child {
-            margin-right: 0px;
-          }
+  .teams {
+    display: inline-block;
+    margin-right: 20px;
+  }
+  .teams:last-child {
+    margin-right: 0px;
+  }
 
-          #pltable {
-            float:right;
-          }
+  #pltable {
+    float: right;
+  }
 
-          #bars {
-            float: left;
-          }
+  #bars {
+    float: left;
+  }

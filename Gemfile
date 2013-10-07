@@ -13,7 +13,6 @@ gem 'poltergeist'
 gem 'zurb-foundation'
 gem 'figaro'
 gem 'puma'
-gem 'sidekiq'
 
 
 group :development, :test do

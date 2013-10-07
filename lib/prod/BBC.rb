@@ -1,12 +1,8 @@
-require "json"
-require "HTTParty"
-require "open-uri"
-
 class BBC
 
 	def initialize
 		@statsjson = get_json
-		@rawlink = get_bbc
+		# @rawlink = get_bbc
 	end
 
 	def get_bbc
@@ -19,6 +15,8 @@ class BBC
 		return arsenalmatch.css('a').last['href']
 		
 	end
+
+	# Join these two things up. PhantomJS?
 
 	def get_json
 		bbcst= "http://polling.bbc.co.uk/sport/shared/football/oppm/json/EFBO694970"
