@@ -20,7 +20,7 @@ I wanted marginally relevant information to have on my other/second screen durin
 
 - Arsenal.com
 - Stats FC API
-- BBC Sport[Lol](http://www.bbc.co.uk/sport/0/24067715)  
+- BBC Sport [Lol](http://www.bbc.co.uk/sport/0/24067715)  
 - Squawka/Opta
 - FourFourTwo/Opta
 

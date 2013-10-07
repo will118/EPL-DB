@@ -13,7 +13,7 @@ class JasonTheBuilder
 		
 		length_of_models = mixarray7.length
 
-		matchnumber = * '1'.."#{length_of_models}"
+		matchnumber = * 1..length_of_models
 
 
 		barray1 = matchnumber.zip mixarray1
@@ -130,7 +130,7 @@ class JasonTheBuilder
 			away_array = Poss.all.map(&:awayposs)
 			home_array = Poss.all.map(&:homeposs)
 			x_range = home_array.length
-			x_axis_array = * '1'.."#{x_range}"
+			x_axis_array = * 1..x_range
 				
 			array1 = x_axis_array.zip home_array
 			array2 = x_axis_array.zip away_array		

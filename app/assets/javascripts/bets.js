@@ -52,7 +52,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
       
-    var liveposs = $.getJSON("http://0.0.0.0:3000/livepossjson", function(liveposs){
+    $.getJSON("http://0.0.0.0:3000/livepossjson", function(liveposs){
 
      nv.addGraph(function() {
             var chart = nv.models.lineChart();
@@ -68,6 +68,7 @@ $(document).ready(function () {
                 .datum(liveposs)
                 .call(chart);
 
+                console.log(liveposs);
             nv.utils.windowResize(chart.update);
 
             return chart;
@@ -118,7 +119,7 @@ $(document).ready(function () {
     $(function() {
         $target = $('#update');
         loadContent(); 
-        window.setInterval(loadContent, 5000); 
+        window.setInterval(loadContent, 8000); 
     });
 
     function loadContent() {
