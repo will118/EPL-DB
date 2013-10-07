@@ -73,6 +73,9 @@ Maybe I'm missing something but it seems pretty much like an open API.
 
 ![Most of the work](/ss/2.png "Second Screen bit")
 
+> My windows chrome has been in italics for so long now I've lost all hope of tracking down why.
+> But you can see the whitespace I have yet to fill which leads me on to.......
+
 ## Work in Progress
 
 I've pretty much just detailed what has been done and hinted at plans. I'm only githubbing now cus I was quite impressed with my first ultran00b foray into regex this just now and it got the original scraper looking quite good. (Not behind the scenes I'm sure)
