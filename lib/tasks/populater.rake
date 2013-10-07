@@ -93,8 +93,7 @@ namespace :populater do
 
   ids.each do 
     |key|
-      gisele = Supermodel.new 
-      gisele.matchid = key
+      gisele = Supermodel.where(:matchid => key).first_or_create 
       poss = passacc[key].fetch('success')
       poss2 = passacc[key].fetch('unsuccess')
       gisele.passaccuracy = (poss - poss2)  

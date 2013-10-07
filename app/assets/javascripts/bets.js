@@ -74,7 +74,113 @@ $(document).ready(function () {
                 .datum(liveposs)
                 .call(chart);
 
-                console.log(liveposs);
+            nv.utils.windowResize(chart.update);
+
+            return chart;
+             })
+          });
+});
+
+// LIVE SHOTS
+
+$(document).ready(function () {
+      
+    $.getJSON("/liveshotjson", function(liveshot){
+
+     nv.addGraph(function() {
+            var chart = nv.models.lineChart();
+
+           chart.transitionDuration(500);
+            chart.xAxis
+                .tickFormat(d3.format(',f'));
+           
+            chart.yAxis
+                .tickFormat(d3.format(',.2f'));
+           
+            d3.select('#liveshotschart svg')
+                .datum(liveshot)
+                .call(chart);
+
+            nv.utils.windowResize(chart.update);
+
+            return chart;
+             })
+          });
+});
+
+// LIVE FOULS
+
+$(document).ready(function () {
+      
+    $.getJSON("/livefouljson", function(livefoul){
+
+     nv.addGraph(function() {
+            var chart = nv.models.lineChart();
+
+           chart.transitionDuration(500);
+            chart.xAxis
+                .tickFormat(d3.format(',f'));
+           
+            chart.yAxis
+                .tickFormat(d3.format(',.2f'));
+           
+            d3.select('#livefoulschart svg')
+                .datum(livefoul)
+                .call(chart);
+
+            nv.utils.windowResize(chart.update);
+
+            return chart;
+             })
+          });
+});
+// LIVE CORNERS
+
+$(document).ready(function () {
+      
+    $.getJSON("/livecornerjson", function(livecorner){
+
+     nv.addGraph(function() {
+            var chart = nv.models.lineChart();
+
+           chart.transitionDuration(500);
+            chart.xAxis
+                .tickFormat(d3.format(',f'));
+           
+            chart.yAxis
+                .tickFormat(d3.format(',.2f'));
+           
+            d3.select('#livecornerschart svg')
+                .datum(livecorner)
+                .call(chart);
+
+            nv.utils.windowResize(chart.update);
+
+            return chart;
+             })
+          });
+});
+// LIVE TARGETS
+
+$(document).ready(function () {
+      
+    $.getJSON("/livetargetjson", function(livetarget){
+
+     nv.addGraph(function() {
+            var chart = nv.models.lineChart();
+
+           chart.transitionDuration(500);
+            chart.xAxis
+                .tickFormat(d3.format(',f'));
+           
+            chart.yAxis
+                .tickFormat(d3.format(',.2f'));
+           
+            d3.select('#livetargetschart svg')
+                .datum(livetarget)
+                .call(chart);
+
+            console.log(livetarget);
             nv.utils.windowResize(chart.update);
 
             return chart;

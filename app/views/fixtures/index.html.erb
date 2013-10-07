@@ -4,41 +4,6 @@
     <div class="large-12 columns">
       <div class="row">
         <div class="large-12 hide-for-small"> 
-        <style>
-
-          body {
-            overflow-y:scroll;
-          }
-
-          text {
-            font: 12px sans-serif;
-          }
-
-          svg {
-            display: block;
-          }
-
-          #chart svg {
-            height: 400px;
-          }
-
-          .teams {
-            display: inline-block;
-            margin-right: 20px;
-          }
-          .teams:last-child {
-            margin-right: 0px;
-          }
-
-          #pltable {
-            float:right;
-          }
-
-          #bars {
-            float: left;
-          }
-
-          </style>
           <body>
 
             <div id="chart" class='with-3d-shadow with-transitions'>
@@ -143,4 +108,28 @@
       </div>
       <center><span id="update"></span></center>
       <br>
+  <div class="row">
+    <div class="large-12 columns">
+     <div class="large-3 columns">
+             <div id="liveposschart" class='with-3d-shadow with-transitions'>
+              <svg style="height: 300px;"></svg>
+            </div>
+     </div>
+     <div class="large-3 columns">
+             <div id="livecardschart" class='with-3d-shadow with-transitions'>
+              <svg style="height: 300px;"></svg>
+            </div>
+     </div>
+    <div class="large-3 columns">
+             <div id="livetargetschart" class='with-3d-shadow with-transitions'>
+              <svg style="height: 300px;"></svg>
+            </div>
+     </div>
+     <div class="large-3 columns">
+             <div id="liveshotschart" class='with-3d-shadow with-transitions'>
+              <svg style="height: 300px;"></svg>
+            </div>
+     </div>
+    </div>
+  </div>
  

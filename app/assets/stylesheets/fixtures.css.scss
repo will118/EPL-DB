@@ -27,3 +27,36 @@
     width: 700px;
     height: 700px;
 }
+
+
+          body {
+            overflow-y:scroll;
+          }
+
+          text {
+            font: 12px sans-serif;
+          }
+
+          svg {
+            display: block;
+          }
+
+          #chart svg {
+            height: 400px;
+          }
+
+          .teams {
+            display: inline-block;
+            margin-right: 20px;
+          }
+          .teams:last-child {
+            margin-right: 0px;
+          }
+
+          #pltable {
+            float:right;
+          }
+
+          #bars {
+            float: left;
+          }
