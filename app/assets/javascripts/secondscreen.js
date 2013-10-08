@@ -25,7 +25,7 @@ $(document).ready(function () {
     nv.utils.windowResize(chart.update);
 
     return chart;
-    })
+      })
     });
 });
 
@@ -49,7 +49,7 @@ $(document).ready(function () {
             nv.utils.windowResize(chart.update);
 
             return chart;
-          });
+        });
 });
 
 // LIVE POSSESSION
@@ -76,7 +76,7 @@ $(document).ready(function () {
 
             return chart;
              })
-          });
+       });
 });
 
 // LIVE SHOTS
@@ -103,7 +103,7 @@ $(document).ready(function () {
 
             return chart;
              })
-          });
+      });
 });
 
 // LIVE FOULS
@@ -130,7 +130,7 @@ $(document).ready(function () {
 
             return chart;
              })
-          });
+      });
 });
 // LIVE CORNERS
 
@@ -156,7 +156,7 @@ $(document).ready(function () {
 
             return chart;
              })
-          });
+     });
 });
 // LIVE TARGETS
 
@@ -182,7 +182,7 @@ $(document).ready(function () {
 
             return chart;
              })
-          });
+     });
 });
 
 // API STUFF
@@ -208,8 +208,12 @@ $(document).ready(function () {
     $("#venue3").append("<a>" + fixtures[2].home + " vs. " + fixtures[2].away + "<br>" + fixtures[2].date + "</a>");
     $("#venue4").append("<a>" + fixtures[3].home + " vs. " + fixtures[3].away + "<br>" + fixtures[3].date + "</a>");
 
-    $("#hometeamform").append("<a>" + form[0].team + "<br>" + form[0].form + "</a>");
-    // $("#awayteamform").append("<a>" + form[1].team + "<br>" + form[1].form + "</a>");
+    var spacedaway = _.map(form[1].form, function(num){ return " " + num; });
+    var spacedhome = _.map(form[0].form, function(num){ return " " + num; });
+    
+
+    $("#hometeamform").append("<a>" + form[0].team + "<br>" + spacedhome + "</a>");
+    $("#awayteamform").append("<a>" + form[1].team + "<br>" + spacedaway + "</a>");
 });
 
 // PREMATCH QUOTES

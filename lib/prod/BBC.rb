@@ -28,6 +28,13 @@ class BBC
 		return result[1]
 	end
 
+
+	def home_or_away
+		# Determine the home and away teams and consequeuntly add them to the supermodel.
+		
+		
+	end
+
 	def possession
 		home = @statsjson['possession']['home']
 		away = @statsjson['possession']['away']

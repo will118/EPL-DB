@@ -4,8 +4,13 @@ class FixturesController < ApplicationController
   FROM_DATE= Time.new.strftime("%Y-%m-%d")
   FIXTURES= "http://api.statsfc.com/#{ENV["COMP"]}/fixtures.json?key=#{ENV["STATS_KEY"]}&team=#{ENV["TEAM"]}&from=#{ENV["FROM_DATE"]}&to=#{ENV["TO_DATE"]}&timezone=#{ENV["TIMEZONE"]}&limit=#{ENV["LIMIT"]}"
   PLTABLE= "http://api.statsfc.com/#{ENV["COMP"]}/table.json?key=#{ENV["STATS_KEY"]}"
+   SCORERS = "http://api.statsfc.com/top-scorers.json?key=#{ENV["STATS_KEY"]}&competition=#{ENV["COMP"]}&team=#{ENV["TEAM"]}&year=2013/2014"    
   
   def index
+
+    gon.scorers = HTTParty.get(SCORERS).response.body
+    # Inexplicably a string I'll come back to this later.
+
     gon.prematch = Prematch.all
     @home_xis = HomeXi.all
     @away_xis = AwayXi.all

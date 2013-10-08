@@ -18,9 +18,9 @@ class JasonTheBuilder
 	  
 	  @form0 = JSON.parse HTTParty.get(fixtures).response.body
 	  @form = JSON.parse HTTParty.get(teamform).response.body
-
-	  away = @form0.first.fetch('homepath')
-	  awayname = @form0.first.fetch('homeshort')
+		
+	  away = @form0.first.fetch('awaypath')
+	  awayname = @form0.first.fetch('awayshort')
 
 	    form = []
 
@@ -111,7 +111,11 @@ class JasonTheBuilder
 
 		end
 
+		def top_scorers_json
+		  raw = "http://api.statsfc.com/top-scorers.json?key=#{ENV["STATS_KEY"]}&competition=#{ENV["COMP"]}&team=#{ENV["TEAM"]}&year=2013/2014"
+		  return HTTParty.get(raw).response.body
 
+		end		
 
 	def jason
 

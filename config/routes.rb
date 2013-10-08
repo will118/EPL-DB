@@ -1,4 +1,5 @@
 AAAAMILNE::Application.routes.draw do
+  mount JasmineRails::Engine => "/specs" if defined?(JasmineRails)
   resources :home_xis
 
   resources :fixtures
@@ -24,7 +25,7 @@ AAAAMILNE::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'news#index', as: "news"
-
+  
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
