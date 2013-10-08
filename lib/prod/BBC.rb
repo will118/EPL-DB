@@ -19,6 +19,7 @@ class BBC
 	# Join these two things up. PhantomJS?
 
 	def get_json
+		rawlink = "http://www.bbc.co.uk/sport/0/football/24350247"
 		bbcst= "http://polling.bbc.co.uk/sport/shared/football/oppm/json/EFBO694970"
 		rawbbc = JSON.parse HTTParty.get(bbcst).response.body.delete('(').delete(');')
 		midway = rawbbc['data']['payload']['Match']

@@ -1,19 +1,21 @@
 class FixturesController < ApplicationController
   before_action :set_fixture, only: [:show, :edit, :update, :destroy]
-
-  require 'httparty'
-  require "json"
   
-  COMP= "premier-league"
-  TIMEZONE= "Europe/London"
-  TEAM= "arsenal"
-  TO_DATE= "2013-12-22"
-  LIMIT= "5"
   FROM_DATE= Time.new.strftime("%Y-%m-%d")
-  APIGET= "http://api.statsfc.com/#{COMP}/fixtures.json?key=#{ENV["STATS_KEY"]}&team=#{TEAM}&from=#{FROM_DATE}&to=#{TO_DATE}&timezone=#{TIMEZONE}&limit=#{LIMIT}"
-  APIGET2= "http://api.statsfc.com/#{COMP}/table.json?key=#{ENV["STATS_KEY"]}"
-  BBCSTATS= "http://polling.bbc.co.uk/sport/shared/football/oppm/json/EFBO726890"
+  FIXTURES= "http://api.statsfc.com/#{ENV["COMP"]}/fixtures.json?key=#{ENV["STATS_KEY"]}&team=#{ENV["TEAM"]}&from=#{ENV["FROM_DATE"]}&to=#{ENV["TO_DATE"]}&timezone=#{ENV["TIMEZONE"]}&limit=#{ENV["LIMIT"]}"
+  PLTABLE= "http://api.statsfc.com/#{ENV["COMP"]}/table.json?key=#{ENV["STATS_KEY"]}"
   
+  def index
+    gon.prematch = Prematch.all
+    @home_xis = HomeXi.all
+    @away_xis = AwayXi.all
+    gon.form = JasonTheBuilder.new.form
+    gon.d3 = JasonTheBuilder.new.jason 
+    gon.liveposs = JasonTheBuilder.new.possession_json 
+    gon.fixtures = JSON.parse HTTParty.get(FIXTURES).response.body
+    gon.table = JSON.parse HTTParty.get(PLTABLE).response.body
+  end
+
   def bbcjson
     render :json => BBC.new.possession
   end
@@ -36,20 +38,6 @@ class FixturesController < ApplicationController
 
   def livefouljson
     render :json => JasonTheBuilder.new.fouls_json
-  end
-
-
-  # GET /fixtures
-  # GET /fixtures.json
-  def index
-    gon.prematch = Prematch.all
-    @home_xis = HomeXi.all
-    @away_xis = AwayXi.all
-    gon.form = JasonTheBuilder.new.form
-    gon.d3 = JasonTheBuilder.new.jason 
-    gon.liveposs = JasonTheBuilder.new.possession_json 
-    gon.fixtures = JSON.parse HTTParty.get(APIGET).response.body
-    gon.table = JSON.parse HTTParty.get(APIGET2).response.body
   end
 
   # GET /fixtures/1
