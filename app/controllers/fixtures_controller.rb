@@ -10,19 +10,33 @@ class FixturesController < ApplicationController
 
     gon.scorers = HTTParty.get(SCORERS).response.body
     # Inexplicably a string I'll come back to this later.
-
-    gon.prematch = Prematch.all
     @home_xis = HomeXi.all
     @away_xis = AwayXi.all
-    gon.form = JasonTheBuilder.new.form
-    gon.d3 = JasonTheBuilder.new.jason 
-    gon.liveposs = JasonTheBuilder.new.possession_json 
-    gon.fixtures = JSON.parse HTTParty.get(FIXTURES).response.body
-    gon.table = JSON.parse HTTParty.get(PLTABLE).response.body
+  end
+
+
+  def megajson
+    render :json => JasonTheBuilder.new.jason
   end
 
   def bbcjson
     render :json => BBC.new.possession
+  end
+
+  def formjson
+    render :json => JasonTheBuilder.new.form
+  end  
+
+  def prematchjson
+    render :json => Prematch.all
+  end
+
+  def fixturesjson
+    render :json => JSON.parse(HTTParty.get(FIXTURES).response.body)
+  end
+
+  def tablejson
+    render :json => JSON.parse(HTTParty.get(PLTABLE).response.body)
   end
 
   def livepossjson
