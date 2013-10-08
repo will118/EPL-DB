@@ -1,7 +1,6 @@
-  require 'nokogiri'  
-  require 'open-uri'
-  require 'capybara/mechanize'
- require 'capybara/poltergeist'
+require 'nokogiri'  
+require 'open-uri'
+require 'capybara/poltergeist'
 
 class JSBBC
   def new_session
@@ -17,8 +16,7 @@ class JSBBC
     @session.driver.headers = { 'User-Agent' =>
       "Mozilla/5.0 (Macintosh; Intel Mac OS X)" }
  
-    # Return the driver's session
-    @session
+
     return @session.driver.network_traffic
   end
 

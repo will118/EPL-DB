@@ -5,4 +5,6 @@ handler do |job|
   puts "Running #{job}"
 end
 
-every(10.seconds, 'frequent.job')
+every(25.seconds, 'Match Recorder') {
+  `rake populater:bbc`
+}

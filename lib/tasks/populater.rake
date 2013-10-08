@@ -117,37 +117,6 @@ namespace :populater do
     FourFourTwo.new.opta_text
   end
 
-  desc "bbc"
-  task bbc: :environment do
-   
-    data = BBC.new.get_json
- 
-    poss = Poss.new
-    poss.homeposs = data['possession']['home']
-    poss.awayposs = data['possession']['away']
-    poss.save
-
-    targets = Target.new
-    targets.homeshots = data['shotsOnTarget']['home']
-    targets.awayshots = data['shotsOnTarget']['away']
-    targets.save
-
-    shots = Shot.new
-    shots.homeshots = data['shots']['home']
-    shots.awayshots = data['shots']['away']
-    shots.save
-
-    corners = Corner.new
-    corners.home = data['corners']['home']
-    corners.away = data['corners']['away']
-    corners.save
-
-    fouls = Foul.new
-    fouls.home = data['fouls']['home']
-    fouls.away = data['fouls']['away']
-    fouls.save
-
-  end
 
 
 task :all => ["populater:arscom", "populater:hometeam", "populater:squawka", "populater:opta"]

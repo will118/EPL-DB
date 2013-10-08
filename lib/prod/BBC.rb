@@ -17,9 +17,9 @@ class BBC
 	end
 
 	# Join these two things up. PhantomJS?
+	# rawlink = "http://www.bbc.co.uk/sport/0/football/24350247"
 
 	def get_json
-		rawlink = "http://www.bbc.co.uk/sport/0/football/24350247"
 		bbcst= "http://polling.bbc.co.uk/sport/shared/football/oppm/json/EFBO694970"
 		rawbbc = JSON.parse HTTParty.get(bbcst).response.body.delete('(').delete(');')
 		midway = rawbbc['data']['payload']['Match']
@@ -38,5 +38,37 @@ class BBC
 	  comboarray << aw
 	  return comboarray
 	end
+
+
+	def recorder
+   
+    data = @statsjson
+ 
+    poss = Poss.new
+    poss.homeposs = data['possession']['home']
+    poss.awayposs = data['possession']['away']
+    poss.save
+
+    targets = Target.new
+    targets.homeshots = data['shotsOnTarget']['home']
+    targets.awayshots = data['shotsOnTarget']['away']
+    targets.save
+
+    shots = Shot.new
+    shots.homeshots = data['shots']['home']
+    shots.awayshots = data['shots']['away']
+    shots.save
+
+    corners = Corner.new
+    corners.home = data['corners']['home']
+    corners.away = data['corners']['away']
+    corners.save
+
+    fouls = Foul.new
+    fouls.home = data['fouls']['home']
+    fouls.away = data['fouls']['away']
+    fouls.save
+
+  end
 		
 end
