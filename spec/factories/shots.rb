@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :shot do
-    homeshots 1
-    awayshots 1
+    homeshots 37
+    awayshots 42
   end
 end

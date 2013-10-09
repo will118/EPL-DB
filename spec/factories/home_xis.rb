@@ -1,9 +1,8 @@
-# Read about factories at https://github.com/thoughtbot/factory_girl
-
 FactoryGirl.define do
   factory :home_xi do
-    name "MyString"
-    number 1
-    subbed "MyString"
+    name "Ozil"
+    number 11
+    subbed "Giroud"
   end
 end
+

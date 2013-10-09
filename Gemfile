@@ -21,7 +21,8 @@ group :development, :test do
 	gem "factory_girl_rails", "~> 4.2.1"
 	gem 'growl'
 	gem 'guard-cucumber'
-  gem 'jasmine-rails'
+	gem 'jasmine-rails'
+	gem 'jasmine-jquery-rails'
 	gem 'guard-rspec'
 end
 

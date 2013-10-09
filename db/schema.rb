@@ -39,15 +39,6 @@ ActiveRecord::Schema.define(version: 20131006120000) do
     t.datetime "updated_at"
   end
 
-  create_table "bets", force: true do |t|
-    t.integer  "homescore"
-    t.integer  "awayscore"
-    t.decimal  "homeodds"
-    t.decimal  "awayodds"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "cards", force: true do |t|
     t.date     "date"
     t.integer  "yellow"

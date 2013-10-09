@@ -173,7 +173,7 @@ function targCallback(livetarget){
 
 function tableCallback(table){
   var tr;
-  for (var i = 0; i < 11; i++) {
+  for (var i = 0; i < Math.min(table.length,11); i++) {
       tr = $('<tr/>');
       tr.append("<td>" + table[i].team + "</td>");
       tr.append("<td>" + table[i].played + "</td>");
@@ -188,7 +188,7 @@ function tableCallback(table){
 
 function fixturesCallback(fixtures) {
 
-  for (var i = 0; i < 4; i++) {
+  for (var i = 0; i < Math.min(fixtures.length, 4); i++) {
     $("#venue"+i).append("<a>" + fixtures[i].home + " vs. " + fixtures[i].away + "<br>" + fixtures[i].date + "</a>");
   };  
 };
@@ -237,7 +237,7 @@ function prematchCallback(prematch){
     };
  };
 
- $(document).ready(function () {
+function setupTables(){
    $.getJSON("/tablejson", tableCallback);
    $.getJSON("/fixturesjson", fixturesCallback);
    $.getJSON("/formjson", formCallback);
@@ -249,4 +249,4 @@ function prematchCallback(prematch){
    $.getJSON("/liveshotjson", shotCallback);
    $.getJSON("/livefouljson", foulCallback);
    $.getJSON("/livecornerjson", cornerCallback);
-});
+};

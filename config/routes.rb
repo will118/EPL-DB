@@ -16,8 +16,6 @@ AAAAMILNE::Application.routes.draw do
   get 'livecornerjson' => 'fixtures#livecornerjson'
   get 'livefouljson' => 'fixtures#livefouljson'
 
-  resources :bets
-
   get "news/index"
   resources :articles
   put 'opta' => 'articles#opta'

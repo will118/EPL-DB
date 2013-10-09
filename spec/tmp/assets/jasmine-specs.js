@@ -39781,7 +39781,7 @@ function targCallback(livetarget){
 
 function tableCallback(table){
   var tr;
-  for (var i = 0; i < 11; i++) {
+  for (var i = 0; i < Math.min(table.length,11); i++) {
       tr = $('<tr/>');
       tr.append("<td>" + table[i].team + "</td>");
       tr.append("<td>" + table[i].played + "</td>");
@@ -39796,7 +39796,7 @@ function tableCallback(table){
 
 function fixturesCallback(fixtures) {
 
-  for (var i = 0; i < 4; i++) {
+  for (var i = 0; i < Math.min(fixtures.length, 4); i++) {
     $("#venue"+i).append("<a>" + fixtures[i].home + " vs. " + fixtures[i].away + "<br>" + fixtures[i].date + "</a>");
   };  
 };
@@ -39845,7 +39845,7 @@ function prematchCallback(prematch){
     };
  };
 
- $(document).ready(function () {
+function setupTables(){
    $.getJSON("/tablejson", tableCallback);
    $.getJSON("/fixturesjson", fixturesCallback);
    $.getJSON("/formjson", formCallback);
@@ -39857,7 +39857,7 @@ function prematchCallback(prematch){
    $.getJSON("/liveshotjson", shotCallback);
    $.getJSON("/livefouljson", foulCallback);
    $.getJSON("/livecornerjson", cornerCallback);
-});
+};
 /* Tooltip rendering model for nvd3 charts.
 window.nv.models.tooltip is the updated,new way to render tooltips.
 
@@ -42503,19 +42503,61 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
     return jasmine.getJSONFixtures().proxyCallTo_('read', arguments)[url]
   }
 }(jasmine, window);
-var table_data = getJSONFixture('table.json')
-
-
 describe("Updating the UI with JSON data", function() {
   it("should populate the table with team data", function() {
-    
-    expect($("#pltable tr").length).toBe(0);
-  
-    tableCallback(table_data)
-    
+    loadFixtures('secondscreen.html')
+
     expect($("#pltable tr").length).toBe(1);
-    expect($("#pltable tr:first td:first").text()).toBe('Arsenal');
+  
+		var table_data = getJSONFixture('table.json')
+
+		    tableCallback(table_data);
+    
+    expect($("#pltable tr").length).toBe(12);
+    expect($("#pltable td:first").text()).toBe('Arsenal');
+  });
+
+  it("should populate upcoming fixtures", function() {
+    loadFixtures('secondscreen.html')
+
+    expect($("#venue1").text()).toBe('');
+  
+		var fixture_data = getJSONFixture('fixtures.json')
+
+		    fixturesCallback(fixture_data);
+    
+    expect($("#venue1").text()).toBe('Crystal Palace vs. Arsenal2013-10-26 12:45:00');
+  });
+
+  it("should populate recent form data", function() {
+    loadFixtures('secondscreen.html')
+
+    expect($("#hometeamform").text()).toBe('');
+  
+		var form_data = getJSONFixture('form.json')
+
+		    formCallback(form_data);
+    
+    expect($("#hometeamform").text()).toBe('Arsenal W, W, W, W, W, D');
+    expect($("#awayteamform").text()).toBe('Norwich L, W, L, L, W, L');
+    
+  });
+
+  it("should display a slideshow of messages", function() {
+    loadFixtures('secondscreen.html')
+
+    expect($("#update").text()).toBe('');
+	  expect($("#update").text().length).toBeLessThan(1);
+
+		var prematch_data = getJSONFixture('prematch.json')
+
+		    prematchCallback(prematch_data);
+    
+    expect($("#update").text().length).toBeGreaterThan(10);
+
+    
   });
 });
+
 
 
