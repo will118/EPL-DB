@@ -49,12 +49,6 @@ class Arscom
     end
   end 
 
-  class << self
-  	def scrape
-  		self.link_filter
-  		noko_save
-  	end
-  end
 
   def body_washer(string)
   	string.gsub!(/(Flash Player)(.*)(Play again)/m, '') 
