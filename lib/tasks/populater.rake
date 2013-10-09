@@ -1,76 +1,14 @@
 namespace :populater do
-  desc "Populates the db"
+  desc "Populates arsenal articles"
   task arscom: :environment do
-
-  rejection_criteria = ["matchdayshowlive", "report", "pressconference", "international-watch", "lotto", "train-ahead", "Theclockendpodcast", "features", "highlights", "pictures", "photocall", "goalofthemonth"]
-  uri = "http://www.arsenal.com"
- 
-  agent = Mechanize.new
-  agent.user_agent_alias = 'Mac Safari'
-
-
-  @links = [] 
-  page = agent.get("#{uri}/news/news-archive?category=first")
-  page.parser.xpath('/html/body/div[5]/div/div/article/*/ul/*/*').each do | links | 
-  @links << links.attribute('href')
+    links = Arscom.new
+    links.link_filter
+    links.noko_save
   end
-
-  rejection_criteria.each do |word|
-    @links -= @links.grep(/#{word}/)
-  end
-
-
-  @links.each do | urls | 
-    nokogiri = Nokogiri::HTML(open("#{uri}#{urls}")) 
-    nokogiri.css('script').remove 
-    nokogiri.xpath('/html/body/div[3]/div/article/section[1]/small').remove 
-    article = Article.new 
-    article.title = nokogiri.css("h1")[0].text
-    dirtybody = nokogiri.xpath('/html/body/div[3]/div/article/section[1]').inner_text
-    nearlyclean = dirtybody.gsub(/(Flash Player)(.*)(Play again)/m, '') 
-    article.body = nearlyclean.gsub(/^\s{5,}/, "\n")
-    src = (nokogiri.at_xpath '//img/@src').to_s
-    article.url = src.chars.first == "/" ? "http://www.arsenal.com" + src : src
-    article.save
-    end
-  end
-
-
 
   desc "Populates teams"
-  task hometeam: :environment do
-    HomeXi.delete_all
-    AwayXi.delete_all
-    BB2= "http://polling.bbc.co.uk/sport/shared/football/oppm/line-up/EFBO694970"
-    
-    document = Nokogiri::HTML(open(BB2))
-      
-        allplayers = document.xpath('//li').map do |player|
-          p = player.inner_text.strip.split(' ')
-          {name: p[1], number: p[0].to_i, subbed: p[2..4].join}
-        end
-
-    hometeam = allplayers[0..10]
-    awayteam = allplayers[18..28]
-
-
-    hometeam.each do |xx|
-    homexi = HomeXi.new
-    y1 = xx[:number] 
-    y2 = xx[:name] 
-    homexi.name = "#{y2} (#{y1})" 
-    homexi.subbed = xx[:subbed].delete('(')
-    homexi.save 
-    end
-
-    awayteam.each do |xx|
-    awayxi = AwayXi.new
-    y1 = xx[:number] 
-    y2 = xx[:name] 
-    awayxi.name = "#{y2} (#{y1})" 
-    awayxi.subbed = xx[:subbed].delete('(')
-    awayxi.save 
-    end   
+  task teams: :environment do
+    BBC.teams
   end
 
   desc "squawka"

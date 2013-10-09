@@ -1,6 +1,3 @@
-require 'open-uri'
-require "Nokogiri" 
-
 class FourFourTwo
 
 	def initialize

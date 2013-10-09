@@ -5,7 +5,6 @@ class JasonTheBuilder
 		@away = []
 	end
 
-
 	def form
 
 		from_date = Time.new.strftime("%Y-%m-%d")

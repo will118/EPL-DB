@@ -1,5 +1,6 @@
 class BBC
 
+    
 	def initialize
 		@statsjson = get_json
 		# @rawlink = get_bbc
@@ -30,9 +31,45 @@ class BBC
 
 
 	def home_or_away
-		# Determine the home and away teams and consequeuntly add them to the supermodel.
-		
-		
+		# Determine the home and away teams and consequeuntly add them to the supermodel.		
+	end
+
+	class << self
+		def teams
+			prefix = "http://polling.bbc.co.uk/sport/shared/football/oppm/line-up/"
+			suffix = "EFBO694970"
+
+			HomeXi.delete_all
+	    AwayXi.delete_all
+	    
+	    document = Nokogiri::HTML(open("#{prefix}#{suffix}"))
+	      
+      allplayers = document.xpath('//li').map do |player|
+        p = player.inner_text.strip.split(' ')
+        {name: p[1], number: p[0].to_i, subbed: p[2..4].join}
+      end
+
+	    hometeam = allplayers[0..10]
+	    awayteam = allplayers[18..28]
+
+	    hometeam.each do |xx|
+		    homexi = HomeXi.new
+		    y1 = xx[:number] 
+		    y2 = xx[:name] 
+		    homexi.name = "#{y2} (#{y1})" 
+		    homexi.subbed = xx[:subbed].delete('(')
+		    homexi.save 
+	    end
+
+	    awayteam.each do |xx|
+		    awayxi = AwayXi.new
+		    y1 = xx[:number] 
+		    y2 = xx[:name] 
+		    awayxi.name = "#{y2} (#{y1})" 
+		    awayxi.subbed = xx[:subbed].delete('(')
+		    awayxi.save 
+	    end   
+		end
 	end
 
 	def possession
