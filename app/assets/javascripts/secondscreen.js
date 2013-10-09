@@ -1,11 +1,8 @@
 // PIE CHART
 
-$(document).ready(function () {
-
-    var bbcj = $.getJSON("/bbcjson", function(pypy){
+function pieCallback(pypy){
                     
     nv.addGraph(function() {
-
 
     var chart = nv.models.pieChart()
         
@@ -20,20 +17,15 @@ $(document).ready(function () {
         .transition().duration(1200)
           .call(chart);
 
-   
-
     nv.utils.windowResize(chart.update);
 
     return chart;
-      })
-    });
-});
+      });
+};
 
 // BIG CHART AT TOP
 
-$(document).ready(function () {
-
-    $.getJSON("/megajson", function(mega){
+function megaCallback(mega){
 
      nv.addGraph(function() {
             var chart = nv.models.lineChart();
@@ -53,15 +45,12 @@ $(document).ready(function () {
 
             return chart;
         });
-      });
-});
+};
 
 // LIVE POSSESSION
 
-$(document).ready(function () {
+function possCallback(liveposs){
       
-    $.getJSON("/livepossjson", function(liveposs){
-
      nv.addGraph(function() {
             var chart = nv.models.lineChart();
 
@@ -80,15 +69,12 @@ $(document).ready(function () {
 
             return chart;
              })
-       });
-});
+};
 
 // LIVE SHOTS
 
-$(document).ready(function () {
+function shotCallback(liveshot){
       
-    $.getJSON("/liveshotjson", function(liveshot){
-
      nv.addGraph(function() {
             var chart = nv.models.lineChart();
 
@@ -107,15 +93,12 @@ $(document).ready(function () {
 
             return chart;
              })
-      });
-});
+};
 
 // LIVE FOULS
 
-$(document).ready(function () {
+function foulCallback(livefoul){
       
-    $.getJSON("/livefouljson", function(livefoul){
-
      nv.addGraph(function() {
             var chart = nv.models.lineChart();
 
@@ -134,13 +117,12 @@ $(document).ready(function () {
 
             return chart;
              })
-      });
-});
+ 
+};
 // LIVE CORNERS
 
-$(document).ready(function () {
+function cornerCallback(livecorner){
       
-    $.getJSON("/livecornerjson", function(livecorner){
 
      nv.addGraph(function() {
             var chart = nv.models.lineChart();
@@ -160,14 +142,12 @@ $(document).ready(function () {
 
             return chart;
              })
-     });
-});
+ 
+};
 // LIVE TARGETS
 
-$(document).ready(function () {
+function targCallback(livetarget){
       
-    $.getJSON("/livetargetjson", function(livetarget){
-
      nv.addGraph(function() {
             var chart = nv.models.lineChart();
 
@@ -186,65 +166,54 @@ $(document).ready(function () {
 
             return chart;
              })
-     });
-});
+
+};
 
 // TABLE API
 
-$(document).ready(function () {
+function tableCallback(table){
+  var tr;
+  for (var i = 0; i < 11; i++) {
+      tr = $('<tr/>');
+      tr.append("<td>" + table[i].team + "</td>");
+      tr.append("<td>" + table[i].played + "</td>");
+      tr.append("<td>" + table[i].won + "</td>");
+      tr.append("<td>" + table[i].drawn + "</td>");
+      tr.append("<td>" + table[i].lost + "</td>");
+      tr.append("<td>" + table[i].difference + "</td>");
+      tr.append("<td>" + table[i].points + "</td>");
+      $('#pltable').append(tr); 
+  };
+}
 
-   $.getJSON("/tablejson", function(table){
-    var tr;
-    for (var i = 0; i < 11; i++) {
-        tr = $('<tr/>');
-        tr.append("<td>" + table[i].team + "</td>");
-        tr.append("<td>" + table[i].played + "</td>");
-        tr.append("<td>" + table[i].won + "</td>");
-        tr.append("<td>" + table[i].drawn + "</td>");
-        tr.append("<td>" + table[i].lost + "</td>");
-        tr.append("<td>" + table[i].difference + "</td>");
-        tr.append("<td>" + table[i].points + "</td>");
-        $('#pltable').append(tr); 
-    };
-  });
-});
+function fixturesCallback(fixtures) {
 
-$(document).ready(function () {
+  for (var i = 0; i < 4; i++) {
+    $("#venue"+i).append("<a>" + fixtures[i].home + " vs. " + fixtures[i].away + "<br>" + fixtures[i].date + "</a>");
+  };  
+};
 
-   $.getJSON("/fixturesjson", function(fixtures){
-
-    $("#venue1").append("<a>" + fixtures[0].home + " vs. " + fixtures[0].away + "<br>" + fixtures[0].date + "</a>");
-    $("#venue2").append("<a>" + fixtures[1].home + " vs. " + fixtures[1].away + "<br>" + fixtures[1].date + "</a>");
-    $("#venue3").append("<a>" + fixtures[2].home + " vs. " + fixtures[2].away + "<br>" + fixtures[2].date + "</a>");
-    $("#venue4").append("<a>" + fixtures[3].home + " vs. " + fixtures[3].away + "<br>" + fixtures[3].date + "</a>");
-  });
-});
-
-$(document).ready(function () {
-
-   $.getJSON("/formjson", function(form){
-
+function formCallback(form){
+    
     var spacedaway = _.map(form[1].form, function(num){ return " " + num; });
     var spacedhome = _.map(form[0].form, function(num){ return " " + num; });
     
     $("#hometeamform").append("<a>" + form[0].team + "<br>" + spacedhome + "</a>");
     $("#awayteamform").append("<a>" + form[1].team + "<br>" + spacedaway + "</a>");
-  });
-});
+    
+};
 
 // PREMATCH QUOTES
 
-$(document).ready(function () {
+function prematchCallback(prematch){
    
-   $.getJSON("/prematchjson", function(prematch){
-       var list = [];
+   var list = [];
 
   $(prematch).each(function(i, obj) {
      list.push(obj.text);
     });
 
   var final_list =  _.reject(list, function(num){ return num.length  == 1; });
-
 
     var $target;
     var loadContentIndex = 0;
@@ -266,5 +235,18 @@ $(document).ready(function () {
             loadContentIndex = 0;
         };
     };
-  });
- });
+ };
+
+ $(document).ready(function () {
+   $.getJSON("/tablejson", tableCallback);
+   $.getJSON("/fixturesjson", fixturesCallback);
+   $.getJSON("/formjson", formCallback);
+   $.getJSON("/prematchjson", prematchCallback);
+   $.getJSON("/bbcjson", pieCallback);
+   $.getJSON("/megajson", megaCallback);
+   $.getJSON("/livepossjson", possCallback);
+   $.getJSON("/livetargetjson", targCallback);
+   $.getJSON("/liveshotjson", shotCallback);
+   $.getJSON("/livefouljson", foulCallback);
+   $.getJSON("/livecornerjson", cornerCallback);
+});
