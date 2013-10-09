@@ -17,16 +17,5 @@ describe Shot do
 	it "is invalid without a hometeam int" do
 		expect(build(:shot, homeshots: nil)).to have(1).errors_on(:homeshots)
 	end
-
-	it "returns errors on matchid with a duplicate info" do
-		Shot.create(
-      awayshots: 42,
-      homeshots: 37)
-		expect(build(:shot)).to have(1).errors_on(:awayshots)
-		expect(build(:shot)).to have(1).errors_on(:homeshots)
-	
 	end
-	end
-
-
 end

@@ -2,6 +2,6 @@
 
 FactoryGirl.define do
   factory :prematch do
-    text "MyText"
+    text "The Gunners have scored a league-high four goals in the opening 15 minutes of Barclays Premier League games this season."
   end
 end

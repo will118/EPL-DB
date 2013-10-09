@@ -1,8 +1,6 @@
-# Read about factories at https://github.com/thoughtbot/factory_girl
-
 FactoryGirl.define do
   factory :target do
-    homeshots 1
-    awayshots 1
+    homeshots 10
+    awayshots 12
   end
 end

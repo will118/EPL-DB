@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :foul do
-    home 1
-    away 1
+    home 9
+    away 5
   end
 end

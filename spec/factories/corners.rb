@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :corner do
-    home 1
-    away 1
+    home 13
+    away 7
   end
 end

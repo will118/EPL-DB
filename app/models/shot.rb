@@ -1,4 +1,4 @@
-class Shot < ActiveRecord::Base
-	validates :awayshots, presence: true, uniqueness: true
-	validates :homeshots, presence: true, uniqueness: true
+class Shot < ActiveRecord::Base	
+	validates :awayshots, presence: true
+	validates :homeshots, presence: true
 end

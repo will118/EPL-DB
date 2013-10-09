@@ -2,7 +2,7 @@
 
 FactoryGirl.define do
   factory :poss do
-    homeposs 1
-    awayposs 1
+    homeposs 57
+    awayposs 43
   end
 end
