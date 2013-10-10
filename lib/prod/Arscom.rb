@@ -52,6 +52,7 @@ class Arscom
   def body_washer(string)
   	string.gsub!(/(Flash Player)(.*)(Play again)/m, '') 
   	string.gsub!(/^\s{5,}/, "\n")
+  	string.gsub!(/View the large version of this image/, '')
   	string
   end
 

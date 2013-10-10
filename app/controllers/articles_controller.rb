@@ -3,13 +3,11 @@ class ArticlesController < ApplicationController
 
   def populater
     system "rake populater:arscom &"
-    sleep 7
     redirect_to news_url 
   end
 
   def opta
     system "rake populater:opta &"
-    sleep 1
     redirect_to fixtures_url
   end  
 

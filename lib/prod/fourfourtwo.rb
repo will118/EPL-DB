@@ -31,4 +31,5 @@ class FourFourTwo
 		texts = doc.css('.pre-match').inner_text
 		@final = texts.split("\n").drop(1)
 	end
+
 end
