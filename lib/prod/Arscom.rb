@@ -49,10 +49,10 @@ class Arscom
     end
   end 
 
-
   def body_washer(string)
   	string.gsub!(/(Flash Player)(.*)(Play again)/m, '') 
   	string.gsub!(/^\s{5,}/, "\n")
+  	string
   end
 
   def links

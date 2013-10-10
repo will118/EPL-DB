@@ -1,5 +1,8 @@
 class BBC
 
+
+	attr_reader :statsjson
+
     
 	def initialize
 		@statsjson = get_json
