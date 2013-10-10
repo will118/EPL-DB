@@ -20,14 +20,10 @@ describe AwayXi do
 
 	it "returns errors on matchid with a duplicate info" do
 		AwayXi.create(
-			name: "Oscar",
-			number: 11,
-			subbed: "Mata")
+			name: "Oscar (11)",
+			subbed: "Mata (10)")
 		expect(build(:away_xi)).to have(1).errors_on(:name)
-		expect(build(:away_xi)).to have(1).errors_on(:number)
-	
 	end
-	end
-
+end
 
 end

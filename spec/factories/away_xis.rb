@@ -2,8 +2,7 @@
 
 FactoryGirl.define do
   factory :away_xi do
-    name "Oscar"
-    number 11
-    subbed "Mata"
+    name "Oscar (11)"
+    subbed "Mata (10)"
   end
 end

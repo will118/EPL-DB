@@ -24,25 +24,10 @@ ActiveRecord::Schema.define(version: 20131006120000) do
     t.datetime "updated_at"
   end
 
-  create_table "away_benches", force: true do |t|
-    t.string   "name"
-    t.integer  "number"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "away_xis", force: true do |t|
     t.string   "name"
     t.integer  "number"
     t.string   "subbed"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "cards", force: true do |t|
-    t.date     "date"
-    t.integer  "yellow"
-    t.integer  "red"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -70,13 +55,6 @@ ActiveRecord::Schema.define(version: 20131006120000) do
     t.datetime "updated_at"
   end
 
-  create_table "home_benches", force: true do |t|
-    t.string   "name"
-    t.integer  "number"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "home_xis", force: true do |t|
     t.string   "name"
     t.integer  "number"
@@ -85,25 +63,9 @@ ActiveRecord::Schema.define(version: 20131006120000) do
     t.datetime "updated_at"
   end
 
-  create_table "passings", force: true do |t|
-    t.date     "date"
-    t.integer  "totalpasses"
-    t.integer  "keypasses"
-    t.integer  "assists"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "posses", force: true do |t|
     t.integer  "homeposs"
     t.integer  "awayposs"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "possessions", force: true do |t|
-    t.date     "date"
-    t.integer  "possession"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

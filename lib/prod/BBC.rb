@@ -39,33 +39,30 @@ class BBC
 			prefix = "http://polling.bbc.co.uk/sport/shared/football/oppm/line-up/"
 			suffix = "EFBO694970"
 
-			HomeXi.delete_all
-	    AwayXi.delete_all
-	    
 	    document = Nokogiri::HTML(open("#{prefix}#{suffix}"))
 	      
       allplayers = document.xpath('//li').map do |player|
-        p = player.inner_text.strip.split(' ')
-        {name: p[1], number: p[0].to_i, subbed: p[2..4].join}
+        players = player.inner_text.strip.split(' ')
+        {name: players[1], number: players[0].to_i, subbed: players[2..4].join}
       end
 
 	    hometeam = allplayers[0..10]
 	    awayteam = allplayers[18..28]
 
 	    hometeam.each do |xx|
-		    homexi = HomeXi.new
 		    y1 = xx[:number] 
 		    y2 = xx[:name] 
-		    homexi.name = "#{y2} (#{y1})" 
+		    name = "#{y2} (#{y1})" 
+		    homexi = HomeXi.where(:name => name).first_or_create  
 		    homexi.subbed = xx[:subbed].delete('(')
 		    homexi.save 
 	    end
 
 	    awayteam.each do |xx|
-		    awayxi = AwayXi.new
 		    y1 = xx[:number] 
 		    y2 = xx[:name] 
-		    awayxi.name = "#{y2} (#{y1})" 
+		    name = "#{y2} (#{y1})" 
+		    awayxi = AwayXi.where(:name => name).first_or_create
 		    awayxi.subbed = xx[:subbed].delete('(')
 		    awayxi.save 
 	    end   
