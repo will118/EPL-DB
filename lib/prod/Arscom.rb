@@ -4,9 +4,13 @@ class Arscom
 
   URI = "http://www.arsenal.com"
 
+  attr_reader :links
+
+
 	def initialize
 		@links = link_get
 	end
+
 
 	def link_filter
 		rejection_criteria = ["matchdayshowlive", "month-award", "report", "pressconference", "international-watch", "lotto", "train-ahead", "Theclockendpodcast", "features", "highlights", "pictures", "photocall", "goalofthemonth"]
@@ -22,6 +26,7 @@ class Arscom
 		# @links.reject {|link| rejection_criteria.any? {|criteria| link.match(Regexp.new(criteria)) } }
 	end
 
+
 	def link_get
 	  agent = Mechanize.new
 	  agent.user_agent_alias = 'Mac Safari'
@@ -32,6 +37,7 @@ class Arscom
 		end
 	  link_got
   end
+
 
   def noko_save
   	links = @links
@@ -49,15 +55,12 @@ class Arscom
     end
   end 
 
+
   def body_washer(string)
   	string.gsub!(/(Flash Player)(.*)(Play again)/m, '') 
   	string.gsub!(/^\s{5,}/, "\n")
   	string.gsub!(/View the large version of this image/, '')
   	string
-  end
-
-  def links
-  	@links
   end
 
 end
