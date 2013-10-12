@@ -95,6 +95,7 @@ Also bear in mind that from the get-go this has been a one page site, by one guy
 
 ### Tests..
 
-Under development, seriously... As in actually seriously not sarcastic. 
+- RSpec unit tests on models and lib.
+- Cuke/Capybara on both pages, with @javascript
+- Jasmine for secondscreen.js
 
-As soon as I have the last of the JS polished/done I will finish the RSpec and Capycumbers with Selenium, don't think I'll bother with PhantomJS although it's very cool. 
