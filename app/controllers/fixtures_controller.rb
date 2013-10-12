@@ -1,7 +1,6 @@
 class FixturesController < ApplicationController
   before_action :set_fixture, only: [:show, :edit, :update, :destroy]
   
-  FROM_DATE= Time.new.strftime("%Y-%m-%d")
   SCORERS = "http://api.statsfc.com/top-scorers.json?key=#{ENV["STATS_KEY"]}&competition=#{ENV["COMP"]}&team=#{ENV["TEAM"]}&year=2013/2014"    
   
   def index

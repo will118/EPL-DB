@@ -243,7 +243,7 @@ function setupTables(){
    $.getJSON("/formjson/arsenal", formCallback);
    $.getJSON("/arsenal/prematchjson", prematchCallback);
    $.getJSON("/bbcjson", pieCallback);
-   $.getJSON("/megajson", megaCallback);
+   $.getJSON("/megajson/arsenal", megaCallback);
    $.getJSON("/livepossjson", possCallback);
    $.getJSON("/livetargetjson", targCallback);
    $.getJSON("/liveshotjson", shotCallback);

@@ -39,7 +39,7 @@ Also scrapes articles I want off of Arsenal.com which was a few hours of work.
 - [Nokogiri I like.](http://nokogiri.org/) 
 - [Foundation too, I haven't really shown its awesome though.](http://foundation.zurb.com/)
 - [William Playfair](http://en.wikipedia.org/wiki/William_Playfair)
-- Rails and Ruby. I suppose JS/jQuery but I can't pretend the love affair is even close.
+- Rails and Ruby and JS frameworks/libraries
 
 ## Dependencies/Requirements:
 
