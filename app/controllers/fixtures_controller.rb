@@ -23,7 +23,7 @@ class FixturesController < ApplicationController
   end
 
   def formjson
-    render :json => JasonTheBuilder.new.form(params[:team])
+    render :json => JasonTheBuilder.form(params[:team])
   end  
 
   def prematchjson

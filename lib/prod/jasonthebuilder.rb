@@ -1,40 +1,37 @@
 class JasonTheBuilder
-	# Can't remember if I had a reason for this.
-	def initialize
-		@home = []
-		@away = []
-	end
 
-	def form(team)
+	class << self
+		def form(team)
 
-		date = Date.today
-		from_date = date.to_s(:db)
+			date = Date.today
+			from_date = date.to_s(:db)
 
-		future_date = date + 2.months 
-		to_date = future_date.to_s(:db)
+			future_date = date + 2.months 
+			to_date = future_date.to_s(:db)
 
-		fixtures = "http://api.statsfc.com/premier-league/fixtures.json?key=#{ENV["STATS_KEY"]}&team=#{team}&from=#{from_date}&to=#{to_date}&timezone=Europe/London&limit=5"
+			fixtures = "http://api.statsfc.com/premier-league/fixtures.json?key=#{ENV["STATS_KEY"]}&team=#{team}&from=#{from_date}&to=#{to_date}&timezone=Europe/London&limit=5"
 
-		teamform = "http://api.statsfc.com/premier-league/form.json?key=#{ENV["STATS_KEY"]}&team=#{team}"
+			teamform = "http://api.statsfc.com/premier-league/form.json?key=#{ENV["STATS_KEY"]}&team=#{team}"
 
-	  form0 = JSON.parse HTTParty.get(fixtures).response.body
-	  form1 = JSON.parse HTTParty.get(teamform).response.body
-		
-	  away = form0.first.fetch('awaypath')
-	  awayname = form0.first.fetch('awayshort')
+			form0 = JSON.parse HTTParty.get(fixtures).response.body
+			form1 = JSON.parse HTTParty.get(teamform).response.body
+			
+			away = form0.first.fetch('awaypath')
+			awayname = form0.first.fetch('awayshort')
 
-    form = []
+			form = []
 
-    form1.each do |x| 
-       if x.has_value?(team)
-        h = {team: team.capitalize, form: x.fetch('form')}
-				form << h 
-      elsif x.has_value?(away)
-        h2 = {team: awayname, form: x.fetch('form')}
-        form << h2
-      end
-	  end
-			form
+			form1.each do |x| 
+				 if x.has_value?(team)
+					h = {team: team.capitalize, form: x.fetch('form')}
+					form << h 
+				elsif x.has_value?(away)
+					h2 = {team: awayname, form: x.fetch('form')}
+					form << h2
+				end
+			end
+				form
+		end
 	end
 
 		def fixture_json(team)
@@ -89,10 +86,10 @@ class JasonTheBuilder
 			array2 = x_axis_array.zip away_array		
 			
 			@home = array1.map do |x, y|
-			  { "x"=> x, "y"=> y }
+				{ "x"=> x, "y"=> y }
 			end
 			@away = array2.map do |x, y|
-			  { "x"=> x, "y"=> y }
+				{ "x"=> x, "y"=> y }
 			end
 
 
@@ -122,8 +119,8 @@ class JasonTheBuilder
 		end
 
 		def top_scorers_json
-		  raw = "http://api.statsfc.com/top-scorers.json?key=#{ENV["STATS_KEY"]}&competition=#{ENV["COMP"]}&team=#{ENV["TEAM"]}&year=2013/2014"
-		  return HTTParty.get(raw).response.body
+			raw = "http://api.statsfc.com/top-scorers.json?key=#{ENV["STATS_KEY"]}&competition=#{ENV["COMP"]}&team=#{ENV["TEAM"]}&year=2013/2014"
+			return HTTParty.get(raw).response.body
 
 		end		
 
@@ -161,25 +158,25 @@ class JasonTheBuilder
 		barray7 = matchnumber.zip mixarray7
 
 		newarray1 = barray1.map do |x, y|
-		  { "x"=> x, "y"=> y }
+			{ "x"=> x, "y"=> y }
 		end
 		newarray2 = barray2.map do |x, y|
-		  { "x"=> x, "y"=> y }
+			{ "x"=> x, "y"=> y }
 		end
 		newarray3 = barray3.map do |x, y|
-		  { "x"=> x, "y"=> y }
+			{ "x"=> x, "y"=> y }
 		end
 		newarray4 = barray4.map do |x, y|
-		  { "x"=> x, "y"=> y }
+			{ "x"=> x, "y"=> y }
 		end
 		newarray5 = barray5.map do |x, y|
-		  { "x"=> x, "y"=> y }
+			{ "x"=> x, "y"=> y }
 		end
 		newarray6 = barray6.map do |x, y|
-		  { "x"=> x, "y"=> y }
+			{ "x"=> x, "y"=> y }
 		end
 		newarray7 = barray7.map do |x, y|
-		  { "x"=> x, "y"=> y }
+			{ "x"=> x, "y"=> y }
 		end
 
 		jj = Hash.new {|k,v| k[v]}
