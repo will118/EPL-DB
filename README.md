@@ -75,23 +75,15 @@ Maybe I'm missing something but it seems pretty much like an open API.
 
 ![Most of the work](/ss/2.png "Second Screen bit")
 
-## Work in Progress
 
-I've pretty much just detailed what has been done and hinted at plans. I'm only githubbing now cus I was quite impressed with my first ultran00b foray into regex this just now and it got the original scraper looking quite good. (Not behind the scenes I'm sure)
+### Work in Progress
 
-### Todo
+What I'm doing next, in order (at least in theory):
 
-Anyway what I'm doing next, in order (at least in theory):
+- Angular + any PL team.
 
-Live D3js graphs of:
-- Shots on target of both teams
-- Possession % of both teams
-- Corners
-- Cards/tackles
-- Nothing seems as good on paper as it does in my head.
-- Also there's some encoding mismatch I'm guessing it's not UTF, anyway it's from the BBC lineup where it looks fine, then when I scrape it I get stuff like "\u00C3\u0096zil" which gets lost somewhere. I haven't looked into it.
+- also there's some encoding mismatch I'm guessing it's not UTF, anyway it's from the BBC lineup where it looks fine, then when I scrape it I get stuff like "\u00C3\u0096zil" which gets lost somewhere. I haven't looked into it.
 
-Also bear in mind that from the get-go this has been a one page site, by one guy, intended for the same guy. It's like the volcanic springs of code smell.
 
 ### Tests
 
