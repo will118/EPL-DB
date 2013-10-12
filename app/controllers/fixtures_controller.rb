@@ -2,14 +2,13 @@ class FixturesController < ApplicationController
   before_action :set_fixture, only: [:show, :edit, :update, :destroy]
   
   FROM_DATE= Time.new.strftime("%Y-%m-%d")
-  FIXTURES= "http://api.statsfc.com/#{ENV["COMP"]}/fixtures.json?key=#{ENV["STATS_KEY"]}&team=#{ENV["TEAM"]}&from=#{ENV["FROM_DATE"]}&to=#{ENV["TO_DATE"]}&timezone=#{ENV["TIMEZONE"]}&limit=#{ENV["LIMIT"]}"
-  PLTABLE= "http://api.statsfc.com/#{ENV["COMP"]}/table.json?key=#{ENV["STATS_KEY"]}"
-   SCORERS = "http://api.statsfc.com/top-scorers.json?key=#{ENV["STATS_KEY"]}&competition=#{ENV["COMP"]}&team=#{ENV["TEAM"]}&year=2013/2014"    
+  SCORERS = "http://api.statsfc.com/top-scorers.json?key=#{ENV["STATS_KEY"]}&competition=#{ENV["COMP"]}&team=#{ENV["TEAM"]}&year=2013/2014"    
   
   def index
 
     gon.scorers = HTTParty.get(SCORERS).response.body
     # Inexplicably a string I'll come back to this later.
+    # Lol totally forgot but that was a great reminder must remember to do more reminders.
     @home_xis = HomeXi.all
     @away_xis = AwayXi.all
   end
@@ -24,19 +23,23 @@ class FixturesController < ApplicationController
   end
 
   def formjson
-    render :json => JasonTheBuilder.new.form
+    render :json => JasonTheBuilder.new.form(params[:team])
   end  
 
   def prematchjson
     render :json => Prematch.all
   end
 
+  def prematchjsonid
+    render :json => Prematch.find(params[:id])
+  end
+
   def fixturesjson
-    render :json => JSON.parse(HTTParty.get(FIXTURES).response.body)
+    render :json => JasonTheBuilder.new.fixture_json(params[:team])
   end
 
   def tablejson
-    render :json => JSON.parse(HTTParty.get(PLTABLE).response.body)
+    render :json => JasonTheBuilder.new.table_json
   end
 
   def livepossjson

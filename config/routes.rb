@@ -1,13 +1,21 @@
 AAAAMILNE::Application.routes.draw do
   mount JasmineRails::Engine => "/specs" if defined?(JasmineRails)
   
+
+  scope :arsenal do
+    get "/prematchjson(.:format)" => "fixtures#prematchjson"
+    get "/prematchjson/:id(.:format)" => "fixtures#prematchjsonid"
+  end
+
+
   resources :home_xis
 
   resources :fixtures
-  get 'fixturesjson' => 'fixtures#fixturesjson'
+  get 'fixturesjson/:team' => 'fixtures#fixturesjson'
   get 'tablejson' => 'fixtures#tablejson'
-  get 'prematchjson' => 'fixtures#prematchjson'
-  get 'formjson' => 'fixtures#formjson'
+  get 'formjson/:team' => 'fixtures#formjson'
+
+
   get 'megajson' => 'fixtures#megajson'
   get 'bbcjson' => 'fixtures#bbcjson'
   get 'livepossjson' => 'fixtures#livepossjson'

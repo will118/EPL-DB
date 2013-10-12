@@ -239,9 +239,9 @@ function prematchCallback(prematch){
 
 function setupTables(){
    $.getJSON("/tablejson", tableCallback);
-   $.getJSON("/fixturesjson", fixturesCallback);
-   $.getJSON("/formjson", formCallback);
-   $.getJSON("/prematchjson", prematchCallback);
+   $.getJSON("/fixturesjson/arsenal", fixturesCallback);
+   $.getJSON("/formjson/arsenal", formCallback);
+   $.getJSON("/arsenal/prematchjson", prematchCallback);
    $.getJSON("/bbcjson", pieCallback);
    $.getJSON("/megajson", megaCallback);
    $.getJSON("/livepossjson", possCallback);

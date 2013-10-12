@@ -19,10 +19,8 @@ class FourFourTwo
 	end
  
   def save
-  	@final.children.each do |x| 
-	   	pre = Prematch.where(:text => x.inner_text).first_or_create
-	    pre.text = x.inner_text
-	  	pre.save
+  	@final.each do |x| 
+	   	Prematch.where(:text => x).first_or_create
 	  end
 	end
 

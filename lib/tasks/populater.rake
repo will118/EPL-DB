@@ -21,7 +21,9 @@ namespace :populater do
 
   desc "opta text"
   task optatext: :environment do
-    FourFourTwo.new.text
+    four = FourFourTwo.new
+    four.text
+    four.save
   end
 
 

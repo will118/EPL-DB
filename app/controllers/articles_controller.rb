@@ -7,7 +7,7 @@ class ArticlesController < ApplicationController
   end
 
   def opta
-    system "rake populater:opta &"
+    system "rake populater:optatext &"
     redirect_to fixtures_url
   end  
 

@@ -1,41 +1,52 @@
 class JasonTheBuilder
-
+	# Can't remember if I had a reason for this.
 	def initialize
 		@home = []
 		@away = []
 	end
 
-	def form
+	def form(team)
 
-		from_date = Time.new.strftime("%Y-%m-%d")
-		to_date = "2013-11-22"
+		date = Date.today
+		from_date = date.to_s(:db)
 
-		fixtures = "http://api.statsfc.com/premier-league/fixtures.json?key=#{ENV["STATS_KEY"]}&team=arsenal&from=#{from_date}&to=#{to_date}&timezone=Europe/London&limit=5"
+		future_date = date + 2.months 
+		to_date = future_date.to_s(:db)
 
-		teamform = "http://api.statsfc.com/premier-league/form.json?key=#{ENV["STATS_KEY"]}&team=arsenal"
+		fixtures = "http://api.statsfc.com/premier-league/fixtures.json?key=#{ENV["STATS_KEY"]}&team=#{team}&from=#{from_date}&to=#{to_date}&timezone=Europe/London&limit=5"
 
-	  
-	  @form0 = JSON.parse HTTParty.get(fixtures).response.body
-	  @form = JSON.parse HTTParty.get(teamform).response.body
+		teamform = "http://api.statsfc.com/premier-league/form.json?key=#{ENV["STATS_KEY"]}&team=#{team}"
+
+	  form0 = JSON.parse HTTParty.get(fixtures).response.body
+	  form1 = JSON.parse HTTParty.get(teamform).response.body
 		
-	  away = @form0.first.fetch('awaypath')
-	  awayname = @form0.first.fetch('awayshort')
+	  away = form0.first.fetch('awaypath')
+	  awayname = form0.first.fetch('awayshort')
 
-	    form = []
+    form = []
 
-    @form.each do |x| 
-       if x.has_value?('arsenal')
-        h = {team: 'Arsenal', form: ''}
-         h[:form] = x.fetch('form')
-         form << h 
+    form1.each do |x| 
+       if x.has_value?(team)
+        h = {team: team.capitalize, form: x.fetch('form')}
+				form << h 
       elsif x.has_value?(away)
-        h2 = {team: awayname, form: ''}
-        h2[:form] = x.fetch('form')
+        h2 = {team: awayname, form: x.fetch('form')}
         form << h2
       end
-     end
-			return form
+	  end
+			form
+	end
+
+		def fixture_json(team)
+			fixtures = "http://api.statsfc.com/#{ENV["COMP"]}/fixtures.json?key=#{ENV["STATS_KEY"]}&team=#{team}&from=#{ENV["FROM_DATE"]}&to=#{ENV["TO_DATE"]}&timezone=#{ENV["TIMEZONE"]}&limit=#{ENV["LIMIT"]}"
+			JSON.parse(HTTParty.get(fixtures).response.body)
 		end
+
+		def table_json
+			table = "http://api.statsfc.com/#{ENV["COMP"]}/table.json?key=#{ENV["STATS_KEY"]}"
+			JSON.parse(HTTParty.get(table).response.body)
+		end
+
 
 		def possession_json
 			@away = Poss.all.map(&:awayposs)
@@ -122,6 +133,11 @@ class JasonTheBuilder
 		# that is nice to have in a controller rather than rake.
 		#
 		# I don't really envisage it ever being helpful to change it now.
+		# 
+		# I'm back a again, a week or so later and I think I need to refactor it... Genuinely didn't see this coming.
+		# Maybe.. I'm going to carry on refactoring from the JS => API angle and see. It could just be a matter of 
+		# changing to Supermodel model so instead of all, I can Supermodel.chelsea.map etc and pass the team name in 
+		# as an argument.. We will have to see what works best.
 
 		mixarray1 = Supermodel.all.map(&:avgpossession)
 		mixarray2 = Supermodel.all.map(&:shotaccuracy)
