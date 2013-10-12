@@ -8,7 +8,9 @@ namespace :populater do
 
   desc "Populates teams"
   task teams: :environment do
-    BBC.teams
+    beeb = BBC.new("Arsenal")
+    beeb.raw_link
+    beeb.teams
   end
 
   desc "squawka"

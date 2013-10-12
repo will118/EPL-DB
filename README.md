@@ -3,15 +3,15 @@ Premier League Dashboard
 
 ## README is out of date. 
 
-### An assortment of Arsenal parsers
 
 > Almost entirely built for 1920x1200 
 
-Basically, scrapes articles I want off of Arsenal.com which was a few hours of work.
-
-Then where most of the work is the "second screen" one-page thing. 
-
 I wanted marginally relevant information to have on my other/second screen during a match.
+
+That is the "second screen" one-page thing. 
+
+Also scrapes articles I want off of Arsenal.com which was a few hours of work.
+
 
 - League table as it stands
 - Our team, their team including subs and when people are subbed off.
@@ -29,7 +29,6 @@ I wanted marginally relevant information to have on my other/second screen durin
 
 
 > Please don't use this by the way, I feel it's kind of deep already when it's just me.
-> rake populater:all is the scraper though  
 
 ## Stuff used worth mentioning:
 
@@ -45,6 +44,7 @@ I wanted marginally relevant information to have on my other/second screen durin
 ## Dependencies/Requirements:
 
 - PostgreSQL.
+- PhantomJS running GhostDriver (phantomjs --webdriver=9134)
 - Pretty sure that's it. 
 - Bundle obviously.
 

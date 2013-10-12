@@ -12,32 +12,32 @@ class JasonTheBuilder
 
 
 		def possession_json
-			@away = Poss.all.map(&:awayposs)
-			@home = Poss.all.map(&:homeposs)
+			@away = Poss.pluck(:awayposs)
+			@home = Poss.pluck(:homeposs)
 			live_array_builder("Home Possession", "Away Possession")
 		end
 
 		def targets_json
-			@away = Target.all.map(&:awayshots)
-			@home = Target.all.map(&:homeshots)
+			@away = Target.pluck(:awayshots)
+			@home = Target.pluck(:homeshots)
 			live_array_builder("Home Shots on Target", "Away Shots on Target")
 		end
 
 		def corners_json
-			@away = Corner.all.map(&:away)
-			@home = Corner.all.map(&:home)
+			@away = Corner.pluck(:away)
+			@home = Corner.pluck(:home)
 			live_array_builder("Home Corners", "Away Corners")
 		end
 
 		def shots_json
-			@away = Shot.all.map(&:awayshots)
-			@home = Shot.all.map(&:homeshots)
+			@away = Shot.pluck(:awayshots)
+			@home = Shot.pluck(:homeshots)
 			live_array_builder("Home Shots", "Away Shots")
 		end
 
 		def fouls_json
-			@away = Foul.all.map(&:away)
-			@home = Foul.all.map(&:home)
+			@away = Foul.pluck(:away)
+			@home = Foul.pluck(:home)
 			live_array_builder("Home Fouls", "Away Fouls")
 		end
 
