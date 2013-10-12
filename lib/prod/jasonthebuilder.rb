@@ -1,7 +1,12 @@
 class JasonTheBuilder
 
 		def fixture_json(team)
-			fixtures = "http://api.statsfc.com/#{ENV["COMP"]}/fixtures.json?key=#{ENV["STATS_KEY"]}&team=#{team}&from=#{ENV["FROM_DATE"]}&to=#{ENV["TO_DATE"]}&timezone=#{ENV["TIMEZONE"]}&limit=#{ENV["LIMIT"]}"
+			date = Date.today
+			from_date = date.to_s(:db)
+
+			future_date = date + 2.months 
+			to_date = future_date.to_s(:db)
+			fixtures = "http://api.statsfc.com/#{ENV["COMP"]}/fixtures.json?key=#{ENV["STATS_KEY"]}&team=#{team}&from=#{from_date}&to=#{to_date}&timezone=#{ENV["TIMEZONE"]}&limit=#{ENV["LIMIT"]}"
 			JSON.parse(HTTParty.get(fixtures).response.body)
 		end
 
@@ -87,8 +92,9 @@ class JasonTheBuilder
 		def top_scorers_json
 			raw = "http://api.statsfc.com/top-scorers.json?key=#{ENV["STATS_KEY"]}&competition=#{ENV["COMP"]}&team=#{ENV["TEAM"]}&year=2013/2014"
 			return HTTParty.get(raw).response.body
-
 		end		
+
+
 
 		def self.form(team)
 
