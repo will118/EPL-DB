@@ -1,39 +1,5 @@
 class JasonTheBuilder
 
-	class << self
-		def form(team)
-
-			date = Date.today
-			from_date = date.to_s(:db)
-
-			future_date = date + 2.months 
-			to_date = future_date.to_s(:db)
-
-			fixtures = "http://api.statsfc.com/premier-league/fixtures.json?key=#{ENV["STATS_KEY"]}&team=#{team}&from=#{from_date}&to=#{to_date}&timezone=Europe/London&limit=5"
-
-			teamform = "http://api.statsfc.com/premier-league/form.json?key=#{ENV["STATS_KEY"]}&team=#{team}"
-
-			form0 = JSON.parse HTTParty.get(fixtures).response.body
-			form1 = JSON.parse HTTParty.get(teamform).response.body
-			
-			away = form0.first.fetch('awaypath')
-			awayname = form0.first.fetch('awayshort')
-
-			form = []
-
-			form1.each do |x| 
-				 if x.has_value?(team)
-					h = {team: team.capitalize, form: x.fetch('form')}
-					form << h 
-				elsif x.has_value?(away)
-					h2 = {team: awayname, form: x.fetch('form')}
-					form << h2
-				end
-			end
-				form
-		end
-	end
-
 		def fixture_json(team)
 			fixtures = "http://api.statsfc.com/#{ENV["COMP"]}/fixtures.json?key=#{ENV["STATS_KEY"]}&team=#{team}&from=#{ENV["FROM_DATE"]}&to=#{ENV["TO_DATE"]}&timezone=#{ENV["TIMEZONE"]}&limit=#{ENV["LIMIT"]}"
 			JSON.parse(HTTParty.get(fixtures).response.body)
@@ -123,6 +89,39 @@ class JasonTheBuilder
 			return HTTParty.get(raw).response.body
 
 		end		
+
+		def self.form(team)
+
+			date = Date.today
+			from_date = date.to_s(:db)
+
+			future_date = date + 2.months 
+			to_date = future_date.to_s(:db)
+
+			fixtures = "http://api.statsfc.com/premier-league/fixtures.json?key=#{ENV["STATS_KEY"]}&team=#{team}&from=#{from_date}&to=#{to_date}&timezone=Europe/London&limit=5"
+
+			teamform = "http://api.statsfc.com/premier-league/form.json?key=#{ENV["STATS_KEY"]}&team=#{team}"
+
+			form0 = JSON.parse HTTParty.get(fixtures).response.body
+			form1 = JSON.parse HTTParty.get(teamform).response.body
+
+			away = form0.first.fetch('awaypath')
+			awayname = form0.first.fetch('awayshort')
+
+			form = []
+
+			form1.each do |x| 
+				 if x.has_value?(team)
+					h = {team: team.capitalize, form: x.fetch('form')}
+					form << h 
+				elsif x.has_value?(away)
+					h2 = {team: awayname, form: x.fetch('form')}
+					form << h2
+				end
+			end
+				form
+			end
+		end
 
 	def jason
 
