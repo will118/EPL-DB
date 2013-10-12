@@ -14,9 +14,9 @@ AAAAMILNE::Application.routes.draw do
   get 'fixturesjson/:team' => 'fixtures#fixturesjson'
   get 'tablejson' => 'fixtures#tablejson'
   get 'formjson/:team' => 'fixtures#formjson'
+  get 'megajson/:team' => 'fixtures#megajson'
 
 
-  get 'megajson' => 'fixtures#megajson'
   get 'bbcjson' => 'fixtures#bbcjson'
   get 'livepossjson' => 'fixtures#livepossjson'
   get 'liveshotjson' => 'fixtures#liveshotjson'

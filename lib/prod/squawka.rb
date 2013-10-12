@@ -51,21 +51,21 @@ class Squawka
 
     ids.each do 
       |key|
-        gisele = Supermodel.where(:matchid => key, :teamname => @teamname).first_or_create
-        poss = @passacc[key].fetch('success')
-        poss2 = @passacc[key].fetch('unsuccess')
-        gisele.passaccuracy = (poss - poss2)  
-        gisele.avgpossession = (@avgpos[key].fetch('total')) * 5
-        total = @shotacc[key].fetch('total')
-        total2 = @shotacc[key].fetch('offtarget')
-        gisele.shotaccuracy = ((total + 1) / (total2 + 1))*50
-        h = @opta[key]
-        gisele.attackscore = h.fetch('attack')
-        gisele.defencescore = h.fetch('defence')
-        gisele.possesionscore = h.fetch('possesion')
-        gisele.optascore = h.fetch('total')
-        gisele.date = h.fetch('date')
-        gisele.save
+        Supermodel.where(:teamname => @teamname, :matchid => key).first_or_create do |supermodel|
+          poss = @passacc[key].fetch('success')
+          poss2 = @passacc[key].fetch('unsuccess')
+          supermodel.passaccuracy = (poss - poss2)  
+          supermodel.avgpossession = (@avgpos[key].fetch('total')) * 5
+          total = @shotacc[key].fetch('total')
+          total2 = @shotacc[key].fetch('offtarget')
+          supermodel.shotaccuracy = ((total + 1) / (total2 + 1))*50
+          h = @opta[key]
+          supermodel.attackscore = h.fetch('attack')
+          supermodel.defencescore = h.fetch('defence')
+          supermodel.possesionscore = h.fetch('possesion')
+          supermodel.optascore = h.fetch('total')
+          supermodel.date = h.fetch('date')
+        end
       end
   end
 

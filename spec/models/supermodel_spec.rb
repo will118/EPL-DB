@@ -18,16 +18,7 @@ describe Supermodel do
 		expect(build(:supermodel, attackscore: nil)).to have(0).errors_on(:attackscore)
 	end
 
-	it "returns errors on matchid with a duplicate info" do
-		Supermodel.create(
-			date: "2013-09-30",
-      matchid: 2100,
-      avgpossession: 1,
-      shotaccuracy: 1,
-      passaccuracy: 1)
-		expect(build(:supermodel)).to have(1).errors_on(:matchid)
 	
-	end
 	end
 
 

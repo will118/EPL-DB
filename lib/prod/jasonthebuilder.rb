@@ -122,25 +122,25 @@ class JasonTheBuilder
 				form
 		end
 
-	def jason
+	def jason(team)
 
-		# This code ain't great but it kind of just has to do one specific task 
+		# This code ain't DRY but it kind of just has to do one specific task 
 		# that is nice to have in a controller rather than rake.
 		#
 		# I don't really envisage it ever being helpful to change it now.
 		# 
 		# I'm back a again, a week or so later and I think I need to refactor it... Genuinely didn't see this coming.
-		# Maybe.. I'm going to carry on refactoring from the JS => API angle and see. It could just be a matter of 
-		# changing to Supermodel model so instead of all, I can Supermodel.chelsea.map etc and pass the team name in 
-		# as an argument.. We will have to see what works best.
+		# Very easy change
 
-		mixarray1 = Supermodel.all.map(&:avgpossession)
-		mixarray2 = Supermodel.all.map(&:shotaccuracy)
-		mixarray3 = Supermodel.all.map(&:passaccuracy)
-		mixarray4 = Supermodel.all.map(&:attackscore)
-		mixarray5 = Supermodel.all.map(&:defencescore)
-		mixarray6 = Supermodel.all.map(&:possesionscore)
-		mixarray7 = Supermodel.all.map(&:optascore)
+		normalized_team = team.titleize
+		
+		mixarray1 = Supermodel.where(:teamname => normalized_team).map(&:avgpossession)
+		mixarray2 = Supermodel.where(:teamname => normalized_team).map(&:shotaccuracy)
+		mixarray3 = Supermodel.where(:teamname => normalized_team).map(&:passaccuracy)
+		mixarray4 = Supermodel.where(:teamname => normalized_team).map(&:attackscore)
+		mixarray5 = Supermodel.where(:teamname => normalized_team).map(&:defencescore)
+		mixarray6 = Supermodel.where(:teamname => normalized_team).map(&:possesionscore)
+		mixarray7 = Supermodel.where(:teamname => normalized_team).map(&:optascore)
 		
 		length_of_models = mixarray7.length
 

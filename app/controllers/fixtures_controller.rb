@@ -15,7 +15,7 @@ class FixturesController < ApplicationController
 
 
   def megajson
-    render :json => JasonTheBuilder.new.jason
+    render :json => JasonTheBuilder.new.jason(params[:team])
   end
 
   def bbcjson
