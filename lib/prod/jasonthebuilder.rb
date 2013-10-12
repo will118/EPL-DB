@@ -120,7 +120,6 @@ class JasonTheBuilder
 				end
 			end
 				form
-			end
 		end
 
 	def jason

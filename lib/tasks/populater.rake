@@ -13,9 +13,12 @@ namespace :populater do
 
   desc "squawka"
   task squawka: :environment do
-    squawk = Squawka.new
-    squawk.hasher
-    squawk.save
+    teams_array = YAML::load( File.open( 'teamnames.yml' ) )
+    teams_array.each do |team|
+      squawk = Squawka.new(team)
+      squawk.hasher
+      squawk.save
+    end
   end
 
 

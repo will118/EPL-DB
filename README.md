@@ -1,5 +1,7 @@
-Parsenal
+Premier League Dashboard
 ====================
+
+## README is out of date. 
 
 ### An assortment of Arsenal parsers
 
