@@ -93,9 +93,9 @@ Live D3js graphs of:
 
 Also bear in mind that from the get-go this has been a one page site, by one guy, intended for the same guy. It's like the volcanic springs of code smell.
 
-### Tests..
+### Tests
 
+Done:
 - RSpec unit tests on models and lib.
 - Cuke/Capybara on both pages, with @javascript
 - Jasmine for secondscreen.js
-
