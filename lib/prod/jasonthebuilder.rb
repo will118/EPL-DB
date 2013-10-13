@@ -106,7 +106,7 @@ class JasonTheBuilder
 
 
 
-		def self.form(team)
+	def self.form(team)
 
 			date = Date.today
 			from_date = date.to_s(:db)
@@ -135,8 +135,8 @@ class JasonTheBuilder
 					form << h2
 				end
 			end
-				form
-		end
+		form
+	end
 
 	def jason(team)
 

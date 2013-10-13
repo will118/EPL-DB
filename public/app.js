@@ -5,14 +5,24 @@ var d3App = angular.module('d3App', [ 'n3-charts.linechart' ]);
 
 
 d3App.controller('AppCtrl', function AppCtrl ($scope, $http) {
+
+
   $scope.team = 'arsenal';
+
+   $scope.$watch('team', function(team) {
+       $scope.team = team;
+       $scope.getMegaJson()
+  });
   $scope.options = {
     lineMode: "cardinal",
     series: [
-      {y: "avg_poss", label: "Avg Poss", color: "#bcbd22"},
-      {y: "shot_acc", label: "Is", color: "#17becf"},
-      {y: "pass_acc", label: "Awesome", color: "#9467bd"},
-      {y: "def_score", label: "Awesome", color: "#9467bd"}
+      {y: "avg_poss", label: "Avg. Possession", color: "#bcbd22"},
+      {y: "shot_acc", label: "Shot Accuracy", color: "#17becf"},
+      {y: "pass_acc", label: "Pass Accuracy", color: "#1467bd"},
+      {y: "def_score", label: "Defensive Score", color: "#9467bd"},
+      {y: "att_score", label: "Attack Score", color: "#9222bd"},
+      {y: "opta_score", label: "Opta Score", color: "#9222bd"},
+      {y: "poss_score", label: "Possession Score", color: "#4222bd"},
     ],
     axes: {
       x: {type: "linear", key: "x"},
@@ -21,29 +31,25 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http) {
     tooltipMode: "default"
   };
 
-  // $scope.getCommitData = function () {
-  //   $http({
-  //     method: 'GET',
-  //     url:'/megajson/' +
-  //       $scope.team
-  //   }).
-  //   success(function (data) {
-  //     // attach this data to the scope
-  //     $scope.data = data;
-  //       console.log(data) 
-
-  //     // clear the error messages
-  //     $scope.error = '';
-  //   }).
-  //   error(function (data, status) {
-  //     if (status === 404) {
-  //       $scope.error = 'Not found?';
-  //     } else {
-  //       $scope.error = 'Error: ' + status;
-  //     }
-  //   });
-  // };
-  // // get the commit data immediately
-  // $scope.getCommitData();
+  $scope.getMegaJson = function () {
+    $http({
+      method: 'GET',
+      url:'/megajson/' +
+        $scope.team
+    }).
+    success(function (data) {
+      $scope.data = data;
+      $scope.error = '';
+    }).
+    error(function (data, status) {
+      if (status === 404) {
+        $scope.error = 'Not found?';
+      } else {
+        $scope.error = 'Error: ' + status;
+      }
+    });
+  };
+  
+  $scope.getMegaJson();
 });
 
