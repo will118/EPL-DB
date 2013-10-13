@@ -40,18 +40,6 @@ class BBC
 		@statsjson = result[1]
 	end
 
-	def possession
-		home = @statsjson['possession']['home']
-		away = @statsjson['possession']['away']
-		comboarray = []
-	  homehash = {'key'=> 'Home', 'y'=> home}
-	  comboarray << homehash 
-	  aw = {'key'=> 'Away', 'y'=> away}
-	  comboarray << aw
-	  comboarray
-	end
-
-
 	def teams
     document = Nokogiri::HTML(open(@lineup_url))
       

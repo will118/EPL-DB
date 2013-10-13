@@ -1,24 +1,21 @@
 class FixturesController < ApplicationController
   before_action :set_fixture, only: [:show, :edit, :update, :destroy]
   
-  SCORERS = "http://api.statsfc.com/top-scorers.json?key=#{ENV["STATS_KEY"]}&competition=#{ENV["COMP"]}&team=#{ENV["TEAM"]}&year=2013/2014"    
-  
   def index
-
-    gon.scorers = HTTParty.get(SCORERS).response.body
-    # Inexplicably a string I'll come back to this later.
-    # Lol totally forgot but that was a great reminder must remember to do more reminders.
     @home_xis = HomeXi.all
     @away_xis = AwayXi.all
   end
-
 
   def megajson
     render :json => JasonTheBuilder.new.jason(params[:team])
   end
 
-  def bbcjson
-    render :json => BBC.new.possession
+  def topscorers
+    render :json => JasonTheBuilder.new.top_scorers_json(params[:team])
+  end
+
+  def liveposspie
+    render :json => JasonTheBuilder.new.poss_pie_json
   end
 
   def formjson

@@ -185,6 +185,17 @@ function tableCallback(table){
       $('#pltable').append(tr); 
   };
 }
+// SCORERS API
+
+function scorersCallback(scorers){
+  var tr;
+  for (var i = 0; i < scorers.length; i++) {
+      tr = $('<tr/>');
+      tr.append("<td><center>" + scorers[i].player + "</center></td>");
+      tr.append("<td><center>" + scorers[i].goals + "</center></td>");
+      $('#scorers').append(tr); 
+  };
+}
 
 function fixturesCallback(fixtures) {
 
@@ -238,11 +249,12 @@ function prematchCallback(prematch){
  };
 
 function setupTables(){
+   $.getJSON("/topscorers/arsenal", scorersCallback);
    $.getJSON("/tablejson", tableCallback);
    $.getJSON("/fixturesjson/arsenal", fixturesCallback);
    $.getJSON("/formjson/arsenal", formCallback);
    $.getJSON("/arsenal/prematchjson", prematchCallback);
-   $.getJSON("/bbcjson", pieCallback);
+   $.getJSON("/liveposspie", pieCallback);
    $.getJSON("/megajson/arsenal", megaCallback);
    $.getJSON("/livepossjson", possCallback);
    $.getJSON("/livetargetjson", targCallback);

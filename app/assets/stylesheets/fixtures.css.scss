@@ -34,6 +34,9 @@ h5 {
 }
 
 
+
+
+
   body {
     overflow-y:scroll;
   }
@@ -53,15 +56,23 @@ h5 {
   .teams {
     display: inline-block;
     margin-right: 20px;
+    margin-top: 40px;
   }
   .teams:last-child {
     margin-right: 0px;
   }
 
   #pltable {
-    float: right;
+    float: center;
   }
 
+  #scorers {
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+  }
+
+
   #bars {
-    float: left;
+    float: right;
   }

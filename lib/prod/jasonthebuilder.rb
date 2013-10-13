@@ -22,6 +22,17 @@ class JasonTheBuilder
 			live_array_builder("Home Possession", "Away Possession")
 		end
 
+		def poss_pie_json
+			pie = Poss.last
+			home = pie['homeposs']
+			away = pie['awayposs']
+			comboarray = []
+		  comboarray << {'key'=> 'Home', 'y'=> home}
+		  comboarray << {'key'=> 'Away', 'y'=> away}
+		  comboarray
+		end
+
+
 		def targets_json
 			@away = Target.pluck(:awayshots)
 			@home = Target.pluck(:homeshots)
@@ -63,8 +74,7 @@ class JasonTheBuilder
 				{ "x"=> x, "y"=> y }
 			end
 
-
-			return hash_composer(home, away)
+			hash_composer(home, away)
 			
 		end
 
@@ -85,13 +95,13 @@ class JasonTheBuilder
 			final << jj
 			final << jj2
 
-			return final
+			final
 
 		end
 
-		def top_scorers_json
-			raw = "http://api.statsfc.com/top-scorers.json?key=#{ENV["STATS_KEY"]}&competition=#{ENV["COMP"]}&team=#{ENV["TEAM"]}&year=2013/2014"
-			return HTTParty.get(raw).response.body
+		def top_scorers_json(team)
+			raw = "http://api.statsfc.com/top-scorers.json?key=#{ENV["STATS_KEY"]}&competition=#{ENV["COMP"]}&team=#{team.titleize}&year=2013/2014"
+			HTTParty.get(raw).response.body
 		end		
 
 
@@ -130,101 +140,23 @@ class JasonTheBuilder
 
 	def jason(team)
 
-		# This code ain't DRY but it kind of just has to do one specific task 
-		# that is nice to have in a controller rather than rake.
-		#
-		# I don't really envisage it ever being helpful to change it now.
-		# 
-		# I'm back a again, a week or so later and I think I need to refactor it... Genuinely didn't see this coming.
-		# Very easy change
-
 		normalized_team = team.titleize
 		
-		mixarray1 = Supermodel.where(:teamname => normalized_team).map(&:avgpossession)
-		mixarray2 = Supermodel.where(:teamname => normalized_team).map(&:shotaccuracy)
-		mixarray3 = Supermodel.where(:teamname => normalized_team).map(&:passaccuracy)
-		mixarray4 = Supermodel.where(:teamname => normalized_team).map(&:attackscore)
-		mixarray5 = Supermodel.where(:teamname => normalized_team).map(&:defencescore)
-		mixarray6 = Supermodel.where(:teamname => normalized_team).map(&:possesionscore)
-		mixarray7 = Supermodel.where(:teamname => normalized_team).map(&:optascore)
+		avg_poss = Supermodel.where(:teamname => normalized_team).pluck(:avgpossession)
+		shot_acc = Supermodel.where(:teamname => normalized_team).pluck(:shotaccuracy)
+		pass_acc = Supermodel.where(:teamname => normalized_team).pluck(:passaccuracy)
+		att_score = Supermodel.where(:teamname => normalized_team).pluck(:attackscore)
+		def_score = Supermodel.where(:teamname => normalized_team).pluck(:defencescore)
+		poss_score = Supermodel.where(:teamname => normalized_team).pluck(:possesionscore)
+		opta_score = Supermodel.where(:teamname => normalized_team).pluck(:optascore)
 		
-		length_of_models = mixarray7.length
+		length_of_models = opta_score.length
 
 		matchnumber = * 1..length_of_models
 
-
-		barray1 = matchnumber.zip mixarray1
-		barray2 = matchnumber.zip mixarray2
-		barray3 = matchnumber.zip mixarray3
-		barray4 = matchnumber.zip mixarray4
-		barray5 = matchnumber.zip mixarray5
-		barray6 = matchnumber.zip mixarray6
-		barray7 = matchnumber.zip mixarray7
-
-		newarray1 = barray1.map do |x, y|
-			{ "x"=> x, "y"=> y }
+		[matchnumber, pass_acc, shot_acc, def_score, att_score, poss_score, opta_score, avg_poss].transpose.map do |x, y, z, d, a, p, o, v| 
+			{ 'x'=> x, "pass_acc"=> y, "shot_acc"=> z, "def_score"=> d, "att_score"=> a, "poss_score"=> p, "opta_score"=> o, "avg_poss"=> v}
 		end
-		newarray2 = barray2.map do |x, y|
-			{ "x"=> x, "y"=> y }
-		end
-		newarray3 = barray3.map do |x, y|
-			{ "x"=> x, "y"=> y }
-		end
-		newarray4 = barray4.map do |x, y|
-			{ "x"=> x, "y"=> y }
-		end
-		newarray5 = barray5.map do |x, y|
-			{ "x"=> x, "y"=> y }
-		end
-		newarray6 = barray6.map do |x, y|
-			{ "x"=> x, "y"=> y }
-		end
-		newarray7 = barray7.map do |x, y|
-			{ "x"=> x, "y"=> y }
-		end
-
-		jj = Hash.new {|k,v| k[v]}
-		jj2 = Hash.new {|k,v| k[v]}
-		jj3 = Hash.new {|k,v| k[v]}
-		jj4 = Hash.new {|k,v| k[v]}
-		jj5 = Hash.new {|k,v| k[v]}
-		jj6 = Hash.new {|k,v| k[v]}
-		jj7 = Hash.new {|k,v| k[v]}
-
-		jj["key"] = "Average Possesion"
-		jj["values"] = newarray1
-
-		jj2["key"] = "Shot Accuracy"
-		jj2["values"] = newarray2
-
-		jj3["key"] = "Pass Accuracy"
-		jj3["values"] = newarray3
-
-		jj4["key"] = "Attack Score"
-		jj4["values"] = newarray4
-
-		jj5["key"] = "Defence Score"
-		jj5["values"] = newarray5
-
-		jj6["key"] = "Possession Score"
-		jj6["values"] = newarray6
-
-		jj7["key"] = "Opta Score"
-		jj7["values"] = newarray7
-
-
-		final = []
-
-		final << jj
-		final << jj2
-		final << jj3
-		final << jj4
-		final << jj5
-		final << jj6
-		final << jj7
-
-
-		return final
 
 	end
 

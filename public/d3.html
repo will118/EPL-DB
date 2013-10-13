@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html ng-app="d3App">
+  <head>
+    <meta charset="utf-8">
+    <title>AngularJS + D3.js</title>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.3.3/d3.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.js"></script>
+      <script src="app.js"></script>
+      <script src="line-chart.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body ng-controller="AppCtrl">
+  <h1>Graph</h1>
+
+  <form ng-submit="getCommitData()">
+    Team: <input ng-model="team"></input>
+    <input type="submit" value="Get Data">
+  </form>
+  
+  <p class="error">{{error}}</p>
+  <linechart data="data" options="options"></linechart>
+</body>
+</html>

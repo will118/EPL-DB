@@ -14,7 +14,7 @@
   	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   	<title><%= content_for?(:title) ? yield(:title) : "NFSW" %></title>
-    <%= include_gon %>
+
 
   	<%= stylesheet_link_tag    "application" %>
   	<%= javascript_include_tag "vendor/custom.modernizr" %>
@@ -39,8 +39,7 @@
       <%= content_tag :div, msg, class: name %>
     <% end -%></center>  
     <%= yield %>
-
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+    
     <%= javascript_include_tag "application" %>
   </body>
 </html>
