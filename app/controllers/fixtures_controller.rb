@@ -6,6 +6,10 @@ class FixturesController < ApplicationController
     @away_xis = AwayXi.all
   end
 
+  def deprecatedjson
+    render :json => JasonTheBuilder.new.deprecated_jason(params[:team])
+  end
+
   def megajson
     render :json => JasonTheBuilder.new.jason(params[:team])
   end

@@ -32,7 +32,6 @@ class JasonTheBuilder
 		  comboarray
 		end
 
-
 		def targets_json
 			@away = Target.pluck(:awayshots)
 			@home = Target.pluck(:homeshots)
@@ -159,5 +158,99 @@ class JasonTheBuilder
 		end
 
 	end
+
+		def deprecated_jason(team)
+
+		normalized_team = team.titleize
+		
+		mixarray1 = Supermodel.where(:teamname => normalized_team).map(&:avgpossession)
+		mixarray2 = Supermodel.where(:teamname => normalized_team).map(&:shotaccuracy)
+		mixarray3 = Supermodel.where(:teamname => normalized_team).map(&:passaccuracy)
+		mixarray4 = Supermodel.where(:teamname => normalized_team).map(&:attackscore)
+		mixarray5 = Supermodel.where(:teamname => normalized_team).map(&:defencescore)
+		mixarray6 = Supermodel.where(:teamname => normalized_team).map(&:possesionscore)
+		mixarray7 = Supermodel.where(:teamname => normalized_team).map(&:optascore)
+		
+		length_of_models = mixarray7.length
+
+		matchnumber = * 1..length_of_models
+
+
+		barray1 = matchnumber.zip mixarray1
+		barray2 = matchnumber.zip mixarray2
+		barray3 = matchnumber.zip mixarray3
+		barray4 = matchnumber.zip mixarray4
+		barray5 = matchnumber.zip mixarray5
+		barray6 = matchnumber.zip mixarray6
+		barray7 = matchnumber.zip mixarray7
+
+		newarray1 = barray1.map do |x, y|
+			{ "x"=> x, "y"=> y }
+		end
+		newarray2 = barray2.map do |x, y|
+			{ "x"=> x, "y"=> y }
+		end
+		newarray3 = barray3.map do |x, y|
+			{ "x"=> x, "y"=> y }
+		end
+		newarray4 = barray4.map do |x, y|
+			{ "x"=> x, "y"=> y }
+		end
+		newarray5 = barray5.map do |x, y|
+			{ "x"=> x, "y"=> y }
+		end
+		newarray6 = barray6.map do |x, y|
+			{ "x"=> x, "y"=> y }
+		end
+		newarray7 = barray7.map do |x, y|
+			{ "x"=> x, "y"=> y }
+		end
+
+		jj = Hash.new {|k,v| k[v]}
+		jj2 = Hash.new {|k,v| k[v]}
+		jj3 = Hash.new {|k,v| k[v]}
+		jj4 = Hash.new {|k,v| k[v]}
+		jj5 = Hash.new {|k,v| k[v]}
+		jj6 = Hash.new {|k,v| k[v]}
+		jj7 = Hash.new {|k,v| k[v]}
+
+		jj["key"] = "Average Possesion"
+		jj["values"] = newarray1
+
+		jj2["key"] = "Shot Accuracy"
+		jj2["values"] = newarray2
+
+		jj3["key"] = "Pass Accuracy"
+		jj3["values"] = newarray3
+
+		jj4["key"] = "Attack Score"
+		jj4["values"] = newarray4
+
+		jj5["key"] = "Defence Score"
+		jj5["values"] = newarray5
+
+		jj6["key"] = "Possession Score"
+		jj6["values"] = newarray6
+
+		jj7["key"] = "Opta Score"
+		jj7["values"] = newarray7
+
+
+		final = []
+
+		final << jj
+		final << jj2
+		final << jj3
+		final << jj4
+		final << jj5
+		final << jj6
+		final << jj7
+
+
+		return final
+
+	end
+
+
 
 end
