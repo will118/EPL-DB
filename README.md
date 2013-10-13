@@ -81,6 +81,8 @@ Maybe I'm missing something but it seems pretty much like an open API.
 What I'm doing next, in order (at least in theory):
 
 - Angular + any PL team.
+![Early days](/ss/1.gif "Love it")
+
 
 - also there's some encoding mismatch I'm guessing it's not UTF, anyway it's from the BBC lineup where it looks fine, then when I scrape it I get stuff like "\u00C3\u0096zil" which gets lost somewhere. I haven't looked into it.
 
