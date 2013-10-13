@@ -5,30 +5,34 @@
     <title>? AngularJS ? D3.js ?</title>
     <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.3.3/d3.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.js"></script>
-      <script src="app.js"></script>
+    
+      <script src="ui-bootstrap-tpls-0.6.0.js"></script>
       <script src="line-chart.min.js"></script>
+      <script src="app.js"></script>
+<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body ng-controller="AppCtrl">
   <h1>Graph</h1>
 
-  <form ng-submit="getCommitData()">
-    Team: <input ng-model="team"></input>
-    <input type="submit" value="Get Data">
-  </form>
+  
+    Team: <input type="text" ng-model="team" typeahead="name for name in names | filter:$viewValue">
+   
+ 
   
   <p class="error">{{error}}</p>
   <div id="linechart"><linechart data="data" options="options"></linechart></div>
   <div class="container-fluid">
+    <br>
     <div class="row-fluid">
         {{form}}  
     </div>
   </div>
-
+      <br>
         <ul class="fixture">
           <li ng-repeat="fixture in fixtures">
-            <h5 class="subheader"><div id="venue"></div>{{fixture.home}} vs. {{fixture.away}} </h5>
-            <h5 class="subheader"><div id="venue"></div>{{fixture.date}}</h5>
+            {{fixture.home}} vs. {{fixture.away}}
+            {{fixture.date}}
           </li>
         </ul>
 

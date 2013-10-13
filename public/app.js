@@ -1,7 +1,7 @@
 'use strict';
 
 
-var d3App = angular.module('d3App', [ 'n3-charts.linechart' ]);
+var d3App = angular.module('d3App', ['n3-charts.linechart', 'ui.bootstrap']);
 
 
 d3App.controller('AppCtrl', function AppCtrl ($scope, $http) {
@@ -24,6 +24,8 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http) {
 
     };
   
+  $scope.names = ["Arsenal", "Liverpool", "Chelsea", "Southampton", "Everton", "Hull City", "Manchester City", "Newcastle United", "Tottenham Hotspur", "West Bromwich Albion", "Cardiff City", "Swansea City", "Aston Villa", "Manchester United", "Stoke City", "Norwich City", "West Ham United", "Fulham", "Crystal Palace", "Sunderland"];
+
   $scope.team = 'Arsenal';
 
   $scope.$watch('team', function(team) {
