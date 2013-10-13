@@ -21,7 +21,10 @@
   <div id="linechart"><linechart data="data" options="options"></linechart></div>
   <div class="container-fluid">
     <div class="row-fluid">
-      <div class="span10">
+        {{form}}  
+    </div>
+  </div>
+
         <ul class="fixture">
           <li ng-repeat="fixture in fixtures">
             <h5 class="subheader"><div id="venue"></div>{{fixture.home}} vs. {{fixture.away}} </h5>
@@ -29,8 +32,5 @@
           </li>
         </ul>
 
-      </div>
-    </div>
-  </div>
 </body>
 </html>

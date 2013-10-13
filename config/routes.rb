@@ -14,6 +14,7 @@ AAAAMILNE::Application.routes.draw do
   get 'fixturesjson/:team' => 'fixtures#fixturesjson'
   get 'tablejson' => 'fixtures#tablejson'
   get 'formjson/:team' => 'fixtures#formjson'
+  get 'singleformjson' => 'fixtures#singleformjson'
   get 'megajson/:team' => 'fixtures#megajson'
   get 'deprecatedjson/:team' => 'fixtures#deprecatedjson'
   get 'topscorers/:team' => 'fixtures#topscorers'

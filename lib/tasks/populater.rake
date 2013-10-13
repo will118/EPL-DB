@@ -23,6 +23,15 @@ namespace :populater do
     end
   end
 
+  desc "teamform"
+  task teamform: :environment do
+      form = JasonTheBuilder.single_form
+      form.each do |d|
+        form = d["form"].join(', ')
+        Form.where(:team => d["team"], :form => form).first_or_create
+      end
+  end
+
 
   desc "opta text"
   task optatext: :environment do

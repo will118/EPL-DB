@@ -7,17 +7,26 @@ var d3App = angular.module('d3App', [ 'n3-charts.linechart' ]);
 d3App.controller('AppCtrl', function AppCtrl ($scope, $http) {
   $scope.getJsons = function () {
    
+      $http({
+        method: 'GET',
+        url:'/formjson/' +
+          $scope.team
+      }).success(function(form) {
+        $scope.form = form;
+    });
     $http({
         method: 'GET',
         url:'/fixturesjson/' +
           $scope.team
       }).success(function(fixtures) {
-      $scope.fixtures = fixtures;
+        $scope.fixtures = fixtures;
     });
+
     };
+  
   $scope.team = 'Arsenal';
 
-   $scope.$watch('team', function(team) {
+  $scope.$watch('team', function(team) {
        $scope.team = team;
        $scope.getMegaJson();
        $scope.getJsons()
