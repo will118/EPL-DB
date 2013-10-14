@@ -84,6 +84,9 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http) {
 			}
 		});
 	};
+	$scope.highlightTeamName=true;
+
+
 	$scope.tableJson();
 });
 

@@ -12,7 +12,7 @@ class JasonTheBuilder
 
 			future_date = date + 2.months 
 			to_date = future_date.to_s(:db)
-			fixtures = "http://api.statsfc.com/#{ENV["COMP"]}/fixtures.json?key=#{ENV["STATS_KEY"]}&team=#{team2}&from=#{from_date}&to=#{to_date}&timezone=#{ENV["TIMEZONE"]}&limit=#{ENV["LIMIT"]}"
+			fixtures = "http://api.statsfc.com/#{ENV["COMP"]}/fixtures.json?key=#{ENV["STATS_KEY"]}&team=#{team2}&from=#{from_date}&to=#{to_date}&timezone=#{ENV["TIMEZONE"]}&limit=5"
 			JSON.parse(HTTParty.get(fixtures).response.body)
 		end
 
