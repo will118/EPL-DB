@@ -206,11 +206,8 @@ function fixturesCallback(fixtures) {
 
 function formCallback(form){
     
-    var spacedaway = _.map(form[1].form, function(num){ return " " + num; });
-    var spacedhome = _.map(form[0].form, function(num){ return " " + num; });
-    
-    $("#hometeamform").append("<a>" + form[0].team + "<br>" + spacedhome + "</a>");
-    $("#awayteamform").append("<a>" + form[1].team + "<br>" + spacedaway + "</a>");
+    $("#hometeamform").append("<a>" + form[0].team + "<br>" + form[0].form + "</a>");
+    $("#awayteamform").append("<a>" + form[1].team + "<br>" + form[1].form + "</a>");
     
 };
 

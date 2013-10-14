@@ -28,7 +28,8 @@ class JasonTheBuilder
 			live_array_builder("Home Possession", "Away Possession")
 		end
 
-		def poss_pie_json
+		def poss_pie_json(team)
+			
 			pie = Poss.last
 			home = pie['homeposs']
 			away = pie['awayposs']

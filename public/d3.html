@@ -11,15 +11,19 @@
 			<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
 			<link rel="stylesheet" href="style.css">
 </head>
-
 <body ng-controller="AppCtrl">
-	<br>
-	Team: <input type="text" ng-model="team" typeahead="name for name in names | filter:$viewValue">
+<nav class="navbar navbar-default" role="navigation">
+  
+    <a class="navbar-brand" href="#">Team</a> 
+    <input type="text" class="form-control" ng-model="team" typeahead="name for name in names | filter:$viewValue">
+     
+</nav>
+
 	<p class="error">{{error}}</p>
 	<div id="linechart"><linechart data="data" options="options"></linechart></div>
   <div class="col-md-3">
-				<h4 ng-repeat-start="fix in fixtures">{{fix.home}} vs. {{fix.away}}</h4>
-				<h5 ng-repeat-end="">{{fix.date}}</h5> 
+				<p class="lead" ng-repeat-start="fix in fixtures">{{fix.home}} vs. {{fix.away}}</p>
+				<p class="muted" ng-repeat-end="">{{fix.date}}</p> 
   </div>
   <div class="col-md-3">
 	  <h2 ng-repeat="f in form">
@@ -47,7 +51,13 @@
             <th>Points</th>
         </tr>
 			  <tr ng-repeat="t in table" ng-class="{success: t.team==team}">
-		      <td>{{t.team}}</td><td>{{t.played}}</td><td>{{t.won}}</td><td>{{t.drawn}}</td><td>{{t.lost}}</td><td>{{t.difference}}</td><td>{{t.points}}</td>
+		      <td>{{t.team}}</td>
+		      <td>{{t.played}}</td>
+		      <td>{{t.won}}</td>
+		      <td>{{t.drawn}}</td>
+		      <td>{{t.lost}}</td>
+		      <td>{{t.difference}}</td>
+		      <td>{{t.points}}</td>
 		  </tr>
 		</table>
 	</div>

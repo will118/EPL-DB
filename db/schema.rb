@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131013215027) do
+ActiveRecord::Schema.define(version: 20131014142408) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 20131013215027) do
     t.integer  "away"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "team"
   end
 
   create_table "fixtures", force: true do |t|
@@ -60,6 +61,7 @@ ActiveRecord::Schema.define(version: 20131013215027) do
     t.integer  "away"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "team"
   end
 
   create_table "home_xis", force: true do |t|
@@ -75,6 +77,7 @@ ActiveRecord::Schema.define(version: 20131013215027) do
     t.integer  "awayposs"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "team"
   end
 
   create_table "prematches", force: true do |t|
@@ -88,6 +91,7 @@ ActiveRecord::Schema.define(version: 20131013215027) do
     t.integer  "awayshots"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "team"
   end
 
   create_table "supermodels", force: true do |t|
@@ -110,6 +114,7 @@ ActiveRecord::Schema.define(version: 20131013215027) do
     t.integer  "awayshots"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "team"
   end
 
 end

@@ -4,6 +4,7 @@ class BBC
 
     
 	def initialize(team)
+		@team = team
 		@rawlink = get_bbc(team)
 	end
 
@@ -13,24 +14,27 @@ class BBC
 	  doc1 = doc.xpath('html/body/div[3]/div/div/div[1]/div[3]/div[2]/div')
 	  mentions = doc1.search "[text()*='#{team.titleize}']"
 	  match = mentions.first.parent.parent.parent.parent
-		match.css('a').last['href']
+		url = match.css('a').last['href']
+		url
+	end
+
+	def is_valid_match?
+		!!(@rawlink =~ /(\/sport\/0)/)
 	end
 
 	def rawlink
-
-		driver = Selenium::WebDriver.for(:remote, :url => "http://localhost:9134")
-		driver.navigate.to @rawlink
-
-		page = driver.page_source
-
-		json_link = page.match(/(http:\/\/polling.bbc.co.uk\/sport\/shared\/football\/oppm\/json).{11}/)
-		lineup_link = page.match(/(http:\/\/polling.bbc.co.uk\/sport\/shared\/football\/oppm\/line-up).{11}/)
-		@finalurl = json_link.to_s
-		@lineup_url = lineup_link.to_s
-		driver.quit
-		
+		if is_valid_match? == true
+			driver = Selenium::WebDriver.for(:remote, :url => "http://localhost:9134")
+			driver.navigate.to @rawlink
+			page = driver.page_source
+			json_link = page.match(/(http:\/\/polling.bbc.co.uk\/sport\/shared\/football\/oppm\/json).{11}/)
+			lineup_link = page.match(/(http:\/\/polling.bbc.co.uk\/sport\/shared\/football\/oppm\/line-up).{11}/)
+			@finalurl = json_link.to_s
+			@lineup_url = lineup_link.to_s
+			driver.quit
+		else "Too early"
+		end
 	end
-
 
 	def get_json
 		rawbbc = JSON.parse HTTParty.get(@finalurl).response.body.delete('(').delete(');')
@@ -75,27 +79,27 @@ class BBC
    
     data = @statsjson
  
-    poss = Poss.new
+    poss = Poss.where(:team => @team).create
     poss.homeposs = data['possession']['home']
     poss.awayposs = data['possession']['away']
     poss.save
 
-    targets = Target.new
+    targets = Target.where(:team => @team).create
     targets.homeshots = data['shotsOnTarget']['home']
     targets.awayshots = data['shotsOnTarget']['away']
     targets.save
 
-    shots = Shot.new
+    shots = Shot.where(:team => @team).create
     shots.homeshots = data['shots']['home']
     shots.awayshots = data['shots']['away']
     shots.save
 
-    corners = Corner.new
+    corners = Corner.where(:team => @team).create
     corners.home = data['corners']['home']
     corners.away = data['corners']['away']
     corners.save
 
-    fouls = Foul.new
+    fouls = Foul.where(:team => @team).create
     fouls.home = data['fouls']['home']
     fouls.away = data['fouls']['away']
     fouls.save

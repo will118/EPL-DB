@@ -19,7 +19,7 @@ class FixturesController < ApplicationController
   end
 
   def liveposspie
-    render :json => JasonTheBuilder.new.poss_pie_json
+    render :json => JasonTheBuilder.new.poss_pie_json(params[:team])
   end
 
   def formjson

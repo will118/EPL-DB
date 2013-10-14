@@ -10,7 +10,6 @@ Given(/^I am on the new article page$/) do
 end
 
 Given(/^I am on the fixtures page$/) do
-  BBC.teams
   visit '/fixtures'
 end
 
