@@ -1,7 +1,12 @@
 class JasonTheBuilder
 
+		def team_normaliser(team)
+			team.gsub!(/[\s]/, "-")
+			team
+		end
+
 		def fixture_json(team)
-			team2 = team.gsub(/[\s]/, "-")
+			team2 = team_normaliser(team)
 			date = Date.today
 			from_date = date.to_s(:db)
 
@@ -100,7 +105,8 @@ class JasonTheBuilder
 		end
 
 		def top_scorers_json(team)
-			raw = "http://api.statsfc.com/top-scorers.json?key=#{ENV["STATS_KEY"]}&competition=#{ENV["COMP"]}&team=#{team.titleize}&year=2013/2014"
+			team2 = team_normaliser(team)
+			raw = "http://api.statsfc.com/top-scorers.json?key=#{ENV["STATS_KEY"]}&competition=#{ENV["COMP"]}&team=#{team2}&year=2013/2014"
 			HTTParty.get(raw).response.body
 		end		
 

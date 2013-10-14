@@ -1,40 +1,66 @@
 <!DOCTYPE html>
 <html ng-app="d3App">
-  <head>
-    <meta charset="utf-8">
-    <title>? AngularJS ? D3.js ?</title>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.3.3/d3.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.js"></script>
-    
-      <script src="ui-bootstrap-tpls-0.6.0.js"></script>
-      <script src="line-chart.min.js"></script>
-      <script src="app.js"></script>
-<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+	<head>
+		<meta charset="utf-8">
+		<title>AngularD3</title>
+			<script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.3.3/d3.min.js"></script>
+			<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.2/angular.js"></script>
+			<script src="ui-bootstrap-tpls-0.6.0.js"></script>
+			<script src="line-chart.min.js"></script>
+			<script src="app.js"></script>
+			<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+			<link rel="stylesheet" href="style.css">
 </head>
+
 <body ng-controller="AppCtrl">
-  <h1>Graph</h1>
+	<h1>Graph</h1>
 
-  
-    Team: <input type="text" ng-model="team" typeahead="name for name in names | filter:$viewValue">
-   
- 
-  
-  <p class="error">{{error}}</p>
-  <div id="linechart"><linechart data="data" options="options"></linechart></div>
-  <div class="container-fluid">
-    <br>
-    <div class="row-fluid">
-        {{form}}  
-    </div>
+	
+		Team: <input type="text" ng-model="team" typeahead="name for name in names | filter:$viewValue">
+	 
+	<p class="error">{{error}}</p>
+	<div id="linechart"><linechart data="data" options="options"></linechart></div>
+  <div class="col-md-4">
+				<h4 ng-repeat-start="fix in fixtures">
+					{{fix.home}} vs. {{fix.away}}
+				</h4>
+				<h5 ng-repeat-end="">{{fix.date}}</h5> 
   </div>
-      <br>
-        <ul class="fixture">
-          <li ng-repeat="fixture in fixtures">
-            {{fixture.home}} vs. {{fixture.away}}
-            {{fixture.date}}
-          </li>
-        </ul>
-
+  <div class="col-md-3">
+	  <h2 ng-repeat="f in form">
+				{{f.form}}
+		</h2>
+		<table class="table table-condensed">
+        <tr>
+            <th>Name</th>
+            <th>Goals</th>
+        </tr>
+			  <tr ng-repeat="s in topscorers">
+		      <td>{{s.player}}</td><td>{{s.goals}}</td>
+		  </tr>
+		</table>		 
+	</div>
+  <div class="col-md-4">
+		<table class="table table-hover">
+        <tr>
+            <th>Team</th>
+            <th>Pl.</th>
+            <th>W</th>
+            <th>D</th>
+            <th>L</th>
+            <th>GD</th>
+            <th>Points</th>
+        </tr>
+			  <tr ng-repeat="t in table">
+		      <td>{{t.team}}</td><td>{{t.played}}</td><td>{{t.won}}</td><td>{{t.drawn}}</td><td>{{t.lost}}</td><td>{{t.difference}}</td><td>{{t.points}}</td>
+		  </tr>
+		</table>
+	</div>
+	<div class="container-fluid">
+		<div class="row-fluid">
+			</div>
+		</div>
+		<div class="row">
+</div>
 </body>
 </html>

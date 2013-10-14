@@ -32,7 +32,6 @@ namespace :populater do
       end
   end
 
-
   desc "opta text"
   task optatext: :environment do
     four = FourFourTwo.new
@@ -41,6 +40,6 @@ namespace :populater do
   end
 
 
-task :all => ["populater:arscom", "populater:teams", "populater:squawka", "populater:optatext"]
+task :all => ["populater:arscom", "populater:teams", "populater:squawka", "populater:optatext", "populater:teamform"]
 end
 
