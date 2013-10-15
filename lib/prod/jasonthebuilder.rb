@@ -29,7 +29,7 @@ class JasonTheBuilder
 		end
 
 		def poss_pie_json(team)
-			
+
 			pie = Poss.last
 			home = pie['homeposs']
 			away = pie['awayposs']
@@ -127,13 +127,24 @@ class JasonTheBuilder
 		def_score = Supermodel.where(:teamname => normalized_team).pluck(:defencescore)
 		poss_score = Supermodel.where(:teamname => normalized_team).pluck(:possesionscore)
 		opta_score = Supermodel.where(:teamname => normalized_team).pluck(:optascore)
-		
-		length_of_models = opta_score.length
 
-		matchnumber = * 1..length_of_models
+		matchnumber = * 1..(opta_score.length)
 
 		[matchnumber, pass_acc, shot_acc, def_score, att_score, poss_score, opta_score, avg_poss].transpose.map do |x, y, z, d, a, p, o, v| 
 			{ 'x'=> x, "pass_acc"=> y, "shot_acc"=> z, "def_score"=> d, "att_score"=> a, "poss_score"=> p, "opta_score"=> o, "avg_poss"=> v}
+		end
+
+	end
+
+	def liveposs
+		
+		home_poss = Poss.pluck(:homeposs)
+		live = home_poss.drop_while {|i| i == 100 }
+		
+		x_axis_array = * 1..(live.length)
+
+		[x_axis_array, live].transpose.map do |x, y| 
+			{ 'x'=> x, "home_poss"=> y }
 		end
 
 	end

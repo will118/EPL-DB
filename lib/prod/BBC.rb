@@ -77,33 +77,37 @@ class BBC
 	def recorder
    
     data = @statsjson
- 
-    poss = Poss.where(:team => @team).create
-    poss.homeposs = data['possession']['home']
-    poss.awayposs = data['possession']['away']
-    poss.save
 
-    targets = Target.where(:team => @team).create
-    targets.homeshots = data['shotsOnTarget']['home']
-    targets.awayshots = data['shotsOnTarget']['away']
-    targets.save
+    if data['shotsOnTarget'] == nil
+    	"No data yet"
+ 		else
+	    poss = Poss.where(:team => @team).create
+	    poss.homeposs = data['possession']['home']
+	    poss.awayposs = data['possession']['away']
+	    poss.save
 
-    shots = Shot.where(:team => @team).create
-    shots.homeshots = data['shots']['home']
-    shots.awayshots = data['shots']['away']
-    shots.save
+	    targets = Target.where(:team => @team).create
+	    targets.homeshots = data['shotsOnTarget']['home']
+	    targets.awayshots = data['shotsOnTarget']['away']
+	    targets.save
 
-    corners = Corner.where(:team => @team).create
-    corners.home = data['corners']['home']
-    corners.away = data['corners']['away']
-    corners.save
+	    shots = Shot.where(:team => @team).create
+	    shots.homeshots = data['shots']['home']
+	    shots.awayshots = data['shots']['away']
+	    shots.save
 
-    fouls = Foul.where(:team => @team).create
-    fouls.home = data['fouls']['home']
-    fouls.away = data['fouls']['away']
-    fouls.save
-  end
+	    corners = Corner.where(:team => @team).create
+	    corners.home = data['corners']['home']
+	    corners.away = data['corners']['away']
+	    corners.save
 
+	    fouls = Foul.where(:team => @team).create
+	    fouls.home = data['fouls']['home']
+	    fouls.away = data['fouls']['away']
+	    fouls.save
+	  end
+	end
+	
   def self.recorder(jsonurl, team)
 
 		rawbbc = JSON.parse HTTParty.get(jsonurl).response.body.delete('(').delete(');')
@@ -113,32 +117,35 @@ class BBC
 		statsjson = result[1]
 	
     data = statsjson
- 
-    poss = Poss.where(:team => team).create
-    poss.homeposs = data['possession']['home']
-    poss.awayposs = data['possession']['away']
-    poss.save
 
-    targets = Target.where(:team => team).create
-    targets.homeshots = data['shotsOnTarget']['home']
-    targets.awayshots = data['shotsOnTarget']['away']
-    targets.save
+    if data['shotsOnTarget'] == nil
+    	"No data yet"
+ 		else
+	    poss = Poss.where(:team => team).create
+	    poss.homeposs = data['possession']['home']
+	    poss.awayposs = data['possession']['away']
+	    poss.save
 
-    shots = Shot.where(:team => team).create
-    shots.homeshots = data['shots']['home']
-    shots.awayshots = data['shots']['away']
-    shots.save
+	    targets = Target.where(:team => team).create
+	    targets.homeshots = data['shotsOnTarget']['home']
+	    targets.awayshots = data['shotsOnTarget']['away']
+	    targets.save
 
-    corners = Corner.where(:team => team).create
-    corners.home = data['corners']['home']
-    corners.away = data['corners']['away']
-    corners.save
+	    shots = Shot.where(:team => team).create
+	    shots.homeshots = data['shots']['home']
+	    shots.awayshots = data['shots']['away']
+	    shots.save
 
-    fouls = Foul.where(:team => team).create
-    fouls.home = data['fouls']['home']
-    fouls.away = data['fouls']['away']
-    fouls.save
+	    corners = Corner.where(:team => team).create
+	    corners.home = data['corners']['home']
+	    corners.away = data['corners']['away']
+	    corners.save
 
+	    fouls = Foul.where(:team => team).create
+	    fouls.home = data['fouls']['home']
+	    fouls.away = data['fouls']['away']
+	    fouls.save
+	  end
   end
 
   def self.tester(rawlink)

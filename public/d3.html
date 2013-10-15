@@ -24,6 +24,8 @@
   <div class="col-md-3">
 				<p class="lead" ng-repeat-start="fix in fixtures">{{fix.home}} vs. {{fix.away}}</p>
 				<p class="muted" ng-repeat-end="">{{fix.date}}</p> 
+				<br>
+				<div id="liveechart"><linechart data="liveposs" options="liveoptions"></linechart></div>
   </div>
   <div class="col-md-3">
 	  <h2 ng-repeat="f in form">

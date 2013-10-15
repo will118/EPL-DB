@@ -50,6 +50,10 @@ class FixturesController < ApplicationController
     render :json => JasonTheBuilder.new.possession_json
   end  
 
+  def livepossjson_v2
+    render :json => JasonTheBuilder.new.liveposs
+  end  
+
   def liveshotjson
     render :json => JasonTheBuilder.new.shots_json
   end  
