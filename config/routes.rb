@@ -20,6 +20,7 @@ AAAAMILNE::Application.routes.draw do
   get 'topscorers/:team' => 'fixtures#topscorers'
   get 'liveposspie' => 'fixtures#liveposspie'
   get 'livepossjson-v2' => 'fixtures#livepossjson_v2'
+  get 'livetargetsjson-v2' => 'fixtures#livetargetsjson_v2'
 
   get 'livepossjson' => 'fixtures#livepossjson'
   get 'liveshotjson' => 'fixtures#liveshotjson'

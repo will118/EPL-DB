@@ -48,6 +48,15 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http) {
 				});
 			}
 
+	$scope.liveTargetsJson = function () {
+					$http({
+						method: 'GET',
+						url:'/livetargetsjson-v2/'
+					}).success(function(data) {
+						$scope.livetargets = data;
+				});
+			}
+
 			
 	$scope.names = ["Arsenal", "Liverpool", "Chelsea", "Southampton", "Everton", "Hull City", "Manchester City", "Newcastle United", "Tottenham Hotspur", "West Bromwich Albion", "Cardiff City", "Swansea City", "Aston Villa", "Manchester United", "Stoke City", "Norwich City", "West Ham United", "Fulham", "Crystal Palace", "Sunderland"];
 
@@ -86,6 +95,18 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http) {
 			},
 			tooltipMode: "default"
 		};
+		$scope.liveoptions2 = {
+					lineMode: "cardinal",
+					series: [
+						{y: "home_shots", label: "Home Shots on Target", color: "#bcbd22"},
+						{y: "away_shots", label: "Away Shots on Target", color: "#006cde"}
+					],
+					axes: {
+						x: {type: "linear", key: "x"},
+						y: {type: "linear"}
+					},
+					tooltipMode: "default"
+				};
 
 	$scope.getMegaJson = function () {
 		$http({
@@ -107,6 +128,7 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http) {
 	};
 
  $scope.livePossJson();
+ $scope.liveTargetsJson();
 	$scope.tableJson();
 });
 

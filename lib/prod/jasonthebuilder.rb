@@ -23,8 +23,12 @@ class JasonTheBuilder
 
 
 		def possession_json
-			@away = Poss.pluck(:awayposs)
-			@home = Poss.pluck(:homeposs)
+			
+			away_poss = Poss.pluck(:awayposs)
+			home_poss = Poss.pluck(:homeposs)
+			
+			@home = home_poss.drop_while {|i| i == 100 }
+			@away = away_poss.drop_while {|i| i == 100 }
 			live_array_builder("Home Possession", "Away Possession")
 		end
 
@@ -147,6 +151,16 @@ class JasonTheBuilder
 			{ 'x'=> x, "home_poss"=> y }
 		end
 
+	end
+
+	def livetargets
+			away = Target.pluck(:awayshots)
+			home = Target.pluck(:homeshots)
+			x_axis_array = * 1..(away.length)
+
+		[x_axis_array, home, away].transpose.map do |x, y, z| 
+			{ 'x'=> x, "home_shots"=> y, "away_shots"=> z }
+		end
 	end
 
 		def deprecated_jason(team)

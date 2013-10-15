@@ -54,6 +54,10 @@ class FixturesController < ApplicationController
     render :json => JasonTheBuilder.new.liveposs
   end  
 
+  def livetargetsjson_v2
+    render :json => JasonTheBuilder.new.livetargets
+  end  
+
   def liveshotjson
     render :json => JasonTheBuilder.new.shots_json
   end  
