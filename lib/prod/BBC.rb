@@ -104,15 +104,50 @@ class BBC
     fouls.save
   end
 
+  def self.recorder(jsonurl, team)
+
+		rawbbc = JSON.parse HTTParty.get(jsonurl).response.body.delete('(').delete(');')
+		midway = rawbbc['data']['payload']['Match']
+		result = []
+		midway.each { |x| result = x.assoc('stats') }
+		statsjson = result[1]
+	
+    data = statsjson
+ 
+    poss = Poss.where(:team => team).create
+    poss.homeposs = data['possession']['home']
+    poss.awayposs = data['possession']['away']
+    poss.save
+
+    targets = Target.where(:team => team).create
+    targets.homeshots = data['shotsOnTarget']['home']
+    targets.awayshots = data['shotsOnTarget']['away']
+    targets.save
+
+    shots = Shot.where(:team => team).create
+    shots.homeshots = data['shots']['home']
+    shots.awayshots = data['shots']['away']
+    shots.save
+
+    corners = Corner.where(:team => team).create
+    corners.home = data['corners']['home']
+    corners.away = data['corners']['away']
+    corners.save
+
+    fouls = Foul.where(:team => team).create
+    fouls.home = data['fouls']['home']
+    fouls.away = data['fouls']['away']
+    fouls.save
+
+  end
+
   def self.tester(rawlink)
 		  driver = Selenium::WebDriver.for(:remote, :url => "http://localhost:9134")
 			driver.navigate.to rawlink
 			page = driver.page_source
 			json_link = page.match(/(http:\/\/polling.bbc.co.uk\/sport\/shared\/football\/oppm\/json).{11}/)
 			lineup_link = page.match(/(http:\/\/polling.bbc.co.uk\/sport\/shared\/football\/oppm\/line-up).{11}/)
-			p json_link.to_s
-			p lineup_link.to_s
-			driver.quit
+			json_link.to_s
 	end
 
 		
