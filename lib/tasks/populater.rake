@@ -39,6 +39,18 @@ namespace :populater do
     four.save
   end
 
+  desc "fixture schedule scrape"
+  task schedule: :environment do
+    sched = Schedule.new("Arsenal")
+    sched = 
+
+
+
+
+  end
+
+
+
 
 task :all => ["populater:arscom", "populater:teams", "populater:squawka", "populater:optatext", "populater:teamform"]
 end

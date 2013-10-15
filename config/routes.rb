@@ -18,7 +18,7 @@ AAAAMILNE::Application.routes.draw do
   get 'megajson/:team' => 'fixtures#megajson'
   get 'deprecatedjson/:team' => 'fixtures#deprecatedjson'
   get 'topscorers/:team' => 'fixtures#topscorers'
-  get 'wpie' => 'fixtures#liveposspie'
+  get 'liveposspie' => 'fixtures#liveposspie'
 
   get 'livepossjson' => 'fixtures#livepossjson'
   get 'liveshotjson' => 'fixtures#liveshotjson'

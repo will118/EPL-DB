@@ -2,7 +2,6 @@ class BBC
 
 	attr_reader :statsjson
 
-    
 	def initialize(team)
 		@team = team
 		@rawlink = get_bbc(team)
@@ -22,7 +21,7 @@ class BBC
 		!!(@rawlink =~ /(\/sport\/0)/)
 	end
 
-	def rawlink
+	def raw_link
 		if is_valid_match? == true
 			driver = Selenium::WebDriver.for(:remote, :url => "http://localhost:9134")
 			driver.navigate.to @rawlink
@@ -103,7 +102,18 @@ class BBC
     fouls.home = data['fouls']['home']
     fouls.away = data['fouls']['away']
     fouls.save
-
   end
+
+  def self.tester(rawlink)
+		  driver = Selenium::WebDriver.for(:remote, :url => "http://localhost:9134")
+			driver.navigate.to rawlink
+			page = driver.page_source
+			json_link = page.match(/(http:\/\/polling.bbc.co.uk\/sport\/shared\/football\/oppm\/json).{11}/)
+			lineup_link = page.match(/(http:\/\/polling.bbc.co.uk\/sport\/shared\/football\/oppm\/line-up).{11}/)
+			p json_link.to_s
+			p lineup_link.to_s
+			driver.quit
+	end
+
 		
 end
