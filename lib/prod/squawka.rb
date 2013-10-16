@@ -1,4 +1,7 @@
-class Squawka  
+require_relative 'namenormaliser'
+
+class Squawka
+  include NameNormaliser
 
   attr_reader :avgpos, :parsed_json, :shotacc, :opta, :passacc
 
@@ -8,28 +11,7 @@ class Squawka
   end
 
   def selector(team)
-    id = case team
-      when "Arsenal" then "31"
-      when "Aston Villa" then "32"
-      when "Chelsea" then "33"
-      when "Everton" then "34"
-      when "Fulham" then "35"
-      when "Liverpool" then "36"
-      when "Manchester City" then "37"
-      when "Manchester United" then "38"
-      when "Newcastle United" then "39"
-      when "Norwich City" then "40"
-      when "Southampton" then "43"
-      when "Stoke City" then "44"
-      when "Sunderland" then "45"
-      when "Swansea City" then "46"
-      when "Tottenham Hotspur" then "47"
-      when "West Bromwich Albion" then "48"
-      when "West Ham United" then "49"
-      when "Cardiff City" then "168"
-      when "Crystal Palace" then "169"
-      when "Hull City" then "170"
-    end
+    id = squawka_id(team)
     sqk = "http://www.squawka.com/wp-content/themes/squawka_web/stats_process.php?club_id=#{id}&team_type=all&min=1&max=100&competition_id=64"
     JSON.parse HTTParty.get(sqk).response.body
   end

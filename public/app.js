@@ -1,6 +1,6 @@
 'use strict';
 
-var d3App = angular.module('d3App', ['n3-charts.linechart', 'ui.bootstrap']);
+var d3App = angular.module('d3App', ['nvd3ChartDirectives', 'ui.bootstrap']);
 
 d3App.controller('AppCtrl', function AppCtrl ($scope, $http) {
 	$scope.getJsons = function () {
@@ -56,7 +56,6 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http) {
 						$scope.livetargets = data;
 				});
 			}
-
 			
 	$scope.names = ["Arsenal", "Liverpool", "Chelsea", "Southampton", "Everton", "Hull City", "Manchester City", "Newcastle United", "Tottenham Hotspur", "West Bromwich Albion", "Cardiff City", "Swansea City", "Aston Villa", "Manchester United", "Stoke City", "Norwich City", "West Ham United", "Fulham", "Crystal Palace", "Sunderland"];
 
@@ -67,45 +66,6 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http) {
 			 $scope.getMegaJson();
 			 $scope.getJsons()
 	});
-	$scope.options = {
-		lineMode: "cardinal",
-		series: [
-			{y: "avg_poss", label: "Avg. Possession", color: "#bcbd22"},
-			{y: "shot_acc", label: "Shot Accuracy", color: "#17becf"},
-			{y: "pass_acc", label: "Pass Accuracy", color: "#47be22"},
-			{y: "def_score", label: "Defensive Score", color: "#9467bd"},
-			{y: "att_score", label: "Attack Score", color: "#9222bd"},
-			{y: "opta_score", label: "Opta Score", color: "#9222bd"},
-			{y: "poss_score", label: "Possession Score", color: "#4222bd"},
-		],
-		axes: {
-			x: {type: "linear", key: "x"},
-			y: {type: "linear"}
-		},
-		tooltipMode: "default"
-	};
-	$scope.liveoptions = {
-			lineMode: "linear",
-			series: [
-				{y: "home_poss", label: "Home Possession", color: "#bcbd22", type: "column"}
-			],
-			axes: {
-				x: {key: "x"}
-			},
-			tooltipMode: "default"
-		};
-		$scope.liveoptions2 = {
-					lineMode: "linear",
-					series: [
-						{y: "home_shots", label: "Home Shots on Target", color: "#bcbd22", type: "area"},
-						{y: "away_shots", label: "Away Shots on Target", color: "#006cde", type: "area"}
-					],
-					axes: {
-						x: {type: "linear", key: "x"},
-						y: {type: "linear"}
-					},
-					tooltipMode: "default"
-				};
 
 	$scope.getMegaJson = function () {
 		$http({
@@ -126,8 +86,8 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http) {
 		});
 	};
 
- $scope.livePossJson();
- $scope.liveTargetsJson();
+	$scope.livePossJson();
+	$scope.liveTargetsJson();
 	$scope.tableJson();
 });
 

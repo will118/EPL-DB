@@ -1,24 +1,25 @@
+require_relative 'namenormaliser'
+
 class BBC
-	include BBCNameNormaliser
+	include NameNormaliser
 
 	attr_reader :statsjson
 
 	def is_it_time
-		 Fixture.order(:kickoff).first(8).each do |x| 
-				time_until = x.kickoff - Time.now 
-				if !!(time_until < 180) && !!(x.jsonurl != nil ) 
+		Fixture.order(:kickoff).first(8).each do |x| 
+				time_until = (x.kickoff - Time.now)
+				if ((time_until < 180) && (x.jsonurl != nil ))
 					recorder(x)
-				elsif !!(time_until < 1800) && !!(x.rawlink == nil)
+				elsif ((time_until < 1800) && (x.rawlink == nil))
 					get_bbc(x)
-				else time_until
+				else return "Stil a while to go"
 				end
-			end
+		end
 	end
 
 	def get_bbc(fixture)
 			if fixture.jsonurl == nil
-				team = TeamNameNormaliser(fixture.hometeam)
-				team = fixture.hometeam
+				team = bbc_name(fixture.hometeam)
 				uri = "http://www.bbc.co.uk/sport/football/premier-league/fixtures"
 				doc = Nokogiri::HTML(open("#{uri}"))
 				doc1 = doc.xpath('html/body/div[3]/div/div/div[1]/div[3]/div[2]/div')
@@ -33,7 +34,7 @@ class BBC
 					fixture.lineup_url = @lineup_url
 					fixture.save
 				else
-					"Much too early"
+					return "Much too early"
 				end
 
 			else

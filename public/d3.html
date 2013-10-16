@@ -4,9 +4,10 @@
 		<meta charset="utf-8">
 		<title>AngularD3</title>
 			<script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.3.3/d3.min.js"></script>
+			<script src="//cdnjs.cloudflare.com/ajax/libs/nvd3/1.1.13-beta/nv.d3.js"></script>
 			<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.2/angular.js"></script>
 			<script src="ui-bootstrap-tpls-0.6.0.js"></script>
-			<script src="line-chart.min.js"></script>
+			<script src="js/angularjs-nvd3-directives.js"></script>
 			<script src="app.js"></script>
 			<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
 			<link rel="stylesheet" href="style.css">
@@ -20,7 +21,7 @@
 </nav>
 
 	<p class="error">{{error}}</p>
-	<div id="linechart"><linechart data="data" options="options"></linechart></div>
+	<nvd3-line-chart data="liveposs" id="liveposs" width="600" height="300" showXAxis="false" showYAxis="true" forcey="[50,80]"><svg></svg></nvd3-line-chart>
   <div class="col-md-3">
 				<p class="lead" ng-repeat-start="fix in fixtures">{{fix.home}} vs. {{fix.away}}</p>
 				<p class="muted" ng-repeat-end="">{{fix.date}}</p> 

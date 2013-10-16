@@ -1,12 +1,10 @@
-class JasonTheBuilder
+require_relative 'namenormaliser'
 
-		def team_normaliser(team)
-			team.gsub!(/[\s]/, "-")
-			team
-		end
+class JasonTheBuilder
+	include NameNormaliser
 
 		def fixture_json(team)
-			team2 = team_normaliser(team)
+			team2 = stats_fc_normaliser(team)
 			date = Date.today
 			from_date = date.to_s(:db)
 
@@ -23,7 +21,6 @@ class JasonTheBuilder
 
 
 		def possession_json
-			
 			away_poss = Poss.pluck(:awayposs)
 			home_poss = Poss.pluck(:homeposs)
 			
@@ -32,8 +29,7 @@ class JasonTheBuilder
 			live_array_builder("Home Possession", "Away Possession")
 		end
 
-		def poss_pie_json(team)
-
+		def poss_pie_json
 			pie = Poss.last
 			home = pie['homeposs']
 			away = pie['awayposs']
@@ -141,26 +137,15 @@ class JasonTheBuilder
 	end
 
 	def liveposs
-		
-		home_poss = Poss.pluck(:homeposs)
-		live = home_poss.drop_while {|i| i == 100 }
-		
-		x_axis_array = * 1..(live.length)
+			home = Poss.pluck(:homeposs)
+			live = home.drop_while {|i| i == 100 }
+			x_axis_array = * 1..(live.length)
 
-		[x_axis_array, live].transpose.map do |x, y| 
-			{ 'x'=> x, "home_poss"=> y }
-		end
+		array = [x_axis_array, live].transpose.map do |x, y| 
+							[ x, y ] 
+						end
 
-	end
-
-	def livetargets
-			away = Target.pluck(:awayshots)
-			home = Target.pluck(:homeshots)
-			x_axis_array = * 1..(away.length)
-
-		[x_axis_array, home, away].transpose.map do |x, y, z| 
-			{ 'x'=> x, "home_shots"=> y, "away_shots"=> z }
-		end
+		return [{"key" => "Series 1", "values" => array}]
 	end
 
 		def deprecated_jason(team)

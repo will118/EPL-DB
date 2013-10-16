@@ -3,9 +3,6 @@ Premier League Dashboard
 
 ## README is undergoing updates.
 
-
-> Almost entirely built for 1920x1200 
-
 I wanted marginally relevant information to have on my other/second screen during a match.
 
 That is the "second screen" one-page thing. 
