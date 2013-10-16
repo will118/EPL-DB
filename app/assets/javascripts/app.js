@@ -18,6 +18,7 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http) {
 				url:'/topscorers/' +
 					$scope.team
 			}).success(function(topscorers) {
+				console.log(topscorers);
 				$scope.topscorers = topscorers;
 		});
 
@@ -27,7 +28,11 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http) {
 					$scope.team
 			}).success(function(fixtures) {
 				$scope.fixtures = fixtures;
-		});
+				$scope.error = '';
+			if (fixtures) {
+				$scope.error = 'Not found?';
+			} 
+		});	
 	}
 
 	$scope.tableJson = function () {

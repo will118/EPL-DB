@@ -20,12 +20,20 @@ h1 {
   color: red;
 }
 
-#livechart {
-  height: 300px;
-
+#form-column {
+  text-align: center;
 }
 
-#liveechart {
-  height: 350px;
+#scorers {
+  width:50%; 
+  margin-left:25%; 
+  margin-right:25%;
+}
 
+#scorer-goals {
+  text-align: center;
+}
+
+#livetargets-svg {
+  margin-top: 5em;
 }

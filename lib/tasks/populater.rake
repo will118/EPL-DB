@@ -54,16 +54,22 @@ namespace :populater do
 
   desc "child labour"
   task fakedata: :environment do
+    Poss.delete_all
+    Shot.delete_all
+    Target.delete_all
+    Corner.delete_all
+    Foul.delete_all
     matches = YAML::load( File.open( 'matches.yml' ) )
     matches.each do |team1, team2|
       90.times do |x|
-        randy = (x*rand(20))
-        xrandy = (x*randy)
-        Poss.where(:homeposs => xrandy, :awayposs => (rand(15)), :hometeam => team1, :awayteam => team2).create
-        Shot.where(:homeshots => xrandy, :awayshots => (xrandy-5), :hometeam => team1, :awayteam => team2).create
-        Target.where(:homeshots => randy, :awayshots => (randy-(rand(10))), :hometeam => team1, :awayteam => team2).create
-        Corner.where(:home => xrandy, :away => randy, :hometeam => team1, :awayteam => team2).create
-        Foul.where(:home => xrandy, :away => randy, :hometeam => team1, :awayteam => team2).create
+        rando = x + ((team1.length)*(team2.length))
+        randy = x + 2
+        randy2 = randy - (rand(5))
+        Poss.where(:homeposs => (rando+2), :awayposs => randy2, :hometeam => team1, :awayteam => team2).create
+        Shot.where(:homeshots => rando, :awayshots => randy2, :hometeam => team1, :awayteam => team2).create
+        Target.where(:homeshots => (randy+7), :awayshots => randy2, :hometeam => team1, :awayteam => team2).create
+        Corner.where(:home => (randy+3), :away => randy2, :hometeam => team1, :awayteam => team2).create
+        Foul.where(:home => randy, :away => randy2, :hometeam => team1, :awayteam => team2).create
       end
     end
   end

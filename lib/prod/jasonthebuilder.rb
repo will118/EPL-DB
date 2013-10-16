@@ -4,14 +4,16 @@ class JasonTheBuilder
 	include NameNormaliser
 
 		def fixture_json(team)
-			team2 = stats_fc_normaliser(team)
-			date = Date.today
-			from_date = date.to_s(:db)
+			name = stats_fc_normaliser(team)
+			unless stats_fc_checker(name) == "1"
+				date = Date.today
+				from_date = date.to_s(:db)
 
-			future_date = date + 2.months 
-			to_date = future_date.to_s(:db)
-			fixtures = "http://api.statsfc.com/#{ENV["COMP"]}/fixtures.json?key=#{ENV["STATS_KEY"]}&team=#{team2}&from=#{from_date}&to=#{to_date}&timezone=#{ENV["TIMEZONE"]}&limit=5"
-			JSON.parse(HTTParty.get(fixtures).response.body)
+				future_date = date + 2.months 
+				to_date = future_date.to_s(:db)
+				fixtures = "http://api.statsfc.com/#{ENV["COMP"]}/fixtures.json?key=#{ENV["STATS_KEY"]}&team=#{name}&from=#{from_date}&to=#{to_date}&timezone=#{ENV["TIMEZONE"]}&limit=5"
+				JSON.parse(HTTParty.get(fixtures).response.body)
+			end
 		end
 
 		def table_json
@@ -32,91 +34,112 @@ class JasonTheBuilder
 	def jason(team)
 
 		normalized_team = team.titleize
-		
-		avg_poss = Supermodel.where(:teamname => normalized_team).pluck(:avgpossession)
-		shot_acc = Supermodel.where(:teamname => normalized_team).pluck(:shotaccuracy)
-		pass_acc = Supermodel.where(:teamname => normalized_team).pluck(:passaccuracy)
-		att_score = Supermodel.where(:teamname => normalized_team).pluck(:attackscore)
-		def_score = Supermodel.where(:teamname => normalized_team).pluck(:defencescore)
-		poss_score = Supermodel.where(:teamname => normalized_team).pluck(:possesionscore)
-		opta_score = Supermodel.where(:teamname => normalized_team).pluck(:optascore)
 
-		[{"key" => "Possession", "values" => ray(avg_poss)}, {"key" => "Shot Accuracy", "values" => ray(shot_acc)}, {"key" => "Pass Accuracy", "values" => ray(pass_acc)}, {"key" => "Attack Score", "values" => ray(att_score)}, {"key" => "Defence Score", "values" => ray(def_score)}, {"key" => "Possession Score", "values" => ray(poss_score)}, {"key" => "Opta Score", "values" => ray(opta_score)}]
+		unless valid_team?(normalized_team) == true
+			avg_poss = Supermodel.where(:teamname => normalized_team).pluck(:avgpossession)
+			shot_acc = Supermodel.where(:teamname => normalized_team).pluck(:shotaccuracy)
+			pass_acc = Supermodel.where(:teamname => normalized_team).pluck(:passaccuracy)
+			att_score = Supermodel.where(:teamname => normalized_team).pluck(:attackscore)
+			def_score = Supermodel.where(:teamname => normalized_team).pluck(:defencescore)
+			poss_score = Supermodel.where(:teamname => normalized_team).pluck(:possesionscore)
+			opta_score = Supermodel.where(:teamname => normalized_team).pluck(:optascore)
+
+			[{"key" => "Possession", "values" => ray(avg_poss)}, {"key" => "Shot Accuracy", "values" => ray(shot_acc)}, {"key" => "Pass Accuracy", "values" => ray(pass_acc)}, {"key" => "Attack Score", "values" => ray(att_score)}, {"key" => "Defence Score", "values" => ray(def_score)}, {"key" => "Possession Score", "values" => ray(poss_score)}, {"key" => "Opta Score", "values" => ray(opta_score)}]
+		end
 	end
 
-def ray(metric)
-	array = []
-	(metric.length).times do |i|
-		array << [ i+1, metric[i]]
+	def valid_team?(team)
+		Fixture.exists?(:hometeam => team) 
 	end
-	array
-end
+
+	def ray(metric)
+		array = []
+		(metric.length).times do |i|
+			array << [ i+1, metric[i]]
+		end
+		array
+	end
 	
 	def poss(team)
-		poss_arr = [] 
-		Poss.where(["awayteam = ? or hometeam = ?", team.titleize, team.titleize]).each do |x|
-			if x.hometeam = team
-				poss_arr << x.homeposs
-			else 
-				poss_arr << x.awayposs
+		normalized_team = team.titleize
+		unless valid_team?(normalized_team) == true
+			poss_arr = [] 
+			Poss.where(["awayteam = ? or hometeam = ?", team.titleize, team.titleize]).each do |x|
+				if x.hometeam = team
+					poss_arr << x.homeposs
+				else 
+					poss_arr << x.awayposs
+				end
 			end
-		end
-		
-		live = poss_arr.drop_while {|i| i == 100 }
-		x_axis_array = * 1..(live.length)
+			
+			live = poss_arr.drop_while {|i| i == 100 }
+			x_axis_array = * 1..(live.length)
 
-		array = [x_axis_array, live].transpose.map do |x, y| 
-							[ x, y ] 
-						end
-		return [{"key" => "Possession", "values" => array}]
+			array = [x_axis_array, live].transpose.map do |x, y| 
+								[ x, y ] 
+							end
+			return [{"key" => "Possession", "values" => array}]
+		end
 	end
 
 	def targets(team)
-		home = []
-		away = []
-			Target.where(["awayteam = ? or hometeam = ?", team.titleize, team.titleize]).each do |x|
-				home << x.homeshots
-				away << x.awayshots
-				@hometeam = x.hometeam
-				@awayteam = x.awayteam
+		normalized_team = team.titleize
+		unless valid_team?(normalized_team) == true
+			home = []
+			away = []
+				Target.where(["awayteam = ? or hometeam = ?", normalized_team, normalized_team]).each do |x|
+					home << x.homeshots
+					away << x.awayshots
+					@hometeam = x.hometeam
+					@awayteam = x.awayteam
+				end
+				nv_builder(home, away)
 			end
-			nv_builder(home, away)
 	end
 
 	def corners(team)
-		home = []
-		away = []
-			Corner.where(["awayteam = ? or hometeam = ?", team.titleize, team.titleize]).each do |x|
-				home << x.home
-				away << x.away
-				@hometeam = x.hometeam
-				@awayteam = x.awayteam
+		normalized_team = team.titleize
+		unless valid_team?(normalized_team) == true
+			home = []
+			away = []
+				Corner.where(["awayteam = ? or hometeam = ?", normalized_team, normalized_team]).each do |x|
+					home << x.home
+					away << x.away
+					@hometeam = x.hometeam
+					@awayteam = x.awayteam
+				end
+				nv_builder(home, away)
 			end
-			nv_builder(home, away)
 	end
 
 	def fouls(team)
-		home = []
-		away = []
-			Foul.where(["awayteam = ? or hometeam = ?", team.titleize, team.titleize]).each do |x|
-				home << x.home
-				away << x.away
-				@hometeam = x.hometeam
-				@awayteam = x.awayteam
+		normalized_team = team.titleize
+		unless valid_team?(normalized_team) == true
+			home = []
+			away = []
+				Foul.where(["awayteam = ? or hometeam = ?", normalized_team, normalized_team]).each do |x|
+					home << x.home
+					away << x.away
+					@hometeam = x.hometeam
+					@awayteam = x.awayteam
+				end
+				nv_builder(home, away)
 			end
-			nv_builder(home, away)
 	end
 
 	def shots(team)
-		home = []
-		away = []
-			Shot.where(["awayteam = ? or hometeam = ?", team.titleize, team.titleize]).each do |x|
-				home << x.homeshots
-				away << x.awayshots
-				@hometeam = x.hometeam
-				@awayteam = x.awayteam
+		normalized_team = team.titleize
+		unless valid_team?(normalized_team) == true
+			home = []
+			away = []
+				Shot.where(["awayteam = ? or hometeam = ?", normalized_team, normalized_team]).each do |x|
+					home << x.homeshots
+					away << x.awayshots
+					@hometeam = x.hometeam
+					@awayteam = x.awayteam
+				end
+				nv_builder(home, away)
 			end
-			nv_builder(home, away)
 	end
 
 	def nv_builder(home, away)
@@ -134,9 +157,11 @@ end
 	end
 
 	def top_scorers_json(team)
-		team2 = stats_fc_normaliser(team)
-		raw = "http://api.statsfc.com/top-scorers.json?key=#{ENV["STATS_KEY"]}&competition=#{ENV["COMP"]}&team=#{team2}&year=2013/2014"
-		HTTParty.get(raw).response.body
+		name = stats_fc_normaliser(team)
+		unless stats_fc_checker(name) == "1"
+			raw = "http://api.statsfc.com/top-scorers.json?key=#{ENV["STATS_KEY"]}&competition=#{ENV["COMP"]}&team=#{name}&year=2013/2014"
+			HTTParty.get(raw).response.body
+		end
 	end		
 
 	def self.single_form

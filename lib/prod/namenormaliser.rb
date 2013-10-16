@@ -48,5 +48,31 @@ module NameNormaliser
 		team.gsub!(/[\s]/, "-")
 		team
 	end
+
+	def stats_fc_checker(team)
+		case team
+			when "Arsenal" then "1"
+			when "Liverpool" then "1"
+			when "Chelsea" then "1"
+			when "Southampton" then "1"
+			when "Everton" then "1"
+			when "Hull-City" then "1"
+			when "Manchester-City" then "1"
+			when "Newcastle-United" then "1"
+			when "Tottenham-Hotspur" then "1"
+			when "West-Bromwich-Albion" then "1"
+			when "Cardiff-City" then "1"
+			when "Swansea City" then "1"
+			when "Aston-Villa" then "1"
+			when "Manchester-United" then "1"
+			when "Stoke-City" then "1"
+			when "Norwich-City" then "1"
+			when "West Ham-United" then "1"
+			when "Fulham" then "1"
+			when "Crystal-Palace" then "1"
+			when "Sunderland" then "1"
+		else "0"
+		end
+	end
 		
 end

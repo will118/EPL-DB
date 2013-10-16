@@ -7,30 +7,31 @@
 			<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body ng-controller="AppCtrl">
-     <span>
-	     	<nvd3-stacked-area-chart data="megajson" id="megajson" width="1000" height="500" showXAxis="false" showYAxis="false" interactive="true" tooltips="true"><svg></svg></nvd3-stacked-area-chart>
-     </span>
+     <div class="row">
+	     	<div class="col-md-6 col-md-offset-3"><nvd3-stacked-area-chart data="megajson" id="megajson" width="1000" height="500" showXAxis="false" showYAxis="false" interactive="true" tooltips="true" showLegend="true"><svg></svg></nvd3-stacked-area-chart></div>
+	     	<div class="col-md-3"><nvd3-line-chart data="livetargets" id="livetargets" width="500" height="400" showXAxis="false" showYAxis="true" forcex="[1]" showLegend="true"><svg id="livetargets-svg"></svg></nvd3-line-chart></div>
+     </div>
   <div class="col-md-3">
     <input type="text" class="form-control" ng-model="team" typeahead="name for name in names | filter:$viewValue">
 			<p class="error">{{error}}</p>
 				<p class="lead" ng-repeat-start="fix in fixtures">{{fix.home}} vs. {{fix.away}}</p>
 				<p class="muted" ng-repeat-end="">{{fix.date}}</p> 
-				<nvd3-line-chart data="liveshots" id="liveshots" width="500" height="400" showXAxis="false" showYAxis="true" forcex="[1]"><svg></svg></nvd3-line-chart>
   </div>
   <div class="col-md-3">
-	  <h2 ng-repeat="f in form">
+	  <h2 ng-repeat="f in form" id="form-column">
 				{{f.form}}
 		</h2>
-		<table class="table table-condensed">
+		<br>
+		<table class="table table-condensed" id="scorers">
         <tr>
             <th>Name</th>
-            <th>Goals</th>
+            <th id="scorer-goals">Goals</th>
         </tr>
 			  <tr ng-repeat="s in topscorers">
-		      <td>{{s.player}}</td><td>{{s.goals}}</td>
+		      <td>{{s.player}}</td><td id="scorer-goals">{{s.goals}}</td>
 		  </tr>
-		</table>		 
-			<nvd3-line-chart data="livetargets" id="livetargets" width="500" height="400" showXAxis="false" showYAxis="true" forcex="[1]"><svg></svg></nvd3-line-chart>
+		</table>
+		<nvd3-line-chart data="liveshots" id="liveshots" width="500" height="400" showXAxis="false" showYAxis="true" showLegend="true" forcex="[1]"><svg></svg></nvd3-line-chart>
 	</div>
   <div class="col-md-3">
 		<table class="table table-hover">
@@ -55,8 +56,8 @@
 		</table>
 	</div>
 		<div class="col-md-3">
-				<nvd3-line-chart data="liveposs" id="liveposs" width="500" height="400" showXAxis="false" showYAxis="true" forcex="[1]"><svg></svg></nvd3-line-chart>
+				<nvd3-line-chart data="liveposs" id="liveposs" width="500" height="400" showXAxis="false" showYAxis="true" showLegend="true" forcex="[1]"><svg></svg></nvd3-line-chart>
 
-				<nvd3-line-chart data="livecorners" id="livecorners" width="500" height="400" showXAxis="false" showYAxis="true" forcex="[1]"><svg></svg></nvd3-line-chart>
+				<nvd3-line-chart data="livecorners" id="livecorners" width="500" height="400" showLegend="true" showXAxis="false" showYAxis="true" forcex="[1]"><svg></svg></nvd3-line-chart>
 		</div>
 	</body>
