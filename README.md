@@ -91,3 +91,6 @@ Done:
 - RSpec unit tests on models and lib.
 - Cuke/Capybara on both pages, with @javascript
 - Jasmine for secondscreen.js
+
+Coverage:
+- It's slipping slightly as I delve into Angular but will get back to 100% as soon as I know what I'm doing.

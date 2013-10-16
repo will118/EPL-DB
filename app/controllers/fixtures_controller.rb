@@ -6,10 +6,6 @@ class FixturesController < ApplicationController
     @away_xis = AwayXi.all
   end
 
-  def deprecatedjson
-    render :json => JasonTheBuilder.new.deprecated_jason(params[:team])
-  end
-
   def megajson
     render :json => JasonTheBuilder.new.jason(params[:team])
   end
@@ -47,31 +43,23 @@ class FixturesController < ApplicationController
   end
 
   def livepossjson
-    render :json => JasonTheBuilder.new.possession_json
-  end  
-
-  def livepossjson_v2
-    render :json => JasonTheBuilder.new.liveposs
-  end  
-
-  def livetargetsjson_v2
-    render :json => JasonTheBuilder.new.livetargets
-  end  
-
-  def liveshotjson
-    render :json => JasonTheBuilder.new.shots_json
+    render :json => JasonTheBuilder.new.poss(params[:team])
   end  
 
   def livetargetjson
-    render :json => JasonTheBuilder.new.targets_json
+    render :json => JasonTheBuilder.new.targets(params[:team])
+  end  
+
+  def liveshotjson
+    render :json => JasonTheBuilder.new.shots(params[:team])
   end  
 
   def livecornerjson
-    render :json => JasonTheBuilder.new.corners_json
+    render :json => JasonTheBuilder.new.corners(params[:team])
   end  
 
   def livefouljson
-    render :json => JasonTheBuilder.new.fouls_json
+    render :json => JasonTheBuilder.new.fouls(params[:team])
   end
 
   # GET /fixtures/1

@@ -31,6 +31,7 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http) {
 	};
 
 	$scope.tableJson = function () {
+					
 					$http({
 						method: 'GET',
 						url:'/tablejson/'
@@ -39,21 +40,40 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http) {
 				});
 			}
 
-	$scope.livePossJson = function () {
+			
+
+	$scope.liveJsons = function () {
+			
 					$http({
 						method: 'GET',
-						url:'/livepossjson-v2/'
+						url:'/possjson/' +
+						$scope.team
 					}).success(function(data) {
 						$scope.liveposs = data;
 				});
-			}
 
-	$scope.liveTargetsJson = function () {
 					$http({
 						method: 'GET',
-						url:'/livetargetsjson-v2/'
+						url:'/targetjson/' +
+							$scope.team
 					}).success(function(data) {
 						$scope.livetargets = data;
+				});
+
+					$http({
+						method: 'GET',
+						url:'/cornerjson/' +
+							$scope.team
+					}).success(function(data) {
+						$scope.livecorners = data;
+				});
+					
+					$http({
+						method: 'GET',
+						url:'/shotjson/' +
+							$scope.team
+					}).success(function(data) {
+						$scope.liveshots = data;
 				});
 			}
 			
@@ -64,6 +84,7 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http) {
 	$scope.$watch('team', function(team) {
 			 $scope.team = team;
 			 $scope.getMegaJson();
+			 $scope.liveJsons();
 			 $scope.getJsons()
 	});
 
@@ -85,9 +106,7 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http) {
 			}
 		});
 	};
-
-	$scope.livePossJson();
-	$scope.liveTargetsJson();
+	$scope.liveJsons();
 	$scope.tableJson();
 });
 

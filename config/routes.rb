@@ -1,11 +1,17 @@
 AAAAMILNE::Application.routes.draw do
-  mount JasmineRails::Engine => "/specs" if defined?(JasmineRails)
   
 
-  scope :arsenal do
+  namespace "arsenal" do
     get "/prematchjson(.:format)" => "fixtures#prematchjson"
     get "/prematchjson/:id(.:format)" => "fixtures#prematchjsonid"
   end
+
+    get 'possjson/:team' => 'fixtures#livepossjson'
+    get 'shotjson/:team' => 'fixtures#liveshotjson'
+    get 'targetjson/:team' => 'fixtures#livetargetjson'
+    get 'cornerjson/:team' => 'fixtures#livecornerjson'
+    get 'fouljson/:team' => 'fixtures#livefouljson'
+
 
 
   resources :home_xis
@@ -19,14 +25,6 @@ AAAAMILNE::Application.routes.draw do
   get 'deprecatedjson/:team' => 'fixtures#deprecatedjson'
   get 'topscorers/:team' => 'fixtures#topscorers'
   get 'liveposspie' => 'fixtures#liveposspie'
-  get 'livepossjson-v2' => 'fixtures#livepossjson_v2'
-  get 'livetargetsjson-v2' => 'fixtures#livetargetsjson_v2'
-
-  get 'livepossjson' => 'fixtures#livepossjson'
-  get 'liveshotjson' => 'fixtures#liveshotjson'
-  get 'livetargetjson' => 'fixtures#livetargetjson'
-  get 'livecornerjson' => 'fixtures#livecornerjson'
-  get 'livefouljson' => 'fixtures#livefouljson'
 
   get "news/index"
   resources :articles
@@ -42,6 +40,7 @@ AAAAMILNE::Application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'news#index', as: "news"
   
+  mount JasmineRails::Engine => "/specs" if defined?(JasmineRails)
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

@@ -52,6 +52,24 @@ namespace :populater do
 
 
 
+  desc "child labour"
+  task fakedata: :environment do
+    matches = YAML::load( File.open( 'matches.yml' ) )
+    matches.each do |team1, team2|
+      90.times do |x|
+        randy = (x*rand(20))
+        xrandy = (x*randy)
+        Poss.where(:homeposs => xrandy, :awayposs => (rand(15)), :hometeam => team1, :awayteam => team2).create
+        # Shot.where(:homeshots => xrandy, :awayshots => (xrandy-5), :hometeam => team1, :awayteam => team2).create
+        # Target.where(:homeshots => randy, :awayshots => (randy-(rand(10))), :hometeam => team1, :awayteam => team2).create
+        # Corner.where(:home => xrandy, :away => randy, :hometeam => team1, :awayteam => team2).create
+        # Foul.where(:home => xrandy, :away => randy, :hometeam => team1, :awayteam => team2).create
+      end
+    end
+  end
+
+
+
 
 task :all => ["populater:arscom", "populater:teams", "populater:squawka", "populater:optatext", "populater:teamform"]
 end
