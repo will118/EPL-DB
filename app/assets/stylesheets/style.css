@@ -36,4 +36,10 @@ h1 {
 
 #livetargets-svg {
   margin-top: 5em;
+  margin-left: 2em;
+}
+#badge {
+  max-width: 400px;
+  max-height: 400px;
+  overflow: auto;
 }
