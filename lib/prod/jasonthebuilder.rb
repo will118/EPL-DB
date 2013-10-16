@@ -5,7 +5,7 @@ class JasonTheBuilder
 
 		def fixture_json(team)
 			name = stats_fc_normaliser(team)
-			unless stats_fc_checker(name) == "1"
+			if stats_fc_checker(name) == "1"
 				date = Date.today
 				from_date = date.to_s(:db)
 
@@ -13,6 +13,7 @@ class JasonTheBuilder
 				to_date = future_date.to_s(:db)
 				fixtures = "http://api.statsfc.com/#{ENV["COMP"]}/fixtures.json?key=#{ENV["STATS_KEY"]}&team=#{name}&from=#{from_date}&to=#{to_date}&timezone=#{ENV["TIMEZONE"]}&limit=5"
 				JSON.parse(HTTParty.get(fixtures).response.body)
+			else "Incorrect team name"
 			end
 		end
 
@@ -158,9 +159,10 @@ class JasonTheBuilder
 
 	def top_scorers_json(team)
 		name = stats_fc_normaliser(team)
-		unless stats_fc_checker(name) == "1"
+		if stats_fc_checker(name) == "1"
 			raw = "http://api.statsfc.com/top-scorers.json?key=#{ENV["STATS_KEY"]}&competition=#{ENV["COMP"]}&team=#{name}&year=2013/2014"
 			HTTParty.get(raw).response.body
+		else "Incorrect team name"
 		end
 	end		
 
