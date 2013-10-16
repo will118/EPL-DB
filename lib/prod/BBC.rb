@@ -2,32 +2,16 @@ class BBC
 
 	attr_reader :statsjson
 
-	def initialize(team, obj)
+	def initialize(team)
 		@team = team
-		@obj = obj
 		@rawlink = get_bbc(team)
-	end
-
-	def get_bbc(team)
-		if @obj.rawlink != nil 
-			uri = "http://www.bbc.co.uk/sport/football/premier-league/fixtures"
-			doc = Nokogiri::HTML(open("#{uri}"))
-		  doc1 = doc.xpath('html/body/div[3]/div/div/div[1]/div[3]/div[2]/div')
-		  mentions = doc1.search "[text()*='#{team.titleize}']"
-		  match = mentions.first.parent.parent.parent.parent
-			url = match.css('a').last['href']
-			#  I need a line here to save to the original Active Record relation not just @obj unless that would somehow magically work, but I doubt it.
-			url
-		else
-			@obj.rawlink
-		end
 	end
 
 	def is_it_time
 		 Fixture.order(:kickoff).first(8).each do |x| 
         time_until = x.kickoff - Time.now 
         if time_until < 180
-         BBC.recorder("http://polling.bbc.co.uk/sport/shared/football/oppm/json/EFBO426393", "England")
+         BBC.recorder(x)
         elsif time_until < 1800
           # Try and get teams 
         else
@@ -35,6 +19,23 @@ class BBC
         end
       end
 	end
+
+	def get_bbc
+		Fixture.order(:kickoff).first(8).each do |x|
+
+			uri = "http://www.bbc.co.uk/sport/football/premier-league/fixtures"
+			doc = Nokogiri::HTML(open("#{uri}"))
+		  doc1 = doc.xpath('html/body/div[3]/div/div/div[1]/div[3]/div[2]/div')
+		  mentions = doc1.search "[text()*='#{@team.titleize}']"
+		  match = mentions.first.parent.parent.parent.parent
+			url = match.css('a').last['href']
+			#  Line here to check its an actual link.
+
+			#  I need a line here to save to the original Active Record relation not just @obj unless that would somehow magically work, but I doubt it.
+			url
+		
+	end
+
 
 	def is_valid_match?
 		!!(@rawlink =~ /(\/sport\/0)/)
@@ -64,8 +65,9 @@ class BBC
 	end
 
 
-	def recorder
-   
+	def recorder(ar_record)
+		# say this as "AR record" not "Activerecord record" if an enrique ever reads this.
+		ar_rec = ar_record
     data = @statsjson
 
     if data['shotsOnTarget'] == nil
