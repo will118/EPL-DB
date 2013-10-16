@@ -85,21 +85,20 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http) {
 		tooltipMode: "default"
 	};
 	$scope.liveoptions = {
-			lineMode: "cardinal",
+			lineMode: "linear",
 			series: [
-				{y: "home_poss", label: "Home Possession", color: "#bcbd22"}
+				{y: "home_poss", label: "Home Possession", color: "#bcbd22", type: "column"}
 			],
 			axes: {
-				x: {type: "linear", key: "x"},
-				y: {type: "linear"}
+				x: {key: "x"}
 			},
 			tooltipMode: "default"
 		};
 		$scope.liveoptions2 = {
-					lineMode: "cardinal",
+					lineMode: "linear",
 					series: [
-						{y: "home_shots", label: "Home Shots on Target", color: "#bcbd22"},
-						{y: "away_shots", label: "Away Shots on Target", color: "#006cde"}
+						{y: "home_shots", label: "Home Shots on Target", color: "#bcbd22", type: "area"},
+						{y: "away_shots", label: "Away Shots on Target", color: "#006cde", type: "area"}
 					],
 					axes: {
 						x: {type: "linear", key: "x"},

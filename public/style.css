@@ -19,3 +19,13 @@ h1 {
 .error {
   color: red;
 }
+
+#livechart {
+  height: 300px;
+
+}
+
+#liveechart {
+  height: 350px;
+
+}

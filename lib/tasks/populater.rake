@@ -28,7 +28,9 @@ namespace :populater do
       form = JasonTheBuilder.single_form
       form.each do |d|
         form = d["form"].join(', ')
-        Form.where(:team => d["team"], :form => form).first_or_create
+        fo = Form.where(:team => d["team"]).first_or_create
+        fo.form = form
+        fo.save
       end
   end
 
