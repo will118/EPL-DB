@@ -1,34 +1,29 @@
 class BBC
-	include BBCTeamNameNormaliser
+	include BBCNameNormaliser
 
 	attr_reader :statsjson
 
-	def initialize
-		@team = team
-	end
-
 	def is_it_time
 		 Fixture.order(:kickoff).first(8).each do |x| 
-        time_until = x.kickoff - Time.now 
-        if !!(time_until < 180) && !!(x.jsonurl != nil ) 
-         BBC.recorder(x)
-        elsif !!(time_until < 1800) && !!(x.rawlink == nil)
-          get_bbc 
-        else time_until
-        end
-      end
+				time_until = x.kickoff - Time.now 
+				if !!(time_until < 180) && !!(x.jsonurl != nil ) 
+					recorder(x)
+				elsif !!(time_until < 1800) && !!(x.rawlink == nil)
+					get_bbc(x)
+				else time_until
+				end
+			end
 	end
 
-	def get_bbc
-
-		Fixture.order(:kickoff).first(8).each do |fixture|
-			if fixture.rawlink == nil
+	def get_bbc(fixture)
+			if fixture.jsonurl == nil
 				team = TeamNameNormaliser(fixture.hometeam)
+				team = fixture.hometeam
 				uri = "http://www.bbc.co.uk/sport/football/premier-league/fixtures"
 				doc = Nokogiri::HTML(open("#{uri}"))
-			  doc1 = doc.xpath('html/body/div[3]/div/div/div[1]/div[3]/div[2]/div')
-			  mentions = doc1.search "[text()*='#{team.titleize}']"
-			  match = mentions.first.parent.parent.parent.parent
+				doc1 = doc.xpath('html/body/div[3]/div/div/div[1]/div[3]/div[2]/div')
+				mentions = doc1.search "[text()*='#{team.titleize}']"
+				match = mentions.first.parent.parent.parent.parent
 				@rawlink = match.css('a').last['href']
 
 				if is_valid_match? == true
@@ -40,6 +35,7 @@ class BBC
 				else
 					"Much too early"
 				end
+
 			else
 				@rawlink = fixture.rawlink 
 				@jsonurl = fixture.jsonurl
@@ -72,81 +68,54 @@ class BBC
 	end
 
 
-	def recorder(ar_record)
 		# say this as "AR record" not "Activerecord record" in case an enrique-type ever comes across this.
+	def recorder(ar_record)
 		x = ar_record
-		x.hometeam
-		x.awayteam
 
-    data = get_json(x.jsonurl)
+		data = get_json(x.jsonurl)
 
-    if data['shotsOnTarget'] == nil
-    	"No data yet"
- 		else
-	    poss = Poss.where(:team => @team).create
-	    poss.homeposs = data['possession']['home']
-	    poss.hometeam = x.hometeam
-	    poss.awayposs = data['possession']['away']
-	    poss.awayteam = x.awayteam
-	    poss.save
+		if data['shotsOnTarget'] == nil
+			"No data yet"
+		else
+			Poss.where(:homeposs => data['possession']['home'], :hometeam => x.hometeam, :awayposs => data['possession']['away'], :awayteam => x.awayteam).create
 
-	    targets = Target.where(:team => @team).create
-	    targets.homeshots = data['shotsOnTarget']['home']
-	    targets.hometeam = x.hometeam
-	    targets.awayshots = data['shotsOnTarget']['away']
-	    targets.awayteam = x.awayteam
-	    targets.save
+			Target.where(:homeshots => data['shotsOnTarget']['home'], :hometeam => x.hometeam, :awayshots => data['shotsOnTarget']['away'], :awayteam => x.awayteam).create
 
-	    shots = Shot.where(:team => @team).create
-	    shots.homeshots = data['shots']['home']
-	    shots.hometeam = x.hometeam
-	    shots.awayshots = data['shots']['away']
-	    shots.awayteam = x.awayteam
-	    shots.save
+			Shot.where(:homeshots => data['shots']['home'], :hometeam => x.hometeam, :awayshots => data['shots']['away'], :awayteam => x.awayteam).create
 
-	    corners = Corner.where(:team => @team).create
-	    corners.home = data['corners']['home']
-	    corners.hometeam = x.hometeam
-	    corners.away = data['corners']['away']
-	    corners.awayteam = x.awayteam
-	    corners.save
+			Corner.where(:home => data['corners']['home'], :hometeam => x.hometeam, :away => data['corners']['away'], :awayteam => x.awayteam).create
 
-	    fouls = Foul.where(:team => @team).create
-	    fouls.home = data['fouls']['home']
-	    fouls.hometeam = x.hometeam
-	    fouls.away = data['fouls']['away']
-	    fouls.awayteam = x.awayteam
-	    fouls.save
-	  end
+			Foul.where(:home => data['fouls']['home'], :hometeam => x.hometeam, :away => data['fouls']['away'], :awayteam => x.awayteam).create
+		end
 	end
 
 	def teams
-    document = Nokogiri::HTML(open(@lineup_url))
-      
-    allplayers = document.xpath('//li').map do |player|
-      players = player.inner_text.strip.split(' ')
-      {name: players[1], number: players[0].to_i, subbed: players[2..4].join}
-    end
+		document = Nokogiri::HTML(open(@lineup_url))
+			
+		allplayers = document.xpath('//li').map do |player|
+			players = player.inner_text.strip.split(' ')
+			{name: players[1], number: players[0].to_i, subbed: players[2..4].join}
+		end
 
-    hometeam = allplayers[0..10]
-    awayteam = allplayers[18..28]
+		hometeam = allplayers[0..10]
+		awayteam = allplayers[18..28]
 
-    hometeam.each do |xx|
-	    y1 = xx[:number] 
-	    y2 = xx[:name] 
-	    name = "#{y2} (#{y1})" 
-	    homexi = HomeXi.where(:name => name).first_or_create  
-	    homexi.subbed = xx[:subbed].delete('(')
-	    homexi.save 
-    end
+		hometeam.each do |xx|
+			y1 = xx[:number] 
+			y2 = xx[:name] 
+			name = "#{y2} (#{y1})" 
+			homexi = HomeXi.where(:name => name).first_or_create  
+			homexi.subbed = xx[:subbed].delete('(')
+			homexi.save 
+		end
 
-    awayteam.each do |xx|
-	    y1 = xx[:number] 
-	    y2 = xx[:name] 
-	    name = "#{y2} (#{y1})" 
-	    awayxi = AwayXi.where(:name => name).first_or_create
-	    awayxi.subbed = xx[:subbed].delete('(')
-	    awayxi.save 
-    end   
+		awayteam.each do |xx|
+			y1 = xx[:number] 
+			y2 = xx[:name] 
+			name = "#{y2} (#{y1})" 
+			awayxi = AwayXi.where(:name => name).first_or_create
+			awayxi.subbed = xx[:subbed].delete('(')
+			awayxi.save 
+		end   
 	end
 end
