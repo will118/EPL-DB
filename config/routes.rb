@@ -1,44 +1,37 @@
 AAAAMILNE::Application.routes.draw do
-  
+    
 
-  namespace "arsenal" do
-    get "/prematchjson(.:format)" => "fixtures#prematchjson"
-    get "/prematchjson/:id(.:format)" => "fixtures#prematchjsonid"
-  end
+  get "static_pages/home"
+  get "static_pages/help"
+  get 'possjson/:team' => 'fixtures#livepossjson'
+  get 'shotjson/:team' => 'fixtures#liveshotjson'
+  get 'targetjson/:team' => 'fixtures#livetargetjson'
+  get 'cornerjson/:team' => 'fixtures#livecornerjson'
+  get 'fouljson/:team' => 'fixtures#livefouljson'
 
-    get 'possjson/:team' => 'fixtures#livepossjson'
-    get 'shotjson/:team' => 'fixtures#liveshotjson'
-    get 'targetjson/:team' => 'fixtures#livetargetjson'
-    get 'cornerjson/:team' => 'fixtures#livecornerjson'
-    get 'fouljson/:team' => 'fixtures#livefouljson'
-
-
-
-  resources :home_xis
-
-  resources :fixtures
   get 'fixturesjson/:team' => 'fixtures#fixturesjson'
+  
   get 'tablejson' => 'fixtures#tablejson'
+  
   get 'formjson/:team' => 'fixtures#formjson'
-  get 'singleformjson' => 'fixtures#singleformjson'
+  
   get 'megajson/:team' => 'fixtures#megajson'
-  get 'deprecatedjson/:team' => 'fixtures#deprecatedjson'
+  
   get 'topscorers/:team' => 'fixtures#topscorers'
+  
   get 'liveposspie' => 'fixtures#liveposspie'
 
   get "news/index"
+  get "/prematchjson(.:format)" => "fixtures#prematchjson"
+  get "/prematchjson/:id(.:format)" => "fixtures#prematchjsonid"
   resources :articles
-  put 'opta' => 'articles#opta'
-  put 'populater' => 'articles#populater', as: :populater
-  put 'wiper' => 'articles#wiper', as: :wiper
-  
-  put 'hmpopulater' => 'home_xis#populate', as: :hmpopulate
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'news#index', as: "news"
+  root to: 'static_pages#home'
   
   mount JasmineRails::Engine => "/specs" if defined?(JasmineRails)
   # Example of regular route:

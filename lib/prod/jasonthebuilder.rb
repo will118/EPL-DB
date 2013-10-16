@@ -41,30 +41,19 @@ class JasonTheBuilder
 		poss_score = Supermodel.where(:teamname => normalized_team).pluck(:possesionscore)
 		opta_score = Supermodel.where(:teamname => normalized_team).pluck(:optascore)
 
-		matchnumber = * 1..(opta_score.length)
-
-		[matchnumber, pass_acc, shot_acc, def_score, att_score, poss_score, opta_score, avg_poss].transpose.map do |x, y, z, d, a, p, o, v| 
-			{ 'x'=> x, "pass_acc"=> y, "shot_acc"=> z, "def_score"=> d, "att_score"=> a, "poss_score"=> p, "opta_score"=> o, "avg_poss"=> v}
-		end
-
+		[{"key" => "Possession", "values" => ray(avg_poss)}, {"key" => "Shot Accuracy", "values" => ray(shot_acc)}, {"key" => "Pass Accuracy", "values" => ray(pass_acc)}, {"key" => "Attack Score", "values" => ray(att_score)}, {"key" => "Defence Score", "values" => ray(def_score)}, {"key" => "Possession Score", "values" => ray(poss_score)}, {"key" => "Opta Score", "values" => ray(opta_score)}]
 	end
 
-	def top_scorers_json(team)
-		team2 = stats_fc_normaliser(team)
-		raw = "http://api.statsfc.com/top-scorers.json?key=#{ENV["STATS_KEY"]}&competition=#{ENV["COMP"]}&team=#{team2}&year=2013/2014"
-		HTTParty.get(raw).response.body
-	end		
-
-	def self.single_form
-		teamform = "http://api.statsfc.com/premier-league/form.json?key=#{ENV["STATS_KEY"]}"		
-		JSON.parse HTTParty.get(teamform).response.body
+def ray(metric)
+	array = []
+	(metric.length).times do |i|
+		array << [ i+1, metric[i]]
 	end
-
+	array
+end
+	
 	def poss(team)
-
-
 		poss_arr = [] 
-
 		Poss.where(["awayteam = ? or hometeam = ?", team.titleize, team.titleize]).each do |x|
 			if x.hometeam = team
 				poss_arr << x.homeposs
@@ -85,7 +74,7 @@ class JasonTheBuilder
 	def targets(team)
 		home = []
 		away = []
-			Target.where(["awayteam = ? or hometeam = ?", team, team]).each do |x|
+			Target.where(["awayteam = ? or hometeam = ?", team.titleize, team.titleize]).each do |x|
 				home << x.homeshots
 				away << x.awayshots
 				@hometeam = x.hometeam
@@ -97,7 +86,7 @@ class JasonTheBuilder
 	def corners(team)
 		home = []
 		away = []
-			Corner.where(["awayteam = ? or hometeam = ?", team, team]).each do |x|
+			Corner.where(["awayteam = ? or hometeam = ?", team.titleize, team.titleize]).each do |x|
 				home << x.home
 				away << x.away
 				@hometeam = x.hometeam
@@ -109,7 +98,7 @@ class JasonTheBuilder
 	def fouls(team)
 		home = []
 		away = []
-			Foul.where(["awayteam = ? or hometeam = ?", team, team]).each do |x|
+			Foul.where(["awayteam = ? or hometeam = ?", team.titleize, team.titleize]).each do |x|
 				home << x.home
 				away << x.away
 				@hometeam = x.hometeam
@@ -121,7 +110,7 @@ class JasonTheBuilder
 	def shots(team)
 		home = []
 		away = []
-			Shot.where(["awayteam = ? or hometeam = ?", team, team]).each do |x|
+			Shot.where(["awayteam = ? or hometeam = ?", team.titleize, team.titleize]).each do |x|
 				home << x.homeshots
 				away << x.awayshots
 				@hometeam = x.hometeam
@@ -142,6 +131,17 @@ class JasonTheBuilder
 		end
 
 		return [{"key"=>@hometeam, "values"=> home_array}, {"key"=>@awayteam, "values"=> away_array}]
+	end
+
+	def top_scorers_json(team)
+		team2 = stats_fc_normaliser(team)
+		raw = "http://api.statsfc.com/top-scorers.json?key=#{ENV["STATS_KEY"]}&competition=#{ENV["COMP"]}&team=#{team2}&year=2013/2014"
+		HTTParty.get(raw).response.body
+	end		
+
+	def self.single_form
+		teamform = "http://api.statsfc.com/premier-league/form.json?key=#{ENV["STATS_KEY"]}"		
+		JSON.parse HTTParty.get(teamform).response.body
 	end
 
 end

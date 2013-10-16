@@ -60,10 +60,10 @@ namespace :populater do
         randy = (x*rand(20))
         xrandy = (x*randy)
         Poss.where(:homeposs => xrandy, :awayposs => (rand(15)), :hometeam => team1, :awayteam => team2).create
-        # Shot.where(:homeshots => xrandy, :awayshots => (xrandy-5), :hometeam => team1, :awayteam => team2).create
-        # Target.where(:homeshots => randy, :awayshots => (randy-(rand(10))), :hometeam => team1, :awayteam => team2).create
-        # Corner.where(:home => xrandy, :away => randy, :hometeam => team1, :awayteam => team2).create
-        # Foul.where(:home => xrandy, :away => randy, :hometeam => team1, :awayteam => team2).create
+        Shot.where(:homeshots => xrandy, :awayshots => (xrandy-5), :hometeam => team1, :awayteam => team2).create
+        Target.where(:homeshots => randy, :awayshots => (randy-(rand(10))), :hometeam => team1, :awayteam => team2).create
+        Corner.where(:home => xrandy, :away => randy, :hometeam => team1, :awayteam => team2).create
+        Foul.where(:home => xrandy, :away => randy, :hometeam => team1, :awayteam => team2).create
       end
     end
   end
