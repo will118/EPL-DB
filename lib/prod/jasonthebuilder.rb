@@ -4,16 +4,19 @@ class JasonTheBuilder
 	include NameNormaliser
 
 		def fixture_json(team)
-			name = stats_fc_normaliser(team)
-			if stats_fc_checker(name) == "1"
+				name = stats_fc_normaliser(team)
 				date = Date.today
 				from_date = date.to_s(:db)
-
 				future_date = date + 2.months 
 				to_date = future_date.to_s(:db)
 				fixtures = "http://api.statsfc.com/#{ENV["COMP"]}/fixtures.json?key=#{ENV["STATS_KEY"]}&team=#{name}&from=#{from_date}&to=#{to_date}&timezone=#{ENV["TIMEZONE"]}&limit=5"
 				JSON.parse(HTTParty.get(fixtures).response.body)
-			else "Incorrect team name"
+		end
+
+		def fixture(team)
+			normalized_team = team.titleize
+			Fixture.where(["awayteam = ? or hometeam = ?", normalized_team, normalized_team]).map do |x|
+				{ "home" => x.hometeam, "away" => x.awayteam, "date" => x.kickoff }
 			end
 		end
 
