@@ -3,7 +3,15 @@ body {
   text-rendering: optimizeLegibility;
   margin-top: 1em;
   overflow-y: scroll;
+  width: 100%;
 }
+
+media="screen"
+body {
+width: 90%;
+margin: auto;
+}
+
 .label {
   font-size: .65em;
 }
@@ -38,8 +46,10 @@ h1 {
   margin-top: 5em;
   margin-left: 2em;
 }
-#badge {
-  max-width: 400px;
-  max-height: 400px;
-  overflow: auto;
+
+#badgey {
+  margin-left:9%;
+  margin-right:9%;
+  margin-top:2%;
+  margin-bottom: 2%; 
 }
