@@ -82,6 +82,14 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http) {
 
 	$scope.team = 'Arsenal';
 
+	$scope.badgehash = 'Arsenaltest.png';
+	var colorArray = ['#0080ff', '#d75054'];
+	$scope.colorFunction = function() {
+	return function(d, i) {
+    	return colorArray[i];
+    };
+}
+
 	$scope.$watch('team', function(team) {
 			 $scope.team = team;
 			 $scope.getMegaJson();

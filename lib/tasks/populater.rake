@@ -65,11 +65,11 @@ namespace :populater do
         rando = x + ((team1.length)*(team2.length))
         randy = x + 2
         randy2 = randy - (rand(5))
-        Poss.where(:homeposs => (rando+2), :awayposs => randy2, :hometeam => team1, :awayteam => team2).create
-        Shot.where(:homeshots => rando, :awayshots => randy2, :hometeam => team1, :awayteam => team2).create
-        Target.where(:homeshots => (randy+7), :awayshots => randy2, :hometeam => team1, :awayteam => team2).create
-        Corner.where(:home => (randy+3), :away => randy2, :hometeam => team1, :awayteam => team2).create
-        Foul.where(:home => randy, :away => randy2, :hometeam => team1, :awayteam => team2).create
+        Poss.where(:homeposs => (rando+2), :awayposs => randy2, :hometeam => team2, :awayteam => team1).create
+        Shot.where(:homeshots => rando, :awayshots => randy2, :hometeam => team2, :awayteam => team1).create
+        Target.where(:homeshots => (randy+7), :awayshots => randy2, :hometeam => team2, :awayteam => team1).create
+        Corner.where(:home => (randy+3), :away => randy2, :hometeam => team2, :awayteam => team1).create
+        Foul.where(:home => randy, :away => randy2, :hometeam => team2, :awayteam => team1).create
       end
     end
   end

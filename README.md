@@ -1,7 +1,7 @@
 Premier League Dashboard
 ====================
 
-## README is undergoing updates.
+> Pre-Alpha
 
 I wanted marginally relevant information to have on my other/second screen during a match.
 

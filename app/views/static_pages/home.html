@@ -9,10 +9,10 @@
 <body ng-controller="AppCtrl">
      <div class="row">
      <div class="col-md-3" id="badge">
-     		<!-- <img src="images/Arsenaltest.png" alt="Arsenal"> -->
+     		<!-- <img ng-src="images/{{badgehash}}"/> -->
      </div>
 	     	<div class="col-md-6"><nvd3-stacked-area-chart data="megajson" id="megajson" width="1000" height="500" showXAxis="false" showYAxis="false" interactive="true" tooltips="true" showLegend="true"><svg></svg></nvd3-stacked-area-chart></div>
-	     	<div class="col-md-3"><nvd3-line-chart data="livetargets" id="livetargets" width="500" height="400" showXAxis="false" showYAxis="true" forcex="[1]" showLegend="true"><svg id="livetargets-svg"></svg></nvd3-line-chart></div>
+	     	<div class="col-md-3"><nvd3-stacked-area-chart data="livetargets" id="livetargets" width="500" height="400" showXAxis="false" showYAxis="true" forcex="[1]" showLegend="true" color="colorFunction()"><svg id="livetargets-svg"></svg></nvd3-stacked-area-chart></div>
      </div>
   <div class="col-md-3">
   <br>
@@ -35,7 +35,7 @@
 		      <td>{{s.player}}</td><td id="scorer-goals">{{s.goals}}</td>
 		  </tr>
 		</table>
-		<nvd3-line-chart data="liveshots" id="liveshots" width="500" height="400" showXAxis="false" showYAxis="true" showLegend="true" forcex="[1]"><svg></svg></nvd3-line-chart>
+		<nvd3-stacked-area-chart data="liveshots" id="liveshots" width="500" height="400" showXAxis="false" showYAxis="true" showLegend="true" color="colorFunction()" forcex="[1]"><svg></svg></nvd3-stacked-area-chart>
 	</div>
   <div class="col-md-3">
 		<table class="table table-hover">
@@ -60,8 +60,8 @@
 		</table>
 	</div>
 		<div class="col-md-3">
-				<nvd3-line-chart data="liveposs" id="liveposs" width="500" height="400" showXAxis="false" showYAxis="true" showLegend="true" forcex="[1]"><svg></svg></nvd3-line-chart>
+				<nvd3-stacked-area-chart data="liveposs" id="liveposs" width="500" height="400" showXAxis="false" showYAxis="true" showLegend="true" forcex="[1]"><svg></svg></nvd3-stacked-area-chart>
 
-				<nvd3-line-chart data="livecorners" id="livecorners" width="500" height="400" showLegend="true" showXAxis="false" showYAxis="true" forcex="[1]"><svg></svg></nvd3-line-chart>
+				<nvd3-stacked-area-chart data="livecorners" id="livecorners" color="colorFunction()" width="500" height="400" showLegend="true" showXAxis="false" showYAxis="true" forcex="[1]"><svg></svg></nvd3-stacked-area-chart>
 		</div>
 	</body>
