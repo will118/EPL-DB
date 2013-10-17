@@ -41,8 +41,6 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http) {
 				});
 			}
 
-			
-
 	$scope.liveJsons = function () {
 			
 					$http({
@@ -82,15 +80,35 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http) {
 
 	$scope.team = 'Arsenal';
 
-	var colours = {
-		'Arsenal': 'red', 
-	  'Chelsea': 'blue',
-	  'Tottenham Hotspur': 'brown'
-	};
+	
+	$scope.colours = [
+    {'Arsenal': 'red'},
+    {'Chelsea': 'blue'},
+    {'West Bromwich Albion': 'black'},
+    {'Aston Villa': 'purple'},
+    {'Liverpool': 'red'},
+    {'Tottenham Hotspur': 'light grey'},
+    {'Manchester United': 'red'},
+    {'Stoke City': 'red'},
+    {'Cardiff': 'red'},
+    {'West Ham United': 'purple'},
+    {'Arsenal': 'red'},
+    {'Chelsea': 'blue'},
+    {'Arsenal': 'red'},
+    {'Chelsea': 'blue'},
+    {'Arsenal': 'red'},
+    {'Chelsea': 'blue'},
+    {'Arsenal': 'red'},
+    {'Chelsea': 'blue'},
+    {'Fulham': 'black'}
+  ];
 
-	$scope.getColour = function () {
-		var team_col = $scope.team
-		$scope.myColour = colours.team_col
+	$scope.colourman = function () {
+	for (var i = 0; i < ($scope.colours).length; i++) {
+	  if ($scope.colours[i][$scope.team]) {
+	  		$scope.myColour = $scope.colours[i][$scope.team]	
+	  	} 
+		}
 	};
 
 	$scope.getBadge = function () {
@@ -103,13 +121,13 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http) {
 	return function(d, i) {
     	return colorArray[i];
     };
-}
+	}
 
 	$scope.$watch('team', function(team) {
 			 $scope.team = team;
 			 $scope.getMegaJson();
 			 $scope.liveJsons();
-			 $scope.getColour();
+			 $scope.colourman();
 			 $scope.getBadge();
 			 $scope.getJsons()
 	});

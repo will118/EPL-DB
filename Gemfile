@@ -11,7 +11,7 @@ gem 'selenium-webdriver'
 gem 'figaro'
 gem 'puma'
 gem 'clockwork'
-
+gem 'foreman'
 
 group :development, :test do
 	gem "rspec-rails", "~> 2.14.0"
