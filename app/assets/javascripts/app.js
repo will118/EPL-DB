@@ -82,11 +82,23 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http) {
 
 	$scope.team = 'Arsenal';
 
+	var colours = {
+		'Arsenal': 'red', 
+	  'Chelsea': 'blue',
+	  'Tottenham Hotspur': 'brown'
+	};
+
+	$scope.getColour = function () {
+		var team_col = $scope.team
+		$scope.myColour = colours.team_col
+	};
+
 	$scope.getBadge = function () {
 		$scope.badgehash = ($scope.team.replace(/ /g,"_") + ".png")
 	};
 
 	var colorArray = ['#d75054','#0080ff'];
+
 	$scope.colorFunction = function() {
 	return function(d, i) {
     	return colorArray[i];
@@ -97,6 +109,7 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http) {
 			 $scope.team = team;
 			 $scope.getMegaJson();
 			 $scope.liveJsons();
+			 $scope.getColour();
 			 $scope.getBadge();
 			 $scope.getJsons()
 	});
