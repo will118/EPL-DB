@@ -12,6 +12,7 @@ gem 'figaro'
 gem 'puma'
 gem 'clockwork'
 gem 'foreman'
+gem 'newrelic_rpm'
 
 group :development, :test do
 	gem "rspec-rails", "~> 2.14.0"
