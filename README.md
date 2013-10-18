@@ -1,6 +1,7 @@
 Premier League Dashboard
 ====================
 
+![Early days](/ss/1.gif "Love it")
 > Pre-Alpha
 
 I wanted marginally relevant information to have on my other/second screen during a match.
@@ -78,7 +79,6 @@ Maybe I'm missing something but it seems pretty much like an open API.
 What I'm doing next, in order (at least in theory):
 
 - Angular + any PL team.
-![Early days](/ss/1.gif "Love it")
 
 - Have the live recorder start automatically for all PL matches (currently none). I suspect there is some cool rails calendar scheduling type thing I can use. I think I will decouple the scheduler logic from the rest. 
 
