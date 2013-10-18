@@ -5,10 +5,14 @@ class BBC
 
 	attr_reader :statsjson
 
-	def is_it_time
+	def match_manager
 		Fixture.order(:kickoff).first(8).each do |x| 
 				time_until = (x.kickoff - Time.now)
-				if ((time_until < 180) && (x.jsonurl != nil ))
+				if ((time_until < -2900) &&  (time_until > -3700) && (x.jsonurl != nil))
+					"Half Time"
+				elsif (time_until < -6650)
+					x.delete
+				elsif ((time_until < 180) && (x.jsonurl != nil ))
 					recorder(x)
 				elsif ((time_until < 1800) && (x.rawlink == nil))
 					get_bbc(x)
@@ -79,13 +83,9 @@ class BBC
 			"No data yet"
 		else
 			Poss.where(:homeposs => data['possession']['home'], :hometeam => x.hometeam, :awayposs => data['possession']['away'], :awayteam => x.awayteam).create
-
 			Target.where(:homeshots => data['shotsOnTarget']['home'], :hometeam => x.hometeam, :awayshots => data['shotsOnTarget']['away'], :awayteam => x.awayteam).create
-
 			Shot.where(:homeshots => data['shots']['home'], :hometeam => x.hometeam, :awayshots => data['shots']['away'], :awayteam => x.awayteam).create
-
 			Corner.where(:home => data['corners']['home'], :hometeam => x.hometeam, :away => data['corners']['away'], :awayteam => x.awayteam).create
-
 			Foul.where(:home => data['fouls']['home'], :hometeam => x.hometeam, :away => data['fouls']['away'], :awayteam => x.awayteam).create
 		end
 	end

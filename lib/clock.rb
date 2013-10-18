@@ -9,6 +9,6 @@ handler do |job|
 end
 
 # every(6.hours, 'Opta Text'){FourFourTwo.new.text}
-# every(6.hours, 'Arscom Scraper'){`rake populater:arscom`}
-# every(6.hours, 'Squawka Scraper'){`rake populater:squawka`}
-every(15.seconds, 'Match Recorder'){BBC.new.is_it_time}
+
+every(6.hours, 'Squawka Scraper'){`rake populater:squawka`}
+every(20.seconds, 'Match Recorder'){BBC.new.match_manager}
