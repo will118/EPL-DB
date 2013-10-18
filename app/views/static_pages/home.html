@@ -7,6 +7,7 @@
 			<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
 	</head>
 <body ng-controller="AppCtrl">
+<div id="containy">
      <div class="row">
 	     <div class="col-lg-3" id="badge">
 	     		<img id="badgey" ng-src="images/{{badgehash}}"/>
@@ -69,4 +70,5 @@
 
 				<nvd3-line-chart data="livecorners" id="livecorners" color="colorFunction()" width="500" height="400" showLegend="true" showXAxis="false" showYAxis="false" forcex="[1]"><svg></svg></nvd3-line-chart>
 		</div>
-	</body>
+	</div>
+</body>
