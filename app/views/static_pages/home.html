@@ -25,13 +25,27 @@
 			<!-- <input type="text" ng-model="myColour" placeholder="Colour"> -->
 			<p class="lead" ng-repeat-start="fix in fixtures">{{fix.home}} vs. {{fix.away}}</p>
 				<p class="muted" ng-repeat-end="">{{fix.date}}</p> 
+		
+<div class="col-lg-1">
+		<table class="table table-hover">
+        <tr>
+            <th>No.</th>
+            <th>Name</th>
+        </tr>
+			  <tr ng-repeat="item in liveteams">
+		      <td>{{item.number}}</td><td>{{item.player}}</td>
+		  </tr>
+		</table>
+  </div>
+</div>
+  <div class="col-lg-1">
   </div>
   <div class="col-lg-3">
 	  <h2 ng-repeat="f in form" id="form-column">
 				{{f.form}}
 		</h2>
 		<br>
-		<table class="table table-condensed" id="scorers">
+		<table class="table table-hover" id="scorers">
         <tr>
             <th>Name</th>
             <th id="scorer-goals">Goals</th>

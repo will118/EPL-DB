@@ -20,6 +20,12 @@ class JasonTheBuilder
 			end
 		end
 
+		def teams(team)
+			normalized_team = team.titleize
+			next_fix = Fixture.where(["awayteam = ? or hometeam = ?", normalized_team, normalized_team]).order(:kickoff).first
+			Team.where(:teamname => [next_fix.hometeam, next_fix.awayteam])
+		end
+
 		def table_json
 			table = "http://api.statsfc.com/#{ENV["COMP"]}/table.json?key=#{ENV["STATS_KEY"]}"
 			JSON.parse(HTTParty.get(table).response.body)

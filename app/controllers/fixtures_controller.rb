@@ -38,6 +38,10 @@ class FixturesController < ApplicationController
     render :json => JasonTheBuilder.new.fixture(params[:team])
   end
 
+  def teams
+    render :json => JasonTheBuilder.new.teams(params[:team])
+  end
+
   def tablejson
     render :json => JasonTheBuilder.new.table_json
   end

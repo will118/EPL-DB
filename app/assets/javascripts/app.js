@@ -43,6 +43,16 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http) {
 
 	$scope.liveJsons = function () {
 			
+					
+					$http({
+						method: 'GET',
+						url:'/teamjson/' +
+							$scope.team
+					}).success(function(data) {
+						$scope.liveteams = data;
+						console.log($scope.liveteams);
+				});
+
 					$http({
 						method: 'GET',
 						url:'/possjson/' +
@@ -78,7 +88,7 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http) {
 			
 	$scope.names = ["Arsenal", "Liverpool", "Chelsea", "Southampton", "Everton", "Hull City", "Manchester City", "Newcastle United", "Tottenham Hotspur", "West Bromwich Albion", "Cardiff City", "Swansea City", "Aston Villa", "Manchester United", "Stoke City", "Norwich City", "West Ham United", "Fulham", "Crystal Palace", "Sunderland"];
 
-	$scope.team = 'Arsenal';
+	$scope.team = 'West Bromwich Albion';
 
 	
 	$scope.colours = [
