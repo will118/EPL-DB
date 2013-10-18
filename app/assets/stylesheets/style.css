@@ -3,11 +3,31 @@ body {
   text-rendering: optimizeLegibility;
   margin-top: 1em;
   overflow-y: scroll;
-  width: 100%;
 }
 .label {
   font-size: .65em;
 }
+
+#teams {
+    float:left;
+    width:48%;
+}
+        #awayteam {
+            float: right;
+            width: 50%;
+        }
+        #hometeam {
+            float: left;
+            width: 50%;
+        }
+        .hometeam {
+            margin-right: 2px;
+            
+        }
+        .awayteam {
+            margin-left: 3px;
+            
+        }
 
 h1 {
   font-size: 36px;

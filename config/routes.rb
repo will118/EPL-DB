@@ -11,7 +11,8 @@ AAAAMILNE::Application.routes.draw do
 
   get 'fixturesjson/:team' => 'fixtures#fixturesjson'
 
-  get 'teamjson/:team' => 'fixtures#teams'
+  get 'hometeam/:team' => 'fixtures#hometeam'
+  get 'awayteam/:team' => 'fixtures#awayteam'
   
   get 'tablejson' => 'fixtures#tablejson'
   

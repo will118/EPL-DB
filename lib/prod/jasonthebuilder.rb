@@ -20,10 +20,16 @@ class JasonTheBuilder
 			end
 		end
 
-		def teams(team)
+		def home_team(team)
 			normalized_team = team.titleize
 			next_fix = Fixture.where(["awayteam = ? or hometeam = ?", normalized_team, normalized_team]).order(:kickoff).first
-			Team.where(:teamname => [next_fix.hometeam, next_fix.awayteam])
+			Team.where(:teamname => next_fix.hometeam)
+		end
+
+		def away_team(team)
+			normalized_team = team.titleize
+			next_fix = Fixture.where(["awayteam = ? or hometeam = ?", normalized_team, normalized_team]).order(:kickoff).first
+			Team.where(:teamname => next_fix.awayteam)
 		end
 
 		def table_json

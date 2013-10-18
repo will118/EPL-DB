@@ -22,24 +22,31 @@
   <div class="col-lg-3">
     <input type="text" class="form-control" ng-model="team" typeahead="name for name in names | filter:$viewValue">
 			<p class="error">{{error}}</p>
-			<!-- <input type="text" ng-model="myColour" placeholder="Colour"> -->
 			<p class="lead" ng-repeat-start="fix in fixtures">{{fix.home}} vs. {{fix.away}}</p>
 				<p class="muted" ng-repeat-end="">{{fix.date}}</p> 
-		
-<div class="col-lg-1">
-		<table class="table table-hover">
+<div id="hometeam"><div class="hometeam"><h4>{{hometeamname}}</h4></div></div>
+  <div id="awayteam"><div class="awayteam"><h4>{{awayteamname}}</h4></div></div>
+		<table class="table table-hover" id="teams">
+        <!-- <p>{{hometeamname}}</p> -->
         <tr>
             <th>No.</th>
             <th>Name</th>
         </tr>
-			  <tr ng-repeat="item in liveteams">
+			  <tr ng-repeat="item in hometeam">
 		      <td>{{item.number}}</td><td>{{item.player}}</td>
 		  </tr>
 		</table>
-  </div>
-</div>
-  <div class="col-lg-1">
-  </div>
+  	<table class="table table-hover" id="teams">
+				<!-- <p>{{awayteamname}}</p> -->
+        <tr>
+            <th>No.</th>
+            <th>Name</th>
+        </tr>
+			  <tr ng-repeat="item in awayteam">
+		      <td>{{item.number}}</td><td>{{item.player}}</td>
+		  </tr>
+		</table>
+	</div>
   <div class="col-lg-3">
 	  <h2 ng-repeat="f in form" id="form-column">
 				{{f.form}}

@@ -46,11 +46,20 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http) {
 					
 					$http({
 						method: 'GET',
-						url:'/teamjson/' +
+						url:'/hometeam/' +
 							$scope.team
 					}).success(function(data) {
-						$scope.liveteams = data;
-						console.log($scope.liveteams);
+						$scope.hometeam = data;
+						$scope.hometeamname	= data[0]['teamname'];
+				});
+
+					$http({
+						method: 'GET',
+						url:'/awayteam/' +
+							$scope.team
+					}).success(function(data) {
+						$scope.awayteam = data;
+						$scope.awayteamname	= data[0]['teamname'];
 				});
 
 					$http({
@@ -90,7 +99,10 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http) {
 
 	$scope.team = 'West Bromwich Albion';
 
+	// $scope.hometeamname = $scope.hometeam
+
 	
+
 	$scope.colours = [
     {'Arsenal': '#e8000b'},
     {'Chelsea': '#063381'},
