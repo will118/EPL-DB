@@ -34,13 +34,6 @@ namespace :populater do
       end
   end
 
-  desc "opta text"
-  task optatext: :environment do
-    four = FourFourTwo.new
-    four.text
-    four.save
-  end
-
   desc "fixture schedule scrape"
   task schedule: :environment do
     teams_array = YAML::load( File.open( 'teamnames.yml' ) )
@@ -49,8 +42,6 @@ namespace :populater do
       sched.save
     end
   end
-
-
 
   desc "child labour"
   task fakedata: :environment do
@@ -77,6 +68,6 @@ namespace :populater do
 
 
 
-task :all => ["populater:arscom", "populater:teams", "populater:squawka", "populater:optatext", "populater:teamform"]
+task :all => ["populater:arscom", "populater:teams", "populater:squawka", "populater:teamform"]
 end
 

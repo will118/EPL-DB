@@ -107,8 +107,7 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http) {
 	$scope.colourman = function () {
 	for (var i = 0; i < ($scope.colours).length; i++) {
 	  if ($scope.colours[i][$scope.team]) {
-	  		$scope.myColour = $scope.colours[i][$scope.team]
-	  		console.log($scope.colours[i][$scope.team]);	
+	  		$scope.myColour = $scope.colours[i][$scope.team]	
 	  	} 
 		}
 	};
