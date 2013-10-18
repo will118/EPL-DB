@@ -69,15 +69,8 @@ namespace :populater do
     links.noko_save
   end
 
-  desc "Populates teams"
-  task teams: :environment do
-    beeb = BBC.new("Arsenal")
-    beeb.raw_link
-    beeb.teams
-  end
 
 
-
-task :all => ["populater:arscom", "populater:teams", "populater:squawka", "populater:teamform"]
+task :all => ["populater:squawka", "populater:teamform", "populater:schedule"]
 end
 

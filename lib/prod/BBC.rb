@@ -16,6 +16,8 @@ class BBC
 					recorder(x)
 				elsif ((time_until < 1800) && (x.rawlink == nil))
 					get_bbc(x)
+				elsif ((time_until < 1800) && (x.lineup_url != nil))
+					teams(x)
 				else return "Stil a while to go"
 				end
 		end
@@ -92,31 +94,31 @@ class BBC
 
 	def teams
 		document = Nokogiri::HTML(open(@lineup_url))
-			
-		allplayers = document.xpath('//li').map do |player|
-			players = player.inner_text.strip.split(' ')
-			{name: players[1], number: players[0].to_i, subbed: players[2..4].join}
+
+		home = document.xpath('html/body/div/div/div[1]')
+		away = document.xpath('html/body/div/div/div[2]')
+		hometeam = home.css('h3.team-name').inner_text
+		awayteam = away.css('h3.team-name').inner_text
+		
+		home.css('.player-list>li').each do |x| 
+			xx = x.inner_text.strip.split(' ')
+			Team.where(:player => xx[1], :number => xx[0].to_i, :subbed => (xx[2..4].join).delete('('), :teamname => hometeam, :starting => true).first_or_create
+		end
+		home.css('.subs-list>li').each do |x| 
+			xx = x.inner_text.strip.split(' ')
+			Team.where(:player => xx[1], :number => xx[0].to_i, :teamname => hometeam, :starting => false).first_or_create
 		end
 
-		hometeam = allplayers[0..10]
-		awayteam = allplayers[18..28]
-
-		hometeam.each do |xx|
-			y1 = xx[:number] 
-			y2 = xx[:name] 
-			name = "#{y2} (#{y1})" 
-			homexi = HomeXi.where(:name => name).first_or_create  
-			homexi.subbed = xx[:subbed].delete('(')
-			homexi.save 
+		away.css('.player-list>li').each do |x| 
+			xx = x.inner_text.strip.split(' ')
+			Team.where(:player => xx[1], :number => xx[0].to_i, :subbed => (xx[2..4].join).delete('('), :teamname => awayteam, :starting => true).first_or_create
 		end
-
-		awayteam.each do |xx|
-			y1 = xx[:number] 
-			y2 = xx[:name] 
-			name = "#{y2} (#{y1})" 
-			awayxi = AwayXi.where(:name => name).first_or_create
-			awayxi.subbed = xx[:subbed].delete('(')
-			awayxi.save 
-		end   
+		away.css('.subs-list>li').each do |x| 
+			xx = x.inner_text.strip.split(' ')
+			Team.where(:player => xx[1], :number => xx[0].to_i, :teamname => awayteam, :starting => false).first_or_create
+		end
 	end
+
 end
+
+
