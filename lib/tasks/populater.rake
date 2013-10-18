@@ -1,16 +1,13 @@
 namespace :populater do
-  desc "Populates arsenal articles"
-  task arscom: :environment do
-    links = Arscom.new
-    links.link_filter
-    links.noko_save
-  end
 
-  desc "Populates teams"
-  task teams: :environment do
-    beeb = BBC.new("Arsenal")
-    beeb.raw_link
-    beeb.teams
+  desc "FourFourTwo Opta Text"
+  task optatext: :environment do
+    Fixture.order(:kickoff).first(8).each do |x|
+      time_until = (x.kickoff - Time.now)
+      (time_until < 86400) 
+      four = FourFourTwo.new
+      four.match_link
+    end
   end
 
   desc "squawka"
@@ -65,6 +62,19 @@ namespace :populater do
     end
   end
 
+  desc "Populates arsenal articles"
+  task arscom: :environment do
+    links = Arscom.new
+    links.link_filter
+    links.noko_save
+  end
+
+  desc "Populates teams"
+  task teams: :environment do
+    beeb = BBC.new("Arsenal")
+    beeb.raw_link
+    beeb.teams
+  end
 
 
 

@@ -30,16 +30,18 @@ Also scrapes the articles that I want off of Arsenal.com which was a few hours o
 
 ## Stuff used worth mentioning:
 
-- [Underscore.js](http://underscorejs.org/)
+- Rails and Ruby
+- [Angular.js](http://angularjs.org/)
 - [NVD3(D3.js)](https://github.com/novus/nvd3)
+- [Nokogiri I like.](http://nokogiri.org/) 
+- [Bootstrap](http://getbootstrap.com/)
 - [Mike Bostock for actual D3](http://bost.ocks.org/mike/)
 - [Shout out to the HTTParty animals](https://github.com/jnunemaker/httparty/)
-- [Nokogiri I like.](http://nokogiri.org/) 
-- [Foundation too, I haven't really shown its awesome though.](http://foundation.zurb.com/)
 - [William Playfair](http://en.wikipedia.org/wiki/William_Playfair)
-- Rails and Ruby and JS frameworks/libraries
 
-## Dependencies/Requirements:
+## Dependencies/Requirements/Setup:
+
+> Check the Procfile for how I run it with nginx. And then you will see the clockwork clock being called too. Check that out as well.
 
 - PostgreSQL.
 - PhantomJS running GhostDriver (phantomjs --webdriver=9134)
@@ -80,7 +82,7 @@ What I'm doing next, in order (at least in theory):
 
 - Angular + any PL team.
 
-- Have the live recorder start automatically for all PL matches (currently none). I suspect there is some cool rails calendar scheduling type thing I can use. I think I will decouple the scheduler logic from the rest. 
+- I want to move the Fixture.order(:kickoff).first(8) and elsif (time_until < -6650) x.delete business into its own class or module.
 
 - also there's some encoding mismatch I'm guessing it's not UTF, anyway it's from the BBC lineup where it looks fine, then when I scrape it I get stuff like "\u00C3\u0096zil" which gets lost somewhere. I haven't looked into it.
 

@@ -16,13 +16,6 @@ class BBC
 					recorder(x)
 				elsif ((time_until < 1800) && (x.rawlink == nil))
 					get_bbc(x)
-				elsif (time_until < 3600) 
-					teams_array = YAML::load( File.open( 'teamnames.yml' ) )
-			    teams_array.each do |team|
-			      four = FourFourTwo.new(team)
-			      four.text
-			      four.save
-			    end
 				else return "Stil a while to go"
 				end
 		end
