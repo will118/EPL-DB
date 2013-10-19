@@ -59,7 +59,6 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout) {
 							$scope.team
 					}).success(function(data) {
 						$scope.prematch = data;
-					console.log(data);
 				});
 
 					$http({
@@ -109,10 +108,6 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout) {
 	$scope.team = 'West Bromwich Albion';
 
 	$scope.refershInterval = 5;
-
-	
-
-	
 
 	$scope.colours = [
     {'Arsenal': '#e8000b'},
