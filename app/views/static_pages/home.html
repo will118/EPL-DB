@@ -44,6 +44,7 @@
 		</table>
 	</div>
   <div class="col-lg-3">
+		  {{prematchsing.text}}
 	  <h2 ng-repeat="f in form" id="form-column">
 				{{f.form}}
 		</h2>
@@ -58,9 +59,8 @@
 		  </tr>
 		</table>
 		<nvd3-line-chart data="liveshots" id="liveshots" width="500" height="400" showXAxis="false" showYAxis="false" showLegend="true" color="colorFunction()" forcex="[1]"><svg></svg></nvd3-line-chart>
-		<li ng-repeat="item in prematch | limitTo:1">
-		  {{item.text}}
-	</li>
+		
+
 	</div>
   <div class="col-lg-3">
 		<table class="table table-hover">

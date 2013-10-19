@@ -41,6 +41,7 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout) {
 				});
 			}
 
+
 	$scope.liveJsons = function () {
 			
 					
@@ -59,8 +60,10 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout) {
 							$scope.team
 					}).success(function(data) {
 						$scope.prematch = data;
+						$scope.preMatcher();
 				});
 
+		
 					$http({
 						method: 'GET',
 						url:'/awayteam/' +
@@ -109,6 +112,17 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout) {
 
 	$scope.refershInterval = 5;
 
+	$scope.counter = 0;
+	$scope.preMatcher = function () {
+			$scope.prematchsing = $scope.prematch[$scope.counter];
+			if ($scope.counter == 10) {
+				$scope.counter = 0
+			} 
+      $scope.counter++;
+
+      console.log($scope.counter);
+  };
+
 	$scope.colours = [
     {'Arsenal': '#e8000b'},
     {'Chelsea': '#063381'},
@@ -143,6 +157,7 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout) {
 	$scope.getBadge = function () {
 		$scope.badgehash = ($scope.team.replace(/ /g,"_") + ".png")
 	};
+
 
 	$scope.colorArray = ['#491919','#0080ff'];
 
@@ -179,12 +194,13 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout) {
 			}
 		});
 	};
+
 	$scope.tableJson();
 
 	setInterval(function(){
             $scope.$apply(function(){
                 $scope.liveJsons();
             })
-        }, 15000);
+        }, 10000);
 });
 

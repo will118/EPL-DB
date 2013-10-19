@@ -15,7 +15,7 @@ class JasonTheBuilder
 
 		def fixture(team)
 			normalized_team = team.titleize
-			Fixture.where(["awayteam = ? or hometeam = ?", normalized_team, normalized_team]).map do |x|
+			Fixture.where(["awayteam = ? or hometeam = ?", normalized_team, normalized_team]).order(:kickoff).map do |x|
 				{ "home" => x.hometeam, "away" => x.awayteam, "date" => x.kickoff }
 			end
 		end
