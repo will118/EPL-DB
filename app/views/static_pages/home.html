@@ -12,12 +12,11 @@
 	     		<img id="badgey" ng-src="images/{{badgehash}}"/>
 	     </div>
 	     	<div class="col-lg-6">
-	     		<nvd3-line-chart data="megajson" id="megajson" width="1000" height="500" showXAxis="false" showYAxis="false" interactive="true" tooltips="true" showLegend="true"><svg></svg></nvd3-line-chart>
+	     		<nvd3-line-chart data="megajson" id="megajson" width="1000" height="500" showXAxis="false" margin="{left:0,top:0,bottom:50,right:30}" showYAxis="false" interactive="true" tooltips="true" showLegend="true"><svg></svg></nvd3-line-chart>
 	     		</div>
 
 	     	<div class="col-lg-3">
-	     	Live Shots on Target
-	     		<nvd3-line-chart data="livetargets" id="livetargets" width="500" height="400" showXAxis="false" showYAxis="false" forcex="[1]" showLegend="true" color="colorFunction()"><svg id="livetargets-svg"></svg></nvd3-line-chart>
+	     		<nvd3-line-chart data="livetargets" id="livetargets" margin="{left:0,top:0,bottom:0,right:0}" width="450" height="400" showXAxis="false" showYAxis="false" forcex="[1]" showLegend="true" color="colorFunction()"><svg id="livetargets-svg"></svg></nvd3-line-chart>
      		</div>
      </div>
   <div class="col-lg-3">
@@ -45,7 +44,7 @@
 		</table>
 	</div>
   <div class="col-lg-3">
-		  {{prematchsing.text}}
+		  <div class="prematch">{{prematchsing.text}}</div>
 	  <h2 ng-repeat="f in form" style="background-color: {{myColour}}" id="form-column">
 				{{f.form}}
 		</h2>	  
@@ -62,10 +61,10 @@
 		      <td>{{s.player}}</td><td id="scorer-goals">{{s.goals}}</td>
 		  </tr>
 		</table>
-		Live Shots
-		<nvd3-line-chart data="liveshots" id="liveshots" width="500" height="400" showXAxis="false" showYAxis="false" showLegend="true" color="colorFunction()" forcex="[1]"><svg></svg></nvd3-line-chart>
-			<p class="lead" ng-repeat-start="score in scorers">{{score.teams}} <span class="score">{{score.score}}</span></p>
+		<div class="livescores">
+			<p class="lead" ng-repeat-start="score in scorers">{{score.teams}}  <span class="score"> {{score.score}}</span></p>
 				<p ng-repeat-end=""></p> 
+			</div>
 	</div>
   <div class="col-lg-3">
 		<table class="table table-hover">
@@ -90,9 +89,9 @@
 		</table>
 	</div>
 		<div class="col-lg-3">
-		Live Possession
-				<nvd3-line-chart data="liveposs" id="liveposs" interactive="true" tooltips="true" width="500" height="400" showXAxis="false" isArea="true" showYAxis="false" showLegend="true" forecey="[30,70]" forcex="[1]"><svg></svg></nvd3-line-chart>
+		<nvd3-line-chart data="liveshots" id="liveshots" width="500" height="400" margin="{left:0,top:0,bottom:5,right:25}" showXAxis="false" showYAxis="false" showLegend="true" color="colorFunction()" forcex="[1]"><svg></svg></nvd3-line-chart>
+				<nvd3-line-chart data="liveposs" id="liveposs" interactive="true" tooltips="true" margin="{left:0,top:0,bottom:5,right:25}" width="500" height="400" showXAxis="false" showYAxis="false" showLegend="true" forecey="[35]"><svg></svg></nvd3-line-chart>
 		Live Corners
-				<nvd3-line-chart data="livecorners" id="livecorners" color="colorFunction()" width="500" height="400" showLegend="true" showXAxis="false" showYAxis="false" forcex="[1]"><svg></svg></nvd3-line-chart>
+				<nvd3-line-chart data="livecorners" id="livecorners" color="colorFunction()" margin="{left:0,top:0,bottom:5,right:25}" width="500" height="400" showLegend="true" showXAxis="false" showYAxis="false" forcex="[1]"><svg></svg></nvd3-line-chart>
 		</div>
 </body>

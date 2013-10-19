@@ -216,7 +216,7 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout) {
 			}
 		});
 	};
-
+$scope.tableJson();
 	setInterval(function(){
             $scope.$apply(function(){
                 $scope.liveJsons();

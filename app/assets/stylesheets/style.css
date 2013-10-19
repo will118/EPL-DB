@@ -94,13 +94,17 @@ h1 {
   text-align: center;
 }
 
-#livetargets-svg {
-  margin-top: 5em;
-  margin-left: 2em;
+.livescores {
+  text-align: center;
+}
+
+.prematch {
+  min-height: 60px;
+  vertical-align: middle;
 }
 
 #badge {
-  max-height: 420px;
+  max-height: 350px;
 }
 
 #navvy  {
