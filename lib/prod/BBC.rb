@@ -49,10 +49,11 @@ class BBC
 						fixture.jsonurl = @jsonurl
 						fixture.lineup_url = @lineup_url
 						fixture.save
-			else
-				@rawlink = fixture.rawlink 
-				@jsonurl = fixture.jsonurl
-				@lineup_url = fixture.lineup_url
+					else
+						@rawlink = fixture.rawlink 
+						@jsonurl = fixture.jsonurl
+						@lineup_url = fixture.lineup_url
+					end
 			end
 	end
 
