@@ -82,6 +82,8 @@ What I'm doing next, in order (at least in theory):
 
 - Angular + any PL team.
 
+- The live graphs go in the wrong direction, a trivial fix when I'm better. I'll fix it then....
+
 - I want to move the Fixture.order(:kickoff).first(8) and elsif (time_until < -6650) x.delete business into its own class or module.
 
 > also there's some encoding mismatch I'm guessing it's not UTF, anyway it's from the BBC lineup where it looks fine, then when I scrape it I get stuff like "\u00C3\u0096zil" which gets lost somewhere. I haven't looked into it. (As of Friday 18th October at 4:16pm - I think I've solved this as was because the model was string rather than text and I remember reading recently that 255 in string and way more in text. I'm guessing because its a UTF world rails/AR had to make it comply to store)

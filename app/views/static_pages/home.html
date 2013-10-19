@@ -21,29 +21,25 @@
      </div>
   <div class="col-lg-3">
     <input type="text" class="form-control" ng-model="team" typeahead="name for name in names | filter:$viewValue">
-			<p class="error">{{error}}</p>
+			<p class="error">{{error}}</p>	
 			<p class="lead" ng-repeat-start="fix in fixtures">{{fix.home}} vs. {{fix.away}}</p>
 				<p class="muted" ng-repeat-end="">{{fix.date}}</p> 
 <div id="hometeam"><div class="hometeam"><h4>{{hometeamname}}</h4></div></div>
   <div id="awayteam"><div class="awayteam"><h4>{{awayteamname}}</h4></div></div>
 		<table class="table table-hover" id="teams">
-        <!-- <p>{{hometeamname}}</p> -->
         <tr>
-            <th>No.</th>
-            <th>Name</th>
+            <th>No.</th><th>Name</th><th></th>
         </tr>
 			  <tr ng-repeat="item in hometeam">
-		      <td>{{item.number}}</td><td>{{item.player}}</td>
+		      <td>{{item.number}}</td><td>{{item.player}}</td><td>{{item.subbed}}</td>
 		  </tr>
 		</table>
   	<table class="table table-hover" id="teams">
-				<!-- <p>{{awayteamname}}</p> -->
         <tr>
-            <th>No.</th>
-            <th>Name</th>
+	       <th>No.</th><th>Name</th><th></th>
         </tr>
 			  <tr ng-repeat="item in awayteam">
-		      <td>{{item.number}}</td><td>{{item.player}}</td>
+		      <td>{{item.number}}</td><td>{{item.player}}</td><td>{{item.subbed}}</td>
 		  </tr>
 		</table>
 	</div>
@@ -62,6 +58,9 @@
 		  </tr>
 		</table>
 		<nvd3-line-chart data="liveshots" id="liveshots" width="500" height="400" showXAxis="false" showYAxis="false" showLegend="true" color="colorFunction()" forcex="[1]"><svg></svg></nvd3-line-chart>
+		<div data-ng-repeat="item in prematch" data-ng-animate="'custom'">
+		  {{item.text}}
+	</div>
 	</div>
   <div class="col-lg-3">
 		<table class="table table-hover">

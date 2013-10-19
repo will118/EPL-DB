@@ -25,8 +25,8 @@ AAAAMILNE::Application.routes.draw do
   get 'liveposspie' => 'fixtures#liveposspie'
 
   get "news/index"
-  get "/prematchjson(.:format)" => "fixtures#prematchjson"
-  get "/prematchjson/:id(.:format)" => "fixtures#prematchjsonid"
+  
+  get "/prematchjson/:team" => "fixtures#prematchjson"
   resources :articles
 
 

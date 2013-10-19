@@ -69,6 +69,16 @@ namespace :populater do
     links.noko_save
   end
 
+  desc "Emergency Wipe for match"
+  task wipe: :environment do
+    Team.delete_all
+    Poss.delete_all
+    Shot.delete_all
+    Target.delete_all
+    Corner.delete_all
+    Foul.delete_all
+  end
+
 
 
 task :all => ["populater:squawka", "populater:teamform", "populater:schedule"]

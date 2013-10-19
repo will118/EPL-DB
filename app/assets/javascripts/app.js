@@ -2,7 +2,7 @@
 
 var d3App = angular.module('d3App', ['nvd3ChartDirectives', 'ui.bootstrap']);
 
-d3App.controller('AppCtrl', function AppCtrl ($scope, $http) {
+d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout) {
 	$scope.getJsons = function () {
 
 		$http({
@@ -55,6 +55,15 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http) {
 
 					$http({
 						method: 'GET',
+						url:'/prematchjson/' +
+							$scope.team
+					}).success(function(data) {
+						$scope.prematch = data;
+					console.log(data);
+				});
+
+					$http({
+						method: 'GET',
 						url:'/awayteam/' +
 							$scope.team
 					}).success(function(data) {
@@ -99,7 +108,9 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http) {
 
 	$scope.team = 'West Bromwich Albion';
 
-	// $scope.hometeamname = $scope.hometeam
+	$scope.refershInterval = 5;
+
+	
 
 	
 
@@ -138,11 +149,11 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http) {
 		$scope.badgehash = ($scope.team.replace(/ /g,"_") + ".png")
 	};
 
-	var colorArray = ['#d75054','#0080ff'];
+	$scope.colorArray = ['#491919','#0080ff'];
 
 	$scope.colorFunction = function() {
 	return function(d, i) {
-    	return colorArray[i];
+    	return $scope.colorArray[i];
     };
 	}
 
@@ -173,7 +184,12 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http) {
 			}
 		});
 	};
-	$scope.liveJsons();
 	$scope.tableJson();
+
+	setInterval(function(){
+            $scope.$apply(function(){
+                $scope.liveJsons();
+            })
+        }, 15000);
 });
 

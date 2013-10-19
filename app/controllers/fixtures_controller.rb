@@ -27,11 +27,7 @@ class FixturesController < ApplicationController
   end
 
   def prematchjson
-    render :json => Prematch.all
-  end
-
-  def prematchjsonid
-    render :json => Prematch.find(params[:id])
+    render :json => Prematch.where(["awayteam = ? or hometeam = ?", (params[:team]), (params[:team])])
   end
 
   def fixturesjson
