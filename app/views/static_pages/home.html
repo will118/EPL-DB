@@ -31,7 +31,7 @@
         <tr>
             <th>No.</th><th>Name</th><th></th>
         </tr>
-			  <tr ng-repeat="item in hometeam">
+			  <tr ng-repeat="item in hometeam | limitTo:11">
 		      <td>{{item.number}}</td><td>{{item.player}}</td><td>{{item.subbed}}</td>
 		  </tr>
 		</table>
@@ -39,7 +39,7 @@
         <tr>
 	       <th>No.</th><th>Name</th><th></th>
         </tr>
-			  <tr ng-repeat="item in awayteam">
+			  <tr ng-repeat="item in awayteam | limitTo:11">
 		      <td>{{item.number}}</td><td>{{item.player}}</td><td>{{item.subbed}}</td>
 		  </tr>
 		</table>

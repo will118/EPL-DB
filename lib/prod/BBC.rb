@@ -106,8 +106,8 @@ class BBC
 		teams
 	end
 
-	def teams
-		document = Nokogiri::HTML(open(@lineup_url))
+	def teams(x)
+		document = Nokogiri::HTML(open(x.lineup_url))
 
 		home = document.xpath('html/body/div/div/div[1]')
 		away = document.xpath('html/body/div/div/div[2]')

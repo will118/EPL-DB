@@ -8,7 +8,7 @@ teams = ["Newcastle United",
  "Manchester United",
  "Chelsea",
  "Stoke City",
- "Everton",
+ "Evrton",
  "Swansea City",
  "West Ham United"]
 
@@ -20,7 +20,9 @@ uri = "http://www.bbc.co.uk/sport/football/premier-league/fixtures"
 				doc1 = doc.xpath('html/body/div[3]/div/div/div[1]/div[3]/div[2]/div')
 				mentions = doc1.search "[text()*='#{team}']"
 				if mentions != nil
+					p mentions.class
 					match = mentions.first.parent.parent.parent.parent
+
 					rawlink = match.css('a').last['href']
 					p rawlink
 				else
