@@ -9,7 +9,7 @@ class BBC
 		Fixture.order(:kickoff).first(8).each do |x| 
 				time_until = ((x.kickoff - Time.now) - 3600)
 				if ((time_until < -2900) &&  (time_until > -3700) && (x.jsonurl != nil))
-					"Half Time"
+					puts "Half Time"
 				elsif ((time_until < 1800) && (x.rawlink == nil))
 					get_bbc(x)
 					puts "BBC"
@@ -35,7 +35,6 @@ class BBC
 				mentions = doc1.search "[text()*='#{team.titleize}']"
 				match = mentions.first.parent.parent.parent.parent
 				@rawlink = match.css('a').last['href']
-				puts @rawlink
 
 				if is_valid_match? == true
 					puts "In the IF"
@@ -98,6 +97,11 @@ class BBC
 			Corner.where(:home => data['corners']['home'], :hometeam => x.hometeam, :away => data['corners']['away'], :awayteam => x.awayteam).create
 			Foul.where(:home => data['fouls']['home'], :hometeam => x.hometeam, :away => data['fouls']['away'], :awayteam => x.awayteam).create
 		end
+	end
+
+	def lineup_url_set(lineup)
+		@lineup_url = lineup
+		teams
 	end
 
 	def teams

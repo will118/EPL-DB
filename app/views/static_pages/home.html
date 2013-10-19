@@ -16,6 +16,7 @@
 	     		</div>
 
 	     	<div class="col-lg-3">
+	     	Live Shots on Target
 	     		<nvd3-line-chart data="livetargets" id="livetargets" width="500" height="400" showXAxis="false" showYAxis="false" forcex="[1]" showLegend="true" color="colorFunction()"><svg id="livetargets-svg"></svg></nvd3-line-chart>
      		</div>
      </div>
@@ -61,6 +62,7 @@
 		      <td>{{s.player}}</td><td id="scorer-goals">{{s.goals}}</td>
 		  </tr>
 		</table>
+		Live Shots
 		<nvd3-line-chart data="liveshots" id="liveshots" width="500" height="400" showXAxis="false" showYAxis="false" showLegend="true" color="colorFunction()" forcex="[1]"><svg></svg></nvd3-line-chart>
 		
 
@@ -88,8 +90,9 @@
 		</table>
 	</div>
 		<div class="col-lg-3">
-				<nvd3-line-chart data="liveposs" id="liveposs" width="500" height="400" showXAxis="true" isArea="true" showYAxis="false" showLegend="true" forcex="[1]"><svg></svg></nvd3-line-chart>
-
+		Live Possession
+				<nvd3-line-chart data="liveposs" id="liveposs" width="500" height="400" showXAxis="true" isArea="true" showYAxis="false" showLegend="true" forecey="[30,70]" forcex="[1]"><svg></svg></nvd3-line-chart>
+		Live Corners
 				<nvd3-line-chart data="livecorners" id="livecorners" color="colorFunction()" width="500" height="400" showLegend="true" showXAxis="false" showYAxis="false" forcex="[1]"><svg></svg></nvd3-line-chart>
 		</div>
 </body>
