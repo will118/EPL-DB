@@ -36,7 +36,10 @@ class BBC
 				doc = Nokogiri::HTML(open("#{uri}"))
 				doc1 = doc.xpath('html/body/div[3]/div/div/div[1]/div[3]/div[2]/div')
 				mentions = doc1.search "[text()*='#{team}']"
-				if mentions != nil
+				if mentions == nil
+					puts "its-nil"
+					next
+				end
 					match = mentions.first.parent.parent.parent.parent
 					@rawlink = match.css('a').last['href']
 					if is_valid_match? == true
@@ -46,12 +49,6 @@ class BBC
 						fixture.jsonurl = @jsonurl
 						fixture.lineup_url = @lineup_url
 						fixture.save
-					else
-						puts "Much too early"
-					end
-				else
-					puts "Can't find"
-				end
 			else
 				@rawlink = fixture.rawlink 
 				@jsonurl = fixture.jsonurl
