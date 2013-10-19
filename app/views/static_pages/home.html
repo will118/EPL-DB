@@ -58,9 +58,9 @@
 		  </tr>
 		</table>
 		<nvd3-line-chart data="liveshots" id="liveshots" width="500" height="400" showXAxis="false" showYAxis="false" showLegend="true" color="colorFunction()" forcex="[1]"><svg></svg></nvd3-line-chart>
-		<div data-ng-repeat="item in prematch" data-ng-animate="'custom'">
+		<li ng-repeat="item in prematch | limitTo:1">
 		  {{item.text}}
-	</div>
+	</li>
 	</div>
   <div class="col-lg-3">
 		<table class="table table-hover">

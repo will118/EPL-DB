@@ -105,7 +105,7 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout) {
 			
 	$scope.names = ["Arsenal", "Liverpool", "Chelsea", "Southampton", "Everton", "Hull City", "Manchester City", "Newcastle United", "Tottenham Hotspur", "West Bromwich Albion", "Cardiff City", "Swansea City", "Aston Villa", "Manchester United", "Stoke City", "Norwich City", "West Ham United", "Fulham", "Crystal Palace", "Sunderland"];
 
-	$scope.team = 'West Bromwich Albion';
+	$scope.team = 'Arsenal';
 
 	$scope.refershInterval = 5;
 
