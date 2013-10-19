@@ -7,24 +7,27 @@ class BBC
 
 	def match_manager
 		Fixture.order(:kickoff).first(8).each do |x| 
-				time_until = (x.kickoff - Time.now)
+				time_until = ((x.kickoff - Time.now) - 3600)
 				if ((time_until < -2900) &&  (time_until > -3700) && (x.jsonurl != nil))
 					"Half Time"
+				elsif ((time_until < 1800) && (x.rawlink == nil))
+					get_bbc(x)
+					puts "BBC"
 				elsif (time_until < -6650)
 					x.delete
 				elsif ((time_until < 180) && (x.jsonurl != nil ))
 					recorder(x)
-				elsif ((time_until < 1800) && (x.rawlink == nil))
-					get_bbc(x)
 				elsif ((time_until < 1800) && (x.lineup_url != nil))
+					puts "Get teams?"
 					teams(x)
-				else return "Stil a while to go"
+				else puts "Still a while to go"
 				end
 		end
 	end
 
 	def get_bbc(fixture)
-			if fixture.jsonurl == nil
+			if ((fixture.jsonurl == nil) || (fixture.jsonurl == ""))
+				puts "GET BBC"
 				team = bbc_name(fixture.hometeam)
 				uri = "http://www.bbc.co.uk/sport/football/premier-league/fixtures"
 				doc = Nokogiri::HTML(open("#{uri}"))
@@ -32,15 +35,17 @@ class BBC
 				mentions = doc1.search "[text()*='#{team.titleize}']"
 				match = mentions.first.parent.parent.parent.parent
 				@rawlink = match.css('a').last['href']
+				puts @rawlink
 
 				if is_valid_match? == true
+					puts "In the IF"
 					raw_link
 					fixture.rawlink = @rawlink
 					fixture.jsonurl = @jsonurl
 					fixture.lineup_url = @lineup_url
 					fixture.save
 				else
-					return "Much too early"
+					puts "Much too early"
 				end
 
 			else
@@ -52,12 +57,14 @@ class BBC
 
 
 	def is_valid_match?
-		!!(@rawlink =~ /(\/sport\/0)/)
+		!!(@rawlink =~ /(\/sport\/football\/\d+)/)
 	end
 
 	def raw_link
+			puts "getting rawlink"
 			driver = Selenium::WebDriver.for(:remote, :url => "http://localhost:9134")
-			driver.navigate.to @rawlink
+			base = "http://www.bbc.co.uk"
+			driver.navigate.to (base+@rawlink)
 			page = driver.page_source
 			json_link = page.match(/(http:\/\/polling.bbc.co.uk\/sport\/shared\/football\/oppm\/json).{11}/)
 			lineup_link = page.match(/(http:\/\/polling.bbc.co.uk\/sport\/shared\/football\/oppm\/line-up).{11}/)
@@ -71,7 +78,7 @@ class BBC
 		midway = rawbbc['data']['payload']['Match']
 		result = []
 		midway.each { |x| result = x.assoc('stats') }
-		@result[1]
+		result[1]
 	end
 
 
@@ -82,8 +89,9 @@ class BBC
 		data = get_json(x.jsonurl)
 
 		if data['shotsOnTarget'] == nil
-			"No data yet"
-		else
+			puts "No data yet"
+		else 
+			puts "Something recorded"
 			Poss.where(:homeposs => data['possession']['home'], :hometeam => x.hometeam, :awayposs => data['possession']['away'], :awayteam => x.awayteam).create
 			Target.where(:homeshots => data['shotsOnTarget']['home'], :hometeam => x.hometeam, :awayshots => data['shotsOnTarget']['away'], :awayteam => x.awayteam).create
 			Shot.where(:homeshots => data['shots']['home'], :hometeam => x.hometeam, :awayshots => data['shots']['away'], :awayteam => x.awayteam).create

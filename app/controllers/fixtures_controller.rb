@@ -22,12 +22,12 @@ class FixturesController < ApplicationController
     render :json => Form.where("team" =>(params[:team]).titleize)
   end  
 
-  def singleformjson
-    render :json => JasonTheBuilder.single_form
-  end
+  def otherformjson
+    render :json => JasonTheBuilder.otherformjson(params[:team])
+  end  
 
   def prematchjson
-    render :json => Prematch.where(["awayteam = ? or hometeam = ?", (params[:team]), (params[:team])])
+    render :json => JasonTheBuilder.prematchjson(params[:team])
   end
 
   def fixturesjson

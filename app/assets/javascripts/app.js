@@ -15,6 +15,16 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout) {
 
 		$http({
 				method: 'GET',
+				url:'/otherformjson/' +
+					$scope.team
+			}).success(function(form) {
+				$scope.otherform = form;
+				$scope.otherteam = (form[0]['team']);
+
+		});
+
+		$http({
+				method: 'GET',
 				url:'/topscorers/' +
 					$scope.team
 			}).success(function(topscorers) {
@@ -119,8 +129,6 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout) {
 				$scope.counter = 0
 			} 
       $scope.counter++;
-
-      console.log($scope.counter);
   };
 
 	$scope.colours = [
@@ -148,8 +156,14 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout) {
 
 	$scope.colourman = function () {
 	for (var i = 0; i < ($scope.colours).length; i++) {
+	  if ($scope.colours[i][$scope.otherteam]) {
+	  		console.log($scope.otherteam);
+	  		$scope.otherColour = $scope.colours[i][$scope.otherteam];	
+	  		console.log($scope.otherColour);
+  		};
 	  if ($scope.colours[i][$scope.team]) {
-	  		$scope.myColour = $scope.colours[i][$scope.team]	
+	  		$scope.myColour = $scope.colours[i][$scope.team];	
+	  		
 	  	} 
 		}
 	};

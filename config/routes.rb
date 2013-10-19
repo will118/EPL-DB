@@ -17,6 +17,7 @@ AAAAMILNE::Application.routes.draw do
   get 'tablejson' => 'fixtures#tablejson'
   
   get 'formjson/:team' => 'fixtures#formjson'
+  get "/otherformjson/:team" => "fixtures#otherformjson"
   
   get 'megajson/:team' => 'fixtures#megajson'
   

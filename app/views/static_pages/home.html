@@ -45,7 +45,10 @@
 	</div>
   <div class="col-lg-3">
 		  {{prematchsing.text}}
-	  <h2 ng-repeat="f in form" id="form-column">
+	  <h2 ng-repeat="f in form" style="background-color: {{myColour}}" id="form-column">
+				{{f.form}}
+		</h2>	  
+		<h2 ng-repeat="f in otherform" style="background-color: {{otherColour}}" id="other-form-column">
 				{{f.form}}
 		</h2>
 		<br>

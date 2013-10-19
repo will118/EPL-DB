@@ -59,3 +59,78 @@
 [10/19/13 11:42:17 +0100 unknown-84:38:35:4d:7e:a0.home (7840)] INFO : Installing ActiveRecord 4 instrumentation
 [10/19/13 11:42:17 +0100 unknown-84:38:35:4d:7e:a0.home (7840)] INFO : Installing Rails4 Error instrumentation
 [10/19/13 11:42:17 +0100 unknown-84:38:35:4d:7e:a0.home (7840)] INFO : Finished instrumentation
+[10/19/13 12:31:12 +0100 unknown-84:38:35:4d:7e:a0.home (8275)] INFO : Starting the New Relic agent in "development" environment.
+[10/19/13 12:31:12 +0100 unknown-84:38:35:4d:7e:a0.home (8275)] INFO : To prevent agent startup add a NEWRELIC_ENABLE=false environment variable or modify the "development" section of your newrelic.yml.
+[10/19/13 12:31:12 +0100 unknown-84:38:35:4d:7e:a0.home (8275)] INFO : Reading configuration from 
+[10/19/13 12:31:12 +0100 unknown-84:38:35:4d:7e:a0.home (8275)] ERROR : Unable to read configuration file : no implicit conversion of nil into String
+[10/19/13 12:31:12 +0100 unknown-84:38:35:4d:7e:a0.home (8275)] INFO : Enabling the Request Sampler.
+[10/19/13 12:31:12 +0100 unknown-84:38:35:4d:7e:a0.home (8275)] INFO : Environment: development
+[10/19/13 12:31:12 +0100 unknown-84:38:35:4d:7e:a0.home (8275)] INFO : No known dispatcher detected.
+[10/19/13 12:31:12 +0100 unknown-84:38:35:4d:7e:a0.home (8275)] INFO : Application: development
+[10/19/13 12:31:12 +0100 unknown-84:38:35:4d:7e:a0.home (8275)] WARN : No license key found in newrelic.yml config. This often means your newrelic.yml is missing a section for the running environment 'development'
+[10/19/13 12:31:12 +0100 unknown-84:38:35:4d:7e:a0.home (8275)] INFO : Installing Net instrumentation
+[10/19/13 12:31:12 +0100 unknown-84:38:35:4d:7e:a0.home (8275)] INFO : Installing Rails 4 Controller instrumentation
+[10/19/13 12:31:12 +0100 unknown-84:38:35:4d:7e:a0.home (8275)] INFO : Installing Rails 4 view instrumentation
+[10/19/13 12:31:12 +0100 unknown-84:38:35:4d:7e:a0.home (8275)] INFO : Installing ActiveRecord 4 instrumentation
+[10/19/13 12:31:12 +0100 unknown-84:38:35:4d:7e:a0.home (8275)] INFO : Installing Rails4 Error instrumentation
+[10/19/13 12:31:12 +0100 unknown-84:38:35:4d:7e:a0.home (8275)] INFO : Finished instrumentation
+[10/19/13 12:45:48 +0100 unknown-84:38:35:4d:7e:a0.home (8527)] INFO : Starting the New Relic agent in "development" environment.
+[10/19/13 12:45:48 +0100 unknown-84:38:35:4d:7e:a0.home (8527)] INFO : To prevent agent startup add a NEWRELIC_ENABLE=false environment variable or modify the "development" section of your newrelic.yml.
+[10/19/13 12:45:48 +0100 unknown-84:38:35:4d:7e:a0.home (8527)] INFO : Reading configuration from 
+[10/19/13 12:45:48 +0100 unknown-84:38:35:4d:7e:a0.home (8527)] ERROR : Unable to read configuration file : no implicit conversion of nil into String
+[10/19/13 12:45:48 +0100 unknown-84:38:35:4d:7e:a0.home (8527)] INFO : Enabling the Request Sampler.
+[10/19/13 12:45:48 +0100 unknown-84:38:35:4d:7e:a0.home (8527)] INFO : Environment: development
+[10/19/13 12:45:48 +0100 unknown-84:38:35:4d:7e:a0.home (8527)] INFO : No known dispatcher detected.
+[10/19/13 12:45:48 +0100 unknown-84:38:35:4d:7e:a0.home (8527)] INFO : Application: development
+[10/19/13 12:45:48 +0100 unknown-84:38:35:4d:7e:a0.home (8527)] WARN : No license key found in newrelic.yml config. This often means your newrelic.yml is missing a section for the running environment 'development'
+[10/19/13 12:45:48 +0100 unknown-84:38:35:4d:7e:a0.home (8527)] INFO : Installing Net instrumentation
+[10/19/13 12:45:48 +0100 unknown-84:38:35:4d:7e:a0.home (8527)] INFO : Installing Rails 4 Controller instrumentation
+[10/19/13 12:45:48 +0100 unknown-84:38:35:4d:7e:a0.home (8527)] INFO : Installing Rails 4 view instrumentation
+[10/19/13 12:45:48 +0100 unknown-84:38:35:4d:7e:a0.home (8527)] INFO : Installing ActiveRecord 4 instrumentation
+[10/19/13 12:45:48 +0100 unknown-84:38:35:4d:7e:a0.home (8527)] INFO : Installing Rails4 Error instrumentation
+[10/19/13 12:45:48 +0100 unknown-84:38:35:4d:7e:a0.home (8527)] INFO : Finished instrumentation
+[10/19/13 12:47:42 +0100 unknown-84:38:35:4d:7e:a0.home (8567)] INFO : Starting the New Relic agent in "development" environment.
+[10/19/13 12:47:42 +0100 unknown-84:38:35:4d:7e:a0.home (8567)] INFO : To prevent agent startup add a NEWRELIC_ENABLE=false environment variable or modify the "development" section of your newrelic.yml.
+[10/19/13 12:47:42 +0100 unknown-84:38:35:4d:7e:a0.home (8567)] INFO : Reading configuration from 
+[10/19/13 12:47:42 +0100 unknown-84:38:35:4d:7e:a0.home (8567)] ERROR : Unable to read configuration file : no implicit conversion of nil into String
+[10/19/13 12:47:42 +0100 unknown-84:38:35:4d:7e:a0.home (8567)] INFO : Enabling the Request Sampler.
+[10/19/13 12:47:42 +0100 unknown-84:38:35:4d:7e:a0.home (8567)] INFO : Environment: development
+[10/19/13 12:47:42 +0100 unknown-84:38:35:4d:7e:a0.home (8567)] INFO : No known dispatcher detected.
+[10/19/13 12:47:42 +0100 unknown-84:38:35:4d:7e:a0.home (8567)] INFO : Application: development
+[10/19/13 12:47:42 +0100 unknown-84:38:35:4d:7e:a0.home (8567)] WARN : No license key found in newrelic.yml config. This often means your newrelic.yml is missing a section for the running environment 'development'
+[10/19/13 12:47:42 +0100 unknown-84:38:35:4d:7e:a0.home (8567)] INFO : Installing Net instrumentation
+[10/19/13 12:47:42 +0100 unknown-84:38:35:4d:7e:a0.home (8567)] INFO : Installing Rails 4 Controller instrumentation
+[10/19/13 12:47:42 +0100 unknown-84:38:35:4d:7e:a0.home (8567)] INFO : Installing Rails 4 view instrumentation
+[10/19/13 12:47:42 +0100 unknown-84:38:35:4d:7e:a0.home (8567)] INFO : Installing ActiveRecord 4 instrumentation
+[10/19/13 12:47:42 +0100 unknown-84:38:35:4d:7e:a0.home (8567)] INFO : Installing Rails4 Error instrumentation
+[10/19/13 12:47:42 +0100 unknown-84:38:35:4d:7e:a0.home (8567)] INFO : Finished instrumentation
+[10/19/13 12:49:19 +0100 unknown-84:38:35:4d:7e:a0.home (8605)] INFO : Starting the New Relic agent in "development" environment.
+[10/19/13 12:49:19 +0100 unknown-84:38:35:4d:7e:a0.home (8605)] INFO : To prevent agent startup add a NEWRELIC_ENABLE=false environment variable or modify the "development" section of your newrelic.yml.
+[10/19/13 12:49:19 +0100 unknown-84:38:35:4d:7e:a0.home (8605)] INFO : Reading configuration from 
+[10/19/13 12:49:19 +0100 unknown-84:38:35:4d:7e:a0.home (8605)] ERROR : Unable to read configuration file : no implicit conversion of nil into String
+[10/19/13 12:49:19 +0100 unknown-84:38:35:4d:7e:a0.home (8605)] INFO : Enabling the Request Sampler.
+[10/19/13 12:49:19 +0100 unknown-84:38:35:4d:7e:a0.home (8605)] INFO : Environment: development
+[10/19/13 12:49:19 +0100 unknown-84:38:35:4d:7e:a0.home (8605)] INFO : No known dispatcher detected.
+[10/19/13 12:49:19 +0100 unknown-84:38:35:4d:7e:a0.home (8605)] INFO : Application: development
+[10/19/13 12:49:19 +0100 unknown-84:38:35:4d:7e:a0.home (8605)] WARN : No license key found in newrelic.yml config. This often means your newrelic.yml is missing a section for the running environment 'development'
+[10/19/13 12:49:19 +0100 unknown-84:38:35:4d:7e:a0.home (8605)] INFO : Installing Net instrumentation
+[10/19/13 12:49:19 +0100 unknown-84:38:35:4d:7e:a0.home (8605)] INFO : Installing Rails 4 Controller instrumentation
+[10/19/13 12:49:20 +0100 unknown-84:38:35:4d:7e:a0.home (8605)] INFO : Installing Rails 4 view instrumentation
+[10/19/13 12:49:20 +0100 unknown-84:38:35:4d:7e:a0.home (8605)] INFO : Installing ActiveRecord 4 instrumentation
+[10/19/13 12:49:20 +0100 unknown-84:38:35:4d:7e:a0.home (8605)] INFO : Installing Rails4 Error instrumentation
+[10/19/13 12:49:20 +0100 unknown-84:38:35:4d:7e:a0.home (8605)] INFO : Finished instrumentation
+[10/19/13 13:03:51 +0100 unknown-84:38:35:4d:7e:a0.home (8869)] INFO : Starting the New Relic agent in "development" environment.
+[10/19/13 13:03:51 +0100 unknown-84:38:35:4d:7e:a0.home (8869)] INFO : To prevent agent startup add a NEWRELIC_ENABLE=false environment variable or modify the "development" section of your newrelic.yml.
+[10/19/13 13:03:51 +0100 unknown-84:38:35:4d:7e:a0.home (8869)] INFO : Reading configuration from 
+[10/19/13 13:03:51 +0100 unknown-84:38:35:4d:7e:a0.home (8869)] ERROR : Unable to read configuration file : no implicit conversion of nil into String
+[10/19/13 13:03:51 +0100 unknown-84:38:35:4d:7e:a0.home (8869)] INFO : Enabling the Request Sampler.
+[10/19/13 13:03:51 +0100 unknown-84:38:35:4d:7e:a0.home (8869)] INFO : Environment: development
+[10/19/13 13:03:51 +0100 unknown-84:38:35:4d:7e:a0.home (8869)] INFO : No known dispatcher detected.
+[10/19/13 13:03:51 +0100 unknown-84:38:35:4d:7e:a0.home (8869)] INFO : Application: development
+[10/19/13 13:03:51 +0100 unknown-84:38:35:4d:7e:a0.home (8869)] WARN : No license key found in newrelic.yml config. This often means your newrelic.yml is missing a section for the running environment 'development'
+[10/19/13 13:03:51 +0100 unknown-84:38:35:4d:7e:a0.home (8869)] INFO : Installing Net instrumentation
+[10/19/13 13:03:51 +0100 unknown-84:38:35:4d:7e:a0.home (8869)] INFO : Installing Rails 4 Controller instrumentation
+[10/19/13 13:03:51 +0100 unknown-84:38:35:4d:7e:a0.home (8869)] INFO : Installing Rails 4 view instrumentation
+[10/19/13 13:03:51 +0100 unknown-84:38:35:4d:7e:a0.home (8869)] INFO : Installing ActiveRecord 4 instrumentation
+[10/19/13 13:03:51 +0100 unknown-84:38:35:4d:7e:a0.home (8869)] INFO : Installing Rails4 Error instrumentation
+[10/19/13 13:03:51 +0100 unknown-84:38:35:4d:7e:a0.home (8869)] INFO : Finished instrumentation

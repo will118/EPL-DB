@@ -76,6 +76,9 @@ h1 {
 #form-column {
   text-align: center;
 }
+#other-form-column {
+  text-align: center;
+}
 
 #scorers {
   width:50%; 

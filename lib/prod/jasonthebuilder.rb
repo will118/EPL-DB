@@ -20,6 +20,21 @@ class JasonTheBuilder
 			end
 		end
 
+		def self.prematchjson(team)
+			normalized_team = team.titleize
+			Prematch.where(["awayteam = ? or hometeam = ?", normalized_team, normalized_team])
+		end
+
+		def self.otherformjson(team)
+			normalized_team = team.titleize
+			next_fix = Fixture.where(["awayteam = ? or hometeam = ?", normalized_team, normalized_team]).order(:kickoff).first
+			if next_fix.hometeam == normalized_team			
+				Form.where(:team => (next_fix.awayteam))
+			else next_fix.awayteam == normalized_team
+				Form.where(:team => (next_fix.hometeam))
+			end
+		end
+
 		def home_team(team)
 			normalized_team = team.titleize
 			next_fix = Fixture.where(["awayteam = ? or hometeam = ?", normalized_team, normalized_team]).order(:kickoff).first
