@@ -3,6 +3,10 @@ require_relative 'namenormaliser'
 class JasonTheBuilder
 	include NameNormaliser
 
+		def self.scores
+			Score.last(8)
+		end
+
 		def fixture_json(team)
 				name = stats_fc_normaliser(team)
 				date = Date.today

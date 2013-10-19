@@ -30,6 +30,10 @@ class FixturesController < ApplicationController
     render :json => JasonTheBuilder.prematchjson(params[:team])
   end
 
+  def scores
+    render :json => JasonTheBuilder.scores
+  end
+
   def fixturesjson
     render :json => JasonTheBuilder.new.fixture(params[:team])
   end

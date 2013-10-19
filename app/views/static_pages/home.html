@@ -64,8 +64,8 @@
 		</table>
 		Live Shots
 		<nvd3-line-chart data="liveshots" id="liveshots" width="500" height="400" showXAxis="false" showYAxis="false" showLegend="true" color="colorFunction()" forcex="[1]"><svg></svg></nvd3-line-chart>
-		
-
+			<p class="lead" ng-repeat-start="score in scorers">{{score.teams}} <span class="score">{{score.score}}</span></p>
+				<p ng-repeat-end=""></p> 
 	</div>
   <div class="col-lg-3">
 		<table class="table table-hover">

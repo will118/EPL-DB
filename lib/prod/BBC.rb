@@ -17,6 +17,7 @@ class BBC
 					x.delete
 				elsif ((time_until < 180) && (x.jsonurl != nil ))
 					recorder(x)
+					scores
 				elsif ((time_until < 1800) && (x.lineup_url != nil))
 					puts "Get teams?"
 					if (x.gotteam == nil || false) 
@@ -130,6 +131,30 @@ class BBC
 		end
 		x.gotteam = true
 		x.save
+	end
+
+	def scores
+		driver = Selenium::WebDriver.for(:remote, :url => "http://localhost:9134")
+		base = "http://www.bbc.co.uk/sport/football/live-scores/premier-league"
+		driver.navigate.to (base)
+		page = Nokogiri::HTML(driver.page_source)
+		driver.quit
+
+		table = page.css('#live-scores-table')
+		tr = table.css('tr td')
+
+		array = tr.map do |x| 
+			hometeam = x.css('.team-home').text
+			awayteam = x.css('.team-away').text
+			score = x.css('.score').text.gsub(/[\\n\s+]/, '')
+			{"teams" => (hometeam + " vs. " + awayteam), "score"=> score}
+		end
+
+		live_scores = array.delete_if {|x| x['score'].length < 1}
+
+		live_scores.each do |x| 
+			Score.where(:teams => x['teams'], :score => x['score']).first_or_create
+		end		
 	end
 
 end

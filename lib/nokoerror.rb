@@ -1,29 +1,50 @@
+require "selenium-webdriver"
 require "open-uri"
 require "nokogiri"
-require_relative 'prod/namenormaliser'
-	include NameNormaliser
 
-teams = ["Newcastle United",
- "Arsenal",
- "Manchester United",
- "Chelsea",
- "Stoke City",
- "Everton",
- "Swansea City",
- "West Ham United"]
 
- teams.each do |x| 
+driver = Selenium::WebDriver.for(:remote, :url => "http://localhost:9134")
+base = "http://www.bbc.co.uk/sport/football/live-scores/premier-league"
+driver.navigate.to (base)
+page = Nokogiri::HTML(driver.page_source)
+driver.quit
 
-uri = "http://www.bbc.co.uk/sport/football/premier-league/fixtures"
-				team = bbc_name(x)
-				doc = Nokogiri::HTML(open("#{uri}"))
-				doc1 = doc.xpath('html/body/div[3]/div/div/div[1]/div[3]/div[2]/div')
-					mentions = doc1.search "[text()*='#{team}']"
-				if mentions == nil
-					puts "its-nil"
-					next
-				end
-					match = mentions.first.parent.parent.parent.parent
-					rawlink = match.css('a').last['href']
-p rawlink
-				end
+# page
+table = page.css('#live-scores-table')
+
+tr = table.css('tr td')
+
+
+array = tr.map do |x| 
+	hometeam = x.css('.team-home').text
+	awayteam = x.css('.team-away').text
+	score = x.css('.score').text.gsub(/[\\n\s+]/, '')
+	{"teams" => (hometeam + " vs. " + awayteam), "score"=> score}
+end
+
+live_scores = array.delete_if {|x| x['score'].length < 1}
+p live_scores
+
+
+
+# str = "\n                                                                                            2 - 2                                                                                    "
+
+# p str.gsub(/[\\n\s+]/, '')
+
+
+
+
+
+# puts table.css('#team-home')
+# puts table.css('#score')
+# puts table.css('#team-away')
+# puts table.css('#elapsed-time')
+			
+
+
+
+# hometeam = 
+# awayteam = 
+# puts "Hometeam: #{hometeam} : #{homescore}"
+# puts "Awayteam: #{awayteam} : #{awayscore}"
+

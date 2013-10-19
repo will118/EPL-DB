@@ -8,6 +8,10 @@ body {
   font-size: .65em;
 }
 
+.score{
+font-weight: bold;
+}
+
 #teams {
     float:left;
     width:48%;

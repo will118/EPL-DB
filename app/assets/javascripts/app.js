@@ -25,6 +25,13 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout) {
 
 		$http({
 				method: 'GET',
+				url:'/scoresjson/'
+			}).success(function(data) {
+				$scope.scorers = data;
+		});
+
+		$http({
+				method: 'GET',
 				url:'/topscorers/' +
 					$scope.team
 			}).success(function(topscorers) {
@@ -61,7 +68,9 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout) {
 							$scope.team
 					}).success(function(data) {
 						$scope.hometeam = data;
-						$scope.hometeamname	= data[0]['teamname'];
+						if (data) {
+							$scope.hometeamname	= data[0]['teamname'];
+						};
 				});
 
 					$http({
@@ -80,7 +89,9 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout) {
 							$scope.team
 					}).success(function(data) {
 						$scope.awayteam = data;
-						$scope.awayteamname	= data[0]['teamname'];
+						if (data) {
+							$scope.awayteamname	= data[0]['teamname'];
+						};
 				});
 
 					$http({
@@ -125,7 +136,7 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout) {
 	$scope.counter = 0;
 	$scope.preMatcher = function () {
 			$scope.prematchsing = $scope.prematch[$scope.counter];
-			if ($scope.counter == 10) {
+			if ($scope.counter == 9) {
 				$scope.counter = 0
 			} 
       $scope.counter++;
@@ -157,13 +168,10 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout) {
 	$scope.colourman = function () {
 	for (var i = 0; i < ($scope.colours).length; i++) {
 	  if ($scope.colours[i][$scope.otherteam]) {
-	  		console.log($scope.otherteam);
 	  		$scope.otherColour = $scope.colours[i][$scope.otherteam];	
-	  		console.log($scope.otherColour);
   		};
 	  if ($scope.colours[i][$scope.team]) {
 	  		$scope.myColour = $scope.colours[i][$scope.team];	
-	  		
 	  	} 
 		}
 	};
@@ -209,11 +217,10 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout) {
 		});
 	};
 
-	$scope.tableJson();
-
 	setInterval(function(){
             $scope.$apply(function(){
                 $scope.liveJsons();
+								$scope.tableJson();
             })
         }, 10000);
 });
