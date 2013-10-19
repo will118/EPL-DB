@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131018150650) do
+ActiveRecord::Schema.define(version: 20131019135008) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(version: 20131018150650) do
     t.string   "rawlink"
     t.string   "jsonurl"
     t.string   "lineup_url"
+    t.boolean  "gotteam"
   end
 
   create_table "forms", force: true do |t|

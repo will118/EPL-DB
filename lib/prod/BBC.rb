@@ -19,7 +19,10 @@ class BBC
 					recorder(x)
 				elsif ((time_until < 1800) && (x.lineup_url != nil))
 					puts "Get teams?"
-					teams(x)
+					if (x.gotteam == nil || false) 
+						teams(x)
+					else puts "Have team"
+					end
 				else puts "Still a while to go"
 				end
 		end
@@ -131,6 +134,8 @@ class BBC
 			xx = x.inner_text.strip.split(' ')
 			Team.where(:player => xx[1], :number => xx[0].to_i, :teamname => awayteam, :starting => false).first_or_create
 		end
+		x.gotteam = true
+		x.save
 	end
 
 end
