@@ -33,8 +33,8 @@ class BBC
 				puts "GET BBC"
 				team = bbc_name(fixture.hometeam)
 				uri = "http://www.bbc.co.uk/sport/football/premier-league/fixtures"
-				doc = Nokogiri::HTML(open("#{uri}"))
-				doc1 = doc.xpath('html/body/div[3]/div/div/div[1]/div[3]/div[2]/div')
+				doc = Nokogiri::HTML(open(uri))
+				doc1 = doc.xpath('html/body/div[3]/div/div/div[1]')
 				mentions = doc1.search "[text()*='#{team}']"
 					match = mentions.first.parent.parent.parent.parent
 					@rawlink = match.css('a').last['href']
