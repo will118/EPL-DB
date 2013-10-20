@@ -237,6 +237,7 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout) {
             $scope.$apply(function(){
                 $scope.liveJsons();
 								$scope.tableJson();
+								$scope.getJsons();
 								$scope.colourman();
             })
         }, 10000);

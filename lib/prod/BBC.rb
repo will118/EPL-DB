@@ -166,7 +166,9 @@ class BBC
 		live_scores = array.delete_if {|x| x['score'].length < 2}
 
 		live_scores.each do |x| 
-			Score.where(:teams => x['teams'], :score => x['score']).first_or_create
+			sco = Score.where(:teams => x['teams']).first_or_create
+			sco.score = x['score']
+			sco.save
 		end		
 	end
 
