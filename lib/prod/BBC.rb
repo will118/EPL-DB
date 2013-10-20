@@ -13,8 +13,17 @@ class BBC
 				elsif ((time_until < 1800) && (x.rawlink == nil))
 					get_bbc(x)
 					puts "BBC"
-				elsif (time_until < -6650)
+				elsif (time_until < -7200)
 					x.delete
+				elsif (((time_until < -6500) || (time_until > 3600)) && (x.gotteam != nil))
+					puts "Getting team form"
+					form = JasonTheBuilder.single_form
+		      form.each do |d|
+		        form = d["form"].join(', ')
+		        fo = Form.where(:team => d["team"]).first_or_create
+		        fo.form = form
+		        fo.save
+		      end
 				elsif ((time_until < 180) && (x.jsonurl != nil ))
 					recorder(x)
 					scores

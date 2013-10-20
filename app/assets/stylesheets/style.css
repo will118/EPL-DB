@@ -103,6 +103,12 @@ h1 {
   vertical-align: middle;
 }
 
+#megaj {
+    margin-left: auto;
+    margin-right: auto;
+    width: 1000px;
+}
+
 #badge {
   max-height: 350px;
 }

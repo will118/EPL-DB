@@ -108,6 +108,9 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout) {
 							$scope.team
 					}).success(function(data) {
 						$scope.livetargets = data;
+						$scope.myliveteam = data[0]['key'];
+						$scope.otherliveteam = data[1]['key'];
+						$scope.colourman();
 				});
 
 					$http({
@@ -168,10 +171,21 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout) {
 	$scope.colourman = function () {
 	for (var i = 0; i < ($scope.colours).length; i++) {
 	  if ($scope.colours[i][$scope.otherteam]) {
-	  		$scope.otherColour = $scope.colours[i][$scope.otherteam];	
-  		};
+	  		$scope.otherColour = $scope.colours[i][$scope.otherteam];
+	  		$scope.colorFunction();	
+	  	};
+  	if ($scope.colours[i][$scope.otherliveteam]) {
+	  		$scope.otherLiveColour = $scope.colours[i][$scope.otherliveteam];  	
+				$scope.colorArray = [$scope.myLiveColour,$scope.otherLiveColour];
+				$scope.colorFunction();
+	  	};
 	  if ($scope.colours[i][$scope.team]) {
-	  		$scope.myColour = $scope.colours[i][$scope.team];	
+	  		$scope.myColour = $scope.colours[i][$scope.team];
+	  		$scope.myLiveColour = $scope.colours[i][$scope.myliveteam];  	
+				$scope.colorArray = [$scope.myLiveColour,$scope.otherLiveColour];
+				$scope.homecolorArray = [$scope.team];
+				$scope.colorFunction();
+				$scope.homecolorFunction();
 	  	} 
 		}
 	};
@@ -181,11 +195,16 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout) {
 	};
 
 
-	$scope.colorArray = ['#491919','#0080ff'];
 
 	$scope.colorFunction = function() {
 	return function(d, i) {
     	return $scope.colorArray[i];
+    };
+	}
+
+	$scope.homecolorFunction = function() {
+	return function(d, i) {
+    	return $scope.homecolorArray[i];
     };
 	}
 
@@ -216,11 +235,14 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout) {
 			}
 		});
 	};
-$scope.tableJson();
+	$scope.tableJson();
+	
+
 	setInterval(function(){
             $scope.$apply(function(){
                 $scope.liveJsons();
 								$scope.tableJson();
+								$scope.colourman();
             })
         }, 10000);
 });
