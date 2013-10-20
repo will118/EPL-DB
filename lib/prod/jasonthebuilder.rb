@@ -20,7 +20,7 @@ class JasonTheBuilder
 		def fixture(team)
 			normalized_team = team.titleize
 			Fixture.where(["awayteam = ? or hometeam = ?", normalized_team, normalized_team]).order(:kickoff).map do |x|
-				{ "home" => x.hometeam, "away" => x.awayteam, "date" => x.kickoff }
+				{ "home" => x.hometeam, "away" => x.awayteam, "date" => ((x.kickoff).to_formatted_s(:long_ordinal).gsub(/2013\s/, "")) }
 			end
 		end
 

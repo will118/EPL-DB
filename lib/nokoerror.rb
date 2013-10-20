@@ -1,50 +1,44 @@
-require "selenium-webdriver"
-require "open-uri"
-require "nokogiri"
+# require "open-uri"
+# require "nokogiri"
+# require "selenium-webdriver"
 
 
-driver = Selenium::WebDriver.for(:remote, :url => "http://localhost:9134")
-base = "http://www.bbc.co.uk/sport/football/live-scores/premier-league"
-driver.navigate.to (base)
-page = Nokogiri::HTML(driver.page_source)
-driver.quit
+# base = "http://www.bbc.co.uk/sport/0/football/24503985"
 
-# page
-table = page.css('#live-scores-table')
-
-tr = table.css('tr td')
+# document = Nokogiri::HTML(open(base))
 
 
-array = tr.map do |x| 
-	hometeam = x.css('.team-home').text
-	awayteam = x.css('.team-away').text
-	score = x.css('.score').text.gsub(/[\\n\s+]/, '')
-	{"teams" => (hometeam + " vs. " + awayteam), "score"=> score}
-end
-
-live_scores = array.delete_if {|x| x['score'].length < 1}
-p live_scores
+# 		home = document.xpath('html/body/div/div/div[1]')
+# 		away = document.xpath('html/body/div/div/div[2]')
+# 		hometeam = home.css('h3.team-name').inner_text
+# 		awayteam = away.css('h3.team-name').inner_text
 
 
+# puts home
+# puts away
 
-# str = "\n                                                                                            2 - 2                                                                                    "
-
-# p str.gsub(/[\\n\s+]/, '')
-
-
-
-
-
-# puts table.css('#team-home')
-# puts table.css('#score')
-# puts table.css('#team-away')
-# puts table.css('#elapsed-time')
+# 		# home.css('.player-list>li').each do |x| 
+# 		# 	xx = x.inner_text.strip.split(' ')
 			
+# 		# 	Team.where(:player => xx[1], :number => xx[0].to_i, :subbed => (xx[2..4].join).delete('('), :teamname => hometeam, :starting => true).first_or_create
+# 		# end
+# 		# home.css('.subs-list>li').each do |x| 
+# 		# 	xx = x.inner_text.strip.split(' ')
+			
+# 		# 	Team.where(:player => xx[1], :number => xx[0].to_i, :teamname => hometeam, :starting => false).first_or_create
+# 		# end
 
-
-
-# hometeam = 
-# awayteam = 
-# puts "Hometeam: #{hometeam} : #{homescore}"
-# puts "Awayteam: #{awayteam} : #{awayscore}"
-
+# 		# away.css('.player-list>li').each do |x| 
+# 		# 	xx = x.inner_text.strip.split(' ')
+			
+# 		# 	Team.where(:player => xx[1], :number => xx[0].to_i, :subbed => (xx[2..4].join).delete('('), :teamname => awayteam, :starting => true).first_or_create
+# 		# end
+# 		# away.css('.subs-list>li').each do |x| 
+# 		# 	xx = x.inner_text.strip.split(' ')
+			
+# 		# 	p (:player => xx[1], :number => xx[0].to_i, :teamname => awayteam, :starting => false)
+# 		# end
+scores = ["2-2", "4-1", "4-1", "2-1", "1-1", "0-0", "4-0", "1-3", "v", "0-0"]
+p scores
+scores.delete_if {|x| x =~ /[a-z]/}
+p scores

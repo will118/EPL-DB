@@ -123,19 +123,23 @@ class BBC
 		
 		home.css('.player-list>li').each do |x| 
 			xx = x.inner_text.strip.split(' ')
+			binding.pry
 			Team.where(:player => xx[1], :number => xx[0].to_i, :subbed => (xx[2..4].join).delete('('), :teamname => hometeam, :starting => true).first_or_create
 		end
 		home.css('.subs-list>li').each do |x| 
 			xx = x.inner_text.strip.split(' ')
+			binding.pry
 			Team.where(:player => xx[1], :number => xx[0].to_i, :teamname => hometeam, :starting => false).first_or_create
 		end
 
 		away.css('.player-list>li').each do |x| 
 			xx = x.inner_text.strip.split(' ')
+			binding.pry
 			Team.where(:player => xx[1], :number => xx[0].to_i, :subbed => (xx[2..4].join).delete('('), :teamname => awayteam, :starting => true).first_or_create
 		end
 		away.css('.subs-list>li').each do |x| 
 			xx = x.inner_text.strip.split(' ')
+			binding.pry
 			Team.where(:player => xx[1], :number => xx[0].to_i, :teamname => awayteam, :starting => false).first_or_create
 		end
 		x.gotteam = true
@@ -159,7 +163,7 @@ class BBC
 			{"teams" => (hometeam + " vs. " + awayteam), "score"=> score}
 		end
 
-		live_scores = array.delete_if {|x| x['score'].length < 1}
+		live_scores = array.delete_if {|x| x['score'].length < 2}
 
 		live_scores.each do |x| 
 			Score.where(:teams => x['teams'], :score => x['score']).first_or_create

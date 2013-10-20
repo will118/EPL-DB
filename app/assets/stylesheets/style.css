@@ -12,6 +12,10 @@ body {
 font-weight: bold;
 }
 
+#poss-svg {
+  height: 220px;
+}
+
 #teams {
     float:left;
     width:48%;
@@ -79,9 +83,15 @@ h1 {
 
 #form-column {
   text-align: center;
+  font-size: 2.4em;
+  color: #fec553;
+  text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
 }
 #other-form-column {
+  background-color: #06347c;
   text-align: center;
+  font-size: 2.4em;
+  color: #8a7039;
 }
 
 #scorers {
@@ -101,12 +111,18 @@ h1 {
 .prematch {
   min-height: 60px;
   vertical-align: middle;
+  text-align: center;
 }
 
 #megaj {
     margin-left: auto;
     margin-right: auto;
     width: 1000px;
+}
+
+.fixdate {
+    font-size: 0.75em;
+    font-weight: 600;
 }
 
 #badge {

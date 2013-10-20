@@ -30,7 +30,7 @@ Also scrapes the articles that I want off of Arsenal.com which was a few hours o
 
 ## Stuff used worth mentioning:
 
-- Rails and Ruby
+- Rails and Ruby (and Pry. Sweet pry.)
 - [Angular.js](http://angularjs.org/)
 - [NVD3(D3.js)](https://github.com/novus/nvd3)
 - [Nokogiri I like.](http://nokogiri.org/) 

@@ -108,8 +108,14 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout) {
 							$scope.team
 					}).success(function(data) {
 						$scope.livetargets = data;
-						$scope.myliveteam = data[0]['key'];
-						$scope.otherliveteam = data[1]['key'];
+						if (data[0]['key'] == $scope.team ) {
+							$scope.myliveteam = data[0]['key'];
+							$scope.otherliveteam = data[1]['key'];
+						};
+						if (data[1]['key'] == $scope.team ) {
+							$scope.myliveteam = data[1]['key'];
+							$scope.otherliveteam = data[0]['key'];
+						};
 						$scope.colourman();
 				});
 
@@ -172,28 +178,19 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout) {
 	for (var i = 0; i < ($scope.colours).length; i++) {
 	  if ($scope.colours[i][$scope.otherteam]) {
 	  		$scope.otherColour = $scope.colours[i][$scope.otherteam];
-	  		$scope.colorFunction();	
 	  	};
   	if ($scope.colours[i][$scope.otherliveteam]) {
 	  		$scope.otherLiveColour = $scope.colours[i][$scope.otherliveteam];  	
 				$scope.colorArray = [$scope.myLiveColour,$scope.otherLiveColour];
-				$scope.colorFunction();
+				
 	  	};
 	  if ($scope.colours[i][$scope.team]) {
 	  		$scope.myColour = $scope.colours[i][$scope.team];
 	  		$scope.myLiveColour = $scope.colours[i][$scope.myliveteam];  	
-				$scope.colorArray = [$scope.myLiveColour,$scope.otherLiveColour];
-				$scope.homecolorArray = [$scope.team];
-				$scope.colorFunction();
-				$scope.homecolorFunction();
-	  	} 
+				$scope.colorArray = [$scope.otherLiveColour,$scope.myLiveColour];
+	  	}
 		}
 	};
-
-	$scope.getBadge = function () {
-		$scope.badgehash = ($scope.team.replace(/ /g,"_") + ".png")
-	};
-
 
 
 	$scope.colorFunction = function() {
@@ -202,11 +199,10 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout) {
     };
 	}
 
-	$scope.homecolorFunction = function() {
-	return function(d, i) {
-    	return $scope.homecolorArray[i];
-    };
-	}
+	$scope.getBadge = function () {
+		$scope.badgehash = ($scope.team.replace(/ /g,"_") + ".png")
+	};
+
 
 	$scope.$watch('team', function(team) {
 			 $scope.team = team;
@@ -236,7 +232,6 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout) {
 		});
 	};
 	$scope.tableJson();
-	
 
 	setInterval(function(){
             $scope.$apply(function(){
