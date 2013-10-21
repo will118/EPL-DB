@@ -10,8 +10,8 @@ class BBC
 	def match_manager
 		Fixture.order(:kickoff).first(8).each do |x| 
 				match_timer = MatchTime.new(x.kickoff)
-				if match_timer.halftime? && got_json?
-					"Half Time"
+				if match_timer.halftime? && x.got_json?
+					puts "Half Time"
 				elsif match_timer.pre_match? && x.missing_link? 
 					get_bbc(x)
 				elsif match_timer.match_over?
@@ -21,14 +21,12 @@ class BBC
 				elsif match_timer.live_match? && x.missing_json?
 					recorder(x)
 					scores
-				elsif match_timer.match_soon? && x.missing_team_source?
-					puts "Get teams?"
-					if x.missing_team? 
-						teams(x)
-					else 
-						puts "Already got team"
-					end
-				else puts "Still a while to go"
+					puts "Recording"
+				elsif match_timer.match_soon? && x.no_team?
+					teams(x)
+					puts "Getting Teams"
+				else 
+					puts "Still a while to go"
 				end
 		end
 	end
@@ -116,23 +114,19 @@ class BBC
 		
 		home.css('.player-list>li').each do |x| 
 			xx = x.inner_text.strip.split(' ')
-			binding.pry
 			Team.where(:player => xx[1], :number => xx[0].to_i, :subbed => (xx[2..4].join).delete('('), :teamname => hometeam, :starting => true).first_or_create
 		end
 		home.css('.subs-list>li').each do |x| 
 			xx = x.inner_text.strip.split(' ')
-			binding.pry
 			Team.where(:player => xx[1], :number => xx[0].to_i, :teamname => hometeam, :starting => false).first_or_create
 		end
 
 		away.css('.player-list>li').each do |x| 
 			xx = x.inner_text.strip.split(' ')
-			binding.pry
 			Team.where(:player => xx[1], :number => xx[0].to_i, :subbed => (xx[2..4].join).delete('('), :teamname => awayteam, :starting => true).first_or_create
 		end
 		away.css('.subs-list>li').each do |x| 
 			xx = x.inner_text.strip.split(' ')
-			binding.pry
 			Team.where(:player => xx[1], :number => xx[0].to_i, :teamname => awayteam, :starting => false).first_or_create
 		end
 		x.gotteam = true

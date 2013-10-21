@@ -2,30 +2,9 @@
 
 var d3App = angular.module('d3App', ['nvd3ChartDirectives', 'ui.bootstrap']);
 
-d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout, GeneralLiveData, LiveStatsData) {
+d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout, GeneralLiveData, LiveStatsData, TeamFormData, BigData) {
 
 	$scope.team = 'Arsenal';
-	
-	$scope.getJsons = function () {
-
-		$http({
-				method: 'GET',
-				url:'/formjson/' +
-					$scope.team
-			}).success(function(form) {
-				$scope.form = form;
-		});
-
-		$http({
-				method: 'GET',
-				url:'/otherformjson/' +
-					$scope.team
-			}).success(function(form) {
-				$scope.otherform = form;
-				$scope.otherteam = (form[0]['team']);
-		});
-
-	}
 
 	$scope.liveJsons = function () {
 		
@@ -95,7 +74,7 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout, GeneralLi
 				});
 			}
 			
-	$scope.names = ["Arsenal", "Liverpool", "Chelsea", "Southampton", "Everton", "Hull City", "Manchester City", "Newcastle United", "Tottenham Hotspur", "West Bromwich Albion", "Cardiff City", "Swansea City", "Aston Villa", "Manchester United", "Stoke City", "Norwich City", "West Ham United", "Fulham", "Crystal Palace", "Sunderland"];
+	$scope.teamnames = ["Arsenal", "Liverpool", "Chelsea", "Southampton", "Everton", "Hull City", "Manchester City", "Newcastle United", "Tottenham Hotspur", "West Bromwich Albion", "Cardiff City", "Swansea City", "Aston Villa", "Manchester United", "Stoke City", "Norwich City", "West Ham United", "Fulham", "Crystal Palace", "Sunderland"];
 
 
 	$scope.refershInterval = 5;
@@ -168,10 +147,11 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout, GeneralLi
 			$scope.liveJsons();
 			$scope.colourman();
 			$scope.getBadge();
-			$scope.getJsons();
-			$scope.fixt();
-			$scope.table();
+			formteam(team);
+			formoppo(team);
 			scorer(team);
+			fixt(team);
+			table();
 	});
 
 	$scope.getMegaJson = function () {
@@ -193,17 +173,15 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout, GeneralLi
 		});
 	};
 
-	$scope.score = function () {
+	var score = function () {
 			var scorePromise = GeneralLiveData.scores()
-
 			scorePromise.then(function(data) {
 				$scope.scores = data
 			})
 		}
 
-	$scope.table = function () {
+	var table = function () {
 			var table = GeneralLiveData.table()
-
 			table.then(function(data) {
 				$scope.premtable = data
 			})
@@ -211,28 +189,39 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout, GeneralLi
 
 	var scorer = function(team) {
 			var s = LiveStatsData.scorers(team);
-			s.then(function(d) {
-				console.log(d[0].teamshort);
-				$scope.scorers = d;
+			s.then(function(data) {
+				$scope.scorers = data;
 			})
 		}
 
-	$scope.fixt = function () {
-			var fixture = GeneralLiveData.fixtures($scope.team);
-
+	var fixt = function(team) {
+			var fixture = GeneralLiveData.fixtures(team);
 			fixture.then(function(data) {
 				$scope.fixtures = data
 			})
 		}
 
-	$scope.score();
+	var formteam = function(team) {
+			var teamform = TeamFormData.teamform(team);
+			teamform.then(function(data) {
+				$scope.form = data
+			})
+		}
+
+	var formoppo = function(team) {
+			var oppoform = TeamFormData.oppoform(team);
+			oppoform.then(function(data) {
+				$scope.otherform = data
+			})
+		}
+
+	score();
 
 	setInterval(function(){
             $scope.$apply(function(){
                 $scope.liveJsons();
-                $scope.score();
-								$scope.getJsons();
 								$scope.colourman();
+                score();
             })
         }, 10000);
 });

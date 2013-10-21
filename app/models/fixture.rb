@@ -15,5 +15,13 @@ class Fixture < ActiveRecord::Base
 	def missing_team_source?
 		lineup_url != nil
 	end
-	
+
+	def missing_json?
+		jsonurl != nil 
+	end
+
+	def no_team?
+		gotteam == nil
+	end
+
 end

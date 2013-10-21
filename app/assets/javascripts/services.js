@@ -30,6 +30,7 @@ app.factory('GeneralLiveData', function ($http, $q) {
 	return methods;
 });
 
+
 app.factory('LiveStatsData', function ($http, $q) {
 		var methods = {};
 		methods.scorers = function (team) {	
@@ -41,3 +42,44 @@ app.factory('LiveStatsData', function ($http, $q) {
 		}
 	return methods;
 });
+
+
+app.factory('TeamFormData', function ($http, $q) {
+		var methods = {};
+		methods.teamform = function (team) {	
+			var defer_teamform = $q.defer();
+			$http.get('/formjson/' + team).success(function(data) {
+				 defer_teamform.resolve(data);
+			});
+			return defer_teamform.promise;
+		}
+		methods.oppoform = function (team) {	
+			var defer_oppoform = $q.defer();
+			$http.get('/otherformjson/' + team).success(function(data) {
+				 defer_oppoform.resolve(data);
+			});
+			return defer_oppoform.promise;
+		}
+	return methods;
+});
+
+
+app.factory('BigData', function ($http, $q) {
+	// 	var methods = {};
+	// 	methods.teamform = function (team) {	
+	// 		var defer_teamform = $q.defer();
+	// 		$http.get('/formjson/' + team).success(function(data) {
+	// 			 defer_teamform.resolve(data);
+	// 		});
+	// 		return defer_teamform.promise;
+	// 	}
+	// 	methods.oppoform = function (team) {	
+	// 		var defer_oppoform = $q.defer();
+	// 		$http.get('/otherformjson/' + team).success(function(data) {
+	// 			 defer_oppoform.resolve(data);
+	// 		});
+	// 		return defer_oppoform.promise;
+	// 	}
+	// return methods;
+});
+

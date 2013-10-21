@@ -47,7 +47,7 @@
 	</div>
   <div class="col-lg-3">
 		  <div class="prematch">{{prematchsing.text}}</div>
-		   <input type="text" class="form-control" ng-model="team" typeahead="name for name in names | filter:$viewValue">
+		   <input type="text" class="form-control" ng-model="team" typeahead="name for name in teamnames | filter:$viewValue">
 			<p class="error">{{error}}</p>	
 	  <h2 ng-repeat="f in form" style="background-color: {{myColour}}" id="form-column">
 				{{f.form}}
