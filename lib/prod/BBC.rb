@@ -1,37 +1,32 @@
 require_relative 'namenormaliser'
+require_relative 'builder'
 
 class BBC
 	include NameNormaliser
+	include ARBuilder
 
 	attr_reader :statsjson
 
 	def match_manager
 		Fixture.order(:kickoff).first(8).each do |x| 
-				time_until = ((x.kickoff - Time.now) - 3600)
-				if ((time_until < -2900) &&  (time_until > -3700) && (x.jsonurl != nil))
-					puts "Half Time"
-				elsif ((time_until < 1800) && (x.rawlink == nil))
+				match_timer = MatchTime.new(x.kickoff)
+				if match_timer.halftime? && got_json?
+					"Half Time"
+				elsif match_timer.pre_match? && x.missing_link? 
 					get_bbc(x)
-					puts "BBC"
-				elsif (time_until < -7200)
+				elsif match_timer.match_over?
 					x.delete
-				elsif (((time_until < -6500) || (time_until > 3600)) && (x.gotteam != nil))
-					puts "Getting team form"
-					form = JasonTheBuilder.single_form
-		      form.each do |d|
-		        form = d["form"].join(', ')
-		        fo = Form.where(:team => d["team"]).first_or_create
-		        fo.form = form
-		        fo.save
-		      end
-				elsif ((time_until < 180) && (x.jsonurl != nil ))
+				elsif match_timer.match_on? && x.missing_team?
+					form_get
+				elsif match_timer.live_match? && x.missing_json?
 					recorder(x)
 					scores
-				elsif ((time_until < 1800) && (x.lineup_url != nil))
+				elsif match_timer.match_soon? && x.missing_team_source?
 					puts "Get teams?"
-					if (x.gotteam == nil || false) 
+					if x.missing_team? 
 						teams(x)
-					else puts "Have team"
+					else 
+						puts "Already got team"
 					end
 				else puts "Still a while to go"
 				end
@@ -40,7 +35,6 @@ class BBC
 
 	def get_bbc(fixture)
 			if ((fixture.jsonurl == nil) || (fixture.jsonurl == ""))
-				puts "GET BBC"
 				team = bbc_name(fixture.hometeam)
 				uri = "http://www.bbc.co.uk/sport/football/premier-league/fixtures"
 				doc = Nokogiri::HTML(open(uri))
@@ -93,7 +87,6 @@ class BBC
 		# say this as "AR record" not "Activerecord record" in case an enrique-type ever comes across this.
 	def recorder(ar_record)
 		x = ar_record
-
 		data = get_json(x.jsonurl)
 
 		if data['shotsOnTarget'] == nil

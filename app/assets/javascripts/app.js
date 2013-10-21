@@ -2,7 +2,10 @@
 
 var d3App = angular.module('d3App', ['nvd3ChartDirectives', 'ui.bootstrap']);
 
-d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout) {
+d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout, GeneralLiveData, LiveStatsData) {
+
+	$scope.team = 'Arsenal';
+	
 	$scope.getJsons = function () {
 
 		$http({
@@ -20,55 +23,19 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout) {
 			}).success(function(form) {
 				$scope.otherform = form;
 				$scope.otherteam = (form[0]['team']);
-
 		});
 
-		$http({
-				method: 'GET',
-				url:'/scoresjson/'
-			}).success(function(data) {
-				$scope.scorers = data;
-		});
-
-		$http({
-				method: 'GET',
-				url:'/topscorers/' +
-					$scope.team
-			}).success(function(topscorers) {
-				$scope.topscorers = topscorers;
-		});
-
-		$http({
-				method: 'GET',
-				url:'/fixturesjson/' +
-					$scope.team
-			}).success(function(fixtures) {
-				$scope.fixtures = fixtures;
-			
-		});	
 	}
 
-	$scope.tableJson = function () {
-					
-					$http({
-						method: 'GET',
-						url:'/tablejson/'
-					}).success(function(data) {
-						$scope.table = data;
-				});
-			}
-
-
 	$scope.liveJsons = function () {
-			
-					
+		
 					$http({
 						method: 'GET',
 						url:'/hometeam/' +
 							$scope.team
 					}).success(function(data) {
 						$scope.hometeam = data;
-						if (data) {
+						if (data && data[0]!=undefined) {
 							$scope.hometeamname	= data[0]['teamname'];
 						};
 				});
@@ -89,17 +56,9 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout) {
 							$scope.team
 					}).success(function(data) {
 						$scope.awayteam = data;
-						if (data) {
+						if (data && data[0]!=undefined) {
 							$scope.awayteamname	= data[0]['teamname'];
 						};
-				});
-
-					$http({
-						method: 'GET',
-						url:'/possjson/' +
-						$scope.team
-					}).success(function(data) {
-						$scope.liveposs = data;
 				});
 
 					$http({
@@ -138,7 +97,6 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout) {
 			
 	$scope.names = ["Arsenal", "Liverpool", "Chelsea", "Southampton", "Everton", "Hull City", "Manchester City", "Newcastle United", "Tottenham Hotspur", "West Bromwich Albion", "Cardiff City", "Swansea City", "Aston Villa", "Manchester United", "Stoke City", "Norwich City", "West Ham United", "Fulham", "Crystal Palace", "Sunderland"];
 
-	$scope.team = 'Arsenal';
 
 	$scope.refershInterval = 5;
 
@@ -205,12 +163,15 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout) {
 
 
 	$scope.$watch('team', function(team) {
-			 $scope.team = team;
-			 $scope.getMegaJson();
-			 $scope.liveJsons();
-			 $scope.colourman();
-			 $scope.getBadge();
-			 $scope.getJsons()
+			$scope.team = team;
+			$scope.getMegaJson();
+			$scope.liveJsons();
+			$scope.colourman();
+			$scope.getBadge();
+			$scope.getJsons();
+			$scope.fixt();
+			$scope.table();
+			scorer(team);
 	});
 
 	$scope.getMegaJson = function () {
@@ -231,12 +192,45 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout) {
 			}
 		});
 	};
-	$scope.tableJson();
+
+	$scope.score = function () {
+			var scorePromise = GeneralLiveData.scores()
+
+			scorePromise.then(function(data) {
+				$scope.scores = data
+			})
+		}
+
+	$scope.table = function () {
+			var table = GeneralLiveData.table()
+
+			table.then(function(data) {
+				$scope.premtable = data
+			})
+		}
+
+	var scorer = function(team) {
+			var s = LiveStatsData.scorers(team);
+			s.then(function(d) {
+				console.log(d[0].teamshort);
+				$scope.scorers = d;
+			})
+		}
+
+	$scope.fixt = function () {
+			var fixture = GeneralLiveData.fixtures($scope.team);
+
+			fixture.then(function(data) {
+				$scope.fixtures = data
+			})
+		}
+
+	$scope.score();
 
 	setInterval(function(){
             $scope.$apply(function(){
                 $scope.liveJsons();
-								$scope.tableJson();
+                $scope.score();
 								$scope.getJsons();
 								$scope.colourman();
             })

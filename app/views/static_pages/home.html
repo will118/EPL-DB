@@ -61,12 +61,12 @@
             <th>Name</th>
             <th id="scorer-goals">Goals</th>
         </tr>
-			  <tr ng-repeat="s in topscorers">
+			  <tr ng-repeat="s in scorers">
 		      <td>{{s.player}}</td><td id="scorer-goals">{{s.goals}}</td>
 		  </tr>
 		</table>
 		<div class="livescores">
-			<p class="lead" ng-repeat-start="score in scorers">{{score.teams}}  <span class="score"> {{score.score}}</span></p>
+			<p class="lead" ng-repeat-start="score in scores">{{score.teams}}  <span class="score"> {{score.score}}</span></p>
 				<p ng-repeat-end=""></p> 
 			</div>
 	</div>
@@ -81,7 +81,7 @@
             <th>GD</th>
             <th>Points</th>
         </tr>
-			  <tr ng-repeat="t in table" ng-class="{success: t.team==team}">
+			  <tr ng-repeat="t in premtable" ng-class="{success: t.team==team}">
 		      <td>{{t.team}}</td>
 		      <td>{{t.played}}</td>
 		      <td>{{t.won}}</td>
@@ -91,7 +91,7 @@
 		      <td>{{t.points}}</td>
 		  </tr>
 		</table>
-		<nvd3-line-chart data="liveposs" id="liveposs" interactive="true" tooltips="true" margin="{left:0,top:0,bottom:5,right:25}" width="500" height="400" showXAxis="false" showYAxis="false" showLegend="true"><svg id="poss-svg"></svg></nvd3-line-chart>
+		<!-- <nvd3-line-chart data="liveposs" id="liveposs" interactive="true" tooltips="true" margin="{left:0,top:0,bottom:5,right:25}" width="500" height="400" showXAxis="false" showYAxis="false" showLegend="true"><svg id="poss-svg"></svg></nvd3-line-chart> -->
 	</div>
 		<div class="col-lg-3">
 		<nvd3-line-chart data="liveshots" id="liveshots" width="500" height="400" margin="{left:0,top:0,bottom:5,right:25}" showXAxis="false" showYAxis="false" showLegend="true" color="colorFunction()" forcex="[1]"><svg></svg></nvd3-line-chart>
