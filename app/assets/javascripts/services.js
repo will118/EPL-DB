@@ -65,21 +65,26 @@ app.factory('TeamFormData', function ($http, $q) {
 
 
 app.factory('BigData', function ($http, $q) {
-	// 	var methods = {};
-	// 	methods.teamform = function (team) {	
-	// 		var defer_teamform = $q.defer();
-	// 		$http.get('/formjson/' + team).success(function(data) {
-	// 			 defer_teamform.resolve(data);
-	// 		});
-	// 		return defer_teamform.promise;
-	// 	}
-	// 	methods.oppoform = function (team) {	
-	// 		var defer_oppoform = $q.defer();
-	// 		$http.get('/otherformjson/' + team).success(function(data) {
-	// 			 defer_oppoform.resolve(data);
-	// 		});
-	// 		return defer_oppoform.promise;
-	// 	}
-	// return methods;
+		var methods = {};
+		methods.squawka = function (team) {	
+			var defer_squawka = $q.defer();
+			$http.get('/megajson/' + team).success(function(data) {
+				 defer_squawka.resolve(data);
+			});
+			return defer_squawka.promise;
+		}
+	return methods;
 });
+
+app.factory('MatchDetails', function ($http, $q) {
+	var methods = {};
+		methods.prematch = function (team) {	
+			var defer_prematch = $q.defer();
+			$http.get('/prematchjson/' + team).success(function(data) {
+				 defer_prematch.resolve(data);
+			});
+			return defer_prematch.promise;
+		}
+	return methods;
+})
 

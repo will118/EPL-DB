@@ -2,7 +2,7 @@
 
 var d3App = angular.module('d3App', ['nvd3ChartDirectives', 'ui.bootstrap']);
 
-d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout, GeneralLiveData, LiveStatsData, TeamFormData, BigData) {
+d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout, GeneralLiveData, LiveStatsData, TeamFormData, BigData, MatchDetails) {
 
 	$scope.team = 'Arsenal';
 
@@ -17,15 +17,6 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout, GeneralLi
 						if (data && data[0]!=undefined) {
 							$scope.hometeamname	= data[0]['teamname'];
 						};
-				});
-
-					$http({
-						method: 'GET',
-						url:'/prematchjson/' +
-							$scope.team
-					}).success(function(data) {
-						$scope.prematch = data;
-						$scope.preMatcher();
 				});
 
 		
@@ -74,42 +65,17 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout, GeneralLi
 				});
 			}
 			
-	$scope.teamnames = ["Arsenal", "Liverpool", "Chelsea", "Southampton", "Everton", "Hull City", "Manchester City", "Newcastle United", "Tottenham Hotspur", "West Bromwich Albion", "Cardiff City", "Swansea City", "Aston Villa", "Manchester United", "Stoke City", "Norwich City", "West Ham United", "Fulham", "Crystal Palace", "Sunderland"];
-
-
 	$scope.refershInterval = 5;
 
 	$scope.counter = 0;
-	$scope.preMatcher = function () {
-			$scope.prematchsing = $scope.prematch[$scope.counter];
+
+	var preMatcher = function (data) {
+			$scope.prematchsing = data[$scope.counter];
 			if ($scope.counter == 9) {
 				$scope.counter = 0
 			} 
       $scope.counter++;
   };
-
-	$scope.colours = [
-    {'Arsenal': '#e8000b'},
-    {'Chelsea': '#063381'},
-    {'West Bromwich Albion': '#090c41'},
-    {'Aston Villa': '#5a0029'},
-    {'Liverpool': '#c3001e'},
-    {'Tottenham Hotspur': '#051246'},
-    {'Manchester United': '#ce000e'},
-    {'Stoke City': '#d62331'},
-    {'Cardiff City': '#e5001e'},
-    {'West Ham United': '#4c172d'},
-    {'Crystal Palace': '#06347c'},
-    {'Southampton': '#e5002e'},
-    {'Newcastle United': '#666666'},
-    {'Sunderland': '#e30021'},
-    {'Norwich City': '#14993e'},
-    {'Everton': '#073b8b'},
-    {'Manchester City': '#4db1e6'},
-    {'Swansea City': '#b4b4b4'},
-    {'Hull City': '#f79616'},
-    {'Fulham': '#000000'}
-  ];
 
 	$scope.colourman = function () {
 	for (var i = 0; i < ($scope.colours).length; i++) {
@@ -141,37 +107,30 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout, GeneralLi
 	};
 
 
+	$scope.teamnames = teamnames
+	$scope.colours = colours
+
 	$scope.$watch('team', function(team) {
 			$scope.team = team;
-			$scope.getMegaJson();
 			$scope.liveJsons();
 			$scope.colourman();
 			$scope.getBadge();
+			squawkajson(team);
 			formteam(team);
+			optatext(team);
 			formoppo(team);
 			scorer(team);
 			fixt(team);
 			table();
 	});
 
-	$scope.getMegaJson = function () {
-		$http({
-			method: 'GET',
-			url:'/megajson/' +
-				$scope.team
-		}).
-		success(function (data) {
-			$scope.megajson = data;
-			$scope.error = '';
-		}).
-		error(function (data, status) {
-			if (status === 404) {
-				$scope.error = 'Not found?';
-			} else {
-				$scope.error = 'Error: ' + status;
-			}
-		});
-	};
+	var squawkajson = function(team) {
+			var megajson = BigData.squawka(team)
+			megajson.then(function(data) {
+				$scope.megajson = data
+			})
+		}
+
 
 	var score = function () {
 			var scorePromise = GeneralLiveData.scores()
@@ -179,6 +138,8 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout, GeneralLi
 				$scope.scores = data
 			})
 		}
+	score();
+	
 
 	var table = function () {
 			var table = GeneralLiveData.table()
@@ -215,8 +176,15 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout, GeneralLi
 			})
 		}
 
-	score();
+	var optatext = function(team) {
+			var prematch = MatchDetails.prematch(team);
+			prematch.then(function(data) {
+				return preMatcher(data);
+			})
+		}
 
+	$scope.liveJsons();
+	
 	setInterval(function(){
             $scope.$apply(function(){
                 $scope.liveJsons();

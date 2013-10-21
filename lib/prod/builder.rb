@@ -1,7 +1,6 @@
 module ARBuilder
 
 	def form_get
-		
 		form = JasonTheBuilder.single_form
     form.each do |d|
       form = d["form"].join(' ')
