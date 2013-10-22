@@ -47,5 +47,3 @@
 function team_colour(name) {
 	return colours[name];
 };
-
-

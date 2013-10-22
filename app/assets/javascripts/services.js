@@ -61,6 +61,11 @@ app.factory('LiveStatsData', function ($http, $q) {
 			});
 			return defer_target.promise;
 		}
+		methods.colours = function(data,team) {
+				var home_team = data[0]['key'];
+				var away_team = data[1]['key'];
+				return [team_colour(home_team),team_colour(away_team)]
+		}
 	return methods;
 });
 

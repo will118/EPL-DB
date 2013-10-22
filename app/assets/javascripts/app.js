@@ -14,12 +14,12 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout, GeneralLi
 			squawkajson(team);
 			getBadge(team);
 			formteam(team);
+			target(team);
 			optatext(team);
 			formoppo(team);
 			liveshot(team);
 			corners(team);
 			scorer(team);
-			target(team);
 			away(team);
 			home(team);
 			fixt(team);
@@ -49,30 +49,37 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout, GeneralLi
 		}
 
 	var target = function(team) {
-			var targets = LiveStatsData.targets(team);
-			targets.then(function(data) {
+			LiveStatsData.targets(team).then(function(data) {
 				$scope.livetargets = data;
-				if (data[0]['key'] == team) {
-					$scope.myLiveColour = team_colour(data[0]['key']);
-					$scope.otherLiveColour = team_colour(data[1]['key']);
-					livecolours();
-				};
-				if (data[1]['key'] == team) {
-					$scope.myLiveColour = team_colour(data[1]['key']);
-					$scope.otherLiveColour = team_colour(data[0]['key']);
-					livecolours();
-				};
+				$scope.colorArray = LiveStatsData.colours(data, team);
 			})
 		}
-  var livecolours = function () {
-		  $scope.colorArray = [$scope.myLiveColour, $scope.otherLiveColour]
+
+	var corners = function(team) {
+			var corner = LiveStatsData.corner(team)
+			corner.then(function(data) {
+				$scope.livecorners = data
+				
+
+			})
+	}
+
+	var liveshot = function(team) {
+		var liveshots = LiveStatsData.shot(team);
+		liveshots.then(function(data) {
+			$scope.liveshots = data
+				
+
+		})
 	};
 
+
 	$scope.colorFunction = function() {
-	return function(d, i) {
-    	return $scope.colorArray[i];
-    };
+		return function(d, i) {
+	    	return $scope.colorArray[i];
+	    };
 	}
+
 
 	var squawkajson = function(team) {
 			var megajson = BigData.squawka(team)
@@ -81,21 +88,12 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout, GeneralLi
 			})
 		}
 
-	var corners = function(team) {
-			var corner = LiveStatsData.corner(team)
-			corner.then(function(data) {
-				$scope.livecorners = data
-			})
-			livecolours();
-		}
-
 	var score = function () {
 			var scorePromise = GeneralLiveData.scores()
 			scorePromise.then(function(data) {
 				$scope.scores = data
 			})
-			livecolours();
-		}
+	}
 	score();
 
 	var table = function () {
@@ -141,12 +139,6 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout, GeneralLi
 			})
 	};
 
-	var liveshot = function(team) {
-		var liveshots = LiveStatsData.shot(team);
-		liveshots.then(function(data) {
-			$scope.liveshots = data
-		})
-	};
 
 	$scope.counter = 0;
 	var preMatcher = function (data) {

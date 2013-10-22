@@ -4,3 +4,8 @@ describe("The Colour Service", function() {
     expect(team_colour("Stoke City")).toBe("#d62331");
   });
 });
+
+// describe("LiveStatsData",function(){
+// 	it("returns colours correctly"
+// 		LiveStatsData.colours(data, team);
+// })
