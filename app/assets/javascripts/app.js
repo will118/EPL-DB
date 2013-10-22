@@ -2,127 +2,77 @@
 
 var d3App = angular.module('d3App', ['nvd3ChartDirectives', 'ui.bootstrap']);
 
-d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout, GeneralLiveData, LiveStatsData, TeamFormData, BigData, MatchDetails) {
+d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout, GeneralLiveData, LiveStatsData, TeamFormData, BigData, MatchDetails, HomeAwayTeam) {
 
 	$scope.team = 'Arsenal';
 
-	$scope.liveJsons = function () {
-		
-					$http({
-						method: 'GET',
-						url:'/hometeam/' +
-							$scope.team
-					}).success(function(data) {
-						$scope.hometeam = data;
-						if (data && data[0]!=undefined) {
-							$scope.hometeamname	= data[0]['teamname'];
-						};
-				});
+	$scope.teamnames = teamnames
 
-		
-					$http({
-						method: 'GET',
-						url:'/awayteam/' +
-							$scope.team
-					}).success(function(data) {
-						$scope.awayteam = data;
-						if (data && data[0]!=undefined) {
-							$scope.awayteamname	= data[0]['teamname'];
-						};
-				});
+	$scope.$watch('team', function(team) {
+			$scope.myColour = team_colour(team);
+			$scope.team = team;
+			squawkajson(team);
+			getBadge(team);
+			formteam(team);
+			optatext(team);
+			formoppo(team);
+			liveshot(team);
+			corners(team);
+			scorer(team);
+			target(team);
+			away(team);
+			home(team);
+			fixt(team);
+			table();
+	});
 
-					$http({
-						method: 'GET',
-						url:'/targetjson/' +
-							$scope.team
-					}).success(function(data) {
-						$scope.livetargets = data;
-						if (data[0]['key'] == $scope.team ) {
-							$scope.myliveteam = data[0]['key'];
-							$scope.otherliveteam = data[1]['key'];
-						};
-						if (data[1]['key'] == $scope.team ) {
-							$scope.myliveteam = data[1]['key'];
-							$scope.otherliveteam = data[0]['key'];
-						};
-						$scope.colourman();
-				});
+	
 
-					$http({
-						method: 'GET',
-						url:'/cornerjson/' +
-							$scope.team
-					}).success(function(data) {
-						$scope.livecorners = data;
-				});
-					
-					$http({
-						method: 'GET',
-						url:'/shotjson/' +
-							$scope.team
-					}).success(function(data) {
-						$scope.liveshots = data;
-				});
-			}
-			
-	$scope.refershInterval = 5;
-
-	$scope.counter = 0;
-
-	var preMatcher = function (data) {
-			$scope.prematchsing = data[$scope.counter];
-			if ($scope.counter == 9) {
-				$scope.counter = 0
-			} 
-      $scope.counter++;
-  };
-
-	$scope.colourman = function () {
-	for (var i = 0; i < ($scope.colours).length; i++) {
-	  if ($scope.colours[i][$scope.otherteam]) {
-	  		$scope.otherColour = $scope.colours[i][$scope.otherteam];
-	  	};
-  	if ($scope.colours[i][$scope.otherliveteam]) {
-	  		$scope.otherLiveColour = $scope.colours[i][$scope.otherliveteam];  	
-				$scope.colorArray = [$scope.myLiveColour,$scope.otherLiveColour];
-				
-	  	};
-	  if ($scope.colours[i][$scope.team]) {
-	  		$scope.myColour = $scope.colours[i][$scope.team];
-	  		$scope.myLiveColour = $scope.colours[i][$scope.myliveteam];  	
-				$scope.colorArray = [$scope.otherLiveColour,$scope.myLiveColour];
-	  	}
+	var home = function(team) {
+			var hometeam = HomeAwayTeam.home(team);
+			hometeam.then(function(data) {
+				if (data && data[0] != undefined) {
+					$scope.hometeam = data;
+					$scope.hometeamname = data[0].teamname
+				}
+			})
 		}
-	};
 
+	var away = function(team) {
+			var awayteam = HomeAwayTeam.away(team);
+			awayteam.then(function(data) {
+				if (data && data[0] != undefined) {
+					$scope.awayteam = data;
+					$scope.awayteamname = data[0].teamname
+				}
+			})
+		}
+
+	var target = function(team) {
+			var targets = LiveStatsData.targets(team);
+			targets.then(function(data) {
+				$scope.livetargets = data;
+				if (data[0]['key'] == team) {
+					$scope.myLiveColour = team_colour(data[0]['key']);
+					$scope.otherLiveColour = team_colour(data[1]['key']);
+					livecolours();
+				};
+				if (data[1]['key'] == team) {
+					$scope.myLiveColour = team_colour(data[1]['key']);
+					$scope.otherLiveColour = team_colour(data[0]['key']);
+					livecolours();
+				};
+			})
+		}
+  var livecolours = function () {
+		  $scope.colorArray = [$scope.myLiveColour, $scope.otherLiveColour]
+	};
 
 	$scope.colorFunction = function() {
 	return function(d, i) {
     	return $scope.colorArray[i];
     };
 	}
-
-	$scope.getBadge = function () {
-		$scope.badgehash = ($scope.team.replace(/ /g,"_") + ".png")
-	};
-
-
-	$scope.teamnames = teamnames
-	$scope.colours = colours
-
-	$scope.$watch('team', function(team) {
-			$scope.team = team;
-			$scope.liveJsons();
-			$scope.colourman();
-			$scope.getBadge();
-			squawkajson(team);
-			formteam(team);
-			optatext(team);
-			formoppo(team);
-			scorer(team);
-			fixt(team);
-			table();
-	});
 
 	var squawkajson = function(team) {
 			var megajson = BigData.squawka(team)
@@ -131,66 +81,93 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout, GeneralLi
 			})
 		}
 
+	var corners = function(team) {
+			var corner = LiveStatsData.corner(team)
+			corner.then(function(data) {
+				$scope.livecorners = data
+			})
+			livecolours();
+		}
 
 	var score = function () {
 			var scorePromise = GeneralLiveData.scores()
 			scorePromise.then(function(data) {
 				$scope.scores = data
 			})
+			livecolours();
 		}
 	score();
-	
 
 	var table = function () {
 			var table = GeneralLiveData.table()
 			table.then(function(data) {
 				$scope.premtable = data
 			})
-		}
+	};
 
 	var scorer = function(team) {
 			var s = LiveStatsData.scorers(team);
 			s.then(function(data) {
 				$scope.scorers = data;
 			})
-		}
+	};
 
 	var fixt = function(team) {
 			var fixture = GeneralLiveData.fixtures(team);
 			fixture.then(function(data) {
 				$scope.fixtures = data
 			})
-		}
+	};
 
 	var formteam = function(team) {
 			var teamform = TeamFormData.teamform(team);
 			teamform.then(function(data) {
 				$scope.form = data
 			})
-		}
+	};
 
 	var formoppo = function(team) {
 			var oppoform = TeamFormData.oppoform(team);
 			oppoform.then(function(data) {
 				$scope.otherform = data
+				$scope.otherColour = team_colour(data[0]['team'])
 			})
-		}
+	};
 
 	var optatext = function(team) {
 			var prematch = MatchDetails.prematch(team);
 			prematch.then(function(data) {
-				return preMatcher(data);
+				preMatcher(data);
 			})
-		}
+	};
 
-	$scope.liveJsons();
-	
+	var liveshot = function(team) {
+		var liveshots = LiveStatsData.shot(team);
+		liveshots.then(function(data) {
+			$scope.liveshots = data
+		})
+	};
+
+	$scope.counter = 0;
+	var preMatcher = function (data) {
+			$scope.prematchsing = data[$scope.counter];
+			if ($scope.counter == 9) {
+				$scope.counter = 0
+			} 
+      $scope.counter++;
+  };
+
+	var getBadge = function (team) {
+		$scope.badgehash = (team.replace(/ /g,"_") + ".png")
+	};
+
 	setInterval(function(){
             $scope.$apply(function(){
-                $scope.liveJsons();
-								$scope.colourman();
                 score();
+                table();
             })
         }, 10000);
-});
+	
+	$scope.refershInterval = 5;
 
+});

@@ -40,6 +40,27 @@ app.factory('LiveStatsData', function ($http, $q) {
 			});
 			return defer_topscorers.promise;
 		}
+		methods.corner = function (team) {	
+			var defer_corner = $q.defer();
+			$http.get('/cornerjson/' + team).success(function(data) {
+				 defer_corner.resolve(data);
+			});
+			return defer_corner.promise;
+		}
+		methods.shot = function (team) {	
+			var defer_shot = $q.defer();
+			$http.get('/shotjson/' + team).success(function(data) {
+				 defer_shot.resolve(data);
+			});
+			return defer_shot.promise;
+		}
+		methods.targets = function (team) {	
+			var defer_target = $q.defer();
+			$http.get('/targetjson/' + team).success(function(data) {
+				 defer_target.resolve(data);
+			});
+			return defer_target.promise;
+		}
 	return methods;
 });
 
@@ -86,5 +107,25 @@ app.factory('MatchDetails', function ($http, $q) {
 			return defer_prematch.promise;
 		}
 	return methods;
-})
+});
+
+app.factory('HomeAwayTeam', function ($http, $q) {
+	var methods = {};
+	methods.home = function (team) {
+		var defer_hometeam = $q.defer();
+		$http.get('/hometeam/' + team).success(function(data) {
+		defer_hometeam.resolve(data);	
+	});
+	return defer_hometeam.promise;
+	}
+	methods.away = function (team) {
+		var defer_awayteam = $q.defer();
+		$http.get('/awayteam/' + team).success(function(data) {
+		defer_awayteam.resolve(data);
+		})
+	return defer_awayteam.promise;
+	}
+	return methods;
+});
+
 
