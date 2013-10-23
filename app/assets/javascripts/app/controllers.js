@@ -1,8 +1,5 @@
-'use strict';
-
-var d3App = angular.module('d3App', ['nvd3ChartDirectives', 'ui.bootstrap']);
-
-d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout, GeneralLiveData, LiveStatsData, TeamFormData, BigData, MatchDetails, HomeAwayTeam) {
+angular.module('d3App.controllers', [])
+.controller('AppController', function($scope, $http, $timeout, GeneralLiveData, LiveStatsData, TeamFormData, BigData, MatchDetails, HomeAwayTeam) {
 
 	$scope.team = 'Arsenal';
 
@@ -11,10 +8,10 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout, GeneralLi
 	$scope.$watch('team', function(team) {
 			$scope.myColour = team_colour(team);
 			$scope.team = team;
+			target(team);
 			squawkajson(team);
 			getBadge(team);
 			formteam(team);
-			target(team);
 			optatext(team);
 			formoppo(team);
 			liveshot(team);
@@ -51,7 +48,7 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout, GeneralLi
 	var target = function(team) {
 			LiveStatsData.targets(team).then(function(data) {
 				$scope.livetargets = data;
-				$scope.colorArray = LiveStatsData.colours(data, team);
+				$scope.colourArray = LiveStatsData.colours(data, team);
 			})
 		}
 
@@ -59,8 +56,6 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout, GeneralLi
 			var corner = LiveStatsData.corner(team)
 			corner.then(function(data) {
 				$scope.livecorners = data
-				
-
 			})
 	}
 
@@ -68,15 +63,13 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout, GeneralLi
 		var liveshots = LiveStatsData.shot(team);
 		liveshots.then(function(data) {
 			$scope.liveshots = data
-				
-
 		})
 	};
 
 
 	$scope.colorFunction = function() {
 		return function(d, i) {
-	    	return $scope.colorArray[i];
+	    	return $scope.colourArray[i];
 	    };
 	}
 
