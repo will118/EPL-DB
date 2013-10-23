@@ -1,5 +1,6 @@
 <body ng-controller="AppController">
- <h1>Welcome back {{ user.name }}</h1>
+<nav class="navbar navbar-default navbar-static-top" role="navigation" style="background-color: {{myColour}}">
+</nav> 
      <div class="row">
              <div class="col-lg-3" id="badge">
                              <img id="badgey" ng-src="images/{{badgehash}}"/>
@@ -14,6 +15,8 @@
                      </div>
      </div>
   <div class="col-lg-3">
+                             <h3>Welcome back {{user.name}}</h3>
+                             <br>
                         <table class="table table-striped" id="fixturestable">
                           <tr ng-repeat="fix in fixtures | limitTo:5">
                       <td>{{fix.home}} vs. {{fix.away}}</td><td><span class="fixdate"> {{fix.date}}</span></td>

@@ -38,9 +38,7 @@ AAAAMILNE::Application.routes.draw do
 
   get "news/index"
   
-  get "/prematchjson/:team" => "fixtures#prematchjson"
-  resources :articles
-  
+  get "/prematchjson/:team" => "fixtures#prematchjson"  
   mount JasmineRails::Engine => "/specs" if defined?(JasmineRails)
 
 end

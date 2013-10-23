@@ -40,35 +40,6 @@ namespace :populater do
     end
   end
 
-  desc "child labour"
-  task fakedata: :environment do
-    Poss.delete_all
-    Shot.delete_all
-    Target.delete_all
-    Corner.delete_all
-    Foul.delete_all
-    matches = YAML::load( File.open( 'matches.yml' ) )
-    matches.each do |team1, team2|
-      90.times do |x|
-        rando = x + ((team1.length)*(team2.length))
-        randy = x + 2
-        randy2 = randy - (rand(5))
-        Poss.where(:homeposs => (rando+2), :awayposs => randy2, :hometeam => team1, :awayteam => team2).create
-        Shot.where(:homeshots => rando, :awayshots => randy2, :hometeam => team1, :awayteam => team2).create
-        Target.where(:homeshots => (randy+7), :awayshots => randy2, :hometeam => team1, :awayteam => team2).create
-        Corner.where(:home => (randy+3), :away => randy2, :hometeam => team1, :awayteam => team2).create
-        Foul.where(:home => randy, :away => randy2, :hometeam => team1, :awayteam => team2).create
-      end
-    end
-  end
-
-  desc "Populates arsenal articles"
-  task arscom: :environment do
-    links = Arscom.new
-    links.link_filter
-    links.noko_save
-  end
-
   desc "Emergency Wipe for match"
   task wipe: :environment do
     Team.delete_all
@@ -78,8 +49,6 @@ namespace :populater do
     Corner.delete_all
     Foul.delete_all
   end
-
-
 
 task :all => ["populater:squawka", "populater:teamform", "populater:schedule"]
 end

@@ -16,11 +16,8 @@ That is the "second screen" one-page thing.
 - Our recent form, and opponents recent form.
 - Stats from previous games
 
-Also scrapes the articles that I want off of Arsenal.com which was a few hours of work.
-
 ## Sources:
 
-- Arsenal.com
 - Stats FC API
 - BBC Sport [Lol](http://www.bbc.co.uk/sport/0/24067715)  
 - Squawka/Opta
@@ -47,13 +44,6 @@ Also scrapes the articles that I want off of Arsenal.com which was a few hours o
 - PhantomJS running GhostDriver (phantomjs --webdriver=9134)
 - Pretty sure that's it. 
 - Bundle obviously.
-
-
-#### Arsenal.com scraping
-
-If you check out populater.rake, you will see the Arscom class being used. (check lib/prod for my classes). Grep to delete links I dont want, regex on the inner_text nokogiri then goes and gets.
-
-![Parser](/ss/1.jpg "Nokogiri bit")
 
 #### Stats FC
 

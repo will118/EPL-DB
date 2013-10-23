@@ -13,10 +13,6 @@
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
   </head>  
   <body>
-    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="background-color: {{myColour}}">
-  
-    <%= button_to "sign out", destroy_user_session_path, method: :delete %>
-    </nav> 
       <div data-ng-view></div>
     <%= javascript_include_tag "application" %>
   </body>

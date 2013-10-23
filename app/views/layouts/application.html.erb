@@ -19,18 +19,14 @@
   	<%= javascript_include_tag "vendor/custom.modernizr" %>
     <%= csrf_meta_tags %>
   </head>
+<center>
   <body>
-      <h1><a href="#">EPLDB</a></h1>
-    <ul>
-        <li class="has-form">
-          <a class="button" href="/users/sign_in">Sign in</a>
-        </li>    
-        <li class="has-form">
-          <a class="button" href="/users/sign_up">Sign up</a>
-        </li>    
-</ul>
-</nav>
-    <%= yield %>  
+    <h1><a href="#">EPLDB</a></h1>
+      <a class="button" href="/users/sign_in">Sign in</a>
+      <br>    
+      <a class="button" href="/users/sign_up">Sign up</a>
+      <%= yield %>  
+</center>
     <%= javascript_include_tag "application" %>
   </body>
 </html>
