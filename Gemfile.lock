@@ -248,7 +248,7 @@ DEPENDENCIES
   guard-cucumber
   guard-rspec
   httparty
-  jbuilder (~> 1.2)
+  jbuilder
   launchy (~> 2.3.0)
   mechanize
   newrelic_rpm

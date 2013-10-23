@@ -26,7 +26,6 @@ d3App.controller('AppCtrl', function AppCtrl ($scope, $http, $timeout, GeneralLi
 			table();
 	});
 
-	
 
 	var home = function(team) {
 			var hometeam = HomeAwayTeam.home(team);

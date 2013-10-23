@@ -132,5 +132,3 @@ app.factory('HomeAwayTeam', function ($http, $q) {
 	}
 	return methods;
 });
-
-

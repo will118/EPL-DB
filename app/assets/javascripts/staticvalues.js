@@ -1,5 +1,4 @@
 'use strict';
-
 	var teamnames = ["Arsenal",
 		 "Liverpool",
 		 "Chelsea",
@@ -20,7 +19,6 @@
 		 "Fulham",
 		 "Crystal Palace",
 		 "Sunderland"];
-
 	var colours = {
     'Arsenal': '#e8000b',  
     'Chelsea': '#063381',
@@ -43,7 +41,6 @@
     'Hull City': '#f79616',
     'Fulham': '#000000'
   };
-	
 function team_colour(name) {
 	return colours[name];
 };
