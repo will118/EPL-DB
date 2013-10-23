@@ -1,6 +1,6 @@
 'use strict';
 
-var app = angular.module('d3App')
+var app = angular.module('d3App.services', [])
 app.factory('GeneralLiveData', function ($http, $q) {
 		var methods = {};
 
@@ -29,7 +29,6 @@ app.factory('GeneralLiveData', function ($http, $q) {
 		}
 	return methods;
 });
-
 
 app.factory('LiveStatsData', function ($http, $q) {
 		var methods = {};
@@ -64,7 +63,7 @@ app.factory('LiveStatsData', function ($http, $q) {
 		methods.colours = function(data,team) {
 				var home_team = data[0]['key'];
 				var away_team = data[1]['key'];
-				return [team_colour(home_team),team_colour(away_team)]
+			return [team_colour(home_team),team_colour(away_team)]
 		}
 	return methods;
 });

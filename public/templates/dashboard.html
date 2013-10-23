@@ -1,0 +1,93 @@
+<body ng-controller="AppController">
+     <div class="row">
+             <div class="col-lg-3" id="badge">
+                             <img id="badgey" ng-src="images/{{badgehash}}"/>
+             </div>
+                     <div class="col-lg-6">
+
+                             <nvd3-line-chart data="megajson" id="megajson" width="1000" height="500" showXAxis="false" margin="{left:0,top:0,bottom:50,right:30}" showYAxis="false" interactive="true" tooltips="true" showLegend="true"><svg id="megaj"></svg></nvd3-line-chart>
+                             </div>
+
+                     <div class="col-lg-3">
+                             <nvd3-line-chart data="livetargets" id="livetargets" margin="{left:0,top:0,bottom:0,right:0}" width="450" height="400" showXAxis="false" showYAxis="false" forcex="[1]" showLegend="true" color="colorFunction()"><svg id="livetargets-svg"></svg></nvd3-line-chart>
+                     </div>
+     </div>
+  <div class="col-lg-3">
+                        <table class="table table-striped" id="fixturestable">
+                          <tr ng-repeat="fix in fixtures | limitTo:5">
+                      <td>{{fix.home}} vs. {{fix.away}}</td><td><span class="fixdate"> {{fix.date}}</span></td>
+                  </tr>
+                </table>                        
+<div id="hometeam"><div class="hometeam"><h4>{{hometeamname}}</h4></div></div>
+  <div id="awayteam"><div class="awayteam"><h4>{{awayteamname}}</h4></div></div>
+                <table class="table table-hover" id="teams">
+        <tr>
+            <th>No.</th><th>Name</th><th></th>
+        </tr>
+                          <tr ng-repeat="item in hometeam | limitTo:11">
+                      <td>{{item.number}}</td><td>{{item.player}}</td><td>{{item.subbed}}</td>
+                  </tr>
+                </table>
+          <table class="table table-hover" id="teams">
+        <tr>
+               <th>No.</th><th>Name</th><th></th>
+        </tr>
+                          <tr ng-repeat="item in awayteam | limitTo:11">
+                      <td>{{item.number}}</td><td>{{item.player}}</td><td>{{item.subbed}}</td>
+                  </tr>
+                </table>
+        </div>
+  <div class="col-lg-3">
+                  <div class="prematch">{{prematchsing.text}}</div>
+                   <input type="text" class="form-control" ng-model="team" typeahead="name for name in teamnames | filter:$viewValue">
+                        <p class="error">{{error}}</p>        
+          <h2 ng-repeat="f in form" style="background-color: {{myColour}}" id="form-column">
+                                {{f.form}}
+                </h2>          
+                <h2 ng-repeat="f in otherform" style="background-color: {{otherColour}}" id="other-form-column">
+                                {{f.form}}
+                </h2>
+                <br>
+                <table class="table table-hover" id="scorers">
+        <tr>
+            <th>Name</th>
+            <th id="scorer-goals">Goals</th>
+        </tr>
+                          <tr ng-repeat="s in scorers">
+                      <td>{{s.player}}</td><td id="scorer-goals">{{s.goals}}</td>
+                  </tr>
+                </table>
+                <div class="livescores">
+                        <p class="lead" ng-repeat-start="score in scores">{{score.teams}}  <span class="score"> {{score.score}}</span></p>
+                                <p ng-repeat-end=""></p> 
+                        </div>
+        </div>
+  <div class="col-lg-3">
+                <table class="table table-hover">
+        <tr>
+            <th>Team</th>
+            <th>Pl.</th>
+            <th>W</th>
+            <th>D</th>
+            <th>L</th>
+            <th>GD</th>
+            <th>Points</th>
+        </tr>
+                          <tr ng-repeat="t in premtable" ng-class="{success: t.team==team}">
+                      <td>{{t.team}}</td>
+                      <td>{{t.played}}</td>
+                      <td>{{t.won}}</td>
+                      <td>{{t.drawn}}</td>
+                      <td>{{t.lost}}</td>
+                      <td>{{t.difference}}</td>
+                      <td>{{t.points}}</td>
+                  </tr>
+                </table>
+                <!-- <nvd3-line-chart data="liveposs" id="liveposs" interactive="true" tooltips="true" margin="{left:0,top:0,bottom:5,right:25}" width="500" height="400" showXAxis="false" showYAxis="false" showLegend="true"><svg id="poss-svg"></svg></nvd3-line-chart> -->
+        </div>
+                <div class="col-lg-3">
+                <nvd3-line-chart data="liveshots" id="liveshots" width="500" height="400" margin="{left:0,top:0,bottom:5,right:25}" showXAxis="false" showYAxis="false" showLegend="true" color="colorFunction()" forcex="[1]"><svg></svg></nvd3-line-chart>
+                                
+                                <nvd3-line-chart data="livecorners" id="livecorners" color="colorFunction()" margin="{left:0,top:0,bottom:5,right:25}" width="500" height="400" showLegend="true" showXAxis="false" showYAxis="false" forcex="[1]"><svg></svg></nvd3-line-chart>
+                </div>
+</body>

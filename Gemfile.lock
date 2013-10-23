@@ -28,6 +28,7 @@ GEM
     addressable (2.3.5)
     arel (4.0.0)
     atomic (1.1.14)
+    bcrypt-ruby (3.1.2)
     builder (3.1.4)
     capybara (2.1.0)
       mime-types (>= 1.16)
@@ -60,6 +61,12 @@ GEM
       nokogiri (>= 1.5.0)
       rails (>= 3.0.0)
     database_cleaner (1.0.1)
+    devise (3.1.1)
+      bcrypt-ruby (~> 3.0)
+      orm_adapter (~> 0.1)
+      railties (>= 3.2.6, < 5)
+      thread_safe (~> 0.1)
+      warden (~> 1.2.3)
     diff-lcs (1.2.4)
     domain_name (0.5.13)
       unf (>= 0.0.5, < 1.0.0)
@@ -73,6 +80,8 @@ GEM
       railties (>= 3.0.0)
     faker (1.1.2)
       i18n (~> 0.5)
+    faraday (0.8.8)
+      multipart-post (~> 1.2.0)
     ffi (1.9.0)
     figaro (0.7.0)
       bundler (~> 1.0)
@@ -96,17 +105,21 @@ GEM
     guard-rspec (3.1.0)
       guard (>= 1.8)
       rspec (~> 2.13)
+    hashie (2.0.5)
     hike (1.2.3)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
     httparty (0.11.0)
       multi_json (~> 1.0)
       multi_xml (>= 0.5.2)
+    httpauth (0.2.0)
     i18n (0.6.5)
     jbuilder (1.5.1)
       activesupport (>= 3.0.0)
       multi_json (>= 1.2.0)
     json (1.8.0)
+    jwt (0.1.8)
+      multi_json (>= 1.5)
     launchy (2.3.0)
       addressable (~> 2.3)
     listen (1.3.1)
@@ -133,12 +146,29 @@ GEM
     multi_json (1.8.0)
     multi_test (0.0.2)
     multi_xml (0.5.5)
+    multipart-post (1.2.0)
     net-http-digest_auth (1.4)
     net-http-persistent (2.9)
     newrelic_rpm (3.6.5.130)
     nokogiri (1.6.0)
       mini_portile (~> 0.5.0)
     ntlm-http (0.1.1)
+    oauth2 (0.8.1)
+      faraday (~> 0.8)
+      httpauth (~> 0.1)
+      jwt (~> 0.1.4)
+      multi_json (~> 1.0)
+      rack (~> 1.2)
+    omniauth (1.1.4)
+      hashie (>= 1.2, < 3)
+      rack
+    omniauth-github (1.1.1)
+      omniauth (~> 1.0)
+      omniauth-oauth2 (~> 1.1)
+    omniauth-oauth2 (1.1.1)
+      oauth2 (~> 0.8.0)
+      omniauth (~> 1.0)
+    orm_adapter (0.4.0)
     pg (0.17.0)
     polyglot (0.3.3)
     pry (0.9.12.2)
@@ -217,8 +247,6 @@ GEM
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
-    turbolinks (1.3.0)
-      coffee-rails
     tzinfo (0.3.37)
     uglifier (2.2.1)
       execjs (>= 0.3.0)
@@ -226,6 +254,9 @@ GEM
     unf (0.1.2)
       unf_ext
     unf_ext (0.0.6)
+    uuidtools (2.1.4)
+    warden (1.2.3)
+      rack (>= 1.0)
     webrobots (0.1.1)
     websocket (1.0.7)
     xpath (2.0.0)
@@ -240,6 +271,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   cucumber-rails
   database_cleaner (~> 1.0.1)
+  devise
   factory_girl_rails (~> 4.2.1)
   faker (~> 1.1.2)
   figaro
@@ -253,6 +285,8 @@ DEPENDENCIES
   mechanize
   newrelic_rpm
   nokogiri
+  omniauth
+  omniauth-github
   pg
   puma
   rails (= 4.0.0)
@@ -260,5 +294,5 @@ DEPENDENCIES
   sass-rails (~> 4.0.0)
   sdoc
   selenium-webdriver
-  turbolinks
   uglifier (>= 1.3.0)
+  uuidtools

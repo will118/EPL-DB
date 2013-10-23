@@ -1,16 +1,36 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="d3App">
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7 ]> <html class="ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
   <head>
-  	<meta charset="utf-8">
+  	<meta charset="utf-8" />
 
-  	<title>EPL-DB</title>
+  	<!-- Uncomment to make IE8 render like IE7 -->
+  	<!-- <meta http-equiv="X-UA-Compatible" content="IE=7" /> -->
+
+  	<!-- Set the viewport width to device width for mobile -->
+  	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  	<title><%= content_for?(:title) ? yield(:title) : "Index" %></title>
+
+  	<%= stylesheet_link_tag    "application" %>
+  	<%= javascript_include_tag "vendor/custom.modernizr" %>
     <%= csrf_meta_tags %>
-  	<%= stylesheet_link_tag "application" %>
   </head>
   <body>
-    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="background-color: {{myColour}}">
-    </nav>
-    <%= yield %>    
+      <h1><a href="#">EPLDB</a></h1>
+    <ul>
+        <li class="has-form">
+          <a class="button" href="/users/sign_in">Sign in</a>
+        </li>    
+        <li class="has-form">
+          <a class="button" href="/users/sign_up">Sign up</a>
+        </li>    
+</ul>
+</nav>
+    <%= yield %>  
     <%= javascript_include_tag "application" %>
   </body>
 </html>
