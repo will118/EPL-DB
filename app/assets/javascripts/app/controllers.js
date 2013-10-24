@@ -1,7 +1,9 @@
 angular.module('d3App.controllers', [])
-.controller('AppController', function($scope, $http, $timeout, GeneralLiveData, LiveStatsData, TeamFormData, BigData, MatchDetails, HomeAwayTeam) {
+.controller('AppController', function($scope, $http, $timeout, session, GeneralLiveData, SessionService, LiveStatsData, TeamFormData, BigData, MatchDetails, HomeAwayTeam) {
 
 	$scope.team = 'Arsenal';
+
+	$scope.user = session.user;
 
 	$scope.teamnames = teamnames
 

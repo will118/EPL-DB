@@ -5,7 +5,12 @@ var d3App = angular.module('d3App', ['ngRoute', 'nvd3ChartDirectives', 'd3App.co
 .config(function ($routeProvider) {
 	$routeProvider.when('/', {
 		templateUrl: '/templates/dashboard.html',
-		controller: 'AppController'
+		controller: 'AppController',
+		resolve: {
+			session: function(SessionService) {
+				return SessionService.getCurrentUser();
+			}
+		}
 	})
 	.otherwise({ redirectTo: '/' });
 });
