@@ -129,24 +129,65 @@ h1 {
   text-align: center;
 }
 
+#table-div {
+  width: 23%;
+}
+
+#live-div {
+  width: 27%;
+}
+
+#mega-div {
+  width: 56%;
+}
+
+#live-targets {
+  width: 24%;
+}
+
+#badge-div {
+  width: 20%;
+}
+
+
+.table-points {
+  text-align: center;
+}
+
+
+
 .livescores {
   text-align: center;
 }
 
 .prematch {
   min-height: 60px;
+  display: table; 
+}
+
+.prematch p {
+  display: table-cell;
+  padding-top: 4px;
   vertical-align: middle;
-  text-align: center;
-  font-size: 0.8em;
+  font-size: 0.85em;
 }
 
 #sign-out-btn {
   margin-right: 5px;
 }
 
+#livetargets-svg {
+  margin-left: -13%;
+}
+
 .fixdate {
     font-size: 0.75em;
     font-weight: 600;
+}
+
+#megaj {
+  margin-left: 4%;
+  margin-right: 2%;
 }
 
 #navvy  {

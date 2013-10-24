@@ -131,10 +131,10 @@ angular.module('d3App.controllers', [])
 	var optatext = function(team) {
 			var prematch = MatchDetails.prematch(team);
 			prematch.then(function(data) {
+				$scope.prematchArray = data
 				preMatcher(data);
 			})
 	};
-
 
 	$scope.counter = 0;
 	var preMatcher = function (data) {
@@ -145,12 +145,15 @@ angular.module('d3App.controllers', [])
       $scope.counter++;
   };
 
+  console.log($scope.counter);
+
 	var getBadge = function (team) {
 		$scope.badgehash = (team.replace(/ /g,"_") + ".png")
 	};
 
 	setInterval(function(){
             $scope.$apply(function(){
+                preMatcher($scope.prematchArray);
                 score();
                 table();
             })
