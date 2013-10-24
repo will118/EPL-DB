@@ -5,23 +5,15 @@ angular.module('d3App.controllers', [])
 
         focus('focusMe');
 
-        $scope.settingsToggle = true
+        $scope.settingsToggle = false
 
         $scope.leftPanelEnable = true
 
-        $scope.team = 'Arsenal';
-
         $scope.user = session.user;
 
-
-        $scope.checkModel = {
-            badge: true,
-            leaguetable: true,
-            prematch: true,
-            oppoform: true,
-            fixtures: true,
-            teams: true
-        };
+        $scope.checkModel = angular.fromJson(session.user.settings);
+     
+        $scope.team = $scope.checkModel.favteam;
 
         $scope.$watch('checkModel', function() {
             if ($scope.checkModel.fixtures == false && $scope.checkModel.teams == false) {
@@ -30,7 +22,6 @@ angular.module('d3App.controllers', [])
             	  $scope.leftPanelEnable = true
             }		       
 			   });
-        // session.user.settings;
 
         $scope.teamnames = teamnames
 
@@ -169,8 +160,6 @@ angular.module('d3App.controllers', [])
             }
             $scope.counter++;
         };
-
-        console.log($scope.counter);
 
         var getBadge = function(team) {
             $scope.badgehash = (team.replace(/ /g, "_") + ".png")

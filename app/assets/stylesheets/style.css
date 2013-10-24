@@ -156,6 +156,11 @@ h1 {
 #sign-out-btn {
     margin-right: 5px;
 }
+.graph-title {
+    position: relative;
+    top: 60px;
+}
+
 #top-toggles {
     margin-top: 8.5px;
 }
