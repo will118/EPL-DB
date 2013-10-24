@@ -19,6 +19,7 @@ Guardfile
 /tmp
 /spec/tmp
 /config/app_config.yml
+/lib/log
 
 Gemfile
 Gemfile.lock

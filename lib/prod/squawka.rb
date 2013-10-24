@@ -26,29 +26,29 @@ class Squawka
 
   def save
     ids = []
-    
+
     @avgpos.each do |k, v|
       ids << k
     end
 
-    ids.each do 
+    ids.each do
       |key|
-        Supermodel.where(:teamname => @teamname, :matchid => key).first_or_create do |supermodel|
-          poss = @passacc[key].fetch('success')
-          poss2 = @passacc[key].fetch('unsuccess')
-          supermodel.passaccuracy = (poss - poss2)  
-          supermodel.avgpossession = (@avgpos[key].fetch('total')) * 5
-          total = @shotacc[key].fetch('total')
-          total2 = @shotacc[key].fetch('offtarget')
-          supermodel.shotaccuracy = ((total + 1) / (total2 + 1))*50
-          h = @opta[key]
-          supermodel.attackscore = h.fetch('attack')
-          supermodel.defencescore = h.fetch('defence')
-          supermodel.possesionscore = h.fetch('possesion')
-          supermodel.optascore = h.fetch('total')
-          supermodel.date = h.fetch('date')
-        end
+      Supermodel.where(:teamname => @teamname, :matchid => key).first_or_create do |supermodel|
+        poss = @passacc[key].fetch('success')
+        poss2 = @passacc[key].fetch('unsuccess')
+        supermodel.passaccuracy = (poss - poss2)
+        supermodel.avgpossession = (@avgpos[key].fetch('total')) * 5
+        total = @shotacc[key].fetch('total')
+        total2 = @shotacc[key].fetch('offtarget')
+        supermodel.shotaccuracy = ((total + 1) / (total2 + 1))*50
+        h = @opta[key]
+        supermodel.attackscore = h.fetch('attack')
+        supermodel.defencescore = h.fetch('defence')
+        supermodel.possesionscore = h.fetch('possesion')
+        supermodel.optascore = h.fetch('total')
+        supermodel.date = h.fetch('date')
       end
+    end
   end
 
 end

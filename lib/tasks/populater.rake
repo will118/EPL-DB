@@ -4,7 +4,7 @@ namespace :populater do
   task optatext: :environment do
     Fixture.order(:kickoff).first(8).each do |x|
       time_until = (x.kickoff - Time.now)
-      (time_until < 86400) 
+      (time_until < 86400)
       four = FourFourTwo.new
       four.match_link
     end
@@ -22,13 +22,13 @@ namespace :populater do
 
   desc "teamform"
   task teamform: :environment do
-      form = JasonTheBuilder.single_form
-      form.each do |d|
-        form = d["form"].join(' ')
-        fo = Form.where(:team => d["team"]).first_or_create
-        fo.form = form
-        fo.save
-      end
+    form = JasonTheBuilder.single_form
+    form.each do |d|
+      form = d["form"].join(' ')
+      fo = Form.where(:team => d["team"]).first_or_create
+      fo.form = form
+      fo.save
+    end
   end
 
   desc "fixture schedule scrape"
@@ -50,6 +50,5 @@ namespace :populater do
     Foul.delete_all
   end
 
-task :all => ["populater:squawka", "populater:teamform", "populater:schedule"]
+  task :all => ["populater:squawka", "populater:teamform", "populater:schedule"]
 end
-

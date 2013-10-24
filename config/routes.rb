@@ -1,14 +1,14 @@
 AAAAMILNE::Application.routes.draw do
-    
+
   devise_scope :user do
     get '/api/current_user' => 'users/sessions#show_current_user', as: 'show_current_user'
     post '/api/check/is_user' => 'users/users#is_user', as: 'is_user'
   end
 
   devise_for :users,
-        :controllers => {
-          :omniauth_callbacks => "users/omniauth_callbacks"
-        }
+  :controllers => {
+    :omniauth_callbacks => "users/omniauth_callbacks"
+  }
 
   get '/dashboard' => 'welcome#dashboard'
   root to: 'welcome#index'
@@ -24,21 +24,20 @@ AAAAMILNE::Application.routes.draw do
 
   get 'hometeam/:team' => 'fixtures#hometeam'
   get 'awayteam/:team' => 'fixtures#awayteam'
-  
+
   get 'tablejson' => 'fixtures#tablejson'
-  
+
   get 'formjson/:team' => 'fixtures#formjson'
   get "/otherformjson/:team" => "fixtures#otherformjson"
-  
+
   get 'megajson/:team' => 'fixtures#megajson'
-  
+
   get 'topscorers/:team' => 'fixtures#topscorers'
-  
+
   get 'liveposspie' => 'fixtures#liveposspie'
 
   get "news/index"
-  
-  get "/prematchjson/:team" => "fixtures#prematchjson"  
-  mount JasmineRails::Engine => "/specs" if defined?(JasmineRails)
+
+  get "/prematchjson/:team" => "fixtures#prematchjson"
 
 end

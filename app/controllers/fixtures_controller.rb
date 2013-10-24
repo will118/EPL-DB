@@ -1,5 +1,5 @@
 class FixturesController < ApplicationController
-  
+
   def megajson
     render :json => JasonTheBuilder.new.jason(params[:team])
   end
@@ -14,11 +14,11 @@ class FixturesController < ApplicationController
 
   def formjson
     render :json => Form.where("team" =>(params[:team]).titleize)
-  end  
+  end
 
   def otherformjson
     render :json => JasonTheBuilder.otherformjson(params[:team])
-  end  
+  end
 
   def prematchjson
     render :json => JasonTheBuilder.prematchjson(params[:team])
@@ -46,19 +46,19 @@ class FixturesController < ApplicationController
 
   def livepossjson
     render :json => JasonTheBuilder.new.poss(params[:team])
-  end  
+  end
 
   def livetargetjson
     render :json => JasonTheBuilder.new.targets(params[:team])
-  end  
+  end
 
   def liveshotjson
     render :json => JasonTheBuilder.new.shots(params[:team])
-  end  
+  end
 
   def livecornerjson
     render :json => JasonTheBuilder.new.corners(params[:team])
-  end  
+  end
 
   def livefouljson
     render :json => JasonTheBuilder.new.fouls(params[:team])
