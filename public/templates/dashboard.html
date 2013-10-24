@@ -1,8 +1,15 @@
-
 <body ng-controller="AppController">
-    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="background-color: {{myColour}}">
-        <p class="navbar-text">Signed in as {{user.name}}</p>
-        <button type="button" class="btn btn-default navbar-btn">Sign out</button>
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="background-color: {{myColour}}">
+    <a class="navbar-brand" style="color: white" href="#">EPLDB</a>
+
+ <form class="navbar-form navbar-left" role="search">
+      <div class="form-group">
+    <input type="text" class="form-control" ng-model="team" typeahead="name for name in teamnames | filter:$viewValue">
+      </div>
+    </form>
+
+        <button type="button" id="sign-out-btn" class="btn btn-warning navbar-btn pull-right">Sign out</button>
+        <p class="navbar-text pull-right" style="color: white">{{user.name}}</p>
     </nav>
     <div class="row">
         <div class="col-lg-3">
@@ -66,8 +73,6 @@
     </div>
     <div class="col-lg-3">
         <div class="prematch">{{prematchsing.text}}</div>
-        <input type="text" class="form-control" ng-model="team" typeahead="name for name in teamnames | filter:$viewValue">
-        <p class="error">{{error}}</p>
         <h2 ng-repeat="f in form" style="background-color: {{myColour}}" id="form-column">
                           {{f.form}}
           </h2> 
