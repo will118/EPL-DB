@@ -2,7 +2,7 @@ Premier League Dashboard
 ====================
 
 ![Early days](/ss/1.gif "Love it")
-> Alpha (I haven't even used $http.cache yet)
+> Alpha
 
 I wanted marginally relevant information to have on my other/second screen during a match.
 
