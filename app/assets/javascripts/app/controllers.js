@@ -1,5 +1,7 @@
 angular.module('d3App.controllers', [])
-.controller('AppController', function($scope, $http, $timeout, session, GeneralLiveData, SessionService, LiveStatsData, TeamFormData, BigData, MatchDetails, HomeAwayTeam) {
+.controller('AppController', function($scope, $http, $timeout, focus, session, GeneralLiveData, SessionService, LiveStatsData, TeamFormData, BigData, MatchDetails, HomeAwayTeam) {
+
+	focus('focusMe');
 
 	$scope.team = 'Arsenal';
 

@@ -4,7 +4,7 @@
 
  <form class="navbar-form navbar-left" role="search">
       <div class="form-group">
-    <input type="text" class="form-control" ng-model="team" typeahead="name for name in teamnames | filter:$viewValue">
+    <input type="text" class="form-control" focus-on="focusMe" ng-model="team" typeahead="name for name in teamnames | filter:$viewValue">
       </div>
     </form>
 
@@ -17,7 +17,7 @@
         </div>
         <div class="col-lg-6">
 
-            <nvd3-line-chart data="megajson" id="megajson" width="700" height="300" showXAxis="false" margin="{left:0,top:0,bottom:0,right:0}" showYAxis="false" interactive="true" tooltips="true" showLegend="true">
+            <nvd3-line-chart data="megajson" id="megajson" width="700" height="320" showXAxis="false" margin="{left:0,top:0,bottom:0,right:0}" showYAxis="false" interactive="true" tooltips="true" showLegend="false">
                 <svg id="megaj"></svg>
             </nvd3-line-chart>
         </div>
@@ -31,8 +31,8 @@
     <div class="col-lg-3">
         <table class="table table-striped" id="fixturestable">
             <tr ng-repeat="fix in fixtures | limitTo:5">
-                <td>{{fix.home}} vs. {{fix.away}}</td>
-                <td><span class="fixdate"> {{fix.date}}</span>
+                <td>{{fix.home}} vs. {{fix.away}} <br />
+                <span class="fixdate"> {{fix.date}}</span>
                 </td>
             </tr>
         </table>

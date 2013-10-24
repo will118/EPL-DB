@@ -132,6 +132,14 @@ app.factory('HomeAwayTeam', function ($http, $q) {
 	return methods;
 });
 
+app.factory('focus', function ($rootScope, $timeout) {
+  return function(name) {
+    $timeout(function (){
+      $rootScope.$broadcast('focusOn', name);
+    });
+  }
+});
+
 app.factory('SessionService', function ($http, $q) {
 	var service = {
 		getCurrentUser: function() {
