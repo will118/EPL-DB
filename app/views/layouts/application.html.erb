@@ -6,7 +6,6 @@
 <!--[if (gte IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
   <head>
   	<meta charset="utf-8" />
-
   	<!-- Uncomment to make IE8 render like IE7 -->
   	<!-- <meta http-equiv="X-UA-Compatible" content="IE=7" /> -->
 
@@ -15,18 +14,14 @@
 
   	<title><%= content_for?(:title) ? yield(:title) : "Index" %></title>
      <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
-  	<%= stylesheet_link_tag    "application" %>
-  	<%= javascript_include_tag "vendor/custom.modernizr" %>
+     <link href="../splash.css" rel="stylesheet">
+  	<%= stylesheet_link_tag "application" %>
     <%= csrf_meta_tags %>
   </head>
-<center>
   <body>
-    <h1><a href="#">EPLDB</a></h1>
-      <a class="button" href="/users/sign_in">Sign in</a>
-      <br>    
-      <a class="button" href="/users/sign_up">Sign up</a>
+    <div id="floater"></div>
+      <div id="centered">
       <%= yield %>  
-</center>
-    <%= javascript_include_tag "application" %>
+    </div>
   </body>
 </html>

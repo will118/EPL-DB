@@ -1,3 +1,25 @@
+
+#splash-container {
+  background: url(../images/bg.jpg) no-repeat center center fixed; 
+  background-size: cover;
+   -webkit-background-size: cover;
+    -moz-background-size: cover;
+      -o-background-size: cover;
+  
+}
+
+#sign-in {
+  color: white;
+}
+
+.sign-in-label {
+  color: #cdcdcd;
+}
+
+.remember-me-label {
+  color: #a1a1a1;
+}
+
 body {
   font: 14px Helvetica Neue;
   text-rendering: optimizeLegibility;
@@ -115,18 +137,11 @@ h1 {
 }
 
 #megaj {
-    margin-left: auto;
-    margin-right: auto;
-    width: 1000px;
 }
 
 .fixdate {
     font-size: 0.75em;
     font-weight: 600;
-}
-
-#badge {
-  max-height: 350px;
 }
 
 #navvy  {
@@ -135,6 +150,7 @@ border-color: #e7e7e7;
 }
 
 #badgey {
+  max-height: 250px;
   margin-left:5%;
   margin-right:0%;
   margin-top:3%;

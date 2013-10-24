@@ -36,6 +36,7 @@ Like a "second screen" single page app, Devise/OAuth(GitHub) login and I plan to
 - [Shout out to the HTTParty animals](https://github.com/jnunemaker/httparty/)
 - [William Playfair](http://en.wikipedia.org/wiki/William_Playfair)
 - GitHub OAuth
+- [Tim Snell's](http://www.testmeat.co.uk/extra/1192/stadium-love) photo of the Emirates.
 
 ## Dependencies/Requirements/Setup:
 
