@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-AAAAMILNE::Application.config.secret_key_base = '1a4a1afbdafac818e8e606870a447584b440ff8149907d577de6a474add786b69dead4079e85cb1f53cfdb98641d2fd87394862e211768eff377354241453b43'
+EPLDB::Application.config.secret_key_base = '1a4a1afbdafac818e8e606870a447584b440ff8149907d577de6a474add786b69dead4079e85cb1f53cfdb98641d2fd87394862e211768eff377354241453b43'

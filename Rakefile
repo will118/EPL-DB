@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-AAAAMILNE::Application.load_tasks
+EPLDB::Application.load_tasks

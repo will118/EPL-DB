@@ -9,6 +9,15 @@ class Users::UsersController < Devise::SessionsController
     }
   end
 
+  def angular_update
+    user.update_attributes(safe_params)
+    render nothing: true, status: 204
+  end
+
+  def safe_params
+    params.require(:user).permit(:settings)
+  end
+
   private
 
   def reject_if_not_authorized_request!

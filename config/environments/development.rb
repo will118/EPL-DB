@@ -1,4 +1,4 @@
-AAAAMILNE::Application.configure do
+EPLDB::Application.configure do
   
 
   silence_warnings do

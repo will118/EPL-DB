@@ -159,6 +159,7 @@ h1 {
 .graph-title {
     position: relative;
     top: 60px;
+    text-decoration: underline;
 }
 
 #top-toggles {
