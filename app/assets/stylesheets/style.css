@@ -122,6 +122,8 @@ h1 {
 }
 #table-div {
     width: 23%;
+    padding-right: 0px;
+    padding-left: 0px;
 }
 #live-div {
     width: 27%;
@@ -154,8 +156,22 @@ h1 {
 #sign-out-btn {
     margin-right: 5px;
 }
+#top-toggles {
+    margin-top: 8.5px;
+}
+#settings-toggle {
+    margin-top: 8.5px;
+    margin-left: 8px;
+    margin-right: auto;
+}
+#settings-btn {
+    margin-right: 5px;
+}
 #livetargets-svg {
     margin-left: -13%;
+}
+#fix-and-table {
+    padding-right: 5px;
 }
 .fixdate {
     font-size: 0.75em;

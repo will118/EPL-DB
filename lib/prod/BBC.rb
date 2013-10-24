@@ -22,6 +22,10 @@ class BBC
         recorder(x)
         scores
         puts "Recording"
+        if match_timer.live_match? && x.out_of_date_teams?
+          teams(x)
+        else puts "Teams still fresh"
+        end
       elsif match_timer.match_soon? && x.no_team?
         teams(x)
         puts "Getting Teams"
@@ -105,30 +109,46 @@ class BBC
   end
 
   def teams(x)
-    document = Nokogiri::HTML(open(x.lineup_url))
+    driver = Selenium::WebDriver.for(:remote, :url => "http://localhost:9134")
+    driver.navigate.to (x.lineup_url)
+    document = Nokogiri::HTML(driver.page_source)
+    driver.quit
 
-    home = document.xpath('html/body/div/div/div[1]')
-    away = document.xpath('html/body/div/div/div[2]')
-    hometeam = home.css('h3.team-name').inner_text
-    awayteam = away.css('h3.team-name').inner_text
+    teams = document.css('#oppm-team-list')
 
-    home.css('.player-list>li').each do |x|
-      xx = x.inner_text.strip.split(' ')
-      Team.where(:player => xx[1], :number => xx[0].to_i, :subbed => (xx[2..4].join).delete('('), :teamname => hometeam, :starting => true).first_or_create
-    end
-    home.css('.subs-list>li').each do |x|
-      xx = x.inner_text.strip.split(' ')
-      Team.where(:player => xx[1], :number => xx[0].to_i, :teamname => hometeam, :starting => false).first_or_create
+    hometeam = teams.css('h3.team-name')[0].text
+    awayteam = teams.css('h3.team-name')[1].text
+
+    both_xis = teams.css('.player-list>li')
+    both_subs = teams.css('.subs-list>li')
+
+    home_xi = both_xis[0..10]
+    away_xi = both_xis[11..21]
+
+    home_subs = both_subs[0..6]
+    away_subs = both_subs[7..13]
+
+    Team.today.where(:teamname => hometeam).delete_all
+    Team.today.where(:teamname => awayteam).delete_all
+
+    home_xi.each do |player|
+      xxx = player.inner_text.strip.gsub(/\s+/, ' ').gsub(/'\s{1}/, '')
+      Team.where(:player => xxx, :teamname => hometeam, :starting => true).first_or_create
     end
 
-    away.css('.player-list>li').each do |x|
-      xx = x.inner_text.strip.split(' ')
-      Team.where(:player => xx[1], :number => xx[0].to_i, :subbed => (xx[2..4].join).delete('('), :teamname => awayteam, :starting => true).first_or_create
+    home_subs.each do |player|
+      Team.where(:player => player.inner_text.strip, :teamname => hometeam, :starting => false).first_or_create
     end
-    away.css('.subs-list>li').each do |x|
-      xx = x.inner_text.strip.split(' ')
-      Team.where(:player => xx[1], :number => xx[0].to_i, :teamname => awayteam, :starting => false).first_or_create
+
+    away_xi.each do |player|
+      xxx = player.inner_text.strip.gsub(/\s+/, ' ').gsub(/'\s{1}/, '')
+      Team.where(:player => xxx, :teamname => awayteam, :starting => true).first_or_create
     end
+
+    away_subs.each do |player|
+      Team.where(:player => player.inner_text.strip, :teamname => awayteam, :starting => false).first_or_create
+    end
+
     x.gotteam = true
     x.save
   end

@@ -1,11 +1,36 @@
+'use strict';
+
 angular.module('d3App.controllers', [])
     .controller('AppController', function($scope, $http, $timeout, focus, session, GeneralLiveData, SessionService, LiveStatsData, TeamFormData, BigData, MatchDetails, HomeAwayTeam) {
 
         focus('focusMe');
 
+        $scope.settingsToggle = true
+
+        $scope.leftPanelEnable = true
+
         $scope.team = 'Arsenal';
 
         $scope.user = session.user;
+
+
+        $scope.checkModel = {
+            badge: true,
+            leaguetable: true,
+            prematch: true,
+            oppoform: true,
+            fixtures: true,
+            teams: true
+        };
+
+        $scope.$watch('checkModel', function() {
+            if ($scope.checkModel.fixtures == false && $scope.checkModel.teams == false) {
+                $scope.leftPanelEnable = false
+            } else {
+            	  $scope.leftPanelEnable = true
+            }		       
+			   });
+        // session.user.settings;
 
         $scope.teamnames = teamnames
 

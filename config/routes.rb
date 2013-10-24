@@ -11,6 +11,7 @@ AAAAMILNE::Application.routes.draw do
   }
 
   get '/dashboard' => 'welcome#dashboard'
+  get '/settings' => 'welcome#dashboard'
   root to: 'welcome#index'
 
   get 'possjson/:team' => 'fixtures#livepossjson'
