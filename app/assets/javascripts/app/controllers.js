@@ -187,18 +187,18 @@ angular.module('d3App.controllers', [])
         });
     };
 
-    // $scope.updateprefs = function() {
-    //     $http({
-    //         url: '/users/edit',
-    //         method: 'POST',
-    //         data: {
-    //             settings: $scope.checkModel
-    //         }
-    //     }).success(function(data) {}).error(function(reason) {
-    //         $scope.user.errors = reason;
-    //         window.location.href = '/';
-    //     });
-    // };
+    $scope.updateprefs = function() {
+        $http({
+            url: '/users/edit',
+            method: 'POST',
+            data: {
+                settings: $scope.checkModel
+            }
+        }).success(function(data) {}).error(function(reason) {
+            $scope.user.errors = reason;
+            window.location.href = '/';
+        });
+    };
 
     $scope.refershInterval = 5;
 
