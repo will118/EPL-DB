@@ -134,6 +134,17 @@ h1 {
 #live-targets {
     width: 24%;
 }
+
+#match-padd-div {
+    width: 12%;
+}
+#match-shots-target {
+    right: 1%;
+}
+
+#match-live-graph {
+    width: 26%;
+}
 #badge-div {
     width: 20%;
 }
@@ -161,6 +172,11 @@ h1 {
     top: 60px;
     text-decoration: underline;
 }
+.match-graph-title {
+        top: -32%;
+        right: -50%;
+    }
+
 #top-toggles {
     margin-top: 8.5px;
 }
