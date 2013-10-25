@@ -22,7 +22,7 @@ angular.module('d3App.controllers', [])
             headers: {'Content-Type': 'application/json'},
             data: $scope.user
         }).success(function(data) {
-            console.log("success?");
+
         }).error(function(reason) {
             console.log(reason);
         });
@@ -31,7 +31,6 @@ angular.module('d3App.controllers', [])
     $scope.team = $scope.checkModel.favteam;
 
     $scope.$watch('checkModel', function(data) {
-        console.log(data);
         if ($scope.checkModel.fixtures == false && $scope.checkModel.teams == false) {
             $scope.leftPanelEnable = false
         } else {
@@ -46,6 +45,8 @@ angular.module('d3App.controllers', [])
         $scope.team = team;
         target(team);
         squawkajson(team);
+        awaybench(team);
+        homebench(team);
         getBadge(team);
         formteam(team);
         optatext(team);
@@ -79,6 +80,21 @@ angular.module('d3App.controllers', [])
             }
         })
     }
+
+    var homebench = function(team) {
+        var homesubs = HomeAwayTeam.homesubs(team);
+        homesubs.then(function(data) {
+                $scope.homesubs = data;
+        })
+    }
+
+    var awaybench = function(team) {
+        var awaysubs = HomeAwayTeam.awaysubs(team);
+        awaysubs.then(function(data) {
+                $scope.awaysubs = data;
+        })
+    }
+
 
     var target = function(team) {
         LiveStatsData.targets(team).then(function(data) {

@@ -26,7 +26,7 @@ class JasonTheBuilder
 
 		def self.prematchjson(team)
 			normalized_team = team.titleize
-			Prematch.where(["awayteam = ? or hometeam = ?", normalized_team, normalized_team])
+			Prematch.where(["awayteam = ? or hometeam = ?", normalized_team, normalized_team]).last(10)
 		end
 
 		def self.otherformjson(team)
@@ -42,13 +42,25 @@ class JasonTheBuilder
 		def home_team(team)
 			normalized_team = team.titleize
 			next_fix = Fixture.where(["awayteam = ? or hometeam = ?", normalized_team, normalized_team]).order(:kickoff).first
-			Team.where(:teamname => next_fix.hometeam)
+			Team.where(:teamname => next_fix.hometeam, :starting => true)
 		end
 
 		def away_team(team)
 			normalized_team = team.titleize
 			next_fix = Fixture.where(["awayteam = ? or hometeam = ?", normalized_team, normalized_team]).order(:kickoff).first
-			Team.where(:teamname => next_fix.awayteam)
+			Team.where(:teamname => next_fix.awayteam, :starting => true)
+		end
+
+		def home_subs(team)
+			normalized_team = team.titleize
+			next_fix = Fixture.where(["awayteam = ? or hometeam = ?", normalized_team, normalized_team]).order(:kickoff).first
+			Team.where(:teamname => next_fix.hometeam, :starting => false)
+		end
+
+		def away_subs(team)
+			normalized_team = team.titleize
+			next_fix = Fixture.where(["awayteam = ? or hometeam = ?", normalized_team, normalized_team]).order(:kickoff).first
+			Team.where(:teamname => next_fix.awayteam, :starting => false)
 		end
 
 		def table_json

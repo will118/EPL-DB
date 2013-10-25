@@ -30,6 +30,9 @@ EPLDB::Application.routes.draw do
   get 'hometeam/:team' => 'fixtures#hometeam'
   get 'awayteam/:team' => 'fixtures#awayteam'
 
+  get 'homesubs/:team' => 'fixtures#homesubs'
+  get 'awaysubs/:team' => 'fixtures#awaysubs'
+
   get 'tablejson' => 'fixtures#tablejson'
 
   get 'formjson/:team' => 'fixtures#formjson'

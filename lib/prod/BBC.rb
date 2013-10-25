@@ -108,6 +108,11 @@ class BBC
     teams
   end
 
+  def player_cleaner(text)
+    text.inner_text.strip.gsub(/\s+/, ' ').gsub(/'\s{1}/, '')
+    text
+  end
+
   def teams(x)
     driver = Selenium::WebDriver.for(:remote, :url => "http://localhost:9134")
     driver.navigate.to (x.lineup_url)
@@ -132,21 +137,23 @@ class BBC
     Team.today.where(:teamname => awayteam).delete_all
 
     home_xi.each do |player|
-      xxx = player.inner_text.strip.gsub(/\s+/, ' ').gsub(/'\s{1}/, '')
+      xxx = player_cleaner(player)
       Team.where(:player => xxx, :teamname => hometeam, :starting => true).first_or_create
     end
 
     home_subs.each do |player|
-      Team.where(:player => player.inner_text.strip, :teamname => hometeam, :starting => false).first_or_create
+      xxx = player_cleaner(player)
+      Team.where(:player => xxx, :teamname => hometeam, :starting => false).first_or_create
     end
 
     away_xi.each do |player|
-      xxx = player.inner_text.strip.gsub(/\s+/, ' ').gsub(/'\s{1}/, '')
+      xxx = player_cleaner(player)
       Team.where(:player => xxx, :teamname => awayteam, :starting => true).first_or_create
     end
 
     away_subs.each do |player|
-      Team.where(:player => player.inner_text.strip, :teamname => awayteam, :starting => false).first_or_create
+      xxx = player_cleaner(player)
+      Team.where(:player => xxx, :teamname => awayteam, :starting => false).first_or_create
     end
 
     x.gotteam = true

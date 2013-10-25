@@ -6,8 +6,9 @@ Premier League Dashboard
 
 I wanted marginally relevant information to have on my other/second screen during a match.
 
-Like a "second screen" single page app, Devise/OAuth(GitHub) login and I plan to add customisable aspects
+## Features
 
+- Customizeable dashboard.
 - Live graphs of 4 or 5 metrics.
 - League table as it stands
 - Our team, their team including subs and when people are subbed off.

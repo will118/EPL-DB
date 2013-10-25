@@ -154,7 +154,25 @@ app.factory('HomeAwayTeam', function($http, $q) {
             defer_awayteam.resolve(data);
         })
         return defer_awayteam.promise;
-    }
+    }    
+    methods.awaysubs = function(team) {
+        var defer_awaysubs = $q.defer();
+        $http.get('/awaysubs/' + team, {
+            cache: true
+        }).success(function(data) {
+            defer_awaysubs.resolve(data);
+        })
+        return defer_awaysubs.promise;
+    }    
+    methods.homesubs = function(team) {
+        var defer_homesubs = $q.defer();
+        $http.get('/homesubs/' + team, {
+            cache: true
+        }).success(function(data) {
+            defer_homesubs.resolve(data);
+        })
+        return defer_homesubs.promise;
+    }    
     return methods;
 });
 

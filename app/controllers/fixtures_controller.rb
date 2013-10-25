@@ -40,6 +40,14 @@ class FixturesController < ApplicationController
     render :json => JasonTheBuilder.new.away_team(params[:team])
   end
 
+  def homesubs
+    render :json => JasonTheBuilder.new.home_subs(params[:team])
+  end
+
+  def awaysubs
+    render :json => JasonTheBuilder.new.away_subs(params[:team])
+  end
+
   def tablejson
     render :json => JasonTheBuilder.new.table_json
   end
