@@ -48,4 +48,5 @@ EPLDB::Application.routes.draw do
 
   get "/prematchjson/:team" => "fixtures#prematchjson"
 
+  get "*path" => 'welcome#index'
 end
