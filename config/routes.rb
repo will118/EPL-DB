@@ -3,6 +3,7 @@ EPLDB::Application.routes.draw do
   devise_scope :user do
     get '/api/current_user' => 'users/sessions#show_current_user', as: 'show_current_user'
     post '/api/check/is_user' => 'users/users#is_user', as: 'is_user'
+    post '/api/settings' => 'users/users#update', as: 'settings'
   end
 
   get '/user/sign_out' => 'welcome#index'

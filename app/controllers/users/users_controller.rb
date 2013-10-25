@@ -9,6 +9,18 @@ class Users::UsersController < Devise::SessionsController
     }
   end
 
+  def update
+    @user = User.find(current_user.id)
+
+    if @user.nil?
+      logger.info("User not found.")
+      render :status => 404, :json => {:status => "error", :errorcode => "11009", :message => "Invalid userid."}
+    else
+      @user.update_attributes(params.permit(:settings, :name, :email))
+      render :status => 200, :json => {:status => "success", :user => @user, :message => "The user has been updated"}
+    end
+  end
+
   def safe_params
     params.require(:user).permit(:settings)
   end

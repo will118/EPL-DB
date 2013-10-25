@@ -14,9 +14,24 @@ angular.module('d3App.controllers', [])
 
     $scope.checkModel = angular.fromJson(session.user.settings);
 
+    $scope.updateprefs = function() {
+        $scope.user.settings = angular.toJson($scope.checkModel)
+        $http({
+            url: '/api/settings',
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            data: $scope.user
+        }).success(function(data) {
+            console.log("success?");
+        }).error(function(reason) {
+            console.log(reason);
+        });
+    };
+
     $scope.team = $scope.checkModel.favteam;
 
-    $scope.$watch('checkModel', function() {
+    $scope.$watch('checkModel', function(data) {
+        console.log(data);
         if ($scope.checkModel.fixtures == false && $scope.checkModel.teams == false) {
             $scope.leftPanelEnable = false
         } else {
@@ -187,18 +202,6 @@ angular.module('d3App.controllers', [])
         });
     };
 
-    $scope.updateprefs = function() {
-        $http({
-            url: '/users/edit',
-            method: 'POST',
-            data: {
-                settings: $scope.checkModel
-            }
-        }).success(function(data) {}).error(function(reason) {
-            $scope.user.errors = reason;
-            window.location.href = '/';
-        });
-    };
 
     $scope.refershInterval = 5;
 
