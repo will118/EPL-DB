@@ -22,15 +22,15 @@
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" role="menu">
-                <li><a href="#">Preset 1</a>
+                <li><a href="#">My Preset</a>
                 </li>
-                <li><a href="#">Preset 2</a>
+                <li><a href="#">Season Overview</a>
                 </li>
-                <li><a href="#">Preset 3</a>
+                <li><a href="#">Match Mode</a>
                 </li>
             </ul>
         </div>
-        <button type="button" id="sign-out-btn" class="btn btn-primary navbar-btn pull-right">Sign out</button>
+        <button type="button" id="sign-out-btn" ng-click="signout()" class="btn btn-primary navbar-btn pull-right">Sign out</button>
         <a href="/users/edit" button type="button" id="settings-btn" class="btn btn-info navbar-btn pull-right">Account</button></a>
         <p class="navbar-text pull-right" style="color: white">{{user.name}}</p>
     </nav>
