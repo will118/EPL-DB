@@ -70,7 +70,7 @@ What I'm doing next, in order (at least in theory):
 
 - Angular/Front End
 
-> also there's some encoding mismatch I'm guessing it's not UTF, anyway it's from the BBC lineup where it looks fine, then when I scrape it I get stuff like "\u00C3\u0096zil" which gets lost somewhere. I haven't looked into it. (As of Friday 18th October at 4:16pm I think I've solved this as was because the model was string rather than text and I remember reading recently that 255 in string and way more in text. I'm guessing because its a UTF world rails/AR had to make it comply to store). As of Saturday I still have this problem so we will have to see... As of Wednesday night I still don't know at which point it happens, pretty sure it's Nokogiri but surely it can't be.
+> Encoding problem: Status - FIXED.
 
 ### Tests
 

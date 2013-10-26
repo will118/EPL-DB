@@ -17,7 +17,7 @@ app.factory('GeneralLiveData', function($http, $q) {
     methods.scores = function() {
         var defer_scores = $q.defer();
         $http.get('/scoresjson/', {
-            cache: true
+            cache: false
         }).success(function(data) {
             defer_scores.resolve(data);
         });

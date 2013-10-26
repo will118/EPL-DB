@@ -12,7 +12,7 @@ angular.module('d3App.controllers', [])
     }, {
         "value": 78,
         "type": "warning"
-    }]
+    }];
 
     focus('focusMe');
 

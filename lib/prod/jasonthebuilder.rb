@@ -42,25 +42,25 @@ class JasonTheBuilder
   def home_team(team)
     normalized_team = team.titleize
     next_fix = Fixture.where(["awayteam = ? or hometeam = ?", normalized_team, normalized_team]).order(:kickoff).first
-    Team.where(:teamname => next_fix.hometeam, :starting => true)
+    Team.where(:teamname => next_fix.hometeam, :starting => true).last(11)
   end
 
   def away_team(team)
     normalized_team = team.titleize
     next_fix = Fixture.where(["awayteam = ? or hometeam = ?", normalized_team, normalized_team]).order(:kickoff).first
-    Team.where(:teamname => next_fix.awayteam, :starting => true)
+    Team.where(:teamname => next_fix.awayteam, :starting => true).last(11)
   end
 
   def home_subs(team)
     normalized_team = team.titleize
     next_fix = Fixture.where(["awayteam = ? or hometeam = ?", normalized_team, normalized_team]).order(:kickoff).first
-    Team.where(:teamname => next_fix.hometeam, :starting => false)
+    Team.where(:teamname => next_fix.hometeam, :starting => false).last(7)
   end
 
   def away_subs(team)
     normalized_team = team.titleize
     next_fix = Fixture.where(["awayteam = ? or hometeam = ?", normalized_team, normalized_team]).order(:kickoff).first
-    Team.where(:teamname => next_fix.awayteam, :starting => false)
+    Team.where(:teamname => next_fix.awayteam, :starting => false).last(7)
   end
 
   def table_json
