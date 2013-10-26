@@ -23,7 +23,6 @@ class Squawka
     @passacc = @parsed_json.assoc('pass_acc_ot')[1]
   end
 
-
   def save
     ids = []
 

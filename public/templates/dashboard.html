@@ -43,15 +43,15 @@
         </span>
         <div class="col-lg-6" id="mega-div">
 
-            <nvd3-line-chart data="megajson" id="megajson" width="739" height="320" showXAxis="false" margin="{left:0,top:0,bottom:0,right:0}" showYAxis="false" interactive="true" tooltips="true" showLegend="true">
-                <svg id="megaj"></svg>
+            <nvd3-line-chart data="megajson" id="megajson" width="760" height="340" showXAxis="false" margin="{left:0,top:0,bottom:0,right:0}" showYAxis="false" interactive="true" tooltips="true" showLegend="true">
+                <svg id="megachart" viewBox="0 0 760 340" preserveAspectRatio="xMidYMid"></svg>
             </nvd3-line-chart>
         </div>
 
         <div class="col-lg-3" id="live-targets">
-            <span class="graph-title" style="left: -30px;">Shots on Target</span>
+            <span class="graph-title" style="left: -20px;">Shots on Target</span>
             <nvd3-line-chart data="livetargets" id="livetargets" margin="{left:0,top:0,bottom:0,right:10}" width="350" height="300" showXAxis="false" showYAxis="false" forcex="[1]" showLegend="true" color="colorFunction()">
-                <svg id="livetargets-svg"></svg>
+                <svg id="live-svg" viewBox="0 0 350 300" preserveAspectRatio="xMidYMid"></svg>
             </nvd3-line-chart>
         </div>
     </div>
@@ -168,11 +168,11 @@
     <div class="col-lg-3" id="live-div">
         <span class="graph-title" style="left: 26px;">Shots</span>
         <nvd3-line-chart data="liveshots" id="liveshots" width="350" height="300" margin="{left:0,top:0,bottom:5,right:10}" showXAxis="false" showYAxis="false" showLegend="true" color="colorFunction()" forcex="[1]">
-            <svg></svg>
+            <svg id="live-svg" viewBox="0 0 350 300" preserveAspectRatio="xMidYMid"></svg>
         </nvd3-line-chart>
         <span class="graph-title" style="left: 26px;">Corners</span>
         <nvd3-line-chart data="livecorners" id="livecorners" color="colorFunction()" margin="{left:0,top:0,bottom:5,right:10}" width="350" height="300" showLegend="true" showXAxis="false" showYAxis="false" forcex="[1]">
-            <svg></svg>
+            <svg id="live-svg" viewBox="0 0 350 300" preserveAspectRatio="xMidYMid"></svg>
         </nvd3-line-chart>
     </div>
 </body>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131024155022) do
+ActiveRecord::Schema.define(version: 20131026084422) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,9 +64,9 @@ ActiveRecord::Schema.define(version: 20131024155022) do
     t.integer  "away"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "team"
     t.string   "hometeam"
     t.string   "awayteam"
+    t.datetime "matchdate"
   end
 
   create_table "fixtures", force: true do |t|
@@ -93,9 +93,9 @@ ActiveRecord::Schema.define(version: 20131024155022) do
     t.integer  "away"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "team"
     t.string   "hometeam"
     t.string   "awayteam"
+    t.datetime "matchdate"
   end
 
   create_table "home_benches", force: true do |t|
@@ -127,9 +127,9 @@ ActiveRecord::Schema.define(version: 20131024155022) do
     t.integer  "awayposs"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "team"
     t.string   "hometeam"
     t.string   "awayteam"
+    t.datetime "matchdate"
   end
 
   create_table "possessions", force: true do |t|
@@ -159,9 +159,9 @@ ActiveRecord::Schema.define(version: 20131024155022) do
     t.integer  "awayshots"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "team"
     t.string   "hometeam"
     t.string   "awayteam"
+    t.datetime "matchdate"
   end
 
   create_table "supermodels", force: true do |t|
@@ -184,9 +184,9 @@ ActiveRecord::Schema.define(version: 20131024155022) do
     t.integer  "awayshots"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "team"
     t.string   "hometeam"
     t.string   "awayteam"
+    t.datetime "matchdate"
   end
 
   create_table "teams", force: true do |t|
@@ -211,8 +211,10 @@ ActiveRecord::Schema.define(version: 20131024155022) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "settings"
+    t.string   "authentication_token"
   end
 
+  add_index "users", ["authentication_token"], name: "index_users_on_authentication_token", unique: true, using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 

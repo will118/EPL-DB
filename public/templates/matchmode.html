@@ -38,18 +38,18 @@
 
         <div class="col-lg-3" id="match-live-graph">
             <nvd3-line-chart data="livetargets" id="livetargets" margin="{left:0,top:0,bottom:10,right:0}" width="350" height="300" showXAxis="false" showYAxis="false" forcex="[1]" showLegend="true" color="colorFunction()">
-                <svg id="livetargets-svg"></svg>
+                <svg id="live-svg" viewBox="0 0 350 300" preserveAspectRatio="xMidYMid"></svg>
             </nvd3-line-chart>
         </div>
         <div class="col-lg-3" id="match-live-graph">
 
             <nvd3-line-chart data="liveshots" id="liveshots" width="350" height="300" margin="{left:0,top:0,bottom:10,right:0}" showXAxis="false" showYAxis="false" showLegend="true" color="colorFunction()" forcex="[1]">
-                <svg></svg>
+                <svg id="live-svg" viewBox="0 0 350 300" preserveAspectRatio="xMidYMid"></svg>
             </nvd3-line-chart>
         </div>
         <div class="col-lg-3" id="match-live-graph">
             <nvd3-line-chart data="livecorners" id="livecorners" color="colorFunction()" margin="{left:0,top:0,bottom:10,right:0}" width="350" height="300" showLegend="true" showXAxis="false" showYAxis="false" forcex="[1]">
-                <svg></svg>
+                <svg id="live-svg" viewBox="0 0 350 300" preserveAspectRatio="xMidYMid"></svg>
             </nvd3-line-chart>
         </div>
         <div class="col-lg-1" id="match-padd-div"></div>

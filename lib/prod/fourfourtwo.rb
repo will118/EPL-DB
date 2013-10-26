@@ -1,10 +1,11 @@
 class FourFourTwo
+require 'open-uri'
 
   attr_reader :link, :final
 
   def match_link
     @uri = "http://www.fourfourtwo.com"
-    statszone = "/statszone/fixtures/8-2013"
+    statszone = "/statszone/fixtures/8-2013/"
     url = @uri + statszone
     doc = Nokogiri::HTML(open(url))
     doc.xpath('html/body/div/div[2]/div[6]/div/div/table[1]')

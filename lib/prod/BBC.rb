@@ -1,5 +1,6 @@
 require_relative 'namenormaliser'
 require_relative 'builder'
+require 'open-uri'
 
 class BBC
   include NameNormaliser
@@ -91,15 +92,17 @@ class BBC
     x = ar_record
     data = get_json(x.jsonurl)
 
+    matchdate = x.kickoff
+
     if data['shotsOnTarget'] == nil
       puts "No data yet"
     else
       puts "Something recorded"
-      Poss.where(:homeposs => data['possession']['home'], :hometeam => x.hometeam, :awayposs => data['possession']['away'], :awayteam => x.awayteam).create
-      Target.where(:homeshots => data['shotsOnTarget']['home'], :hometeam => x.hometeam, :awayshots => data['shotsOnTarget']['away'], :awayteam => x.awayteam).create
-      Shot.where(:homeshots => data['shots']['home'], :hometeam => x.hometeam, :awayshots => data['shots']['away'], :awayteam => x.awayteam).create
-      Corner.where(:home => data['corners']['home'], :hometeam => x.hometeam, :away => data['corners']['away'], :awayteam => x.awayteam).create
-      Foul.where(:home => data['fouls']['home'], :hometeam => x.hometeam, :away => data['fouls']['away'], :awayteam => x.awayteam).create
+      Poss.where(:homeposs => data['possession']['home'], :hometeam => x.hometeam, :awayposs => data['possession']['away'], :awayteam => x.awayteam, :matchdate => matchdate).create
+      Target.where(:homeshots => data['shotsOnTarget']['home'], :hometeam => x.hometeam, :awayshots => data['shotsOnTarget']['away'], :awayteam => x.awayteam, :matchdate => matchdate).create
+      Shot.where(:homeshots => data['shots']['home'], :hometeam => x.hometeam, :awayshots => data['shots']['away'], :awayteam => x.awayteam, :matchdate => matchdate).create
+      Corner.where(:home => data['corners']['home'], :hometeam => x.hometeam, :away => data['corners']['away'], :awayteam => x.awayteam, :matchdate => matchdate).create
+      Foul.where(:home => data['fouls']['home'], :hometeam => x.hometeam, :away => data['fouls']['away'], :awayteam => x.awayteam, :matchdate => matchdate).create
     end
   end
 

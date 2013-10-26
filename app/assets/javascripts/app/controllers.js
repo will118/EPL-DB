@@ -184,6 +184,13 @@ angular.module('d3App.controllers', [])
         })
     };
 
+    var livestats = function() {
+        var team = $scope.team
+        liveshot(team);
+        corners(team);
+        target(team);
+    };
+
     $scope.counter = 0;
     var preMatcher = function(data) {
         $scope.prematchsing = data[$scope.counter];
@@ -200,6 +207,7 @@ angular.module('d3App.controllers', [])
     setInterval(function() {
         $scope.$apply(function() {
             preMatcher($scope.prematchArray);
+            livestats();
             score();
             table();
         })
