@@ -134,7 +134,7 @@ class JasonTheBuilder
     unless valid_team?(normalized_team) == true
       home = []
       away = []
-      most_recent = Target.where(["awayteam = ? or hometeam = ?", normalized_team, normalized_team]).order(:matchdate).last.matchdate
+      most_recent = Target.where(["awayteam = ? or hometeam = ?", normalized_team, normalized_team]).order(:matchdate).first.matchdate
 
       Target.where(["awayteam = ? and matchdate = ? or hometeam = ? and matchdate = ?", normalized_team, most_recent, normalized_team, most_recent]).each do |x|
         home << x.homeshots
@@ -151,7 +151,7 @@ class JasonTheBuilder
     unless valid_team?(normalized_team) == true
       home = []
       away = []
-      most_recent = Corner.where(["awayteam = ? or hometeam = ?", normalized_team, normalized_team]).order(:matchdate).last.matchdate
+      most_recent = Corner.where(["awayteam = ? or hometeam = ?", normalized_team, normalized_team]).order(:matchdate).first.matchdate
 
       Corner.where(["awayteam = ? and matchdate = ? or hometeam = ? and matchdate = ?", normalized_team, most_recent, normalized_team, most_recent]).each do |x|
         home << x.home
@@ -169,7 +169,7 @@ class JasonTheBuilder
       home = []
       away = []
 
-      most_recent = Foul.where(["awayteam = ? or hometeam = ?", normalized_team, normalized_team]).order(:matchdate).last.matchdate
+      most_recent = Foul.where(["awayteam = ? or hometeam = ?", normalized_team, normalized_team]).order(:matchdate).first.matchdate
 
       Foul.where(["awayteam = ? and matchdate = ? or hometeam = ? and matchdate = ?", normalized_team, most_recent, normalized_team, most_recent]).each do |x|
         home << x.home
@@ -186,7 +186,7 @@ class JasonTheBuilder
     unless valid_team?(normalized_team) == true
       home = []
       away = []
-      most_recent = Shot.where(["awayteam = ? or hometeam = ?", normalized_team, normalized_team]).order(:matchdate).last.matchdate
+      most_recent = Shot.where(["awayteam = ? or hometeam = ?", normalized_team, normalized_team]).order(:matchdate).first.matchdate
 
       Shot.where(["awayteam = ? and matchdate = ? or hometeam = ? and matchdate = ?", normalized_team, most_recent, normalized_team, most_recent]).each do |x|
         home << x.homeshots
