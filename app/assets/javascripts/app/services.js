@@ -41,7 +41,7 @@ app.factory('LiveStatsData', function($http, $q) {
     methods.scorers = function(team) {
         var defer_topscorers = $q.defer();
         $http.get('/topscorers/' + team, {
-            cache: true
+            cache: false
         }).success(function(data) {
             defer_topscorers.resolve(data);
         });
@@ -50,7 +50,7 @@ app.factory('LiveStatsData', function($http, $q) {
     methods.corner = function(team) {
         var defer_corner = $q.defer();
         $http.get('/cornerjson/' + team, {
-            cache: true
+            cache: false
         }).success(function(data) {
             defer_corner.resolve(data);
         });
@@ -59,7 +59,7 @@ app.factory('LiveStatsData', function($http, $q) {
     methods.shot = function(team) {
         var defer_shot = $q.defer();
         $http.get('/shotjson/' + team, {
-            cache: true
+            cache: false
         }).success(function(data) {
             defer_shot.resolve(data);
         });
@@ -68,7 +68,7 @@ app.factory('LiveStatsData', function($http, $q) {
     methods.targets = function(team) {
         var defer_target = $q.defer();
         $http.get('/targetjson/' + team, {
-            cache: true
+            cache: false
         }).success(function(data) {
             defer_target.resolve(data);
         });

@@ -23,12 +23,12 @@ away_xi = both_xis[11..21]
 home_subs = both_subs[0..6]
 away_subs = both_subs[7..13]
 
-p home_subs.class
-
+  p hometeam.class
 
 # home_xi.each do |player|
 #   xxx = player.inner_text.strip.gsub(/\s+/, ' ').gsub(/'\s{1}/, '')
-#   Team.where(:player => xxx, :teamname => hometeam, :starting => true).first_or_create
+#   p xxx.class
+# #    Team.where(:player => xxx, :teamname => hometeam, :starting => true).first_or_create
 # end
 
 # home_subs.each do |player|

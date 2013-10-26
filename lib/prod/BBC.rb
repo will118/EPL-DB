@@ -121,7 +121,6 @@ class BBC
     driver.navigate.to (x.lineup_url)
     document = Nokogiri::HTML(driver.page_source)
     driver.quit
-    
 
     teams = document.css('#oppm-team-list')
 
@@ -129,30 +128,29 @@ class BBC
     awayteam = teams.css('h3.team-name')[1].text
 
     both_xis = teams.css('.player-list>li')
-    both_subs = teams.css('.subs-list>li')
-
     home_xi = both_xis[0..10]
     away_xi = both_xis[11..21]
 
+    both_subs = teams.css('.subs-list>li')
     home_subs = both_subs[0..6]
     away_subs = both_subs[7..13]
 
     Team.today.where(:teamname => hometeam).delete_all
     Team.today.where(:teamname => awayteam).delete_all
-
+    binding.pry
     home_xi.each do |player|
       xxx = player_cleaner(player)
       Team.where(:player => xxx, :teamname => hometeam, :starting => true).first_or_create
     end
 
-    home_subs.each do |player|
-      xxx = player_cleaner(player)
-      Team.where(:player => xxx, :teamname => hometeam, :starting => false).first_or_create
-    end
-
     away_xi.each do |player|
       xxx = player_cleaner(player)
       Team.where(:player => xxx, :teamname => awayteam, :starting => true).first_or_create
+    end
+
+    home_subs.each do |player|
+      xxx = player_cleaner(player)
+      Team.where(:player => xxx, :teamname => hometeam, :starting => false).first_or_create
     end
 
     away_subs.each do |player|

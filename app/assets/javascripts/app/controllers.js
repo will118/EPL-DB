@@ -216,6 +216,9 @@ angular.module('d3App.controllers', [])
         $scope.badgehash = (team.replace(/ /g, "_") + ".png")
     };
 
+
+    $scope.refershInterval = 5;
+
     setInterval(function() {
         $scope.$apply(function() {
             preMatcher($scope.prematchArray);
@@ -237,8 +240,4 @@ angular.module('d3App.controllers', [])
             window.location.href = '/';
         });
     };
-
-
-    $scope.refershInterval = 5;
-
 });
