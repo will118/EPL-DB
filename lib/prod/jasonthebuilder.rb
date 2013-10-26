@@ -68,13 +68,17 @@ class JasonTheBuilder
     JSON.parse(HTTParty.get(table).response.body)
   end
 
-  def poss_pie_json
-    pie = Poss.last
-    home = pie['homeposs']
-    away = pie['awayposs']
+  def poss_bar_json(team)
+    normalized_team = team.titleize
+    poss = Poss.where(["awayteam = ? or hometeam = ?", normalized_team, normalized_team]).last
     comboarray = []
-    comboarray << {'key'=> 'Home', 'y'=> home}
-    comboarray << {'key'=> 'Away', 'y'=> away}
+    if (poss.homeposs + poss.awayposs) == 101
+      comboarray << {'value'=> (poss['homeposs']-0.5), 'type'=> 'info'}
+      comboarray << {'value'=> (poss['awayposs']-0.5), 'type'=> 'warning'}
+    else
+      comboarray << {'value'=> poss['homeposs'], 'type'=> 'info'}
+      comboarray << {'value'=> poss['awayposs'], 'type'=> 'warning'}
+    end
     comboarray
   end
 

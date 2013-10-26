@@ -135,6 +135,20 @@ app.factory('MatchDetails', function($http, $q) {
     return methods;
 });
 
+app.factory('LiveBars', function($http, $q) {
+    var methods = {};
+    methods.poss = function(team) {
+        var defer_poss = $q.defer();
+        $http.get('/livepossbar/' + team, {
+            cache: false
+        }).success(function(data) {
+            defer_poss.resolve(data);
+        });
+        return defer_poss.promise;
+    }
+    return methods;
+});
+
 app.factory('HomeAwayTeam', function($http, $q) {
     var methods = {};
     methods.home = function(team) {

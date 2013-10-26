@@ -8,8 +8,8 @@ class FixturesController < ApplicationController
     render :json => JasonTheBuilder.new.top_scorers_json(params[:team])
   end
 
-  def liveposspie
-    render :json => JasonTheBuilder.new.poss_pie_json(params[:team])
+  def livepossbar
+    render :json => JasonTheBuilder.new.poss_bar_json(params[:team])
   end
 
   def formjson

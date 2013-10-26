@@ -2,15 +2,15 @@
 
 angular.module('d3App.controllers', [])
 
-.controller('AppController', function($scope, $http, $timeout, focus, session, GeneralLiveData, SessionService, LiveStatsData, TeamFormData, BigData, MatchDetails, HomeAwayTeam) {
+.controller('AppController', function($scope, $http, $timeout, focus, session, GeneralLiveData, SessionService, LiveStatsData, TeamFormData, LiveBars, BigData, MatchDetails, HomeAwayTeam) {
 
-    var types = ['success', 'info', 'warning', 'danger'];
+    var types = ['info', 'warning'];
 
-    $scope.stacked = [{
-        "value": 22,
+    $scope.shotsBar = [{
+        "value": 50,
         "type": "info"
     }, {
-        "value": 78,
+        "value": 50,
         "type": "warning"
     }];
 
@@ -64,6 +64,7 @@ angular.module('d3App.controllers', [])
         optatext(team);
         formoppo(team);
         liveshot(team);
+        barposs(team);
         corners(team);
         scorer(team);
         away(team);
@@ -71,7 +72,12 @@ angular.module('d3App.controllers', [])
         fixt(team);
         table();
     });
-
+    
+    var barposs = function(team) {
+        LiveBars.poss(team).then(function(data) {
+            $scope.possBar = angular.fromJson(data);
+        })
+    }
 
     var home = function(team) {
         var hometeam = HomeAwayTeam.home(team);

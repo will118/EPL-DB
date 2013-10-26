@@ -42,7 +42,7 @@ EPLDB::Application.routes.draw do
 
   get 'topscorers/:team' => 'fixtures#topscorers'
 
-  get 'liveposspie' => 'fixtures#liveposspie'
+  get 'livepossbar/:team' => 'fixtures#livepossbar'
 
   get "news/index"
 

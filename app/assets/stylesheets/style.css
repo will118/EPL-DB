@@ -195,6 +195,28 @@ h1 {
 #live-svg {
 }
 
+.bar-title {
+    
+}
+
+.progress .bar {
+    height: 100%;
+    color: #ffffff;
+    float: left;
+    font-size: 12px;
+    text-align: center;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+
+.progress .bar-info {
+    background-color: #4bb1cf;
+    background-image: linear-gradient(to bottom, #5bc0de, #339bb9);
+}
+.progress .bar-warning {
+    background-color: #faa732;
+    background-image: linear-gradient(to bottom, #fbb450, #f89406);
+}
+
 #fix-and-table {
     padding-right: 5px;
 }
