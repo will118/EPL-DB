@@ -33,7 +33,6 @@
         </div>
         <button type="button" class="btn btn-warning" id="top-toggles" ng-click="updateprefs()">Save</button>
         <button type="button" id="sign-out-btn" ng-click="signout()" class="btn btn-primary navbar-btn pull-right">Sign out</button>
-        <a href="/users/edit" button type="button" id="settings-btn" class="btn btn-info navbar-btn pull-right">Account</button></a>
     </nav>
     <div class="row">
         <span ng-if="checkModel.badge">
@@ -128,7 +127,7 @@
                 <th>Name</th>
                 <th id="scorer-goals">Goals</th>
             </tr>
-            <tr ng-repeat="s in scorers">
+            <tr ng-repeat="s in scorers track by $index">
                 <td>{{s.player}}</td>
                 <td id="scorer-goals">{{s.goals}}</td>
             </tr>

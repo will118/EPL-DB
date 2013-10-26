@@ -13,6 +13,7 @@
                 <button type="button" class="btn btn-primary" ng-model="checkModel.oppoform" btn-checkbox>Opponent Form</button>
                 <button type="button" class="btn btn-primary" ng-model="checkModel.teams" btn-checkbox>Teams</button>
                 <button type="button" class="btn btn-primary" ng-model="checkModel.subs" btn-checkbox>Subs</button>
+                <button type="button" class="btn btn-primary" ng-model="checkModel.liveBars" btn-checkbox>Live Bars</button>
             </div>
         </span>
         <button type="button" class="btn btn-primary" id="settings-toggle" ng-model="settingsToggle" btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false">Settings</button>
@@ -31,7 +32,6 @@
         </div>
         <button type="button" class="btn btn-warning" id="top-toggles" ng-click="updateprefs()">Save</button>
         <button type="button" id="sign-out-btn" ng-click="signout()" class="btn btn-primary navbar-btn pull-right">Sign out</button>
-        <a href="/users/edit" button type="button" id="settings-btn" class="btn btn-info navbar-btn pull-right">Account</button></a>
     </nav>
     <div class="row">
    <div class="col-lg-1" id="match-padd-div"></div>
@@ -55,6 +55,10 @@
         <div class="col-lg-1" id="match-padd-div"></div>
     </div>
       <div class="col-lg-3">
+        <pre>{{checkModel.liveBars}}</pre>
+          <progress percent="stacked"></progress>
+      <span ng-if="liveBars">
+      </span>
         <h2 ng-repeat="f in form" style="background-color: {{myColour}}" id="form-column">
             {{f.form}}
         </h2>

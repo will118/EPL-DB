@@ -23,13 +23,13 @@ class BBC
         recorder(x)
         scores
         puts "Recording"
-        if match_timer.live_match? && x.out_of_date_teams?
-          teams(x)
-        else puts "Teams still fresh"
-        end
-      elsif match_timer.match_soon? && x.no_team?
-        teams(x)
-        puts "Getting Teams"
+        # if match_timer.live_match? && x.out_of_date_teams?
+        #   teams(x)
+        # else puts "Teams still fresh"
+        # end
+      # elsif match_timer.match_soon? && x.no_team?
+      #   teams(x)
+      #   puts "Getting Teams"
       else
         puts "Still a while to go"
       end
@@ -121,6 +121,7 @@ class BBC
     driver.navigate.to (x.lineup_url)
     document = Nokogiri::HTML(driver.page_source)
     driver.quit
+    
 
     teams = document.css('#oppm-team-list')
 

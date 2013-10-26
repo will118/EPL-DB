@@ -1,5 +1,11 @@
 EPLDB::Application.routes.draw do
 
+  devise_for :users,
+  :controllers => {
+    :omniauth_callbacks => "users/omniauth_callbacks",
+    :registrations => "registrations"
+  }
+
   devise_scope :user do
     get '/api/current_user' => 'users/sessions#show_current_user', as: 'show_current_user'
     post '/api/check/is_user' => 'users/users#is_user', as: 'is_user'
@@ -7,12 +13,6 @@ EPLDB::Application.routes.draw do
   end
 
   get '/user/sign_out' => 'welcome#index'
-
-  devise_for :users,
-  :controllers => {
-    :omniauth_callbacks => "users/omniauth_callbacks",
-    :registrations => "registrations"
-  }
 
   get '/dashboard' => 'welcome#dashboard'
   get '/settings' => 'welcome#dashboard'

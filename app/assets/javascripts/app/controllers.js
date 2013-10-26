@@ -4,6 +4,16 @@ angular.module('d3App.controllers', [])
 
 .controller('AppController', function($scope, $http, $timeout, focus, session, GeneralLiveData, SessionService, LiveStatsData, TeamFormData, BigData, MatchDetails, HomeAwayTeam) {
 
+    var types = ['success', 'info', 'warning', 'danger'];
+
+    $scope.stacked = [{
+        "value": 22,
+        "type": "info"
+    }, {
+        "value": 78,
+        "type": "warning"
+    }]
+
     focus('focusMe');
 
     $scope.settingsToggle = false
@@ -19,7 +29,9 @@ angular.module('d3App.controllers', [])
         $http({
             url: '/api/settings',
             method: 'POST',
-            headers: {'Content-Type': 'application/json'},
+            headers: {
+                'Content-Type': 'application/json'
+            },
             data: $scope.user
         }).success(function(data) {
 
@@ -84,14 +96,14 @@ angular.module('d3App.controllers', [])
     var homebench = function(team) {
         var homesubs = HomeAwayTeam.homesubs(team);
         homesubs.then(function(data) {
-                $scope.homesubs = data;
+            $scope.homesubs = data;
         })
     }
 
     var awaybench = function(team) {
         var awaysubs = HomeAwayTeam.awaysubs(team);
         awaysubs.then(function(data) {
-                $scope.awaysubs = data;
+            $scope.awaysubs = data;
         })
     }
 
