@@ -4,17 +4,24 @@ angular.module('d3App.controllers', [])
 
 .controller('AppController', function($scope, $http, $timeout, focus, session, GeneralLiveData, SessionService, LiveStatsData, TeamFormData, LiveBars, BigData, MatchDetails, HomeAwayTeam) {
 
-    var types = ['info', 'warning'];
+    $scope.possBar = [{
+        "value": 50,
+        "type": "arsenal"
+    }, {
+        "value": 50,
+        "type": "fulham"
+    }];
 
     $scope.shotsBar = [{
         "value": 50,
-        "type": "info"
+        "type": "home"
     }, {
         "value": 50,
-        "type": "warning"
+        "type": "away"
     }];
 
     focus('focusMe');
+
 
     $scope.settingsToggle = false
 
@@ -72,10 +79,10 @@ angular.module('d3App.controllers', [])
         fixt(team);
         table();
     });
-    
+
     var barposs = function(team) {
         LiveBars.poss(team).then(function(data) {
-            $scope.possBar = angular.fromJson(data);
+            // $scope.possBar = angular.fromJson(data);
         })
     }
 

@@ -73,11 +73,11 @@ class JasonTheBuilder
     poss = Poss.where(["awayteam = ? or hometeam = ?", normalized_team, normalized_team]).last
     comboarray = []
     if (poss.homeposs + poss.awayposs) == 101
-      comboarray << {'value'=> (poss['homeposs']-0.5), 'type'=> 'info'}
-      comboarray << {'value'=> (poss['awayposs']-0.5), 'type'=> 'warning'}
+      comboarray << {'value'=> (poss['homeposs']-0.5), 'type'=> 'home'}
+      comboarray << {'value'=> (poss['awayposs']-0.5), 'type'=> 'away'}
     else
-      comboarray << {'value'=> poss['homeposs'], 'type'=> 'info'}
-      comboarray << {'value'=> poss['awayposs'], 'type'=> 'warning'}
+      comboarray << {'value'=> poss['homeposs'], 'type'=> 'home'}
+      comboarray << {'value'=> poss['awayposs'], 'type'=> 'away'}
     end
     comboarray
   end

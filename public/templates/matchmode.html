@@ -34,7 +34,7 @@
         <button type="button" id="sign-out-btn" ng-click="signout()" class="btn btn-primary navbar-btn pull-right">Sign out</button>
     </nav>
     <div class="row">
-   <div class="col-lg-1" id="match-padd-div"></div>
+        <div class="col-lg-1" id="match-padd-div"></div>
 
         <div class="col-lg-3" id="match-live-graph">
             <nvd3-line-chart data="livetargets" id="livetargets" margin="{left:0,top:0,bottom:10,right:0}" width="370" height="300" showXAxis="false" showYAxis="true" forcex="[1]" showLegend="true" color="colorFunction()">
@@ -54,13 +54,13 @@
         </div>
         <div class="col-lg-1" id="match-padd-div"></div>
     </div>
-      <div class="col-lg-3">
-      <span ng-if="checkModel.liveBars">
-        <span class="bar-title">Possession</span>
-          <progress percent="possBar"></progress>
-          <span class="bar-title">Shots</span>
-          <progress percent="shotsBar"></progress>
-      </span>
+    <div class="col-lg-3">
+        <span ng-if="checkModel.liveBars"> 
+            <span class="bar-title">Possession</span>
+            <progress percent="possBar" ng-style="livebarcolours"></progress>
+            <span class="bar-title">Shots</span>
+            <progress percent="shotsBar"></progress>
+        </span>
         <h2 ng-repeat="f in form" style="background-color: {{myColour}}" id="form-column">
             {{f.form}}
         </h2>
@@ -151,11 +151,11 @@
         </div>
     </span>
     <div class="col-lg-3">
-		    <div class="livescores">
+        <div class="livescores">
             <p class="lead" ng-repeat-start="score in scores">{{score.teams}}
                 <span class="score">{{score.score}}</span>
             </p>
             <p ng-repeat-end=""></p>
         </div>
-      </div>
+    </div>
 </body>

@@ -1,0 +1,80 @@
+.progress .bar-arsenal {
+    background-image: linear-gradient(to bottom, #e8000b, #c8020d);
+}
+
+.progress .bar-chelsea {
+    background-image: linear-gradient(to bottom, #063381, #032660);
+}
+
+.progress .bar-west-bromwich-albion {
+    background-image: linear-gradient(to bottom, #090c41, #06082e);
+}
+
+.progress .bar-aston-villa {
+    background-image: linear-gradient(to bottom, #5a0029, #4d0024);
+}
+
+.progress .bar-liverpool {
+    background-image: linear-gradient(to bottom, #c3001e, #8e0118);
+}
+
+.progress .bar-tottenham-hotspur {
+    background-image: linear-gradient(to bottom, #051246, #030b2c);
+}
+
+.progress .bar-manchester-united {
+    background-image: linear-gradient(to bottom, #ce000e, #8d010c);
+}
+
+.progress .bar-stoke-city {
+    background-image: linear-gradient(to bottom, #d62331, #911823);
+}
+
+.progress .bar-cardiff-city {
+    background-image: linear-gradient(to bottom, #e5001e, #b10019);
+}
+
+.progress .bar-west-ham-united {
+    background-image: linear-gradient(to bottom, #4c172d, #300f1d);
+}
+
+.progress .bar-crystal-palace {
+    background-image: linear-gradient(to bottom, #06347c, #031e47);
+}
+
+.progress .bar-southampton {
+    background-image: linear-gradient(to bottom, #e5002e, #980020);
+}
+
+.progress .bar-newcastle-united {
+    background-image: linear-gradient(to bottom, #666666, #414141);
+}
+
+.progress .bar-sunderland {
+    background-image: linear-gradient(to bottom, #e30021, #a3021b);
+}
+
+.progress .bar-norwich-city {
+    background-image: linear-gradient(to bottom, #14993e, #0d6328);
+}
+
+.progress .bar-everton {
+    background-image: linear-gradient(to bottom, #073b8b, #04265a);
+}
+
+.progress .bar-manchester-city {
+    background-image: linear-gradient(to bottom, #4db1e6, #357aa0);
+}
+
+.progress .bar-swansea-city {
+    background-image: linear-gradient(to bottom, #b4b4b4, #8c8c8c);
+}
+
+.progress .bar-hull-city {
+    background-image: linear-gradient(to bottom, #f79616, #c87914);
+}
+
+.progress .bar-fulham {
+    background-image: linear-gradient(to bottom, #000000, #2d2d2d);
+}
+

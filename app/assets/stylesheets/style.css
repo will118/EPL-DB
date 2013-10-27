@@ -1,17 +1,15 @@
 body {
-  background-color: #fff;
-  color: #333;
-  font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
-  font-size: 13px;
-  line-height: 18px;
+    background-color: #fff;
+    color: #333;
+    font-family:"Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    line-height: 18px;
 }
-
 p, ol, ul, td {
-  font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
-  font-size: 13px;
-  line-height: 18px;
+    font-family:"Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    line-height: 18px;
 }
-
 body {
     padding-top: 60px;
 }
@@ -134,14 +132,12 @@ h1 {
 #live-targets {
     width: 24%;
 }
-
 #match-padd-div {
     width: 12%;
 }
 #match-shots-target {
     right: 1%;
 }
-
 #match-live-graph {
     width: 26%;
 }
@@ -173,10 +169,9 @@ h1 {
     text-decoration: underline;
 }
 .match-graph-title {
-        top: -32%;
-        right: -50%;
-    }
-
+    top: -32%;
+    right: -50%;
+}
 #top-toggles {
     margin-top: 8.5px;
 }
@@ -194,11 +189,14 @@ h1 {
 }
 #live-svg {
 }
-
 .bar-title {
-    
 }
-
+.progress .bar-home {
+    background-image: linear-gradient(to bottom, #5bc0de, #339bb9);
+}
+.progress .bar-away {
+    background-image: linear-gradient(to bottom, #fbb450, #f89406);
+}
 .progress .bar {
     height: 100%;
     color: #ffffff;
@@ -207,16 +205,6 @@ h1 {
     text-align: center;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
-
-.progress .bar-info {
-    background-color: #4bb1cf;
-    background-image: linear-gradient(to bottom, #5bc0de, #339bb9);
-}
-.progress .bar-warning {
-    background-color: #faa732;
-    background-image: linear-gradient(to bottom, #fbb450, #f89406);
-}
-
 #fix-and-table {
     padding-right: 5px;
 }

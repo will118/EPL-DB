@@ -1,26 +1,29 @@
 'use strict';
-	var teamnames = ["Arsenal",
-		 "Liverpool",
-		 "Chelsea",
-		 "Southampton",
-		 "Everton",
-		 "Hull City",
-		 "Manchester City",
-		 "Newcastle United",
-		 "Tottenham Hotspur",
-		 "West Bromwich Albion",
-		 "Cardiff City",
-		 "Swansea City",
-		 "Aston Villa",
-		 "Manchester United",
-		 "Stoke City",
-		 "Norwich City",
-		 "West Ham United",
-		 "Fulham",
-		 "Crystal Palace",
-		 "Sunderland"];
-	var colours = {
-    'Arsenal': '#e8000b',  
+var teamnames = ["Arsenal",
+    "Liverpool",
+    "Chelsea",
+    "Southampton",
+    "Everton",
+    "Hull City",
+    "Manchester City",
+    "Newcastle United",
+    "Tottenham Hotspur",
+    "West Bromwich Albion",
+    "Cardiff City",
+    "Swansea City",
+    "Aston Villa",
+    "Manchester United",
+    "Stoke City",
+    "Norwich City",
+    "West Ham United",
+    "Fulham",
+    "Crystal Palace",
+    "Sunderland"
+];
+var types = ['arsenal', 'chelsea', 'west-bromwich-albion', 'aston-villa', 'liverpool', 'tottenham-hotspur', 'manchester-united', 'stoke-city', 'cardiff-city', 'west-ham-united', 'crystal-palace', 'southampton', 'newcastle-united', 'sunderland', 'norwich-city', 'everton', 'manchester-city', 'swansea-city', 'hull-city', 'fulham'];
+
+var colours = {
+    'Arsenal': '#e8000b',
     'Chelsea': '#063381',
     'West Bromwich Albion': '#090c41',
     'Aston Villa': '#5a0029',
@@ -40,7 +43,8 @@
     'Swansea City': '#b4b4b4',
     'Hull City': '#f79616',
     'Fulham': '#000000'
-  };
+};
+
 function team_colour(name) {
-	return colours[name];
+    return colours[name];
 };
