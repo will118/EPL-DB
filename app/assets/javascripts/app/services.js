@@ -146,6 +146,15 @@ app.factory('LiveBars', function($http, $q) {
         });
         return defer_poss.promise;
     }
+    methods.shots = function(team) {
+        var defer_shots = $q.defer();
+        $http.get('/liveshotsbar/' + team, {
+            cache: false
+        }).success(function(data) {
+            defer_shots.resolve(data);
+        });
+        return defer_shots.promise;
+    }
     return methods;
 });
 

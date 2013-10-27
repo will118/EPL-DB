@@ -44,6 +44,8 @@ EPLDB::Application.routes.draw do
 
   get 'livepossbar/:team' => 'fixtures#livepossbar'
 
+  get 'liveshotsbar/:team' => 'fixtures#liveshotsbar'
+
   get "news/index"
 
   get "/prematchjson/:team" => "fixtures#prematchjson"

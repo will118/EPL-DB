@@ -25,7 +25,7 @@ class Fixture < ActiveRecord::Base
 	end
 
 	def out_of_date_teams?
-		updated_at >= (Time.now - 360)
+		updated_at >= (Time.now.utc - 360)
 	end
 
 end

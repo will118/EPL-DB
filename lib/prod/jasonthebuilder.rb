@@ -84,6 +84,20 @@ class JasonTheBuilder
     comboarray
   end
 
+  def shots_bar_json(team)
+    normalized_team = team.titleize
+    shot = Shot.where(["awayteam = ? or hometeam = ?", normalized_team, normalized_team]).last
+    total = (shot.homeshots + shot.awayshots)
+    homeshots = (shot.homeshots.to_f/total.to_f)*100
+    awayshots = (shot.awayshots.to_f/total.to_f)*100
+    comboarray = []
+    hometeam = shot.hometeam.downcase.gsub(/[" "]/, "-")
+    awayteam = shot.awayteam.downcase.gsub(/[" "]/, "-")
+      comboarray << {'value'=> homeshots, 'type'=> hometeam}
+      comboarray << {'value'=> awayshots, 'type'=> awayteam}
+    comboarray
+  end
+
   def jason(team)
 
     normalized_team = team.titleize

@@ -12,6 +12,10 @@ class FixturesController < ApplicationController
     render :json => JasonTheBuilder.new.poss_bar_json(params[:team])
   end
 
+  def liveshotsbar
+    render :json => JasonTheBuilder.new.shots_bar_json(params[:team])
+  end
+
   def formjson
     render :json => Form.where("team" =>(params[:team]).titleize)
   end

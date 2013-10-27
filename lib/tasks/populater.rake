@@ -3,7 +3,7 @@ namespace :populater do
   desc "FourFourTwo Opta Text"
   task optatext: :environment do
     Fixture.order(:kickoff).first(8).each do |x|
-      time_until = (x.kickoff - Time.now)
+      time_until = (x.kickoff - Time.now.utc)
       if (time_until < 86400)
         four = FourFourTwo.new
         four.match_link
