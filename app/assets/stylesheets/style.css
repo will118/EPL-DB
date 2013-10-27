@@ -11,7 +11,7 @@ p, ol, ul, td {
     line-height: 18px;
 }
 body {
-    padding-top: 60px;
+    padding-top: 50px;
 }
 #splash-container {
     background: url(../images/bg.jpg) no-repeat center center fixed;
@@ -22,6 +22,9 @@ body {
 }
 #sign-in {
     color: white;
+}
+#colours-middle {
+    max-width: 100%;
 }
 .sign-in-label {
     color: #cdcdcd;
@@ -46,7 +49,11 @@ body {
 }
 #teams {
     float:left;
-    width:48%;
+    width:50%;
+}
+#colour-lead {
+  font-size: 23px;
+  line-height: 32px;
 }
 #awayteam {
     float: right;

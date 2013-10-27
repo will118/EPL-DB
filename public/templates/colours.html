@@ -1,39 +1,37 @@
-<body ng-controller="AppController">
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="background-color: {{myColour}}">
-        <a class="navbar-brand" style="color: white">EPLDB</a>
-        <form class="navbar-form navbar-left" role="search">
-            <div class="form-group">
-                <input type="text" class="form-control" focus-on="focusMe" ng-model="team" typeahead="name for name in teamnames | filter:$viewValue">
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+         <link rel="stylesheet" type="text/css" href="bootstrap.css" />
+        <title>EPLDB</title>
+    </head>
+    <body id="bootstrap_1pxdeep" data-spy="scroll" data-target="#epl_navbar" ng-controller="AppController">
+        <nav id="epl_navbar" class="navbar navbar-fixed-top" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">EPLDB</a>
             </div>
-        </form>
-        <span ng-if="settingsToggle">
-            <div class="btn-group" id="top-toggles">
-                <button type="button" class="btn btn-primary" ng-model="checkModel.badge" btn-checkbox>Badges</button>
-                <button type="button" class="btn btn-primary" ng-model="checkModel.leaguetable" btn-checkbox>League Table</button>
-                <button type="button" class="btn btn-primary" ng-model="checkModel.oppoform" btn-checkbox>Opponent Form</button>
-                <button type="button" class="btn btn-primary" ng-model="checkModel.teams" btn-checkbox>Teams</button>
-                <button type="button" class="btn btn-primary" ng-model="checkModel.subs" btn-checkbox>Subs</button>
-                <button type="button" class="btn btn-primary" ng-model="checkModel.liveBars" btn-checkbox>Live Bars</button>
+
+            <div id="epl_navbar_nav" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/match">Match Mode</a></li>
+                    <li><a href="#">Settings</a></li>
+                    <li><a href="#">Default</a></li>
+                    <li><a href="#">Account</a></li>
+                </ul>
+            
             </div>
-        </span>
-        <button type="button" class="btn btn-primary" id="settings-toggle" ng-model="settingsToggle" btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false">Settings</button>
-        <div class="btn-group">
-            <button type="button" class="btn btn-default dropdown-toggle" id="top-toggles" data-toggle="dropdown">Presets
-                <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" role="menu">
-                <li><a href="/">Default</a>
-                </li>
-                <li><a href="/colours">Colours</a>
-                </li>
-                <li><a href="/match">Match Mode</a>
-                </li>
-            </ul>
-        </div>
-        <button type="button" class="btn btn-warning" id="top-toggles" ng-click="updateprefs()">Save</button>
-        <button type="button" id="sign-out-btn" ng-click="signout()" class="btn btn-primary navbar-btn pull-right">Sign out</button>
-    </nav>
-    <div class="row">
+        </nav>
+
+        <div id="colourhome" class="sectional color1">
+            <div class="container" id="colours-middle">
+             <div class="row">
         <div class="col-lg-1" id="match-padd-div"></div>
 
         <div class="col-lg-3" id="match-live-graph">
@@ -53,8 +51,8 @@
             </nvd3-line-chart>
         </div>
         <div class="col-lg-1" id="match-padd-div"></div>
-    </div>
-   
+    </div>    
+                   
     <div class="col-lg-3">
         <span ng-if="checkModel.liveBars"> 
             <span class="bar-title">Possession</span>
@@ -112,13 +110,13 @@
             </span>
             <span ng-if="checkModel.subs">
                 <table class="table table-hover" id="teams">
-                    <tr ng-repeat="item in homesubs | limitTo:7">
+                    <tr ng-repeat="item in homesubs | limitTo:7" class="coloursubs">
                         <td>{{item.player}}</td>
                     </tr>
                 </table>
                 <table class="table table-hover" id="teams">
 
-                    <tr ng-repeat="item in awaysubs | limitTo:7">
+                    <tr ng-repeat="item in awaysubs | limitTo:7" class="coloursubs">
                         <td>{{item.player}}</td>
                     </tr>
                 </table>
@@ -138,7 +136,7 @@
                     <th>GD</th>
                     <th>Points</th>
                 </tr>
-                <tr ng-repeat="t in premtable" ng-class="{success: t.team==team}">
+                <tr ng-repeat="t in premtable" ng-class="{notmypremteam: t.team!=team}">
                     <td>{{t.team}}</td>
                     <td class="table-points">{{t.played}}</td>
                     <td class="table-points">{{t.won}}</td>
@@ -153,10 +151,17 @@
     </span>
     <div class="col-lg-3">
         <div class="livescores">
-            <p class="lead" ng-repeat-start="score in scores">{{score.teams}}
+            <p class="lead" id="colour-lead" ng-repeat-start="score in scores">{{score.teams}}
                 <span class="score">{{score.score}}</span>
             </p>
             <p ng-repeat-end=""></p>
         </div>
     </div>
-</body>
+
+
+                </div>
+            </div>
+       
+
+    </body>
+</html>

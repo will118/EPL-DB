@@ -4,24 +4,15 @@ angular.module('d3App.controllers', [])
 
 .controller('AppController', function($scope, $http, $timeout, focus, session, GeneralLiveData, SessionService, LiveStatsData, TeamFormData, LiveBars, BigData, MatchDetails, HomeAwayTeam) {
 
-    $scope.possBar = [{
-        "value": 50,
-        "type": "arsenal"
-    }, {
-        "value": 50,
-        "type": "fulham"
-    }];
-
     $scope.shotsBar = [{
         "value": 50,
-        "type": "home"
+        "type": "manchester-united"
     }, {
         "value": 50,
-        "type": "away"
+        "type": "norwich-city"
     }];
 
     focus('focusMe');
-
 
     $scope.settingsToggle = false
 
@@ -30,6 +21,8 @@ angular.module('d3App.controllers', [])
     $scope.user = session.user;
 
     $scope.checkModel = angular.fromJson(session.user.settings);
+    
+    $scope.team = $scope.checkModel.favteam;
 
     $scope.updateprefs = function() {
         $scope.user.settings = angular.toJson($scope.checkModel)
@@ -47,7 +40,6 @@ angular.module('d3App.controllers', [])
         });
     };
 
-    $scope.team = $scope.checkModel.favteam;
 
     $scope.$watch('checkModel', function(data) {
         if ($scope.checkModel.fixtures == false && $scope.checkModel.teams == false) {
@@ -82,7 +74,7 @@ angular.module('d3App.controllers', [])
 
     var barposs = function(team) {
         LiveBars.poss(team).then(function(data) {
-            // $scope.possBar = angular.fromJson(data);
+            $scope.possBar = angular.fromJson(data);
         })
     }
 

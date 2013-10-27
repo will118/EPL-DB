@@ -72,12 +72,14 @@ class JasonTheBuilder
     normalized_team = team.titleize
     poss = Poss.where(["awayteam = ? or hometeam = ?", normalized_team, normalized_team]).last
     comboarray = []
+    hometeam = poss.hometeam.downcase.gsub(/[" "]/, "-")
+    awayteam = poss.awayteam.downcase.gsub(/[" "]/, "-")
     if (poss.homeposs + poss.awayposs) == 101
-      comboarray << {'value'=> (poss['homeposs']-0.5), 'type'=> 'home'}
-      comboarray << {'value'=> (poss['awayposs']-0.5), 'type'=> 'away'}
+      comboarray << {'value'=> (poss['homeposs']-0.5), 'type'=> hometeam}
+      comboarray << {'value'=> (poss['awayposs']-0.5), 'type'=> awayteam}
     else
-      comboarray << {'value'=> poss['homeposs'], 'type'=> 'home'}
-      comboarray << {'value'=> poss['awayposs'], 'type'=> 'away'}
+      comboarray << {'value'=> poss['homeposs'], 'type'=> hometeam}
+      comboarray << {'value'=> poss['awayposs'], 'type'=> awayteam}
     end
     comboarray
   end

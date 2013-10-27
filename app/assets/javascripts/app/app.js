@@ -23,6 +23,15 @@ var d3App = angular.module('d3App', ['ngRoute', 'nvd3ChartDirectives', 'd3App.di
             }
         }
     })
+    .when('/colours', {
+        templateUrl: '/templates/colours.html',
+        controller: 'AppController',
+        resolve: {
+            session: function(SessionService) {
+                return SessionService.getCurrentUser();
+            }
+        }
+    })
         .otherwise({
             redirectTo: '/'
         });

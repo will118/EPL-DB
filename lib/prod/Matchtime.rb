@@ -1,7 +1,7 @@
 class MatchTime
 
 	def initialize(kickoff)
-		@time_until = ((kickoff - Time.now) - 3600)
+		@time_until = (kickoff - Time.now)
 	end
 
 	def halftime?
