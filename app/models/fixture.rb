@@ -1,9 +1,5 @@
 class Fixture < ActiveRecord::Base
 
-  def valid_team?(team)
-    exists?(:hometeam => team)
-  end
-
 	def got_json?
 		jsonurl != nil
 	end

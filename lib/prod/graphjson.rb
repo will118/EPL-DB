@@ -3,8 +3,11 @@ require_relative 'namenormaliser'
 class GraphJSON
   include NameNormaliser
 
-  def main(team)
+  def valid_team?(team)
+    Fixture.exists?(:hometeam => team)
+  end
 
+  def main(team)
     unless valid_team?(team) == true
       avg_poss = Supermodel.of_possession_where(team)
       shot_acc = Supermodel.of_shots_where(team)

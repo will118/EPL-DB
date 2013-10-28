@@ -23,7 +23,7 @@ class Supermodel < ActiveRecord::Base
 		end
 
 		def of_possessionscore_where(team)
-			where(:teamname => team.titleize).pluck(:possessionscore)
+			where(:teamname => team.titleize).pluck(:possesionscore)
 		end
 
 		def of_optascore_where(team)

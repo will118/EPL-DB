@@ -3,8 +3,17 @@ require_relative 'namenormaliser'
 class RemoteAPI
   include NameNormaliser
 
-  class << self
-    
+  def top_scorers(team)
+    name = stats_fc_normaliser(team)
+    if stats_fc_checker(name) == "1"
+      raw = "http://api.statsfc.com/top-scorers.json?key=#{ENV["STATS_KEY"]}&competition=#{ENV["COMP"]}&team=#{name}&year=2013/2014"
+      HTTParty.get(raw).response.body
+    else "Incorrect team name"
+    end
+  end
+
+
+  class << self    
     def next_5_fixtures(type="normal")
       date = Date.today
       from_date = date.to_s(:db)
@@ -21,20 +30,10 @@ class RemoteAPI
       fixtures
     end
 
-    def self.top_scorers(team)
-      name = stats_fc_normaliser(team)
-      if stats_fc_checker(name) == "1"
-        raw = "http://api.statsfc.com/top-scorers.json?key=#{ENV["STATS_KEY"]}&competition=#{ENV["COMP"]}&team=#{name}&year=2013/2014"
-        HTTParty.get(raw).response.body
-      else "Incorrect team name"
-      end
-    end
-
-    def table_json
+    def table
       table = "http://api.statsfc.com/#{ENV["COMP"]}/table.json?key=#{ENV["STATS_KEY"]}"
       JSON.parse(HTTParty.get(table).response.body)
-    end
-  
+    end  
   end
 
 end

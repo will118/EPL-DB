@@ -3,7 +3,7 @@ class Shot < ActiveRecord::Base
 	validates :homeshots, presence: true
 	
 	def self.last_where(team)
-		where(["awayteam = ? or hometeam = ?", normalized_team, normalized_team]).last
+		where(["awayteam = ? or hometeam = ?", team.titleize, team.titleize]).last
 	end
 
 end
