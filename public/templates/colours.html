@@ -32,25 +32,17 @@
                 </div>
             </span>
             <ul class="nav navbar-nav">
-                <li><a href="#">Default</a>
+                <li><a href="/">Default</a>
                 </li>
                 <li><a href="/match">Match Mode</a>
                 </li>
                 <li><a href="#" ng-model="settingsToggle" btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false">Settings</a>
                 </li>
-                <li><a href="#">Sign Out</a>
+                <li><a href="#" ng-click="signout()">Sign Out</a>
                 </li>
             </ul>
         </div>
     </nav>
-
-
-
-
-
-
-
-
 
     <div id="colourhome" class="sectional color1">
         <div class="container" id="colours-middle">
@@ -78,21 +70,36 @@
 
             <div class="col-lg-3" style="padding-right: 5px;">
                 <span ng-if="checkModel.liveBars">
+                <table class="table color1">
+                    <td>
                     <span class="bar-title">Possession</span>
                     <progress percent="possBar"></progress>
+                    </td>
+                    <tr>
+                    <td>
                     <span class="bar-title">Shots</span>
                     <progress percent="shotsBar"></progress>
+                    </td>
+                    </tr>
+                </table>
                 </span>
+                <table class="table color1">
+                <td>
                 <h2 ng-repeat="f in form" style="background-color: {{myColour}}" id="form-column">
                     {{f.form}}
                 </h2>
+                </td>
+                <tr>
+                <td>
                 <span ng-if="checkModel.oppoform">
                     <h2 ng-repeat="f in otherform" style="background-color: {{otherColour}}" id="other-form-column">
                         {{f.form}}
                     </h2>
+                    </td>
+                    </tr>
                     <br>
                 </span>
-                <table class="table table-hover color2" id="scorers">
+                <table class="table table-hover color1" id="scorers">
                     <tr>
                         <th>Name</th>
                         <th id="scorer-goals">Goals</th>
@@ -148,7 +155,7 @@
 
             <span ng-if="checkModel.leaguetable">
                 <div class="col-lg-3" id="table-div">
-                    <table class="table table-hover color2">
+                    <table class="table table-hover color1">
                         <tr>
                             <th>Team</th>
                             <th>Pl.</th>
@@ -178,7 +185,7 @@
                     </p>
                     <p ng-repeat-end=""></p>
                 </div>
-                <div class="nextfixes">
+                <div class="livescores">
                     <p class="lead" id="colour-lead" ng-repeat-start="nextfix in nextfixtures track by $index">{{nextfix.home}} vs. {{nextfix.away}}
                         <br />
                         <span class="score">{{nextfix.date}}</span>

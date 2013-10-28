@@ -229,7 +229,9 @@ angular.module('d3App.controllers', [])
             data: {
                 user: $scope.user
             }
-        }).success(function(data) {}).error(function(reason) {
+        }).success(function(data) {
+            console.log("Signed out");
+        }).error(function(reason) {
             $scope.user.errors = reason;
             window.location.href = '/';
         });

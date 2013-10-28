@@ -14,6 +14,7 @@ class RemoteAPI
 
 
   class << self
+  include ActionView::Helpers::DateHelper
     def next_5_fixtures(type="normal")
       date = Date.today
       from_date = date.to_s(:db)
@@ -24,7 +25,8 @@ class RemoteAPI
       if type == "countdown"
         fixtures.each do |x|
           date = Time.parse(x['date'])
-          x['date'] = date - Time.now.utc
+          time = date - Time.now.utc
+          x['date'] = distance_of_time_in_words_to_now(Time.now + time)
         end
       end
       fixtures

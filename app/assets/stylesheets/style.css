@@ -32,6 +32,12 @@ body {
 .remember-me-label {
     color: #a1a1a1;
 }
+#bartable {
+    background-color: #4e8a89;
+}
+#formtable {
+    background-color: #4e8a89;
+}
 body {
     font: 14px Helvetica Neue;
     text-rendering: optimizeLegibility;
