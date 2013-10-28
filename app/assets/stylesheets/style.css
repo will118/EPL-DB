@@ -214,6 +214,7 @@ h1 {
 }
 #fix-and-table {
     padding-right: 5px;
+    padding-left: 5px;
 }
 .fixdate {
     font-size: 0.75em;

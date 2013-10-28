@@ -24,6 +24,16 @@ app.factory('GeneralLiveData', function($http, $q) {
         return defer_scores.promise;
     }
 
+    methods.nextfixtures = function() {
+        var defer_nextfixtures = $q.defer();
+        $http.get('/nextfixtures/' + 'countdown', {
+            cache: false
+        }).success(function(data) {
+            defer_nextfixtures.resolve(data);
+        });
+        return defer_nextfixtures.promise;
+    }
+
     methods.fixtures = function(team) {
         var deferred = $q.defer();
         $http.get('/fixturesjson/' + team, {

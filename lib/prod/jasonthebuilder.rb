@@ -17,6 +17,22 @@ class JasonTheBuilder
     JSON.parse(HTTParty.get(fixtures).response.body)
   end
 
+  def next_fixtures(type="normal")
+    date = Date.today
+    from_date = date.to_s(:db)
+    future_date = date + 2.months
+    to_date = future_date.to_s(:db)
+    fixtures = "http://api.statsfc.com/#{ENV["COMP"]}/fixtures.json?key=#{ENV["STATS_KEY"]}&from=#{from_date}&to=#{to_date}&timezone=#{ENV["TIMEZONE"]}&limit=5"
+    fixtures = JSON.parse(HTTParty.get(fixtures).response.body)
+    if type == "countdown"
+      fixtures.each do |x|
+       date = Time.parse(x['date'])
+       x['date'] = date - Time.now.utc
+      end
+    end
+    fixtures
+  end
+
   def fixture(team)
     normalized_team = team.titleize
     Fixture.where(["awayteam = ? or hometeam = ?", normalized_team, normalized_team]).order(:kickoff).map do |x|

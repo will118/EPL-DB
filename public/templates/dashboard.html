@@ -3,7 +3,7 @@
         <a class="navbar-brand" style="color: white">EPLDB</a>
         <form class="navbar-form navbar-left" role="search">
             <div class="form-group">
-                <input type="text" class="form-control" focus-on="focusMe" ng-model="team" typeahead="name for name in teamnames | filter:$viewValue">
+                <input type="text" class="form-control" focus-on="focusMe" ng-model="team" typeahead="name for name in teamnames | filter:$viewValue" typeahead-editable="false">
             </div>
         </form>
         <span ng-if="settingsToggle">

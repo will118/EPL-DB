@@ -13,7 +13,7 @@ angular.module('d3App.controllers', [])
     $scope.user = session.user;
 
     $scope.checkModel = angular.fromJson(session.user.settings);
-    
+
     $scope.team = $scope.checkModel.favteam;
 
     $scope.updateprefs = function() {
@@ -41,38 +41,19 @@ angular.module('d3App.controllers', [])
         }
     });
 
-    $scope.teamnames = teamnames
+    $scope.teamnames = teamnames;
 
-    $scope.$watch('team', function(team) {
-        $scope.myColour = team_colour(team);
-        $scope.team = team;
-        target(team);
-        squawkajson(team);
-        awaybench(team);
-        homebench(team);
-        getBadge(team);
-        formteam(team);
-        optatext(team);
-        formoppo(team);
-        liveshot(team);
-        barposs(team);
-        barshots(team);
-        corners(team);
-        scorer(team);
-        away(team);
-        home(team);
-        fixt(team);
-        table();
-    });
+    $scope.possBar = [{"value":50,"type":"crystal-palace"},{"value":50,"type":"arsenal"}];
+    $scope.shotsBar = [{"value":50,"type":"crystal-palace"},{"value":50,"type":"arsenal"}];
 
     var barposs = function(team) {
         LiveBars.poss(team).then(function(data) {
-            $scope.possBar = angular.fromJson(data);
+            $scope.possBar = data;
         })
     }
     var barshots = function(team) {
         LiveBars.shots(team).then(function(data) {
-            $scope.shotsBar = angular.fromJson(data);
+            $scope.shotsBar = data;
         })
     }
 
@@ -153,7 +134,15 @@ angular.module('d3App.controllers', [])
             $scope.scores = data
         })
     }
-    score();
+
+
+    var nextfix = function() {
+        var nextfixes = GeneralLiveData.nextfixtures()
+        nextfixes.then(function(data) {
+            $scope.nextfixtures = data
+        })
+    }
+
 
     var table = function() {
         var table = GeneralLiveData.table()
@@ -200,12 +189,10 @@ angular.module('d3App.controllers', [])
     };
 
     var livestats = function() {
-        var team = $scope.team
+        var team = $scope.team;
         liveshot(team);
         corners(team);
         target(team);
-        barshots(team);
-        barposs(team);
     };
 
     $scope.counter = 0;
@@ -229,6 +216,7 @@ angular.module('d3App.controllers', [])
             preMatcher($scope.prematchArray);
             livestats();
             score();
+            nextfix();
             table();
         })
     }, 10000);
@@ -245,4 +233,30 @@ angular.module('d3App.controllers', [])
             window.location.href = '/';
         });
     };
+
+    var updateTeamDependencies = function(team) {
+        $scope.myColour = team_colour(team);
+        target(team);
+        squawkajson(team);
+        awaybench(team);
+        homebench(team);
+        getBadge(team);
+        formteam(team);
+        optatext(team);
+        formoppo(team);
+        liveshot(team);
+        barposs(team);
+        barshots(team);
+        corners(team);
+        scorer(team);
+        away(team);
+        home(team);
+        fixt(team);
+        table();
+        score();
+        nextfix();
+    };
+    $scope.$watch('team', updateTeamDependencies);
+
+    updateTeamDependencies($scope.team);
 });

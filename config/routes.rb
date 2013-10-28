@@ -25,6 +25,7 @@ EPLDB::Application.routes.draw do
   get 'fouljson/:team' => 'fixtures#livefouljson'
 
   get 'fixturesjson/:team' => 'fixtures#fixturesjson'
+  get 'nextfixtures/:type' => 'fixtures#nextfixtures'
   get 'scoresjson' => 'fixtures#scores'
 
   get 'hometeam/:team' => 'fixtures#hometeam'
