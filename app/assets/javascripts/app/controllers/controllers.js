@@ -112,7 +112,12 @@ angular.module('d3App.controllers', [])
 
     $scope.colorFunction = function() {
         return function(d, i) {
+            if ($scope.colourArray == null) {
+                $scope.colourArray = ['#e8000b','#051246']
+            }
+            else  {
             return $scope.colourArray[i];
+            };
         };
     }
 
