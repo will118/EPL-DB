@@ -25,7 +25,7 @@ namespace :populater do
 
     desc "teamform"
     task teamform: :environment do
-      form = JasonTheBuilder.single_form
+      form = Form.single_form
       form.each do |d|
         form = d["form"].join(' ')
         fo = Form.where(:team => d["team"]).first_or_create

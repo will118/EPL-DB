@@ -1,83 +1,83 @@
 class DataController < ApplicationController
 
-  def megajson
-    render :json => JasonTheBuilder.new.jason(params[:team])
-  end
-
-  def topscorers
-    render :json => JasonTheBuilder.new.top_scorers_json(params[:team])
-  end
-
-  def livepossbar
-    render :json => JasonTheBuilder.new.poss_bar_json(params[:team])
-  end
-
-  def liveshotsbar
-    render :json => JasonTheBuilder.new.shots_bar_json(params[:team])
-  end
-
-  def formjson
-    render :json => Form.where("team" =>(params[:team]).titleize)
-  end
-
-  def otherformjson
-    render :json => JasonTheBuilder.otherformjson(params[:team])
-  end
-
-  def prematchjson
-    render :json => JasonTheBuilder.prematchjson(params[:team])
-  end
-
-  def scores
-    render :json => JasonTheBuilder.scores
-  end
-
-  def fixturesjson
-    render :json => JasonTheBuilder.new.fixture(params[:team])
-  end
-
-  def nextfixtures
-    render :json => JasonTheBuilder.new.next_fixtures(params[:type])
-  end
-
   def hometeam
-    render :json => JasonTheBuilder.new.home_team(params[:team])
+    render :json => Teams.home_team(params[:team])
   end
 
   def awayteam
-    render :json => JasonTheBuilder.new.away_team(params[:team])
+    render :json => Teams.away_team(params[:team])
   end
 
   def homesubs
-    render :json => JasonTheBuilder.new.home_subs(params[:team])
+    render :json => Teams.home_subs(params[:team])
   end
 
   def awaysubs
-    render :json => JasonTheBuilder.new.away_subs(params[:team])
+    render :json => Teams.away_subs(params[:team])
+  end
+
+  def topscorers
+    render :json => RemoteAPI.top_scorers(params[:team])
+  end
+
+  def livepossbar
+    render :json => LiveBars.possession(params[:team])
+  end
+
+  def liveshotsbar
+    render :json => LiveBars.shots(params[:team])
+  end
+
+  def formjson
+    render :json => Form.of(params[:team])
+  end
+
+  def otherformjson
+    render :json => Form.of_other(params[:team])
+  end
+
+  def prematchjson
+    render :json => Prematch.last_10_of(params[:team])
+  end
+
+  def scores
+    render :json => Score.live
+  end
+
+  def fixturesjson
+    render :json => Fixture.by_team(params[:team])
+  end
+
+  def nextfixtures
+    render :json => RemoteAPI.next_5_fixtures(params[:type])
   end
 
   def tablejson
-    render :json => JasonTheBuilder.new.table_json
+    render :json => RemoteAPI.table
+  end
+
+  def megajson
+    render :json => GraphJSON.new.main(params[:team])
   end
 
   def livepossjson
-    render :json => JasonTheBuilder.new.poss(params[:team])
+    render :json => GraphJSON.new.poss(params[:team])
   end
 
   def livetargetjson
-    render :json => JasonTheBuilder.new.targets(params[:team])
+    render :json => GraphJSON.new.targets(params[:team])
   end
 
   def liveshotjson
-    render :json => JasonTheBuilder.new.shots(params[:team])
+    render :json => GraphJSON.new.shots(params[:team])
   end
 
   def livecornerjson
-    render :json => JasonTheBuilder.new.corners(params[:team])
+    render :json => GraphJSON.new.corners(params[:team])
   end
 
   def livefouljson
-    render :json => JasonTheBuilder.new.fouls(params[:team])
+    render :json => GraphJSON.new.fouls(params[:team])
   end
 
 end

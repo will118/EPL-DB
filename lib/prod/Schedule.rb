@@ -1,12 +1,21 @@
+require_relative 'namenormaliser'
+
 class Schedule
+  include NameNormaliser
 
 	def initialize(team)
 		@team = team
 	end
 
 	def next_match
-		JasonTheBuilder.new.fixture_json(@team)
-	end
+    name = stats_fc_normaliser(@team)
+    date = Date.today
+    from_date = date.to_s(:db)
+    future_date = date + 2.months
+    to_date = future_date.to_s(:db)
+    fixtures = "http://api.statsfc.com/#{ENV["COMP"]}/fixtures.json?key=#{ENV["STATS_KEY"]}&team=#{name}&from=#{from_date}&to=#{to_date}&timezone=#{ENV["TIMEZONE"]}&limit=5"
+    JSON.parse(HTTParty.get(fixtures).response.body)
+  end
 
 	def save
 		json = next_match
