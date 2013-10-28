@@ -1,5 +1,9 @@
 class Fixture < ActiveRecord::Base
 
+	def self.next_8
+		order(:kickoff).first(8)
+	end
+
 	def got_json?
 		jsonurl != nil
 	end

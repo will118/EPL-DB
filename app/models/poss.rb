@@ -6,4 +6,8 @@ class Poss < ActiveRecord::Base
 		where(["awayteam = ? or hometeam = ?", team.titleize, team.titleize]).last
 	end
 
+	def self.involving(team)
+		where(["awayteam = ? or hometeam = ?", team.titleize, team.titleize])
+	end
+
 end

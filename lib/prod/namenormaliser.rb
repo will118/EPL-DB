@@ -47,7 +47,7 @@ module NameNormaliser
 	def stats_fc_normaliser(team)
 		team.gsub!(/[\s]/, "-")
 		team
-	end
+	end	
 
 	def stats_fc_checker(team)
 		case team

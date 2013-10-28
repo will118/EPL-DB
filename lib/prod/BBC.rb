@@ -6,10 +6,9 @@ class BBC
   include NameNormaliser
   include ARBuilder
 
-  attr_reader :statsjson
 
   def match_manager
-    Fixture.order(:kickoff).first(8).each do |x|
+    Fixture.next_8.each do |x|
       match_timer = MatchTime.new(x.kickoff)
       if match_timer.halftime? && x.got_json?
         puts "Half Time"
@@ -117,35 +116,28 @@ class BBC
     hometeam = teams.css('h3.team-name')[0].text
     awayteam = teams.css('h3.team-name')[1].text
 
-    both_xis = teams.css('.player-list>li')
-    home_xi = both_xis[0..10]
-    away_xi = both_xis[11..21]
-
-    both_subs = teams.css('.subs-list>li')
-    home_subs = both_subs[0..6]
-    away_subs = both_subs[7..13]
-
-    Team.today.where(:teamname => hometeam).delete_all
-    Team.today.where(:teamname => awayteam).delete_all
+    home_xi = teams.css('.player-list>li')[0..10]
+    away_xi = teams.css('.player-list>li')[11..21]
+    
+    home_subs = teams.css('.subs-list>li')[0..6]
+    away_subs = teams.css('.subs-list>li')[7..13]
+    
+    Team.wipe_todays_of(hometeam, awayteam)
 
     home_xi.each do |player|
-      xxx = player.inner_text.strip.gsub(/\s+/, ' ').gsub(/'\s{1}/, '')
-      Team.where(:player => xxx, :teamname => hometeam, :starting => true).first_or_create
+      Team.bbc_scraped_name(player, hometeam, true)
     end
 
     away_xi.each do |player|
-      xxx = player.inner_text.strip.gsub(/\s+/, ' ').gsub(/'\s{1}/, '')
-      Team.where(:player => xxx, :teamname => awayteam, :starting => true).first_or_create
+      Team.bbc_scraped_name(player, awayteam, true)
     end
 
     home_subs.each do |player|
-      xxx = player.inner_text.strip.gsub(/\s+/, ' ').gsub(/'\s{1}/, '')
-      Team.where(:player => xxx, :teamname => hometeam, :starting => false).first_or_create
+      Team.bbc_scraped_name(player, hometeam, false)
     end
 
     away_subs.each do |player|
-      xxx = player.inner_text.strip.gsub(/\s+/, ' ').gsub(/'\s{1}/, '')
-      Team.where(:player => xxx, :teamname => awayteam, :starting => false).first_or_create
+      Team.bbc_scraped_name(player, awayteam, false)
     end
 
     x.gotteam = true

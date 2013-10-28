@@ -61,7 +61,7 @@ class DataController < ApplicationController
   end
 
   def livepossjson
-    render :json => GraphJSON.new.poss(params[:team])
+    render :json => GraphJSON.new.possession(params[:team])
   end
 
   def livetargetjson
