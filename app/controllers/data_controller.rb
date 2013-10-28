@@ -1,5 +1,6 @@
 class DataController < ApplicationController
 
+## Teams ##
   def hometeam
     render :json => Teams.home_team(params[:team])
   end
@@ -16,10 +17,7 @@ class DataController < ApplicationController
     render :json => Teams.away_subs(params[:team])
   end
 
-  def topscorers
-    render :json => RemoteAPI.new.top_scorers(params[:team])
-  end
-
+## Live Bars ##
   def livepossbar
     render :json => LiveBars.possession(params[:team])
   end
@@ -28,6 +26,7 @@ class DataController < ApplicationController
     render :json => LiveBars.shots(params[:team])
   end
 
+## Form ##
   def formjson
     render :json => Form.of(params[:team])
   end
@@ -36,26 +35,35 @@ class DataController < ApplicationController
     render :json => Form.of_other(params[:team])
   end
 
+## Prematch ##
   def prematchjson
     render :json => Prematch.last_10_of(params[:team])
   end
 
+## Scores ##
   def scores
     render :json => Score.live
   end
 
+## Fixtures ##
   def fixturesjson
     render :json => Fixture.by_team(params[:team])
+  end
+
+## Remote API ##
+  def tablejson
+    render :json => RemoteAPI.table
+  end
+
+  def topscorers
+    render :json => RemoteAPI.new.top_scorers(params[:team])
   end
 
   def nextfixtures
     render :json => RemoteAPI.next_5_fixtures(params[:type])
   end
 
-  def tablejson
-    render :json => RemoteAPI.table
-  end
-
+## Graph JSONs ##
   def megajson
     render :json => GraphJSON.new.main(params[:team])
   end

@@ -18,5 +18,15 @@ class Form < ActiveRecord::Base
     JSON.parse HTTParty.get(teamform).response.body
   end
 
+  def self.form_get
+    form = Form.single_form
+    form.each do |d|
+      form = d["form"].join(' ')
+      team = Form.where(:team => d["team"]).first_or_create
+      team.form = form
+      team.save
+    end
+  end
+
 	
 end

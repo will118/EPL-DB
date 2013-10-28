@@ -1,11 +1,8 @@
 require_relative 'namenormaliser'
-require_relative 'builder'
 require 'open-uri'
 
 class BBC
   include NameNormaliser
-  include ARBuilder
-
 
   def match_manager
     Fixture.next_8.each do |x|
@@ -17,7 +14,7 @@ class BBC
       elsif match_timer.match_over?
         x.delete
       elsif match_timer.match_on? && x.missing_team?
-        form_get
+        Form.form_get
       elsif match_timer.live_match? && x.missing_json?
         recorder(x)
         scores
@@ -36,7 +33,7 @@ class BBC
   end
 
   def get_bbc(fixture)
-    if ((fixture.jsonurl == nil) || (fixture.jsonurl == ""))
+    if (fixture.jsonurl == nil) || (fixture.jsonurl == "")
       team = bbc_name(fixture.hometeam)
       uri = "http://www.bbc.co.uk/sport/football/premier-league/fixtures"
       doc = Nokogiri::HTML(open(uri))
@@ -58,7 +55,6 @@ class BBC
       end
     end
   end
-
 
   def is_valid_match?
     !!(@rawlink =~ /(\/sport\/football\/\d+)/)
@@ -164,9 +160,9 @@ class BBC
     live_scores = array.delete_if {|x| x['score'].length < 2}
 
     live_scores.each do |x|
-      sco = Score.where(:teams => x['teams']).first_or_create
-      sco.score = x['score']
-      sco.save
+      score = Score.where(:teams => x['teams']).first_or_create
+      score.score = x['score']
+      score.save
     end
   end
 
