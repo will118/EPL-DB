@@ -6,6 +6,7 @@
 
 # Ignore bundler config.
 /.bundle
+/.idea
 /lib/.betfair.rb
 .rspec
 Guardfile
