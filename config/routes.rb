@@ -18,38 +18,38 @@ EPLDB::Application.routes.draw do
   get '/settings' => 'welcome#dashboard'
   root to: 'welcome#index'
 
-  get 'possjson/:team' => 'fixtures#livepossjson'
-  get 'shotjson/:team' => 'fixtures#liveshotjson'
-  get 'targetjson/:team' => 'fixtures#livetargetjson'
-  get 'cornerjson/:team' => 'fixtures#livecornerjson'
-  get 'fouljson/:team' => 'fixtures#livefouljson'
+  get 'possjson/:team' => 'data#livepossjson'
+  get 'shotjson/:team' => 'data#liveshotjson'
+  get 'targetjson/:team' => 'data#livetargetjson'
+  get 'cornerjson/:team' => 'data#livecornerjson'
+  get 'fouljson/:team' => 'data#livefouljson'
 
-  get 'fixturesjson/:team' => 'fixtures#fixturesjson'
-  get 'nextfixtures/:type' => 'fixtures#nextfixtures'
-  get 'scoresjson' => 'fixtures#scores'
+  get 'fixturesjson/:team' => 'data#fixturesjson'
+  get 'nextfixtures/:type' => 'data#nextfixtures'
+  get 'scoresjson' => 'data#scores'
 
-  get 'hometeam/:team' => 'fixtures#hometeam'
-  get 'awayteam/:team' => 'fixtures#awayteam'
+  get 'hometeam/:team' => 'data#hometeam'
+  get 'awayteam/:team' => 'data#awayteam'
 
-  get 'homesubs/:team' => 'fixtures#homesubs'
-  get 'awaysubs/:team' => 'fixtures#awaysubs'
+  get 'homesubs/:team' => 'data#homesubs'
+  get 'awaysubs/:team' => 'data#awaysubs'
 
-  get 'tablejson' => 'fixtures#tablejson'
+  get 'tablejson' => 'data#tablejson'
 
-  get 'formjson/:team' => 'fixtures#formjson'
-  get "/otherformjson/:team" => "fixtures#otherformjson"
+  get 'formjson/:team' => 'data#formjson'
+  get "/otherformjson/:team" => "data#otherformjson"
 
-  get 'megajson/:team' => 'fixtures#megajson'
+  get 'megajson/:team' => 'data#megajson'
 
-  get 'topscorers/:team' => 'fixtures#topscorers'
+  get 'topscorers/:team' => 'data#topscorers'
 
-  get 'livepossbar/:team' => 'fixtures#livepossbar'
+  get 'livepossbar/:team' => 'data#livepossbar'
 
-  get 'liveshotsbar/:team' => 'fixtures#liveshotsbar'
+  get 'liveshotsbar/:team' => 'data#liveshotsbar'
 
   get "news/index"
 
-  get "/prematchjson/:team" => "fixtures#prematchjson"
+  get "/prematchjson/:team" => "data#prematchjson"
 
   get "*path" => 'welcome#index'
 end
