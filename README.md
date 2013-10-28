@@ -50,7 +50,7 @@ I wanted marginally relevant information to have on my other/second screen durin
 
 #### BBC Sport
 
-So the situation here is bonafide-ish JSONs and CORS. The JSONs seem to be nested in 1 too many array/hashes so if you're trying to deal with these JSONs for some reason then be sure to check them on a JSON validator. As for my personal use, this is where all the magic comes from. Or at least most of the live data. I have a few different methods of scraping stuff off of the BBC, I think they're kind of cool (check lib/prod/BBC.rb). 
+So the situation here is bonafide-ish JSONs and CORS. The JSONs seem to be nested in 1 too many array/hashes so if you're trying to deal with these JSONs for some reason then be sure to check them on a JSON validator. As for my personal use, this is where all the magic comes from. Or at least most of the live data. The BBCGetter and BBCRecorder classes are managed by the MatchManager.
 
 #### Stats FC
 
@@ -66,11 +66,11 @@ Maybe I'm missing something but it seems pretty much like an open API.
 
 ### Work in Progress
 
-What I'm doing next, in order (at least in theory):
+What I'm doing next, in order:
 
+- Refactoring
 - Angular/Front End
-
-> Encoding problem: Status - FIXED.
+- Tests
 
 ### Tests
 

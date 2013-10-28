@@ -86,6 +86,6 @@ class BBCRecorder
     live_scores.each do |x|
       Score.save_data(x['teams'], x['score'])
     end
-
   end
+  
 end

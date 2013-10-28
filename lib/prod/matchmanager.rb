@@ -1,6 +1,6 @@
 class MatchManager
   
-  def self.match_manager
+  def self.run
     Fixture.next_8.each do |fixture|
       match_timer = MatchTime.new(fixture.kickoff)
       if match_timer.halftime? && fixture.got_json?

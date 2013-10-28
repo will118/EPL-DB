@@ -13,7 +13,7 @@ class RemoteAPI
   end
 
 
-  class << self    
+  class << self
     def next_5_fixtures(type="normal")
       date = Date.today
       from_date = date.to_s(:db)
@@ -33,7 +33,7 @@ class RemoteAPI
     def table
       table = "http://api.statsfc.com/#{ENV["COMP"]}/table.json?key=#{ENV["STATS_KEY"]}"
       JSON.parse(HTTParty.get(table).response.body)
-    end  
+    end
   end
 
 end
