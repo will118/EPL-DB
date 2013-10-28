@@ -4,8 +4,20 @@ class Fixture < ActiveRecord::Base
 		order(:kickoff).first(8)
 	end
 
+	def link_save(rawurl, jsonurl, lineupurl)
+		self.rawlink = rawlink
+		self.jsonurl = jsonurl
+		self.lineup_url = lineupurl
+		self.save
+	end
+
 	def got_json?
 		jsonurl != nil
+	end
+
+	def got_team!
+		self.gotteam = true
+		self.save
 	end
 
 	def missing_link?
