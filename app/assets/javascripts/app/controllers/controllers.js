@@ -9,10 +9,13 @@ angular.module('d3App.controllers', [])
     $scope.settingsToggle = false
 
     $scope.user = session.user;
-    // Default values for new users.
-    $scope.checkModel = {"badge":true,"leaguetable":true,"prematch":false,"oppoform":true,"fixtures":true,"teams":true,"favteam":"Arsenal","subs":true,"liveBars":true}
     
     $scope.checkModel = angular.fromJson(session.user.settings);
+
+    // Default values for new users.
+    if ($scope.checkModel == null) {
+        $scope.checkModel = {"badge":true,"leaguetable":true,"prematch":false,"oppoform":true,"fixtures":true,"teams":true,"favteam":"Arsenal","subs":true,"liveBars":true}
+    };
 
     $scope.team = $scope.checkModel.favteam;
 
