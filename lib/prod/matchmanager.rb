@@ -12,17 +12,14 @@ class MatchManager
       elsif match_timer.match_on? && fixture.missing_team?
         Form.form_get
       elsif match_timer.live_match? && fixture.missing_json?
-        BBCRecorder.scores
-        recorder = BBCRecorder.new(fixture)
-        recorder.teams_and_stats
-        puts "Recording"
+        ScoreFactory.save
+        rec = TeamFactory.new(fixture)
         if match_timer.live_match? && fixture.out_of_date_teams?
-          recorder.teams
+          rec.teams
         else puts "Teams still fresh"
         end
       elsif match_timer.match_soon? && fixture.no_team?
-        recorder.teams
-        puts "Getting Teams"
+        TeamFactory.new(fixture).teams
       else
         puts "Still a while to go"
       end

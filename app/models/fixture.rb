@@ -5,7 +5,7 @@ class Fixture < ActiveRecord::Base
 	end
 
 	def link_save(rawurl, jsonurl, lineupurl)
-		self.rawlink = rawlink
+		self.rawlink = rawurl
 		self.jsonurl = jsonurl
 		self.lineup_url = lineupurl
 		self.save

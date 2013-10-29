@@ -10,4 +10,12 @@ class Poss < ActiveRecord::Base
 		where(["awayteam = ? or hometeam = ?", team.titleize, team.titleize])
 	end
 
+	def over_100?
+		if homeposs + awayposs <= 101
+			return true
+		else
+			return false
+		end
+	end
+	
 end

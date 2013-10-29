@@ -38,7 +38,8 @@ EPLDB::Application.routes.draw do
   get 'awaysubs/:team' => 'data#awaysubs'
   get 'formjson/:team' => 'data#formjson'
 ## Next Fixtures ##
-  get 'nextfixtures/:type' => 'data#nextfixtures'
+  get 'nextfixtures/' => 'data#nextfixtures'
+  get 'nextfixtures/countdown' => 'data#nextfixtures_countdown'
 
 ## Generic JSONs ## 
   get 'scoresjson' => 'data#scores'

@@ -3,32 +3,30 @@ require 'open-uri'
 
   attr_reader :link, :final
 
-  def match_link
+  def initialize
     @uri = "http://www.fourfourtwo.com"
-    statszone = "/statszone/fixtures/8-2013/"
-    url = @uri + statszone
-    doc = Nokogiri::HTML(open(url))
-    doc.xpath('html/body/div/div[2]/div[6]/div/div/table[1]')
-    links = doc.css('a').map { |link| link['href'] }
-    por = []
-    links.each {|l| por << (/\/statszone\/8-2013\/matches(.*?)\/pre-match/.match(l)) }
-    final = []
-    (por.reject { |e| e == nil }).each {|x| final << x[0]}
-    @next_matches = final
-    text
   end
 
-  def text
-    @next_matches.each do |x|
+  def match_link
+    doc = Nokogiri::HTML(open(@uri+"/statszone/fixtures/8-2013/"))
+    doc.xpath('html/body/div/div[2]/div[6]/div/div/table[1]')
+    links = doc.css('a').map { |link| link['href'] }
+    every_matched_link = links.map {|l| /\/statszone\/8-2013\/matches(.*?)\/pre-match/.match(l) }
+    next_matches = (every_matched_link.reject { |e| e.nil? }).map {|x| x[0]}
+  
+    next_matches.each do |x|
       doc = Nokogiri::HTML(open(@uri+x))
       texts = doc.css('.pre-match').inner_text
-      hometeam = (doc.css('div.teams div.score-wrapper span.home-head').inner_text).gsub(/[\\\n]/, '').strip
-      awayteam = (doc.css('div.teams div.score-wrapper span.away-head').inner_text).gsub(/[\\\n]/, '').strip
       all_text = texts.split("\n").drop(1)
       all_text.each do |x|
-        Prematch.where(:text => x, :hometeam => hometeam, :awayteam => awayteam).first_or_create
+        Prematch.where(:text => x, :hometeam => parse_team_name("home", doc), :awayteam => parse_team_name("away", doc)).first_or_create
       end
     end
+  end
+
+  private
+  def parse_team_name(home_or_away, doc)
+    (doc.css("div.teams div.score-wrapper span.#{home_or_away}-head").inner_text).gsub(/[\\\n]/, '').strip
   end
 
 end

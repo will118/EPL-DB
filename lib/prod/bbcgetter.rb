@@ -8,6 +8,11 @@ class BBCGetter
     !!(@rawlink =~ /(\/sport\/football\/\d+)/)
   end
 
+  def self.get_json(jsonurl)
+    rawbbc = JSON.parse HTTParty.get(jsonurl).response.body.delete('(').delete(');')
+    rawbbc['data']['payload']['Match'].last['stats']
+  end
+
   def get(fixture)
     if (fixture.jsonurl == nil) || (fixture.jsonurl == "")
       team = bbc_name(fixture.hometeam)
@@ -16,37 +21,27 @@ class BBCGetter
       doc1 = doc.xpath('html/body/div[3]/div/div/div[1]')
       mentions = doc1.search "[text()*='#{team}']"
       match = mentions.first.parent.parent.parent.parent
-      @rawlink = match.css('a').last['href']
       if is_valid_match? == true
-        raw_link
-        fixture.link_save(@rawlink, @jsonurl, @lineup_url)
+        link = match.css('a').last['href'] 
+        json_link, lineup_link = hidden_links(link)
+        fixture.link_save(link, jsonurl, lineup_url)
       else
-        @rawlink = fixture.rawlink
-        @jsonurl = fixture.jsonurl
-        @lineup_url = fixture.lineup_url
+        rawlink = fixture.rawlink
+        jsonurl = fixture.jsonurl
+        lineup_url = fixture.lineup_url
       end
     end
   end
 
-  def raw_link
-    puts "Getting rawlink"
+  def hidden_links(link)
     driver = Selenium::WebDriver.for(:remote, :url => "http://localhost:9134")
     base = "http://www.bbc.co.uk"
-    driver.navigate.to (base+@rawlink)
+    driver.navigate.to (base+link)
     page = driver.page_source
-    json_link = page.match(/(http:\/\/polling.bbc.co.uk\/sport\/shared\/football\/oppm\/json).{11}/)
-    lineup_link = page.match(/(http:\/\/polling.bbc.co.uk\/sport\/shared\/football\/oppm\/line-up).{11}/)
-    @jsonurl = json_link.to_s
-    @lineup_url = lineup_link.to_s
+    json_link = page.match(/(http:\/\/polling.bbc.co.uk\/sport\/shared\/football\/oppm\/json).{11}/).to_s
+    lineup_link = page.match(/(http:\/\/polling.bbc.co.uk\/sport\/shared\/football\/oppm\/line-up).{11}/).to_s
     driver.quit
-  end
-
-  def self.get_json(jsonurl)
-    rawbbc = JSON.parse HTTParty.get(jsonurl).response.body.delete('(').delete(');')
-    midway = rawbbc['data']['payload']['Match']
-    result = []
-    midway.each { |x| result = x.assoc('stats') }
-    result[1]
+    [json_link,lineup_link]
   end
 
 end

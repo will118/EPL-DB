@@ -14,4 +14,22 @@ class Shot < ActiveRecord::Base
 		where(["awayteam = ? and matchdate = ? or hometeam = ? and matchdate = ?", team.titleize, last, team.titleize, last])
 	end
 
+	def homeshots_percent
+		total = (homeshots + awayshots)
+		(homeshots.to_f/total.to_f)*100
+	end
+
+	def awayshots_percent
+		total = (homeshots + awayshots)
+		(awayshots.to_f/total.to_f)*100
+	end
+
+	def hometeam_hyphenated
+		hometeam.downcase.gsub(/[" "]/, "-")
+	end
+
+	def awayteam_hyphenated
+		awayteam.downcase.gsub(/[" "]/, "-")
+	end
+
 end
