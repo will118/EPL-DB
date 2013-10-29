@@ -7,6 +7,7 @@ Guardfile
 /config/app_config.yml
 /lib/log
 
+/app/assets/javascripts/ga.js
 Gemfile
 Gemfile.lock
 
