@@ -9,12 +9,23 @@ angular.module('d3App.controllers', [])
     $scope.settingsToggle = false
 
     $scope.user = session.user;
-    
+
     $scope.checkModel = angular.fromJson(session.user.settings);
 
     // Default values for new users.
     if ($scope.checkModel == null) {
-        $scope.checkModel = {"badge":true,"leaguetable":true,"prematch":false,"oppoform":true,"fixtures":true,"teams":true,"favteam":"Arsenal","subs":true,"liveBars":true,"nextFixtures":true}
+        $scope.checkModel = {
+            "badge": true,
+            "leaguetable": true,
+            "prematch": false,
+            "oppoform": true,
+            "fixtures": true,
+            "teams": true,
+            "favteam": "Arsenal",
+            "subs": true,
+            "liveBars": true,
+            "nextFixtures": true
+        }
     };
 
     $scope.team = $scope.checkModel.favteam;
@@ -39,8 +50,20 @@ angular.module('d3App.controllers', [])
     $scope.teamnames = teamnames;
 
     // Generic default values for instantiation
-    $scope.possBar = [{"value":50,"type":"crystal-palace"},{"value":50,"type":"arsenal"}];
-    $scope.shotsBar = [{"value":50,"type":"crystal-palace"},{"value":50,"type":"arsenal"}];
+    $scope.possBar = [{
+        "value": 50,
+        "type": "crystal-palace"
+    }, {
+        "value": 50,
+        "type": "arsenal"
+    }];
+    $scope.shotsBar = [{
+        "value": 50,
+        "type": "crystal-palace"
+    }, {
+        "value": 50,
+        "type": "arsenal"
+    }];
 
     var barposs = function(team) {
         LiveBars.poss(team).then(function(data) {
@@ -113,10 +136,9 @@ angular.module('d3App.controllers', [])
     $scope.colorFunction = function() {
         return function(d, i) {
             if ($scope.colourArray == null) {
-                $scope.colourArray = ['#e8000b','#051246']
-            }
-            else  {
-            return $scope.colourArray[i];
+                $scope.colourArray = ['#e8000b', '#051246']
+            } else {
+                return $scope.colourArray[i];
             };
         };
     }
