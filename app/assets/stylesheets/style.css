@@ -1,8 +1,12 @@
 .nav>li>a {
-color: #a1c7f2;
+    color: #a1c7f2;
 }
-
-
+#graphtitle {
+    position: absolute;
+    top: 6%;
+    left: 7%;
+    width: 30%;
+}
 body {
     background-color: #fff;
     color: #333;

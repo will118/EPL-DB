@@ -19,7 +19,7 @@ class Poss < ActiveRecord::Base
 	end
 
 	def over_100?
-		if homeposs + awayposs <= 101
+		if homeposs + awayposs >= 101
 			return true
 		else
 			return false
