@@ -15,7 +15,7 @@ class Form < ActiveRecord::Base
   
   def self.single_form
     teamform = "http://api.statsfc.com/premier-league/form.json?key=#{ENV["STATS_KEY"]}"
-    JSON.parse HTTParty.get(teamform).response.body
+    json_get(teamform)
   end
 
   def self.form_get

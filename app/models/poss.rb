@@ -10,6 +10,14 @@ class Poss < ActiveRecord::Base
 		where(["awayteam = ? or hometeam = ?", team.titleize, team.titleize])
 	end
 
+	def hometeam_hyphenated
+		hometeam.downcase.gsub(/[" "]/, "-")
+	end
+
+	def awayteam_hyphenated
+		awayteam.downcase.gsub(/[" "]/, "-")
+	end
+
 	def over_100?
 		if homeposs + awayposs <= 101
 			return true

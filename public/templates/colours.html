@@ -23,13 +23,14 @@
             </form>
             <span ng-if="settingsToggle">
                 <div class="btn-group" id="top-toggles">
-                    <button type="button" class="btn btn-default color2" ng-model="checkModel.badge" btn-checkbox>Badges</button>
-                    <button type="button" class="btn btn-default color2" ng-model="checkModel.leaguetable" btn-checkbox>League Table</button>
-                    <button type="button" class="btn btn-default color2" ng-model="checkModel.oppoform" btn-checkbox>Opponent Form</button>
-                    <button type="button" class="btn btn-default color2" ng-model="checkModel.teams" btn-checkbox>Teams</button>
-                    <button type="button" class="btn btn-default color2" ng-model="checkModel.subs" btn-checkbox>Subs</button>
-                    <button type="button" class="btn btn-default color2" ng-model="checkModel.liveBars" btn-checkbox>Live Bars</button>
+                    <button type="button" class="btn btn-default color3" ng-model="checkModel.leaguetable" btn-checkbox>League Table</button>
+                    <button type="button" class="btn btn-default color3" ng-model="checkModel.oppoform" btn-checkbox>Opponent Form</button>
+                    <button type="button" class="btn btn-default color3" ng-model="checkModel.teams" btn-checkbox>Teams</button>
+                    <button type="button" class="btn btn-default color3" ng-model="checkModel.subs" btn-checkbox>Subs</button>
+                    <button type="button" class="btn btn-default color3" ng-model="checkModel.liveBars" btn-checkbox>Live Bars</button>
+                    <button type="button" class="btn btn-default color3" ng-model="checkModel.nextFixtures" btn-checkbox>Next Fixtures</button>
                 </div>
+                    <button type="button" id="top-toggles" class="btn btn-default color3" ng-click="updateprefs()">Save</button>
             </span>
             <ul class="nav navbar-nav">
                 <li><a href="/">Default</a>
@@ -97,7 +98,6 @@
                     </h2>
                     </td>
                     </tr>
-                    <br>
                 </span>
                 <table class="table table-hover color1" id="scorers">
                     <tr>
@@ -178,7 +178,7 @@
                     <!-- <nvd3-line-chart data="liveposs" id="liveposs" interactive="true" tooltips="true" margin="{left:0,top:0,bottom:5,right:25}" width="500" height="400" showXAxis="false" showYAxis="false" showLegend="true"><svg id="poss-svg"></svg></nvd3-line-chart> -->
                 </div>
             </span>
-            <div class="col-lg-3">
+            <div class="col-lg-3" id="rightmostcol">
                 <div class="livescores">
                     <p class="lead" id="colour-lead" ng-repeat-start="score in scores">{{score.teams}}
                         <span class="score">{{score.score}}</span>
@@ -186,11 +186,16 @@
                     <p ng-repeat-end=""></p>
                 </div>
                 <div class="livescores">
-                    <p class="lead" id="colour-lead" ng-repeat-start="nextfix in nextfixtures track by $index">{{nextfix.home}} vs. {{nextfix.away}}
+                <table class="table color1" id="bottom-table-next-fix">
+                    <tr ng-repeat="nextfix in nextfixtures track by $index">
+                        <td>
+                        <p class="lead" id="colour-lead2">{{nextfix.home}} vs. {{nextfix.away}}
                         <br />
                         <span class="score">{{nextfix.date}}</span>
-                    </p>
-                    <p ng-repeat-end=""></p>
+                        </p>
+                        </td>
+                    </tr>
+                    </table>
                 </div>
             </div>
 

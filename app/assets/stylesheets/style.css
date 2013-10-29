@@ -58,8 +58,15 @@ body {
     width:50%;
 }
 #colour-lead {
-  font-size: 23px;
-  line-height: 32px;
+  font-size: 21px;
+  line-height: 22px;
+}
+#colour-lead2 {
+  font-size: 18px;
+  line-height: 20px;
+}
+#bottom-table-next-fix {
+    padding-top: 30px;
 }
 #awayteam {
     float: right;
@@ -112,29 +119,16 @@ h1 {
 .error {
     color: red;
 }
-#form-column {
-    text-align: center;
-    font-size: 2.4em;
-    color: #fec553;
-}
-#other-form-column {
-    background-color: #06347c;
-    text-align: center;
-    font-size: 2.4em;
-    color: #8a7039;
-}
 #scorers {
     width:70%;
     margin-left:15%;
     margin-right:15%;
 }
+#match-padd-div {
+    width: 12%;
+}
 #scorer-goals {
     text-align: center;
-}
-#table-div {
-    width: 23%;
-    padding-right: 0px;
-    padding-left: 0px;
 }
 #live-div {
     width: 27%;
@@ -145,9 +139,6 @@ h1 {
 #live-targets {
     width: 24%;
 }
-#match-padd-div {
-    width: 12%;
-}
 #match-shots-target {
     right: 1%;
 }
@@ -156,6 +147,33 @@ h1 {
 }
 #badge-div {
     width: 20%;
+}
+#rightmostcol {
+    width: 22%;
+}
+#table-div {
+    margin-left: 1%;
+    width: 27%;
+    padding-right: 0px;
+    padding-left: 0px;
+}
+#fix-and-table {
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+#form-column {
+    border-radius: 5px;
+    text-align: center;
+    font-size: 2.4em;
+    color: #fec553;
+}
+#other-form-column {
+    border-radius: 5px;
+    background-color: #06347c;
+    text-align: center;
+    font-size: 2.4em;
+    color: #8a7039;
 }
 .table-points {
     text-align: center;
@@ -218,10 +236,6 @@ h1 {
     text-align: center;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
-#fix-and-table {
-    padding-right: 5px;
-    padding-left: 5px;
-}
 .fixdate {
     font-size: 0.75em;
     font-weight: 600;
@@ -242,6 +256,6 @@ h1 {
     max-height: 275px;
     margin-left:10%;
     margin-right:50%;
-    margin-top:3%;
+    margin-top:20%;
     margin-bottom: 6%;
 }

@@ -3,8 +3,6 @@ require_relative 'namenormaliser'
 class Squawka
   include NameNormaliser
 
-  attr_reader :avgpos, :parsed_json, :shotacc, :opta, :passacc
-
   def initialize(team)
     @parsed_json = get(team)
     @teamname = team
@@ -13,7 +11,7 @@ class Squawka
   def get(team)
     id = squawka_id(team)
     sqk = "http://www.squawka.com/wp-content/themes/squawka_web/stats_process.php?club_id=#{id}&team_type=all&min=1&max=100&competition_id=64"
-    JSON.parse HTTParty.get(sqk).response.body
+    get_json(sqk)
   end
 
   def hasher

@@ -8,8 +8,8 @@ class BBCGetter
     !!(@rawlink =~ /(\/sport\/football\/\d+)/)
   end
 
-  def self.get_json(jsonurl)
-    rawbbc = JSON.parse HTTParty.get(jsonurl).response.body.delete('(').delete(');')
+  def self.get_json(url)
+    rawbbc = json_get(url).delete('(').delete(');')
     rawbbc['data']['payload']['Match'].last['stats']
   end
 

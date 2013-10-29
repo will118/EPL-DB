@@ -62,6 +62,7 @@
             <span class="bar-title">Shots</span>
             <progress percent="shotsBar"></progress>
         </span>
+
         <h2 ng-repeat="f in form" style="background-color: {{myColour}}" id="form-column">
             {{f.form}}
         </h2>
@@ -71,6 +72,8 @@
             </h2>
             <br>
         </span>
+
+
         <table class="table table-hover" id="scorers">
             <tr>
                 <th>Name</th>
@@ -149,7 +152,7 @@
             <!-- <nvd3-line-chart data="liveposs" id="liveposs" interactive="true" tooltips="true" margin="{left:0,top:0,bottom:5,right:25}" width="500" height="400" showXAxis="false" showYAxis="false" showLegend="true"><svg id="poss-svg"></svg></nvd3-line-chart> -->
         </div>
     </span>
-    <div class="col-lg-3">
+    <div class="col-lg-3" id="rightmostcol">
         <div class="livescores">
             <p class="lead" ng-repeat-start="score in scores">{{score.teams}}
                 <span class="score">{{score.score}}</span>
