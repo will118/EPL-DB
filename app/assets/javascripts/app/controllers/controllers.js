@@ -244,6 +244,12 @@ angular.module('d3App.controllers', [])
         })
     }, 10000);
 
+    setInterval(function() {
+        $scope.$apply(function() {
+            $scope.colorFunction();
+        })
+    }, 100);
+
     $scope.signout = function() {
         $http({
             url: '/users/sign_out',
@@ -260,26 +266,30 @@ angular.module('d3App.controllers', [])
     };
 
     var updateTeamDependencies = function(team) {
-        $scope.myColour = team_colour(team);
-        target(team);
-        squawkajson(team);
-        awaybench(team);
-        homebench(team);
-        getBadge(team);
-        formteam(team);
-        optatext(team);
-        formoppo(team);
-        liveshot(team);
-        barposs(team);
-        barshots(team);
-        corners(team);
-        scorer(team);
-        away(team);
-        home(team);
-        fixt(team);
-        table();
-        score();
-        nextfix();
+        if (team == undefined) {
+            return null
+        } else {
+            $scope.myColour = team_colour(team);
+            target(team);
+            squawkajson(team);
+            awaybench(team);
+            homebench(team);
+            getBadge(team);
+            formteam(team);
+            optatext(team);
+            formoppo(team);
+            liveshot(team);
+            barposs(team);
+            barshots(team);
+            corners(team);
+            scorer(team);
+            away(team);
+            home(team);
+            fixt(team);
+            table();
+            score();
+            nextfix();
+        }
     };
     $scope.$watch('team', updateTeamDependencies);
 

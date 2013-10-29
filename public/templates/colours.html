@@ -183,7 +183,7 @@
             </span>
             <div class="col-lg-3" id="rightmostcol">
                 <div class="livescores">
-                    <table class="table color1" id="bottom-table-next-fix">
+                    <table class="table color1" id="bottom-table-scores">
                         <tr ng-repeat="score in scores">
                             <td>
                                 <p class="lead" id="colour-lead">{{score.teams}}
@@ -195,7 +195,7 @@
                 <div class="livescores">
                     <table class="table color1" id="bottom-table-next-fix">
                         <tr ng-repeat="nextfix in nextfixtures| limitTo:3">
-                            <td>
+                            <td id="bottom-tr-next-fix">
                                 <p class="lead" id="colour-lead2">{{nextfix.home}} vs. {{nextfix.away}}
                                     <br />
                                     <span class="score">{{nextfix.date}}</span>

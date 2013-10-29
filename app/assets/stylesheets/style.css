@@ -79,10 +79,16 @@ body {
 }
 #colour-lead2 {
     font-size: 18px;
-    line-height: 20px;
+}
+
+#bottom-tr-next-fix {
+    padding-bottom: 0px;
 }
 #bottom-table-next-fix {
-    padding-top: 30px;
+    margin-bottom: 0px;
+}
+#bottom-table-scores {
+    
 }
 #awayteam {
     float: right;
