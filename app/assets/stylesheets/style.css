@@ -58,12 +58,12 @@ body {
     width:50%;
 }
 #colour-lead {
-  font-size: 21px;
-  line-height: 22px;
+    font-size: 21px;
+    line-height: 22px;
 }
 #colour-lead2 {
-  font-size: 18px;
-  line-height: 20px;
+    font-size: 18px;
+    line-height: 20px;
 }
 #bottom-table-next-fix {
     padding-top: 30px;
@@ -157,11 +157,20 @@ h1 {
     padding-right: 0px;
     padding-left: 0px;
 }
+#dash-table-div {
+    width: 26%;
+    padding-right: 0px;
+    padding-left: 0px;
+}
+#dash-form {
+    padding-left: 0px;
+    
+    width: 22%;
+}
 #fix-and-table {
     padding-right: 5px;
     padding-left: 5px;
 }
-
 #form-column {
     border-radius: 5px;
     text-align: center;
