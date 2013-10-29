@@ -1,3 +1,8 @@
+.nav>li>a {
+color: #a1c7f2;
+}
+
+
 body {
     background-color: #fff;
     color: #333;
@@ -54,8 +59,13 @@ body {
     height: 270px;
 }
 #teams {
+    width:49%;
+    float: right;
+}
+#teamsleft {
     float:left;
-    width:50%;
+    width:49%;
+    margin-right: 2%;
 }
 #colour-lead {
     font-size: 21px;
@@ -149,10 +159,16 @@ h1 {
     width: 20%;
 }
 #rightmostcol {
-    width: 22%;
+    width: 22.5%;
+    padding-right: 0px;
+    padding-left: 10px;
+}
+#leftmostcol {
+    padding-right: 5px;
+    padding-left: 0px;
 }
 #table-div {
-    margin-left: 1%;
+    margin-left: 0.5%;
     width: 27%;
     padding-right: 0px;
     padding-left: 0px;
