@@ -65,11 +65,13 @@ body {
 #teams {
     width:49%;
     float: right;
+    margin-bottom: 4px;
 }
 #teamsleft {
     float:left;
     width:49%;
     margin-right: 2%;
+    margin-bottom: 4px;
 }
 #colour-lead {
     font-size: 21px;
