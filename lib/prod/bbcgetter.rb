@@ -2,8 +2,8 @@ require 'open-uri'
 
 class BBCGetter
 
-  def is_valid_match?
-    !!(@rawlink =~ /(\/sport\/football\/\d+)/)
+  def is_valid_match?(link)
+    !!(link =~ /(\/sport\/football\/\d+)/) || !!(link =~ /(sport\/\d\/football\/\d+)/)
   end
 
   def self.get_json(url)
@@ -19,15 +19,13 @@ class BBCGetter
       doc1 = doc.xpath('html/body/div[3]/div/div/div[1]')
       mentions = doc1.search "[text()*='#{team}']"
       match = mentions.first.parent.parent.parent.parent
-      if is_valid_match? == true
-        link = match.css('a').last['href'] 
+      link = match.css('a').last['href'] 
+      if is_valid_match?(link) == true
         json_link, lineup_link = hidden_links(link)
         fixture.link_save(link, jsonurl, lineup_url)
-      else
-        rawlink = fixture.rawlink
-        jsonurl = fixture.jsonurl
-        lineup_url = fixture.lineup_url
+      else "Invalid link"
       end
+    else "Got JSON url"
     end
   end
 

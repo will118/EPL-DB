@@ -1,7 +1,7 @@
 class TeamFactory
 
-	def initialize(ar_record)
-		@fixture = ar_record
+	def initialize(fix)
+		@fixture = fix
 		recorder
 		teams
 	end

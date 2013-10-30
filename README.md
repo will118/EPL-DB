@@ -75,9 +75,9 @@ What I'm doing next, in order:
 ### Tests
 
 Coverage:
-- It's slipping slightly as I delve into Angular but will get back to 100% as soon as I know what I'm doing.
-- It has now slipped as I've removed all the deprecated tests from earlier iterations.
+- RSpec ~90%
+- Karma 0%
 
 Goals:
-- RSpec unit tests on models and lib. 
-- Karma for the Angular app. E2E and Unit.
+- RSpec unit tests for Rails side.
+- Karma for the Angular side. E2E and Unit.

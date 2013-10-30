@@ -1,5 +1,7 @@
 class Squawka
 
+  attr_reader :parsed_json, :avgpos, :shotacc, :opta, :passacc
+
   def initialize(team)
     @parsed_json = get(team)
     @teamname = team
@@ -8,7 +10,7 @@ class Squawka
   def get(team)
     id = squawka_id(team)
     sqk = "http://www.squawka.com/wp-content/themes/squawka_web/stats_process.php?club_id=#{id}&team_type=all&min=1&max=100&competition_id=64"
-    get_json(sqk)
+    json_get(sqk)
   end
 
   def hasher

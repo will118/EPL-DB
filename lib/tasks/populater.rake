@@ -6,7 +6,7 @@ namespace :populater do
       time_until = (x.kickoff - Time.now.utc)
       if (time_until < 86400)
         four = FourFourTwo.new
-        four.match_link
+        four.save
       else
         puts "24 hours remaining at least"
       end

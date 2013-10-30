@@ -56,7 +56,7 @@ class DataController < ApplicationController
   end
 
   def topscorers
-    render :json => RemoteAPI.new.top_scorers(params[:team])
+    render :json => RemoteAPI.top_scorers(params[:team])
   end
 
   def nextfixtures

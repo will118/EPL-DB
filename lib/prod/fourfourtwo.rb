@@ -1,20 +1,29 @@
-class FourFourTwo
 require 'open-uri'
 
-  attr_reader :link, :final
+class FourFourTwo
+
+  attr_accessor :next_matches
 
   def initialize
     @uri = "http://www.fourfourtwo.com"
   end
 
-  def match_link
+  def save
+    match_links
+    open_and_save
+  end
+
+  def match_links
     doc = Nokogiri::HTML(open(@uri+"/statszone/fixtures/8-2013/"))
     doc.xpath('html/body/div/div[2]/div[6]/div/div/table[1]')
     links = doc.css('a').map { |link| link['href'] }
     every_matched_link = links.map {|l| /\/statszone\/8-2013\/matches(.*?)\/pre-match/.match(l) }
-    next_matches = (every_matched_link.reject { |e| e.nil? }).map {|x| x[0]}
+    @next_matches = (every_matched_link.reject { |e| e.nil? }).map {|x| x[0]}
+    return @next_matches 
+  end
   
-    next_matches.each do |x|
+  def open_and_save
+    @next_matches.each do |x|
       doc = Nokogiri::HTML(open(@uri+x))
       texts = doc.css('.pre-match').inner_text
       all_text = texts.split("\n").drop(1)

@@ -1,21 +1,25 @@
 require 'spec_helper'
 
 describe Squawka do
+	sqk = Squawka.new("Arsenal")
 
-		context "object instantiation" do
-			it "verifies that a full json is HTTPartied" do
-		    squawk = Squawka.new
-				expect(squawk.parsed_json).to be_kind_of(Hash)
-				expect(squawk.parsed_json.length).to be > 20
+		context "getting" do
+			it "the raw json-esque file for a team" do
+				expect(sqk.parsed_json).to be_a Hash
+				expect(sqk.parsed_json.to_s.length).to be > 100
 			end
 
-			it "verifies the hasher method" do
-		    squawk = Squawka.new
-		    squawk.hasher
-				expect(squawk.avgpos).to be_kind_of(Hash)
-				expect(squawk.shotacc).to be_kind_of(Hash)
-				expect(squawk.opta).to be_kind_of(Hash)
-				expect(squawk.passacc).to be_kind_of(Hash)
+			it "verifys the hasher method and saves" do
+				sqk.hasher
+				sqk_array = [sqk.avgpos, sqk.shotacc, sqk.opta, sqk.passacc]
+				expect(sqk_array).to be_an Array
+				4.times do |x| 
+					expect(sqk_array[x]).to be_an Hash
+				end
+				expect(Supermodel.count).to be 0
+				sqk.save
+				expect(Supermodel.count).to be > 8
 			end
-		end
+		end	
+		
 end

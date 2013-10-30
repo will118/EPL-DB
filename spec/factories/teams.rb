@@ -4,6 +4,6 @@ FactoryGirl.define do
   factory :team do
     teamname "MyString"
     player "MyString"
-    subbed "MyString"
+    starting true
   end
 end

@@ -8,8 +8,8 @@ describe MatchTime do
 		it "initializes @timeuntil" do
 			fixture = FactoryGirl.build(:fixture)
 			match_timer = MatchTime.new(fixture.kickoff)
-			# 5 seconds because whole test suite takes a while
-			expect(match_timer.time_until).to be_within(5).of(0)
+			# 30 seconds because whole test suite takes a while
+			expect(match_timer.time_until).to be_within(30).of(0)
 		end
 
 		it "should be half time" do
