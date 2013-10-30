@@ -1,5 +1,7 @@
 class MatchTime
 
+	attr_reader :time_until
+
 	def initialize(kickoff)
 		@time_until = (kickoff - Time.now.utc)
 	end
@@ -16,7 +18,7 @@ class MatchTime
 		(@time_until < -7200)
 	end
 
-	def match_on?
+	def match_on_soon_or_just_ended?
 		(@time_until < -6500) || (@time_until > 3600)
 	end
 

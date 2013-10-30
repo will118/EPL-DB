@@ -3,8 +3,7 @@
 FactoryGirl.define do
   factory :fixture do
     hometeam "MyString"
-    awayteam "MyString"
-    kickoff "2013-09-24 13:10:24"
-    competition "MyString"
+    awayteam "MyString2"
+    kickoff  Time.now.utc
   end
 end

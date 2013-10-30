@@ -1,7 +1,4 @@
-require_relative 'namenormaliser'
-
 class RemoteAPI
-  include NameNormaliser
 
   class << self
   include ActionView::Helpers::DateHelper
@@ -9,8 +6,7 @@ class RemoteAPI
     def next_5_fixtures
       from_date = Date.today.strftime("%Y-%m-%d")
       to_date =  2.months.from_now.strftime("%Y-%m-%d")
-      fixtures_url = "http://api.statsfc.com/#{ENV["COMP"]}/fixtures.json?key=#{ENV["STATS_KEY"]}&from=#{from_date}&to=#{to_date}&timezone=#{ENV["TIMEZONE"]}&limit=5"
-      json_get(fixtures_url)
+      json_get("http://api.statsfc.com/#{ENV["COMP"]}/fixtures.json?key=#{ENV["STATS_KEY"]}&from=#{from_date}&to=#{to_date}&timezone=#{ENV["TIMEZONE"]}&limit=5")
     end
 
     def next_5_fixtures_countdown
@@ -25,16 +21,14 @@ class RemoteAPI
     end
 
     def table
-      table = "http://api.statsfc.com/#{ENV["COMP"]}/table.json?key=#{ENV["STATS_KEY"]}"
-      json_get(table)
+      json_get("http://api.statsfc.com/#{ENV["COMP"]}/table.json?key=#{ENV["STATS_KEY"]}")
     end
   end
 
-  def top_scorers(team)
+  def self.top_scorers(team)
     name = stats_fc_normaliser(team)
     if stats_fc_checker(name) == "1"
-      raw = "http://api.statsfc.com/top-scorers.json?key=#{ENV["STATS_KEY"]}&competition=#{ENV["COMP"]}&team=#{name}&year=2013/2014"
-      json_get(raw)
+      json_get("http://api.statsfc.com/top-scorers.json?key=#{ENV["STATS_KEY"]}&competition=#{ENV["COMP"]}&team=#{name}&year=2013/2014")
     else "Incorrect team name"
     end
   end

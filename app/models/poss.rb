@@ -25,5 +25,16 @@ class Poss < ActiveRecord::Base
 			return false
 		end
 	end
+
+	def homeposs_percent
+		total = (homeposs + awayposs)
+		(homeposs.to_f/total.to_f)*100
+	end
+
+	def awayposs_percent
+		total = (homeposs + awayposs)
+		(awayposs.to_f/total.to_f)*100
+	end
+
 	
 end

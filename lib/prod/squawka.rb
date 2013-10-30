@@ -1,7 +1,4 @@
-require_relative 'namenormaliser'
-
 class Squawka
-  include NameNormaliser
 
   def initialize(team)
     @parsed_json = get(team)

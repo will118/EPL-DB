@@ -1,7 +1,4 @@
-require_relative 'namenormaliser'
-
 class GraphJSON
-  include NameNormaliser
 
   def valid_team?(team)
     Fixture.exists?(:hometeam => team)

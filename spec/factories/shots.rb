@@ -1,8 +1,8 @@
-# Read about factories at https://github.com/thoughtbot/factory_girl
-
 FactoryGirl.define do
   factory :shot do
-    homeshots 37
-    awayshots 42
+    homeshots 13
+    awayshots 10
+    hometeam "Crystal Palace"
+    awayteam "Arsenal"
   end
 end

@@ -12,8 +12,8 @@ class LiveBars
   	def possession(team)
       poss = Poss.last_where(team)
       if poss.over_100?
-        [{'value'=> (poss['homeposs']-0.5), 'type'=> poss.hometeam_hyphenated},
-          {'value'=> (poss['awayposs']-0.5), 'type'=> poss.awayteam_hyphenated}]
+        [{'value'=> poss.homeposs_percent, 'type'=> poss.hometeam_hyphenated},
+          {'value'=> poss.awayposs_percent, 'type'=> poss.awayteam_hyphenated}]
       else
         [{'value'=> poss['homeposs'], 'type'=> poss.hometeam_hyphenated},
         {'value'=> poss['awayposs'], 'type'=> poss.awayteam_hyphenated}]
@@ -22,3 +22,4 @@ class LiveBars
   end
 
 end
+

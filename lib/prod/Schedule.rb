@@ -1,7 +1,4 @@
-require_relative 'namenormaliser'
-
 class Schedule
-  include NameNormaliser
 
 	def initialize(team)
 		@team = team

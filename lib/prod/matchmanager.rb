@@ -9,8 +9,6 @@ class MatchManager
         BBCGetter.new.get(fixture)
       elsif match_timer.match_over?
         fixture.delete
-      elsif match_timer.match_on? && fixture.missing_team?
-        Form.form_get
       elsif match_timer.live_match? && fixture.missing_json?
         ScoreFactory.save
         rec = TeamFactory.new(fixture)
@@ -20,6 +18,8 @@ class MatchManager
         end
       elsif match_timer.match_soon? && fixture.no_team?
         TeamFactory.new(fixture).teams
+      elsif match_timer.match_on_soon_or_just_ended?
+        Form.form_get
       else
         puts "Still a while to go"
       end

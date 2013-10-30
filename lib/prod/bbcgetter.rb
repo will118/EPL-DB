@@ -1,8 +1,6 @@
-require_relative 'namenormaliser'
 require 'open-uri'
 
 class BBCGetter
-  include NameNormaliser
 
   def is_valid_match?
     !!(@rawlink =~ /(\/sport\/football\/\d+)/)

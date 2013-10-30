@@ -80,5 +80,4 @@ Coverage:
 
 Goals:
 - RSpec unit tests on models and lib. 
-- Capybara integration tests.
-- Jasmine or Karma for the Angular app.
+- Karma for the Angular app. E2E and Unit.
