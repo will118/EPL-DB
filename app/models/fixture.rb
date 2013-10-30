@@ -4,7 +4,7 @@ class Fixture < ActiveRecord::Base
 		order(:kickoff).first(8)
 	end
 
-	def link_save(rawurl, jsonurl, lineupurl)
+	def link_save(rawurl, lineupurl, jsonurl)
 		self.rawlink = rawurl
 		self.jsonurl = jsonurl
 		self.lineup_url = lineupurl
@@ -24,15 +24,11 @@ class Fixture < ActiveRecord::Base
 		rawlink == nil
 	end
 
-	def missing_team?
-		gotteam != nil
-	end
-
-	def missing_team_source?
+	def have_team_link?
 		lineup_url != nil
 	end
 
-	def missing_json?
+	def have_json_link?
 		jsonurl != nil 
 	end
 
@@ -40,8 +36,13 @@ class Fixture < ActiveRecord::Base
 		gotteam == nil
 	end
 
+	def update_timestamp
+		self.updated_at = DateTime.now.utc
+		self.save
+	end
+
 	def out_of_date_teams?
-		updated_at >= (Time.now.utc - 360)
+		updated_at <= (Time.now.utc - 360)
 	end
 
 	def self.involving(team)
