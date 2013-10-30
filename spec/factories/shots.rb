@@ -4,5 +4,6 @@ FactoryGirl.define do
     awayshots 10
     hometeam "Crystal Palace"
     awayteam "Arsenal"
+    matchdate Time.now - 1.day
   end
 end

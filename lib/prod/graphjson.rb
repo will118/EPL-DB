@@ -5,7 +5,9 @@ class GraphJSON
   end
 
   def main(team)
-    unless valid_team?(team) == true
+    if valid_team?(team) == nil
+      return nil
+    else
       avg_poss = Supermodel.of_possession_where(team)
       shot_acc = Supermodel.of_shots_where(team)
       pass_acc = Supermodel.of_passes_where(team)
@@ -35,7 +37,9 @@ class GraphJSON
   end
 
   def possession(team)
-    unless valid_team?(team.titleize) == true
+    if valid_team?(team.titleize) == nil
+      return nil
+    else
       poss_arr = []
       Poss.involving(team).each do |x|
         if x.hometeam = team
@@ -56,70 +60,54 @@ class GraphJSON
   end
 
   def targets(team)
-    unless valid_team?(team.titleize) == true
-      home = []
-      away = []
+    if valid_team?(team.titleize) == nil
+      return nil
+    else
       date = Target.most_recent_1(team).matchdate
-
-      Target.most_recent_data(date,team).each do |x|
-        home << x.homeshots
-        away << x.awayshots
-        @hometeam = x.hometeam
-        @awayteam = x.awayteam
-      end
-      d3_data_builder(home, away)
+      targets = Target.most_recent_data(date,team)
+      home = targets.map { |x| x.homeshots }
+      away = targets.map { |x| x.awayshots }
+      d3_data_builder(home, away, targets[0].hometeam, targets[0].awayteam)
     end
   end
 
   def corners(team)
-    unless valid_team?(team.titleize) == true
-      home = []
-      away = []
+    if valid_team?(team.titleize) == nil
+      return nil
+    else
       date = Corner.most_recent_1(team).matchdate
-
-      Corner.most_recent_data(date,team).each do |x|
-        home << x.home
-        away << x.away
-        @hometeam = x.hometeam
-        @awayteam = x.awayteam
-      end
-      d3_data_builder(home, away)
+      corners = Corner.most_recent_data(date,team)
+      home = corners.map { |x| x.home }
+      away = corners.map { |x| x.away }
+      d3_data_builder(home, away, corners[0].hometeam, corners[0].awayteam)
     end
   end
 
   def fouls(team)
-    unless valid_team?(team.titleize) == true
-      home = []
-      away = []
+    if valid_team?(team.titleize) == nil
+      return nil
+    else
       date = Foul.most_recent_1(team).matchdate
-
-      Foul.most_recent_data(date,team).each do |x|
-        home << x.home
-        away << x.away
-        @hometeam = x.hometeam
-        @awayteam = x.awayteam
-      end
-      d3_data_builder(home, away)
+      fouls = Foul.most_recent_data(date,team)
+      home = fouls.map { |x| x.home }
+      away = fouls.map { |x| x.away }
+      d3_data_builder(home, away, fouls[0].hometeam, fouls[0].awayteam)
     end
   end
 
   def shots(team)
-    unless valid_team?(team.titleize) == true
-      home = []
-      away = []
+    if valid_team?(team.titleize) == nil
+      return nil
+    else
       date = Shot.most_recent_1(team).matchdate
-
-      Shot.most_recent_data(date,team).each do |x|
-        home << x.homeshots
-        away << x.awayshots
-        @hometeam = x.hometeam
-        @awayteam = x.awayteam
-      end
-      d3_data_builder(home, away)
+      shots = Shot.most_recent_data(date,team)
+      home = shots.map { |x| x.homeshots }
+      away = shots.map { |x| x.awayshots }
+      d3_data_builder(home, away, shots[0].hometeam, shots[0].awayteam)
     end
   end
 
-  def d3_data_builder(home, away)
+  def d3_data_builder(home, away, hometeam, awayteam)
     x_axis_array = * 1..(away.length)
 
     home_array = [x_axis_array, home].transpose.map do |x_axis_array, home|
@@ -130,7 +118,7 @@ class GraphJSON
       [x_axis_array, away]
     end
 
-    return [{"key"=>@hometeam, "values"=> home_array}, {"key"=>@awayteam, "values"=> away_array}]
+    return [{"key"=>hometeam, "values"=> home_array}, {"key"=>awayteam, "values"=> away_array}]
   end
 
 end
