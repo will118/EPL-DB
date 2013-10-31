@@ -2,7 +2,6 @@ Premier League Dashboard
 ====================
 
 ![Early days](/ss/1.gif "Love it")
-> Alpha
 
 I wanted marginally relevant information to have on my other/second screen during a match.
 
@@ -76,7 +75,8 @@ What I'm doing next, in order:
 
 Coverage:
 - RSpec ~90%
-- Karma 0%
+- Karma Unit 0%
+- Karma E2E 0%
 
 Goals:
 - RSpec unit tests for Rails side.
