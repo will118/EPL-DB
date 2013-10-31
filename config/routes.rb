@@ -43,6 +43,7 @@ EPLDB::Application.routes.draw do
 
 ## Generic JSONs ## 
   get 'scoresjson' => 'data#scores'
+  get 'fullscoresjson' => 'data#dashscores'
   get 'tablejson' => 'data#tablejson'
 
 ## Catch-all ##

@@ -2,49 +2,46 @@
 
 angular.module('d3App.controllers', [])
 
-.controller('AppController', function($scope, $http, $timeout, focus, session, GeneralLiveData, SessionService, LiveStatsData, TeamFormData, LiveBars, BigData, MatchDetails, HomeAwayTeam) {
+.controller('AppController', function($scope, $localStorage, $sessionStorage, $http, $timeout, focus, GeneralLiveData, LiveStatsData, TeamFormData, LiveBars, BigData, MatchDetails, HomeAwayTeam) {
 
+    $scope.$storage = $localStorage.$default({
+        "badge": true,
+        "leaguetable": true,
+        "prematch": true,
+        "oppoform": true,
+        "fixtures": true,
+        "teams": true,
+        "favteam": "Arsenal",
+        "subs": true,
+        "liveBars": true,
+        "nextFixtures": true
+    });
+    
     focus('focusMe');
 
     $scope.settingsToggle = false
 
-    $scope.user = session.user;
+    $scope.team = $scope.$storage.favteam;
 
-    $scope.checkModel = angular.fromJson(session.user.settings);
+    // $scope.user = session.user;
 
-    // Default values for new users.
-    if ($scope.checkModel == null) {
-        $scope.checkModel = {
-            "badge": true,
-            "leaguetable": true,
-            "prematch": false,
-            "oppoform": true,
-            "fixtures": true,
-            "teams": true,
-            "favteam": "Arsenal",
-            "subs": true,
-            "liveBars": true,
-            "nextFixtures": true
-        }
-    };
+    // $scope.checkModel = angular.fromJson(session.user.settings);
 
-    $scope.team = $scope.checkModel.favteam;
+    // $scope.updateprefs = function() {
+    //     $scope.user.settings = angular.toJson($scope.checkModel)
+    //     $http({
+    //         url: '/api/settings',
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },
+    //         data: $scope.user
+    //     }).success(function(data) {
 
-    $scope.updateprefs = function() {
-        $scope.user.settings = angular.toJson($scope.checkModel)
-        $http({
-            url: '/api/settings',
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            data: $scope.user
-        }).success(function(data) {
-
-        }).error(function(reason) {
-            console.log(reason);
-        });
-    };
+    //     }).error(function(reason) {
+    //         console.log(reason);
+    //     });
+    // };
 
     // Filter on search, loaded from staticvalues 
     $scope.teamnames = teamnames;
@@ -155,6 +152,13 @@ angular.module('d3App.controllers', [])
         var scorePromise = GeneralLiveData.scores()
         scorePromise.then(function(data) {
             $scope.scores = data
+        })
+    }
+
+    var fullscore = function() {
+        var scorePromise = GeneralLiveData.fullscores()
+        scorePromise.then(function(data) {
+            $scope.fullscores = data
         })
     }
 
@@ -286,6 +290,7 @@ angular.module('d3App.controllers', [])
             away(team);
             home(team);
             fixt(team);
+            fullscore();
             table();
             score();
             nextfix();

@@ -1,6 +1,14 @@
 .nav>li>a {
     color: #a1c7f2;
 }
+.navbar {
+margin-bottom: 10px;
+height: 50px;
+}
+.mypremteam {
+    background-color: red;
+}
+
 #graphtitle {
     position: absolute;
     top: 6%;
@@ -156,7 +164,9 @@ h1 {
     width: 27%;
 }
 #mega-div {
-    width: 56%;
+    width: 61%;
+    padding-right: 10px;
+    padding-left: 0px;
 }
 #live-targets {
     width: 24%;
@@ -168,7 +178,12 @@ h1 {
     width: 26%;
 }
 #badge-div {
-    width: 20%;
+    width: 15%;
+    max-height: 10%;
+}
+#badge-holder-div {
+    width: 6%;
+    max-height: 10%;
 }
 #rightmostcol {
     width: 22.5%;
@@ -186,17 +201,19 @@ h1 {
     padding-left: 0px;
 }
 #dash-table-div {
-    width: 26%;
-    padding-right: 0px;
+    float: right;
+    margin-top: 1.0%;
+    width: 24%;
+    padding-right: 0.5%;
     padding-left: 0px;
 }
 #dash-form {
-    padding-left: 0px;
-    width: 22%;
+    width: 26%;
+    padding-right: 0px;
 }
-#fix-and-table {
-    padding-right: 5px;
-    padding-left: 5px;
+#fix-and-table2 {
+padding-left: 5px;
+padding-right: 5px;
 }
 #form-column {
     border-radius: 5px;
@@ -289,9 +306,9 @@ h1 {
     border-color: #e7e7e7;
 }
 #badgey {
-    max-height: 275px;
-    margin-left:10%;
-    margin-right:50%;
-    margin-top:20%;
-    margin-bottom: 6%;
+    margin-top:50%;
+    width: 90%;
+    height: auto;
+    padding-right: 0px;
+    padding-left: 10px;
 }

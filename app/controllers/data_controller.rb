@@ -42,7 +42,10 @@ class DataController < ApplicationController
 
 ## Scores ##
   def scores
-    render :json => Score.live
+    render :json => Score.live(8)
+  end
+  def dashscores
+    render :json => Score.live(10)
   end
 
 ## Fixtures ##

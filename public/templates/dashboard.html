@@ -1,43 +1,43 @@
 <body ng-controller="AppController">
+    <link rel="stylesheet" type="text/css" href="dash.css" />
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="background-color: {{myColour}}">
-        <a class="navbar-brand" style="color: white">EPLDB</a>
-        <form class="navbar-form navbar-left" role="search">
-            <div class="form-group">
-                <input type="text" class="form-control" focus-on="focusMe" ng-model="team" typeahead="name for name in teamnames | filter:$viewValue" typeahead-editable="false">
-            </div>
-        </form>
-        <span ng-if="settingsToggle">
-            <div class="btn-group" id="top-toggles">
-                <button type="button" class="btn btn-primary" ng-model="checkModel.badge" btn-checkbox>Badges</button>
-                <button type="button" class="btn btn-primary" ng-model="checkModel.leaguetable" btn-checkbox>League Table</button>
-                <button type="button" class="btn btn-primary" ng-model="checkModel.prematch" btn-checkbox>Prematch Text</button>
-                <button type="button" class="btn btn-primary" ng-model="checkModel.oppoform" btn-checkbox>Opponent Form</button>
-                <button type="button" class="btn btn-primary" ng-model="checkModel.fixtures" btn-checkbox>Next Fixtures</button>
-                <button type="button" class="btn btn-primary" ng-model="checkModel.teams" btn-checkbox>Teams</button>
-                <button type="button" class="btn btn-primary" ng-model="checkModel.subs" btn-checkbox>Subs</button>
-            </div>
-        </span>
-        <button type="button" class="btn btn-primary" id="settings-toggle" ng-model="settingsToggle" btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false">Settings</button>
-        <div class="btn-group">
-            <button type="button" class="btn btn-default dropdown-toggle" id="top-toggles" data-toggle="dropdown">Presets
-                <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" role="menu">
-                <li><a href="/">Default</a>
-                </li>
-                 <li><a href="/colours">Colours</a>
+        <div class="navbar-header">
+            <a class="navbar-brand">EPLDB</a>
+        </div>
+
+        <div id="epl_navbar_nav" class="collapse navbar-collapse">
+            <form class="navbar-form navbar-left" role="search">
+                <div class="form-group">
+                    <input type="text" class="form-control" focus-on="focusMe" ng-model="team" typeahead="name for name in teamnames | filter:$viewValue" typeahead-editable="false">
+                </div>
+            </form>
+            <span ng-if="settingsToggle">
+                <div class="btn-group" id="top-toggles">
+                    <button type="button" class="btn btn-default color3" ng-model="$storage.badge" btn-checkbox>Badges</button>
+                    <button type="button" class="btn btn-default color3" ng-model="$storage.prematch" btn-checkbox>Prematch Text</button>
+                    <button type="button" class="btn btn-default color3" ng-model="$storage.leaguetable" btn-checkbox>League Table</button>
+                    <button type="button" class="btn btn-default color3" ng-model="$storage.oppoform" btn-checkbox>Opponent Form</button>
+                </div>
+            </span>
+            <ul class="nav navbar-nav" id="home-nav-text">
+                <li><a href="/">Overview</a>
                 </li>
                 <li><a href="/match">Match Mode</a>
                 </li>
+                <li><a href="#" ng-model="settingsToggle" btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false">Settings</a>
+                </li>
             </ul>
         </div>
-        <button type="button" class="btn btn-warning" id="top-toggles" ng-click="updateprefs()">Save</button>
-        <button type="button" id="sign-out-btn" ng-click="signout()" class="btn btn-primary navbar-btn pull-right">Sign out</button>
     </nav>
-    <div class="row">
-        <span ng-if="checkModel.badge">
+    <div id="top-left">
+
+        <span ng-if="$storage.badge==true">
             <div class="col-lg-3" id="badge-div">
                 <img id="badgey" ng-src="images/{{badgehash}}" />
+            </div>
+        </span>
+        <span ng-if="$storage.badge==false">
+            <div class="col-lg-3" id="badge-holder-div">
             </div>
         </span>
         <div class="col-lg-6" id="mega-div">
@@ -46,132 +46,83 @@
                 <svg id="megachart" viewBox="0 0 760 340" preserveAspectRatio="xMidYMid"></svg>
             </nvd3-line-chart>
         </div>
-
-        <div class="col-lg-3" id="live-targets">
-            <span class="graph-title" style="left: -20px;">Shots on Target</span>
-            <nvd3-line-chart data="livetargets" id="livetargets" margin="{left:0,top:0,bottom:0,right:10}" width="350" height="300" showXAxis="false" showYAxis="false" forcex="[1]" showLegend="true" color="colorFunction()">
-                <svg id="live-svg" viewBox="0 0 350 300" preserveAspectRatio="xMidYMid"></svg>
-            </nvd3-line-chart>
-        </div>
-    </div>
-
-        <div class="col-lg-3" id="fix-and-table">
-            <span ng-if="checkModel.fixtures">
-                <table class="table table-hover" id="fixturestable">
-                    <tr ng-repeat="fix in fixtures | limitTo:5">
-                        <td>{{fix.home}} vs. {{fix.away}}
-                            <br />
-                            <span class="fixdate">{{fix.date}}</span>
-                        </td>
-                    </tr>
-                </table>
-            </span>
-            <span ng-if="checkModel.teams">
-                <div id="hometeam">
-                    <div class="hometeam">
-                        <h4>{{hometeamname}}</h4>
-                    </div>
-                </div>
-                <div id="awayteam">
-                    <div class="awayteam">
-                        <h4>{{awayteamname}}</h4>
-                    </div>
-                </div>
-                <table class="table table-hover" id="teams">
+        <span ng-if="$storage.leaguetable">
+            <div class="col-lg-3" id="dash-table-div">
+                <table class="table table-hover">
                     <tr>
+                        <th>Team</th>
+                        <th>Pl.</th>
+                        <th>W</th>
+                        <th>D</th>
+                        <th>L</th>
+                        <th>GD</th>
+                        <th>Points</th>
                     </tr>
-                    <tr ng-repeat="item in hometeam | limitTo:11">
-                        <td>{{item.player}}</td>
-                    </tr>
-                </table>
-                <table class="table table-hover" id="teams">
-                    <tr>
-                    </tr>
-                    <tr ng-repeat="item in awayteam | limitTo:11">
-                        <td>{{item.player}}</td>
-                    </tr>
-                </table>
-            </span>
-            <span ng-if="checkModel.subs">
-            <table class="table table-hover" id="teams">
-                    <tr ng-repeat="item in homesubs | limitTo:7">
-                        <td>{{item.player}}</td>
-                    </tr>
-                </table>
-                <table class="table table-hover" id="teams">
-
-                    <tr ng-repeat="item in awaysubs | limitTo:7">
-                        <td>{{item.player}}</td>
+                    <tr ng-repeat="t in premtable" ng-class="{success: t.team==team}">
+                        <td>{{t.team}}</td>
+                        <td class="table-points">{{t.played}}</td>
+                        <td class="table-points">{{t.won}}</td>
+                        <td class="table-points">{{t.drawn}}</td>
+                        <td class="table-points">{{t.lost}}</td>
+                        <td class="table-points">{{t.difference}}</td>
+                        <td class="table-points">{{t.points}}</td>
                     </tr>
                 </table>
-            </span>
-        </div>
-
-    <div class="col-lg-3" id="dash-form">
-        <h2 ng-repeat="f in form" style="background-color: {{myColour}}" id="form-column">
-            {{f.form}}
-        </h2>
-        <span ng-if="checkModel.prematch">
-            <div class="prematch">
-                <p>{{prematchsing.text}}</p>
+                <!-- <nvd3-line-chart data="liveposs" id="liveposs" interactive="true" tooltips="true" margin="{left:0,top:0,bottom:5,right:25}" width="500" height="400" showXAxis="false" showYAxis="false" showLegend="true"><svg id="poss-svg"></svg></nvd3-line-chart> -->
             </div>
-        </span>
-        <span ng-if="checkModel.oppoform">
-            <h2 ng-repeat="f in otherform" style="background-color: {{otherColour}}" id="other-form-column">
-                {{f.form}}
-            </h2>
-            <br>
-        </span>
-        <table class="table table-hover" id="scorers">
-            <tr>
-                <th>Name</th>
-                <th id="scorer-goals">Goals</th>
-            </tr>
-            <tr ng-repeat="s in scorers track by $index">
-                <td>{{s.player}}</td>
-                <td id="scorer-goals">{{s.goals}}</td>
-            </tr>
-        </table>
-        <div class="livescores">
-            <p class="lead" ng-repeat-start="score in scores">{{score.teams}}
-                <span class="score">{{score.score}}</span>
-            </p>
-            <p ng-repeat-end=""></p>
+    </div>
+
+    </span>
+    <div id="floaty">
+        <div id="flex-container">
+            <div class="flex">
+                <div class="col-lg-3" id="fix-and-table">
+                        <table class="table table-hover" id="fixturestable">
+                            <tr ng-repeat="fix in fixtures | limitTo:8">
+                                <td>{{fix.home}} vs. {{fix.away}}
+                                    <br />
+                                    <span class="fixdate">{{fix.date}}</span>
+                                </td>
+                            </tr>
+                        </table>
+                </div>
+
+                <div class="col-lg-3" id="dash-form">
+                    <h2 ng-repeat="f in form" style="background-color: {{myColour}}" id="form-column">
+                        {{f.form}}
+                    </h2>
+                    <span ng-if="$storage.prematch">
+                        <div class="prematch">
+                            <p>{{prematchsing.text}}</p>
+                        </div>
+                    </span>
+                    <span ng-if="$storage.oppoform">
+                        <h2 ng-repeat="f in otherform" style="background-color: {{otherColour}}" id="other-form-column">
+                            {{f.form}}
+                        </h2>
+                        <br>
+                    </span>
+                    <table class="table table-hover" id="scorers">
+                        <tr>
+                            <th>Name</th>
+                            <th id="scorer-goals">Goals</th>
+                        </tr>
+                        <tr ng-repeat="s in scorers track by $index">
+                            <td>{{s.player}}</td>
+                            <td id="scorer-goals">{{s.goals}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            <div class="livescores">
+                <p class="lead" ng-repeat-start="score in fullscores">{{score.teams}}
+                    <span class="score">{{score.score}}</span>
+                </p>
+                <p ng-repeat-end=""></p>
+            </div>
         </div>
     </div>
-    <span ng-if="checkModel.leaguetable">
-        <div class="col-lg-3" id="dash-table-div">
-            <table class="table table-hover">
-                <tr>
-                    <th>Team</th>
-                    <th>Pl.</th>
-                    <th>W</th>
-                    <th>D</th>
-                    <th>L</th>
-                    <th>GD</th>
-                    <th>Points</th>
-                </tr>
-                <tr ng-repeat="t in premtable" ng-class="{success: t.team==team}">
-                    <td>{{t.team}}</td>
-                    <td class="table-points">{{t.played}}</td>
-                    <td class="table-points">{{t.won}}</td>
-                    <td class="table-points">{{t.drawn}}</td>
-                    <td class="table-points">{{t.lost}}</td>
-                    <td class="table-points">{{t.difference}}</td>
-                    <td class="table-points">{{t.points}}</td>
-                </tr>
-            </table>
-            <!-- <nvd3-line-chart data="liveposs" id="liveposs" interactive="true" tooltips="true" margin="{left:0,top:0,bottom:5,right:25}" width="500" height="400" showXAxis="false" showYAxis="false" showLegend="true"><svg id="poss-svg"></svg></nvd3-line-chart> -->
-        </div>
-    </span>
-    <div class="col-lg-3" id="live-div">
-        <span class="graph-title" style="left: 26px;">Shots</span>
-        <nvd3-line-chart data="liveshots" id="liveshots" width="350" height="300" margin="{left:0,top:0,bottom:5,right:10}" showXAxis="false" showYAxis="false" showLegend="true" color="colorFunction()" forcex="[1]">
-            <svg id="live-svg" viewBox="0 0 350 300" preserveAspectRatio="xMidYMid"></svg>
-        </nvd3-line-chart>
-        <span class="graph-title" style="left: 26px;">Corners</span>
-        <nvd3-line-chart data="livecorners" id="livecorners" color="colorFunction()" margin="{left:0,top:0,bottom:5,right:10}" width="350" height="300" showLegend="true" showXAxis="false" showYAxis="false" forcex="[1]">
-            <svg id="live-svg" viewBox="0 0 350 300" preserveAspectRatio="xMidYMid"></svg>
-        </nvd3-line-chart>
     </div>
 </body>

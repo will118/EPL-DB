@@ -15,7 +15,7 @@ describe GraphJSON do
 				end
 			end
 			it "should add an x-axis index to arrays" do
-				input_array = (0..rand(100)).to_a.reject { |x| x % 3 == 0 }
+				input_array = [3, 8, 25]
 				resultant_array = GraphJSON.new.x_axis_maker(input_array)
 				expect(resultant_array).to be_an(Array)
 				(input_array.length).times do |x|
@@ -23,7 +23,6 @@ describe GraphJSON do
 					expect(resultant_array[x][1]).to eq input_array[x]
 				end
 			end
-
 		end	
 
 		context "Live Graphs" do
