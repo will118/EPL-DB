@@ -4,6 +4,8 @@ angular.module('d3App.controllers', [])
 
 .controller('AppController', function($scope, $localStorage, $sessionStorage, $http, $timeout, focus, GeneralLiveData, LiveStatsData, TeamFormData, LiveBars, BigData, MatchDetails, HomeAwayTeam) {
 
+    $scope.text = "Helo"
+
     $scope.$storage = $localStorage.$default({
         "badge": true,
         "leaguetable": true,
@@ -16,7 +18,7 @@ angular.module('d3App.controllers', [])
         "liveBars": true,
         "nextFixtures": true
     });
-    
+
     focus('focusMe');
 
     $scope.settingsToggle = false

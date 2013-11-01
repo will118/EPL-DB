@@ -1,27 +1,14 @@
-describe("myApp", function() {
- 
+describe("my First test", function() {
+    var AppController;
     beforeEach(module('d3App'));
-    beforeEach(module('d3App.controllers'));
+    beforeEach(inject(function($rootScope) {
+        $scope = $rootScope.$new();
+    }));
 
-    describe("AppController", function() {
-       var mockService = {
-        someAsyncCall: function (x){
-          return 'weee';
-        }
-      }
-    
-        var scope;
-        beforeEach(inject(function($rootScope, $controller) {
-            scope = $rootScope.$new();
-            // scope.text = "Hello World!";
-            $controller("AppController", {
-                $scope: scope,
-                sessionProvider: mockService
-            });
-        }));
- 
-        it("should double d", function() {
-            expect(scope.text).toBe("Hello World!");
+    it('Should initialize value to Loading', inject(function($controller) {
+    ctrl = $controller('AppController', {
+        $scope: $scope
         });
-    });
+        expect($scope.text).toBe('Helo');
+    }));
 });

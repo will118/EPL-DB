@@ -8,6 +8,7 @@ module.exports = function(config) {
     basePath: '',
 
 
+
     // frameworks to use
     frameworks: ['jasmine'],
 
@@ -16,10 +17,10 @@ module.exports = function(config) {
     files: [
       'jasmine/angular.js',
       'jasmine/angular_mocks.js',
-      'app/assets/javascripts/app/services/*.js',
       'jasmine/*.js',
       'jasmine/*.html',
       'app/assets/javascripts/app/*.js',
+      'app/assets/javascripts/app/services/*.js',
       'app/assets/javascripts/app/controllers/*.js',
       'app/assets/javascripts/app/directives/*.js'
     ],
@@ -33,7 +34,7 @@ module.exports = function(config) {
 
     // test results reporter to use
     // possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
-    reporters: ['progress'],
+    reporters: ['progress', 'growl'],
 
 
     // web server port
