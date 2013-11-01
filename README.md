@@ -81,3 +81,9 @@ Coverage:
 Goals:
 - RSpec unit tests for Rails side.
 - Karma for the Angular side. E2E and Unit.
+
+Info:
+> rspec
+> karma start
+> ./selenium/start
+> protractor jasmine/e2e/config.js

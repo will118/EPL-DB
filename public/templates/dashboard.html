@@ -1,6 +1,6 @@
 <body ng-controller="AppController">
     <link rel="stylesheet" type="text/css" href="dash.css" />
-    <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="background-color: {{myColour}}">
+    <nav class="navbar navbar-default navbar-fixed-top" id="topnavbarcol" role="navigation" style="background-color: {{myColour}}">
         <div class="navbar-header">
             <a class="navbar-brand">EPLDB</a>
         </div>
@@ -11,29 +11,29 @@
                     <input type="text" class="form-control" focus-on="focusMe" ng-model="team" typeahead="name for name in teamnames | filter:$viewValue" typeahead-editable="false">
                 </div>
             </form>
-            <span ng-if="settingsToggle">
-                <div class="btn-group" id="top-toggles">
-                    <button type="button" class="btn btn-default color3" ng-model="$storage.badge" btn-checkbox>Badges</button>
-                    <button type="button" class="btn btn-default color3" ng-model="$storage.prematch" btn-checkbox>Prematch Text</button>
-                    <button type="button" class="btn btn-default color3" ng-model="$storage.leaguetable" btn-checkbox>League Table</button>
-                    <button type="button" class="btn btn-default color3" ng-model="$storage.oppoform" btn-checkbox>Opponent Form</button>
-                </div>
-            </span>
             <ul class="nav navbar-nav" id="home-nav-text">
-                <li><a href="/">Overview</a>
+                <li><a href="/">Season Overview</a>
                 </li>
-                <li><a href="/match">Match Mode</a>
+                <li><a href="/match" id="matchmode">Match Mode</a>
                 </li>
-                <li><a href="#" ng-model="settingsToggle" btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false">Settings</a>
+                <li><a href="#" id="settingsToggle" ng-model="settingsToggle" btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false">Settings</a>
                 </li>
             </ul>
+            <span ng-if="settingsToggle">
+                <div class="btn-group" id="top-toggles">
+                    <button type="button" id="badgetog" class="btn btn-default color3" ng-model="$storage.badge" btn-checkbox>Badges</button>
+                    <button type="button" id="prematchtog" class="btn btn-default color3" ng-model="$storage.prematch" btn-checkbox>Prematch Text</button>
+                    <button type="button" id="leaguetog" class="btn btn-default color3" ng-model="$storage.leaguetable" btn-checkbox>League Table</button>
+                    <button type="button" id="opformtog" class="btn btn-default color3" ng-model="$storage.oppoform" btn-checkbox>Opponent Form</button>
+                </div>
+            </span>
         </div>
     </nav>
     <div id="top-left">
 
         <span ng-if="$storage.badge==true">
             <div class="col-lg-3" id="badge-div">
-                <img id="badgey" ng-src="images/{{badgehash}}" />
+                <img class="badgey" ng-src="images/{{badgehash}}" />
             </div>
         </span>
         <span ng-if="$storage.badge==false">

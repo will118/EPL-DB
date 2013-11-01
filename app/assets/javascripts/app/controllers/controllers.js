@@ -25,26 +25,6 @@ angular.module('d3App.controllers', [])
 
     $scope.team = $scope.$storage.favteam;
 
-    // $scope.user = session.user;
-
-    // $scope.checkModel = angular.fromJson(session.user.settings);
-
-    // $scope.updateprefs = function() {
-    //     $scope.user.settings = angular.toJson($scope.checkModel)
-    //     $http({
-    //         url: '/api/settings',
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         },
-    //         data: $scope.user
-    //     }).success(function(data) {
-
-    //     }).error(function(reason) {
-    //         console.log(reason);
-    //     });
-    // };
-
     // Filter on search, loaded from staticvalues 
     $scope.teamnames = teamnames;
 
@@ -131,16 +111,13 @@ angular.module('d3App.controllers', [])
         })
     };
 
+    $scope.colourArray = ['#e8000b', '#051246']
 
     $scope.colorFunction = function() {
         return function(d, i) {
-            if ($scope.colourArray == null) {
-                $scope.colourArray = ['#e8000b', '#051246']
-            } else {
                 return $scope.colourArray[i];
-            };
         };
-    }
+    };
 
 
     var squawkajson = function(team) {
@@ -256,21 +233,6 @@ angular.module('d3App.controllers', [])
         })
     }, 100);
 
-    $scope.signout = function() {
-        $http({
-            url: '/users/sign_out',
-            method: 'DELETE',
-            data: {
-                user: $scope.user
-            }
-        }).success(function(data) {
-            console.log("Signed out");
-        }).error(function(reason) {
-            $scope.user.errors = reason;
-            window.location.href = '/';
-        });
-    };
-
     var updateTeamDependencies = function(team) {
         if (team == undefined) {
             return null
@@ -300,5 +262,39 @@ angular.module('d3App.controllers', [])
     };
     $scope.$watch('team', updateTeamDependencies);
 
-    updateTeamDependencies($scope.team);
 });
+
+    // $scope.user = session.user;
+
+    // $scope.checkModel = angular.fromJson(session.user.settings);
+
+    // $scope.updateprefs = function() {
+    //     $scope.user.settings = angular.toJson($scope.checkModel)
+    //     $http({
+    //         url: '/api/settings',
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },
+    //         data: $scope.user
+    //     }).success(function(data) {
+
+    //     }).error(function(reason) {
+    //         console.log(reason);
+    //     });
+    // };
+
+    // $scope.signout = function() {
+    //     $http({
+    //         url: '/users/sign_out',
+    //         method: 'DELETE',
+    //         data: {
+    //             user: $scope.user
+    //         }
+    //     }).success(function(data) {
+    //         console.log("Signed out");
+    //     }).error(function(reason) {
+    //         $scope.user.errors = reason;
+    //         window.location.href = '/';
+    //     });
+    // };

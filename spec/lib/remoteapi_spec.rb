@@ -22,12 +22,13 @@ describe RemoteAPI do
 	  	next_5_fixtures = RemoteAPI.next_5_fixtures
 	  	expect(next_5_fixtures[0]['date']).to be_a(String)
 	  	expect(DateTime.parse(next_5_fixtures[0]['date'])).to be_a(DateTime)
+  		expect(next_5_fixtures[0]['date'].split.count).to be 2
 		end
 		
 		it "returns a valid countdown" do
 	  	next_5_fixtures = RemoteAPI.next_5_fixtures_countdown
 	  	expect(next_5_fixtures[0]['date']).to be_a(String)
-	  	expect{DateTime.parse(next_5_fixtures[0]['date'])}.to raise_error(ArgumentError)
+	  	expect(next_5_fixtures[0]['date'].split.count).to be > 2
 		end
 
 		context "top scorers" do

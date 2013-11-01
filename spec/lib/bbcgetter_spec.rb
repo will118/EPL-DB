@@ -7,11 +7,6 @@ describe BBCGetter do
 			expect(BBCGetter.new.get(fix)).to eq "Got JSON url"
 		end
 
-		it "checks the rawlink is valid" do
-			fix = create(:fixture)
-			expect(BBCGetter.new.get(fix)).to eq "Invalid link"
-		end
-
 		it "should be a valid link" do
 			link = "/sport/0/football/24350247"
 			expect(BBCGetter.new.is_valid_match?(link)).to be true
