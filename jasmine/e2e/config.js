@@ -7,8 +7,8 @@ exports.config = {
     'browserName': 'chrome'
   },
 
-  // specs: ['*.js'],
-  specs: ['matchmode.js'],
+  specs: ['*.js'],
+  // specs: ['matchmode.js'],
 
   jasmineNodeOpts: {
     showColors: true, 

@@ -23,7 +23,4 @@ production:
   host: localhost
   pool: 5
   username: aaaamilne
-  password: 
-
-cucumber:
-  <<: *test
+  password:

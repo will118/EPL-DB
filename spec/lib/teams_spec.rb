@@ -20,9 +20,9 @@ describe Teams do
       create(:fixture)
       teams_array = YAML::load( File.open( 'testsubs.yml' ) )
       teams_array.each do |player|
-        create(:team, teamname: "Spuds", player: player, starting: false)
+        create(:team, teamname: "Spudders", player: player, starting: false)
       end
-      team = Teams.away_subs("Spuds")
+      team = Teams.away_subs("Spudders")
       expect(team).to be_an(Array)
       (team.length).times do |x|
         expect(teams_array[x]).to eq team[x].player

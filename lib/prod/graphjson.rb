@@ -5,7 +5,7 @@ class GraphJSON
   end
 
   def main(team)
-    if valid_team?(team) == nil
+    if valid_team?(team) == false
       return nil
     else
       avg_poss = Supermodel.of_possession_where(team)
@@ -37,7 +37,7 @@ class GraphJSON
   end
 
   def possession(team)
-    if valid_team?(team.titleize) == nil
+    if valid_team?(team.titleize) == false
       return nil
     else
       poss_arr = []
@@ -60,7 +60,7 @@ class GraphJSON
   end
 
   def targets(team)
-    if valid_team?(team.titleize) == nil
+    if valid_team?(team.titleize) == false
       return nil
     else
       date = Target.most_recent_1(team).matchdate
@@ -72,7 +72,7 @@ class GraphJSON
   end
 
   def corners(team)
-    if valid_team?(team.titleize) == nil
+    if valid_team?(team.titleize) == false
       return nil
     else
       date = Corner.most_recent_1(team).matchdate
@@ -84,7 +84,7 @@ class GraphJSON
   end
 
   def fouls(team)
-    if valid_team?(team.titleize) == nil
+    if valid_team?(team.titleize) == false
       return nil
     else
       date = Foul.most_recent_1(team).matchdate
@@ -96,7 +96,7 @@ class GraphJSON
   end
 
   def shots(team)
-    if valid_team?(team.titleize) == nil
+    if valid_team?(team.titleize) == false
       return nil
     else
       date = Shot.most_recent_1(team).matchdate
