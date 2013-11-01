@@ -3,6 +3,8 @@ Premier League Dashboard
 
 ![Early days](/ss/1.gif "Love it")
 
+GIF is butchered a bit, [Demo here](http://epldb.co.uk)
+
 I wanted marginally relevant information to have on my other/second screen during a match.
 
 ## Features
