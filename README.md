@@ -1,9 +1,9 @@
 Premier League Dashboard
 ====================
 
-![Early days](/ss/1.gif "Love it")
+![Img](/ss/1.png "That's a blurry emirates")
 
-GIF is butchered a bit, [Demo here](http://epldb.co.uk)
+[Demo here](http://epldb.co.uk)
 
 I wanted marginally relevant information to have on my other/second screen during a match.
 
