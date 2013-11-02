@@ -7,8 +7,10 @@ class BBCGetter
   end
 
   def self.get_json(url)
-    rawbbc = json_get(url).delete('(').delete(');')
-    rawbbc['data']['payload']['Match'].last['stats']
+    data = HTTParty.get(url).response.body
+    final = data.delete('(').delete(');')
+    full = JSON.parse final 
+    return full['data']['payload']['Match'].last['stats']
   end
 
   def get(fixture)
@@ -22,7 +24,7 @@ class BBCGetter
       link = match.css('a').last['href'] 
       if is_valid_match?(link) == true
         json_link, lineup_link = hidden_links(link)
-        fixture.link_save(link, json_link, lineup_link)
+        fixture.link_save(link, json_link)
       else "Invalid link"
       end
     else "Got JSON url"

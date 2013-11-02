@@ -1,8 +1,8 @@
 class Team < ActiveRecord::Base
 	
   def self.wipe_todays_of(team1, team2)
-    where(["created_at >= ? and hometeam = ?", Time.zone.now.beginning_of_day, team1]).delete_all
-    where(["created_at >= ? and awayteam = ?", Time.zone.now.beginning_of_day, team2]).delete_all
+    where(["created_at >= ? and teamname = ?", Time.zone.now.beginning_of_day, team1]).delete_all
+    where(["created_at >= ? and teamname = ?", Time.zone.now.beginning_of_day, team2]).delete_all
   end
 
   def self.today

@@ -2,8 +2,6 @@ class TeamFactory
 
 	def initialize(fix)
 		@fixture = fix
-		recorder
-		teams
 	end
 
   def recorder
@@ -32,6 +30,9 @@ class TeamFactory
 
     teams = document.css('#oppm-team-list')
 
+    if teams.css('h3.team-name')[0].text == nil
+      return nil
+    else
     hometeam = teams.css('h3.team-name')[0].text
     awayteam = teams.css('h3.team-name')[1].text
 
@@ -61,5 +62,6 @@ class TeamFactory
 
     @fixture.got_team!
     puts "Got team"
+    end
   end
 end
