@@ -63,11 +63,11 @@ class DataController < ApplicationController
   end
 
   def nextfixtures
-    render :json => RemoteAPI.next_5_fixtures
+    render :json => RemoteAPI.next_10_fixtures
   end
 
   def nextfixtures_countdown
-    render :json => RemoteAPI.next_5_fixtures_countdown
+    render :json => RemoteAPI.next_10_fixtures_countdown
   end
 
 ## Graph JSONs ##
