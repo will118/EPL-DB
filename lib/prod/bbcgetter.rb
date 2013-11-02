@@ -24,7 +24,7 @@ class BBCGetter
       link = match.css('a').last['href'] 
       if is_valid_match?(link) == true
         json_link, lineup_link = hidden_links(link)
-        fixture.link_save(link, json_link, lineup_link)
+        fixture.link_save(link,lineup_link,json_link)
       else "Invalid link"
       end
     else "Got JSON url"

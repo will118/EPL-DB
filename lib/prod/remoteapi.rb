@@ -27,7 +27,11 @@ class RemoteAPI
       countdown.each do |fixture|
         date = Time.parse(fixture['date'])
         time = date - Time.now.utc
+        if date < Time.now.utc
+          "Do nothing"
+        else
         fixture['date'] = distance_of_time_in_words_to_now(Time.now + time)
+        end
       end
 
     end
