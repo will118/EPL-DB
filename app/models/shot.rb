@@ -7,7 +7,7 @@ class Shot < ActiveRecord::Base
 	end
 
 	def self.most_recent_1(team)
-		where(["awayteam = ? or hometeam = ?", team.titleize, team.titleize]).order(:matchdate).first
+		where(["awayteam = ? or hometeam = ?", team.titleize, team.titleize]).order('created_at DESC').first
 	end
 
 	def self.most_recent_data(last, team)
