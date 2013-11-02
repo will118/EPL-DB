@@ -16,14 +16,13 @@
                 </li>
                 <li><a href="/match" id="matchmode">Match Mode</a>
                 </li>
-                <li><a href="#" id="settingsToggle" ng-model="settingsToggle" btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false">Settings</a>
+                <li><a href="#" id="settingsToggle" ng-model="settingsToggle" btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false">Toggles</a>
                 </li>
             </ul>
             <span ng-if="settingsToggle">
                 <div class="btn-group" id="top-toggles">
-                    <button type="button" id="badgetog" class="btn btn-default color3" ng-model="$storage.badge" btn-checkbox>Badges</button>
+                    <button type="button" id="badgetog" class="btn btn-default color3" ng-model="$storage.badge" btn-checkbox>Badge</button>
                     <button type="button" id="prematchtog" class="btn btn-default color3" ng-model="$storage.prematch" btn-checkbox>Prematch Text</button>
-                    <button type="button" id="leaguetog" class="btn btn-default color3" ng-model="$storage.leaguetable" btn-checkbox>League Table</button>
                     <button type="button" id="opformtog" class="btn btn-default color3" ng-model="$storage.oppoform" btn-checkbox>Opponent Form</button>
                 </div>
             </span>
@@ -46,7 +45,7 @@
                 <svg id="megachart" viewBox="0 0 760 340" preserveAspectRatio="xMidYMid"></svg>
             </nvd3-line-chart>
         </div>
-        <span ng-if="$storage.leaguetable">
+        
             <div class="col-lg-3" id="dash-table-div">
                 <table class="table table-hover">
                     <tr>
@@ -68,10 +67,7 @@
                         <td class="table-points">{{t.points}}</td>
                     </tr>
                 </table>
-                <!-- <nvd3-line-chart data="liveposs" id="liveposs" interactive="true" tooltips="true" margin="{left:0,top:0,bottom:5,right:25}" width="500" height="400" showXAxis="false" showYAxis="false" showLegend="true"><svg id="poss-svg"></svg></nvd3-line-chart> -->
             </div>
-    </div>
-
     </span>
     <div id="floaty">
         <div id="flex-container">

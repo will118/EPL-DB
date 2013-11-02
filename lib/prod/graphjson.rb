@@ -41,21 +41,21 @@ class GraphJSON
       return nil
     else
       poss_arr = []
-      Poss.involving(team).each do |x|
-        if x.hometeam = team
+      Poss.last_data_involving(team).each do |x|
+        if x.hometeam == team
           poss_arr << x.homeposs
         else
           poss_arr << x.awayposs
         end
       end
 
-      live = poss_arr.drop_while {|i| i == 100 }
+      live = poss_arr.drop(30)
       x_axis_array = * 1..(live.length)
 
       array = [x_axis_array, live].transpose.map do |x, y|
         [ x, y ]
       end
-      return [{"key" => "Possession", "values" => array}]
+      return array
     end
   end
 

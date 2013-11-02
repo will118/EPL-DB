@@ -19,9 +19,9 @@ module.exports = function(config) {
       'jasmine/angular_mocks.js',
       'jasmine/*.js',
       'jasmine/*.html',
+      'app/assets/javascripts/app/controllers/*.js',
       'app/assets/javascripts/app/*.js',
       'app/assets/javascripts/app/services/*.js',
-      'app/assets/javascripts/app/controllers/*.js',
       'app/assets/javascripts/app/directives/*.js'
     ],
 

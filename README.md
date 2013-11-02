@@ -5,7 +5,7 @@ Premier League Dashboard
 
 [Demo here](http://epldb.co.uk)
 
-I wanted marginally relevant information to have on my other/second screen during a match.
+I wanted marginally relevant information to have on my other/second screen during a match, but also learn Angular etc.
 
 ## Features
 
@@ -32,12 +32,12 @@ I wanted marginally relevant information to have on my other/second screen durin
 - Rails and Ruby (and Pry. Sweet pry.)
 - [Angular.js](http://angularjs.org/)
 - [NVD3(D3.js)](https://github.com/novus/nvd3)
+- [NV directives](https://github.com/cmaurer/angularjs-nvd3-directives)
 - [Nokogiri I like.](http://nokogiri.org/) 
 - [Bootstrap](http://getbootstrap.com/)
 - [Mike Bostock for actual D3](http://bost.ocks.org/mike/)
 - [Shout out to the HTTParty animals](https://github.com/jnunemaker/httparty/)
 - [William Playfair](http://en.wikipedia.org/wiki/William_Playfair)
-- GitHub OAuth
 - [Tim Snell's](http://www.testmeat.co.uk/extra/1192/stadium-love) photo of the Emirates.
 
 ## Dependencies/Requirements/Setup:

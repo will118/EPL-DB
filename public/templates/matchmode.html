@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
 
-    <link rel="stylesheet" type="text/css" href="eplv5.css" />
+    <link rel="stylesheet" type="text/css" href="eplv6.css" />
 
     <title>EPLDB</title>
 </head>
@@ -27,12 +27,13 @@
                 </li>
                 <li><a href="/match">Match Mode</a>
                 </li>
-                <li><a href="#" ng-model="settingsToggle" btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false">Settings</a>
+                <li><a href="#" ng-model="settingsToggle" btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false">Toggles</a>
                 </li>
             </ul>
             <span ng-if="settingsToggle">
                 <div class="btn-group" id="top-toggles">
                     <button type="button" class="btn btn-default color3" ng-model="$storage.leaguetable" btn-checkbox>PL Table</button>
+                    <button type="button" class="btn btn-default color3" ng-model="$storage.liveposs" btn-checkbox>Live Possession</button>
                     <button type="button" class="btn btn-default color3" ng-model="$storage.oppoform" btn-checkbox>Oppo. Form</button>
                     <button type="button" class="btn btn-default color3" ng-model="$storage.teams" btn-checkbox>Teams</button>
                     <button type="button" class="btn btn-default color3" ng-model="$storage.subs" btn-checkbox>Subs</button>
@@ -67,148 +68,161 @@
                     </div>
                 </div>
             </div>
-<div id="flex-container2">
-    <div class="flex2">
-            <div class="col-lg-3" id="leftmostcol">
-                <span ng-if="$storage.liveBars">
-                    <table class="table color1">
-                        <td>
-                            <span class="bar-title">Possession</span>
-                            <progress percent="possBar"></progress>
-                        </td>
-                        <tr>
+            <div id="flex-container2">
+                <div class="flex2">
+                    <div class="col-lg-3" id="leftmostcol">
+                        <span ng-if="$storage.liveBars">
+                            <table class="table color1">
+                                <td>
+                                    <span class="bar-title">Possession</span>
+                                    <progress percent="possBar"></progress>
+                                </td>
+                                <tr>
+                                    <td>
+                                        <span class="bar-title">Shots</span>
+                                        <progress percent="shotsBar"></progress>
+                                    </td>
+                                </tr>
+                            </table>
+                        </span>
+                        <table class="table color1">
                             <td>
-                                <span class="bar-title">Shots</span>
-                                <progress percent="shotsBar"></progress>
-                            </td>
-                        </tr>
-                    </table>
-                </span>
-                <table class="table color1">
-                    <td>
-                        <h2 ng-repeat="f in form" style="background-color: {{myColour}}" id="form-column">
-                            {{f.form}}
-                        </h2>
-                    </td>
-                    <tr>
-                        <td>
-                            <span ng-if="$storage.oppoform">
-                                <h2 ng-repeat="f in otherform" style="background-color: {{otherColour}}" id="other-form-column">
+                                <h2 ng-repeat="f in form" style="background-color: {{myColour}}" id="form-column">
                                     {{f.form}}
                                 </h2>
-                        </td>
-                    </tr>
-                    </span>
-                    <table class="table table-hover color1" id="scorers">
-                        <tr>
-                            <th>Name</th>
-                            <th id="scorer-goals">Goals</th>
-                        </tr>
-                        <tr ng-repeat="s in scorers track by $index">
-                            <td>{{s.player}}</td>
-                            <td id="scorer-goals">{{s.goals}}</td>
-                        </tr>
-                    </table>
-            </div>
-
-            <div class="col-lg-3" id="fix-and-table2">
-                <span ng-if="$storage.teams">
-                    <div id="hometeam">
-                        <div class="hometeam">
-                            <h4>{{hometeamname}}</h4>
-                        </div>
-                    </div>
-                    <div id="awayteam">
-                        <div class="awayteam">
-                            <h4>{{awayteamname}}</h4>
-                        </div>
-                    </div>
-                    <table class="table table-hover color1" id="teamsleft">
-                        <tr>
-                        </tr>
-                        <tr ng-repeat="item in hometeam | limitTo:11">
-                            <td>{{item.player}}</td>
-                        </tr>
-                    </table>
-                    <table class="table table-hover color1" id="teams">
-                        <tr>
-                        </tr>
-                        <tr ng-repeat="item in awayteam | limitTo:11">
-                            <td>{{item.player}}</td>
-                        </tr>
-                    </table>
-                </span>
-                <span ng-if="$storage.subs">
-                    <table class="table table-hover color1" id="teamsleft">
-                        <tr ng-repeat="item in homesubs | limitTo:7" class="coloursubs">
-                            <td>{{item.player}}</td>
-                        </tr>
-                    </table>
-                    <table class="table table-hover color1" id="teams">
-
-                        <tr ng-repeat="item in awaysubs | limitTo:7" class="coloursubs">
-                            <td>{{item.player}}</td>
-                        </tr>
-                    </table>
-                </span>
-            </div>
-
-            <span ng-if="$storage.leaguetable">
-                <div id="match-table-div">
-                    <table class="table table-hover color1">
-                        <tr>
-                            <th>Team</th>
-                            <th>Pl.</th>
-                            <th>W</th>
-                            <th>D</th>
-                            <th>L</th>
-                            <th>GD</th>
-                            <th>Points</th>
-                        </tr>
-                        <tr ng-repeat="t in premtable" ng-style="t.team == team && {'background-color': myColour}">
-                            <td>{{t.team}}</td>
-                            <td class="table-points">{{t.played}}</td>
-                            <td class="table-points">{{t.won}}</td>
-                            <td class="table-points">{{t.drawn}}</td>
-                            <td class="table-points">{{t.lost}}</td>
-                            <td class="table-points">{{t.difference}}</td>
-                            <td class="table-points">{{t.points}}</td>
-                        </tr>
-                    </table>
-                    <!-- <nvd3-line-chart data="liveposs" id="liveposs" interactive="true" tooltips="true" margin="{left:0,top:0,bottom:5,right:25}" width="500" height="400" showXAxis="false" showYAxis="false" showLegend="true"><svg id="poss-svg"></svg></nvd3-line-chart> -->
-                </div>
-            </span>
-            <div class="col-lg-3" id="rightmostcol">
-                <div class="livescores">
-                    <table class="table color1" id="bottom-table-scores">
-                        <tr ng-repeat="score in scores | limitTo:-6">
-                            <td>
-                                <p class="lead" id="colour-lead">{{score.teams}}
-                                    <span class="score">{{score.score}}</span>
-                                </p>
                             </td>
-                        </tr>
-                    </table>
-                </div>
-                <span ng-if="$storage.nextFixtures">
-                    <div class="livescores">
-                        <table class="table color1" id="bottom-table-next-fix">
-                            <tr ng-repeat="nextfix in nextfixtures| limitTo:3">
-                                <td id="bottom-tr-next-fix">
-                                    <p class="lead" id="colour-lead2">{{nextfix.home}} vs. {{nextfix.away}}
-                                        <br />
-                                        <span class="score">{{nextfix.date}}</span>
-                                    </p>
+                            <tr>
+                                <td>
+                                    <span ng-if="$storage.oppoform">
+                                        <h2 ng-repeat="f in otherform" style="background-color: {{otherColour}}" id="other-form-column">
+                                            {{f.form}}
+                                        </h2>
                                 </td>
                             </tr>
-                        </table>
+                            </span>
+                            <table class="table table-hover color1" id="scorers">
+                                <tr>
+                                    <th>Name</th>
+                                    <th id="scorer-goals">Goals</th>
+                                </tr>
+                                <tr ng-repeat="s in scorers track by $index">
+                                    <td>{{s.player}}</td>
+                                    <td id="scorer-goals">{{s.goals}}</td>
+                                </tr>
+                            </table>
                     </div>
-                </span>
+
+                    <div class="col-lg-3" id="fix-and-table2">
+                        <span ng-if="$storage.teams">
+                            <div id="hometeam">
+                                <div class="hometeam">
+                                    <h4>{{hometeamname}}</h4>
+                                </div>
+                            </div>
+                            <div id="awayteam">
+                                <div class="awayteam">
+                                    <h4>{{awayteamname}}</h4>
+                                </div>
+                            </div>
+                            <table class="table table-hover color1" id="teamsleft">
+                                <tr>
+                                </tr>
+                                <tr ng-repeat="item in hometeam | limitTo:11">
+                                    <td>{{item.player}}</td>
+                                </tr>
+                            </table>
+                            <table class="table table-hover color1" id="teams">
+                                <tr>
+                                </tr>
+                                <tr ng-repeat="item in awayteam | limitTo:11">
+                                    <td>{{item.player}}</td>
+                                </tr>
+                            </table>
+                        </span>
+                        <span ng-if="$storage.subs">
+                            <table class="table table-hover color1" id="teamsleft">
+                                <tr ng-repeat="item in homesubs | limitTo:7" class="coloursubs">
+                                    <td>{{item.player}}</td>
+                                </tr>
+                            </table>
+                            <table class="table table-hover color1" id="teams">
+
+                                <tr ng-repeat="item in awaysubs | limitTo:7" class="coloursubs">
+                                    <td>{{item.player}}</td>
+                                </tr>
+                            </table>
+                        </span>
+                    </div>
+
+                    <span ng-if="$storage.leaguetable">
+                        <div id="match-table-div">
+                            <table class="table table-hover color1">
+                                <tr>
+                                    <th>Team</th>
+                                    <th>Pl.</th>
+                                    <th>W</th>
+                                    <th>D</th>
+                                    <th>L</th>
+                                    <th>GD</th>
+                                    <th>Points</th>
+                                </tr>
+                                <tr ng-repeat="t in premtable" ng-style="t.team == team && {'background-color': myColour}">
+                                    <td>{{t.team}}</td>
+                                    <td class="table-points">{{t.played}}</td>
+                                    <td class="table-points">{{t.won}}</td>
+                                    <td class="table-points">{{t.drawn}}</td>
+                                    <td class="table-points">{{t.lost}}</td>
+                                    <td class="table-points">{{t.difference}}</td>
+                                    <td class="table-points">{{t.points}}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </span>
+                    <div class="col-lg-3" id="rightmostcol">
+                        <span ng-if="$storage.liveposs">
+                        <div class="liveposs">
+                            <table class="table color1" id="live-poss">
+                                <td>
+                                    <nvd3-sparkline-chart data="liveposs" id="liveposs" width="350" height="150" margin="{left:10, top:20, bottom:10, right:45}" x="xFunction()" y="yFunction()" color="sparkFunction()">
+                                        <svg></svg>
+                                    </nvd3-sparkline-chart>
+                                    <p id="graphtitle" style="left: 9%; top: 16%;">Possession</p>
+                                </td>
+                                </tr>
+                            </table>
+                        </div>
+                        </span>
+
+                        <div class="livescores">
+                            <table class="table color1" id="bottom-table-scores">
+                                <tr ng-repeat="score in scores | limitTo:-6">
+                                    <td>
+                                        <p class="lead" id="colour-lead">{{score.teams}}
+                                            <span class="score">{{score.score}}</span>
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <span ng-if="$storage.nextFixtures">
+                            <div class="livescores">
+                                <table class="table color1" id="bottom-table-next-fix">
+                                    <tr ng-repeat="nextfix in nextfixtures| limitTo:3">
+                                        <td id="bottom-tr-next-fix">
+                                            <p class="lead" id="colour-lead2">{{nextfix.home}} vs. {{nextfix.away}}
+                                                <br />
+                                                <span class="score">{{nextfix.date}}</span>
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
-</div>
 </body>
 
 </html>

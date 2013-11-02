@@ -8,6 +8,16 @@ class Poss < ActiveRecord::Base
 
 	def self.involving(team)
 		where(["awayteam = ? or hometeam = ?", team.titleize, team.titleize])
+	end	
+
+	def self.last_data_involving(team)
+		team = team.titleize
+		last_match = where(["awayteam = ? or hometeam = ?", team, team]).last
+		if last_match.hometeam == team
+			where(:matchdate => last_match.matchdate, :hometeam => team)
+		else 
+			where(:matchdate => last_match.matchdate, :awayteam => team)
+		end
 	end
 
 	def hometeam_hyphenated

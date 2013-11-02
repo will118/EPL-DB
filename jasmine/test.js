@@ -5,7 +5,7 @@ describe("controller tests", function() {
     beforeEach(inject(function($rootScope, $controller, _LiveStatsData_) {
         LiveStatsData = _LiveStatsData_
         $scope = $rootScope.$new();
-        ctrl = $controller('AppController', { $scope: $scope });
+        ctrl = $controller('MatchModeController', { $scope: $scope });
     }));
 
     it('should initialize default team', function() {
