@@ -4,6 +4,9 @@
 #flex-container2 {
   
 }
+.table>tbody>tr.success>td {
+    background-color: rgba(223, 240, 216, 0.27);
+}
 .flex {
     width: 90%;
     border: none;

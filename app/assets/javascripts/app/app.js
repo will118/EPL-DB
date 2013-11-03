@@ -6,7 +6,7 @@ var d3App = angular.module('d3App', ['ngStorage', 'ngRoute', 'nvd3ChartDirective
     $locationProvider.html5Mode(true);
     $routeProvider
     .when('/', {
-        templateUrl: '/templates/dashboard.html',
+        templateUrl: '/templates/seasonmode.html',
         controller: 'SeasonModeController'
     })
     .when('/match', {

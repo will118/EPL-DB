@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
 
-    <link rel="stylesheet" type="text/css" href="eplv6.css" />
+    <link rel="stylesheet" type="text/css" href="eplv7.css" />
 
     <title>EPLDB</title>
 </head>
@@ -170,7 +170,8 @@
                                     <th>GD</th>
                                     <th>Points</th>
                                 </tr>
-                                <tr ng-repeat="t in premtable" ng-style="t.team == team && {'background-color': myColour}">
+                                <!-- <tr ng-repeat="t in premtable" ng-style="t.team == team && {'background-color': myColour}"> -->
+                                <tr ng-repeat="t in premtable" ng-class="{success: t.team==team}">
                                     <td><a class="matchtablenames" href="#" ng-click="selectTeam(t.team)">{{t.team}}</a>
                                     </td>
                                     <td class="table-points">{{t.played}}</td>
@@ -202,7 +203,7 @@
                          <span ng-if="gotLive">
                             <table class="table color1">
 
-                                <tr ng-repeat="score in scores">
+                                <tr ng-repeat="score in scores" ng-class="{success: score.home==team || score.away==team}">
                                     <td>
                                         {{score.home}} vs. {{score.away}} {{score.fulltime}}
                                     </td>
@@ -212,7 +213,8 @@
                             </span>
                             <table class="table color1">
 
-                                <tr ng-repeat="score in results">
+                                <tr ng-repeat="score in results" ng-class="{success: score.home==team || score.away==team}">
+
                                     <td>
                                         {{score.home}} vs. {{score.away}} {{score.fulltime}}
                                     </td>

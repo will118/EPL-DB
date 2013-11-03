@@ -19,11 +19,17 @@ angular.module('d3App.seasoncontrollers', [])
 
     focus('focusMe');
 
-    $scope.htmlTooltip = "I've been made <b>bold</b>!"
-
     $scope.selectTeam = function(team) {
         $scope.team = team
     };
+    
+    $scope.selectForm = function(fix) {
+            if (fix.home == $scope.team) {
+                $scope.desiredForm = fix.away
+            } else {
+                $scope.desiredForm = fix.home
+            };
+        };
 
     $scope.settingsToggle = false
 
@@ -75,7 +81,7 @@ angular.module('d3App.seasoncontrollers', [])
     }
 
     var scores = function() {
-        var scorePromise = GeneralLiveData.scores();
+        var scorePromise = GeneralLiveData.fullscores();
         scorePromise.then(function(data) {
             $scope.results = data
         })
