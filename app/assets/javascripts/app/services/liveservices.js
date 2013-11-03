@@ -49,13 +49,13 @@ app.factory('GeneralLiveData', function($http, $q) {
     }
     // Quick fix
     methods.fullscores = function() {
-        var defer_scores = $q.defer();
+        var defer_fullscores = $q.defer();
         $http.get('/fullscoresjson/', {
             cache: false
         }).success(function(data) {
-            defer_scores.resolve(data);
+            defer_fullscores.resolve(data);
         });
-        return defer_scores.promise;
+        return defer_fullscores.promise;
     }
 
     methods.nextfixtures = function() {

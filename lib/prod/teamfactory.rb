@@ -42,7 +42,7 @@ class TeamFactory
     home_subs = teams.css('.subs-list>li')[0..6]
     away_subs = teams.css('.subs-list>li')[7..13]
     
-    Team.wipe_todays_of(hometeam, awayteam)
+    Team.wipe_data_of(hometeam, awayteam)
 
     home_xi.each do |player|
       Team.bbc_scraped_name(player, hometeam, true)

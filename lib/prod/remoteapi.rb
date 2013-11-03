@@ -18,7 +18,6 @@ class RemoteAPI
       if Cache.need_new_countdown? == true
         countdown = json_get(fixtures_url)
         cache = Cache.where(:kind_of => 'countdown').first_or_create
-
         cache.json = countdown
         cache.save
       else
@@ -35,6 +34,26 @@ class RemoteAPI
       json_get("http://api.statsfc.com/#{ENV["COMP"]}/table.json?key=#{ENV["STATS_KEY"]}")
     end
   end
+
+
+  def self.api_save
+    from_date = (Date.today - 2.month).strftime("%Y-%m-%d")
+    to_date =  Date.today.strftime("%Y-%m-%d")
+    results = json_get("http://api.statsfc.com/results.json?key=#{ENV["STATS_KEY"]}&competition=#{ENV["COMP"]}&year=2013/2014&from=#{from_date}&to=#{to_date}&limit=10")
+    results.each do |x| 
+      api = ApiScore.create
+      api.date = x['date']
+      api.home = x['home']
+      api.away = x['away']
+      api.status = x['status']
+      api.halftime = x['halftime']
+      api.fulltime = x['fulltime']
+      api.incidents = x['incidents']
+      api.save
+    end 
+  end
+
+
 
   def self.top_scorers(team)
     name = stats_fc_normaliser(team)

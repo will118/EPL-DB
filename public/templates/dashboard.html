@@ -112,11 +112,11 @@
             </div>
         </div>
         <div class="col-lg-3">
-            <div class="livescores">
-                <p class="lead" ng-repeat-start="score in fullscores">{{score.teams}}
-                    <span class="score">{{score.score}}</span>
-                </p>
-                <p ng-repeat-end=""></p>
+            <div class="livescores">   
+            <table>
+            <tr><td>     
+             <button ng-repeat="score in fullscores" Popover-animation="true" popover="{{score.incidents}}" style="width: 100%;" popover-placement="left" class="btn">{{score.home}} vs. {{score.away}} {{score.fulltime}}</button>
+             </tr></td>
             </div>
         </div>
     </div>

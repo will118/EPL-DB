@@ -62,28 +62,21 @@ angular.module('d3App.seasoncontrollers', [])
     }
 
     var squawkajson = function(team) {
-        var megajson = BigData.squawka(team)
+        var megajson = BigData.squawka(team);
         megajson.then(function(data) {
             $scope.megajson = data
         })
     }
 
-    var score = function() {
-        var scorePromise = GeneralLiveData.scores()
-        scorePromise.then(function(data) {
-            $scope.scores = data
-        })
-    }
-
     var fullscore = function() {
-        var scorePromise = GeneralLiveData.fullscores()
+        var scorePromise = GeneralLiveData.fullscores();
         scorePromise.then(function(data) {
             $scope.fullscores = data
         })
     }
 
     var table = function() {
-        var table = GeneralLiveData.table()
+        var table = GeneralLiveData.table();
         table.then(function(data) {
             $scope.premtable = data
         })
