@@ -124,7 +124,8 @@
                                     <h4>{{awayteamname}}</h4>
                                 </div>
                             </div>
-                            <table class="table table-hover color1" id="teamsleft">
+                            <div class="row" id="teamrows">
+                            <table class="table table-hover color1" id="teams">
                                 <tr>
                                 </tr>
                                 <tr ng-repeat="item in hometeam | limitTo:11">
@@ -138,19 +139,22 @@
                                     <td>{{item.player}}</td>
                                 </tr>
                             </table>
+                            </div>
                         </span>
                         <span ng-if="$storage.subs">
-                            <table class="table table-hover color1" id="teamsleft">
+                          <div class="row" id="teamrows">
+                            <table class="table table-hover color1" id="subs">
                                 <tr ng-repeat="item in homesubs | limitTo:7" class="coloursubs">
                                     <td>{{item.player}}</td>
                                 </tr>
                             </table>
-                            <table class="table table-hover color1" id="teams">
+                            <table class="table table-hover color1" id="subs">
 
                                 <tr ng-repeat="item in awaysubs | limitTo:7" class="coloursubs">
                                     <td>{{item.player}}</td>
                                 </tr>
                             </table>
+                           </div>
                         </span>
                     </div>
 
@@ -167,7 +171,8 @@
                                     <th>Points</th>
                                 </tr>
                                 <tr ng-repeat="t in premtable" ng-style="t.team == team && {'background-color': myColour}">
-                                    <td>{{t.team}}</td>
+                                    <td><a class="matchtablenames" href="#" ng-click="selectTeam(t.team)">{{t.team}}</a>
+                                    </td>
                                     <td class="table-points">{{t.played}}</td>
                                     <td class="table-points">{{t.won}}</td>
                                     <td class="table-points">{{t.drawn}}</td>
@@ -180,28 +185,39 @@
                     </span>
                     <div class="col-lg-3" id="rightmostcol">
                         <span ng-if="$storage.liveposs">
-                        <div class="liveposs">
-                            <table class="table color1" id="live-poss">
-                                <td>
-                                    <nvd3-sparkline-chart data="liveposs" id="liveposs" width="350" height="150" margin="{left:10, top:20, bottom:10, right:45}" x="xFunction()" y="yFunction()" color="sparkFunction()">
-                                        <svg></svg>
-                                    </nvd3-sparkline-chart>
-                                    <p id="graphtitle" style="left: 9%; top: 16%;">Possession</p>
-                                </td>
-                                </tr>
-                            </table>
-                        </div>
+                            <div class="liveposs">
+                                <table class="table color1" id="live-poss">
+                                    <td>
+                                        <nvd3-sparkline-chart data="liveposs" id="liveposs" width="350" height="150" margin="{left:10, top:20, bottom:10, right:45}" x="xFunction()" y="yFunction()" color="sparkFunction()">
+                                            <svg></svg>
+                                        </nvd3-sparkline-chart>
+                                        <p id="graphtitle" style="left: 9%; top: 16%;">Possession</p>
+                                    </td>
+                                    </tr>
+                                </table>
+                            </div>
                         </span>
 
                         <div class="livescores">
-                            <table class="table color1" id="bottom-table-scores">
-                                <tr ng-repeat="score in scores | limitTo:-6">
+                         <span ng-if="gotLive">
+                            <table class="table color1">
+
+                                <tr ng-repeat="score in scores">
                                     <td>
-                                        <p class="lead" id="colour-lead">{{score.teams}}
-                                            <span class="score">{{score.score}}</span>
-                                        </p>
+                                        {{score.home}} vs. {{score.away}} {{score.fulltime}}
                                     </td>
                                 </tr>
+
+                            </table>
+                            </span>
+                            <table class="table color1">
+
+                                <tr ng-repeat="score in results">
+                                    <td>
+                                        {{score.home}} vs. {{score.away}} {{score.fulltime}}
+                                    </td>
+                                </tr>
+
                             </table>
                         </div>
                         <span ng-if="$storage.nextFixtures">

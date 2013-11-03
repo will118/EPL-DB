@@ -42,10 +42,13 @@ class DataController < ApplicationController
 
 ## Scores ##
   def scores
+    render :json => ApiScore.results(8)
+  end
+  def livescores
     render :json => ApiScore.live(8)
   end
   def dashscores
-    render :json => ApiScore.live(10)
+    render :json => ApiScore.results(10)
   end
 
 ## Fixtures ##

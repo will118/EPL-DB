@@ -12,6 +12,7 @@ class MatchManager
         fixture.delete
       elsif match_timer.live_match? && fixture.have_json_link?
         rec.recorder
+        RemoteAPI.api_save
         if match_timer.live_match? && fixture.out_of_date_teams?
           rec.teams
           fixture.update_timestamp

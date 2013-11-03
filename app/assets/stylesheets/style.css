@@ -1,3 +1,7 @@
+.matchtablenames {
+    color: white;
+}
+
 .nav>li>a {
     color: #FFF544 !important;
 }
@@ -75,14 +79,20 @@ body {
 .score {
     font-weight: bold;
 }
+#teamrows {
+     margin-right: 0px;
+     margin-left: 0px;
+}
 #teams {
     width:49%;
-    float: right;
+    float: left;
+    margin-right: 0.5%;
     margin-bottom: 4px;
 }
-#teamsleft {
+#subs {
     float:left;
     width:49%;
+    margin-right: 0.5%;
     margin-bottom: 4px;
 }
 #colour-lead {

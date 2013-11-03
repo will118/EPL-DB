@@ -42,6 +42,7 @@ EPLDB::Application.routes.draw do
   get 'nextfixtures/countdown' => 'data#nextfixtures_countdown'
 
 ## Generic JSONs ## 
+  get 'livescoresjson' => 'data#livescores'
   get 'scoresjson' => 'data#scores'
   get 'fullscoresjson' => 'data#dashscores'
   get 'tablejson' => 'data#tablejson'

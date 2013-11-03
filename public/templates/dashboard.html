@@ -29,7 +29,6 @@
         </div>
     </nav>
     <div id="top-left">
-
         <span ng-if="$storage.badge==true">
             <div class="col-lg-3" id="badge-div">
                 <img class="badgey" ng-src="images/{{badgehash}}" />
@@ -45,34 +44,35 @@
                 <svg id="megachart" viewBox="0 0 760 340" preserveAspectRatio="xMidYMid"></svg>
             </nvd3-line-chart>
         </div>
-        
-            <div class="col-lg-3" id="dash-table-div">
-                <table class="table table-hover">
-                    <tr>
-                        <th>Team</th>
-                        <th>Pl.</th>
-                        <th>W</th>
-                        <th>D</th>
-                        <th>L</th>
-                        <th>GD</th>
-                        <th>Points</th>
-                    </tr>
-                    <tr ng-repeat="t in premtable" ng-class="{success: t.team==team}">
-                        <td>{{t.team}}</td>
-                        <td class="table-points">{{t.played}}</td>
-                        <td class="table-points">{{t.won}}</td>
-                        <td class="table-points">{{t.drawn}}</td>
-                        <td class="table-points">{{t.lost}}</td>
-                        <td class="table-points">{{t.difference}}</td>
-                        <td class="table-points">{{t.points}}</td>
-                    </tr>
-                </table>
-            </div>
-    </span>
-    <div id="floaty">
-        <div id="flex-container">
-            <div class="flex">
-                <div class="col-lg-3" id="fix-and-table">
+
+        <div class="col-lg-3" id="dash-table-div">
+            <table class="table table-hover">
+                <tr>
+                    <th>Team</th>
+                    <th>Pl.</th>
+                    <th>W</th>
+                    <th>D</th>
+                    <th>L</th>
+                    <th>GD</th>
+                    <th>Points</th>
+                </tr>
+                <tr ng-repeat="t in premtable" ng-class="{success: t.team==team}">
+                    <td><a href="#" ng-click="selectTeam(t.team)">{{t.team}}</a>
+                    </td>
+                    <td class="table-points">{{t.played}}</td>
+                    <td class="table-points">{{t.won}}</td>
+                    <td class="table-points">{{t.drawn}}</td>
+                    <td class="table-points">{{t.lost}}</td>
+                    <td class="table-points">{{t.difference}}</td>
+                    <td class="table-points">{{t.points}}</td>
+                </tr>
+            </table>
+        </div>
+        </span>
+        <div id="floaty">
+            <div id="flex-container">
+                <div class="flex">
+                    <div class="col-lg-3" id="fix-and-table">
                         <table class="table table-hover" id="fixturestable">
                             <tr ng-repeat="fix in fixtures | limitTo:8">
                                 <td>{{fix.home}} vs. {{fix.away}}
@@ -81,44 +81,40 @@
                                 </td>
                             </tr>
                         </table>
-                </div>
+                    </div>
 
-                <div class="col-lg-3" id="dash-form">
-                    <h2 ng-repeat="f in form" style="background-color: {{myColour}}" id="form-column">
-                        {{f.form}}
-                    </h2>
-                    <span ng-if="$storage.prematch">
-                        <div class="prematch">
-                            <p>{{prematchsing.text}}</p>
-                        </div>
-                    </span>
-                    <span ng-if="$storage.oppoform">
-                        <h2 ng-repeat="f in otherform" style="background-color: {{otherColour}}" id="other-form-column">
+                    <div class="col-lg-3" id="dash-form">
+                        <h2 ng-repeat="f in form" style="background-color: {{myColour}}" id="form-column">
                             {{f.form}}
                         </h2>
-                        <br>
-                    </span>
-                    <table class="table table-hover" id="scorers">
-                        <tr>
-                            <th>Name</th>
-                            <th id="scorer-goals">Goals</th>
-                        </tr>
-                        <tr ng-repeat="s in scorers track by $index">
-                            <td>{{s.player}}</td>
-                            <td id="scorer-goals">{{s.goals}}</td>
-                        </tr>
-                    </table>
+                        <span ng-if="$storage.prematch">
+                            <div class="prematch">
+                                <p>{{prematchsing.text}}</p>
+                            </div>
+                        </span>
+                        <span ng-if="$storage.oppoform">
+                            <h2 ng-repeat="f in otherform" style="background-color: {{otherColour}}" id="other-form-column">
+                                {{f.form}}
+                            </h2>
+                            <br>
+                        </span>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-lg-3">
-            <div class="livescores">   
-            <table>
-            <tr><td>     
-             <button ng-repeat="score in fullscores" Popover-animation="true" popover="{{score.incidents}}" style="width: 100%;" popover-placement="left" class="btn">{{score.home}} vs. {{score.away}} {{score.fulltime}}</button>
-             </tr></td>
+            <div class="col-lg-3">
+                <div class="livescores">
+                    <table class="table color1" id="bottom-table-scores">
+
+                        <tr ng-repeat="score in results">
+                            <td>
+                                {{score.home}} vs. {{score.away}} {{score.fulltime}}
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+
             </div>
         </div>
-    </div>
     </div>
 </body>

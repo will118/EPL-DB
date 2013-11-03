@@ -44,7 +44,7 @@ I wanted marginally relevant information to have on my other/second screen durin
 
 > Check the Procfile.dev for how I run it locally. And then you will see the clockwork clock being called too. Check that out as well.
 
-- PostgreSQL.
+- PostgreSQL, I don't think I'm using any specific features though. 
 - PhantomJS running GhostDriver (phantomjs --webdriver=9134)
 - Pretty sure that's it. 
 - Bundle obviously.
@@ -55,15 +55,13 @@ So the situation here is bonafide-ish JSONs and CORS. The JSONs seem to be neste
 
 #### Stats FC
 
-So while their API is great, I found the docs among the worst even out of the limited APIs I've come across. I think it's because they look so good, you expect them to work. However the actual samples they have are unhelpful because most of them don't work, and return "premier-league" competition could not be found. 200ms+ response times too I'd say but that's just annecdotal. Happy customer still.
-
-That actually means they need more or less info I can't remember which. I.e. they need "&team=arsenal" appended to the end of their example for "Form" (results of last 5 matches). However returning competition not found is a bit counterintuitive. 
+So while their API is great, docs were a bit confusing at first. 100-200ms+ response times too I'd say but that's just annecdotal. Happy customer still.
 
 #### Squawka 
 
-Don't really know what to say here, from their placement on Opta's own site and the data they show on their site it seems like they have Opta's data or data as good as. As far as I can tell... I have a few theories and no facts, surely whoever is responsible has been aware from when they first wrote it? 
+Don't really know what to say here, from their placement on Opta's own site and the data they show on their site it seems like they have Opta's data or data as good as. As far as I can tell... I have a few theories and no facts, surely whoever is responsible has been aware from when they first wrote it? Maybe I'm missing something but it seems pretty much like an open API. 
 
-Maybe I'm missing something but it seems pretty much like an open API. 
+This data has never been that useful but its quite nice to quickly compare recent form vaguely..
 
 ### Work in Progress
 
@@ -85,7 +83,7 @@ Goals:
 - Karma for the Angular side. E2E and Unit.
 
 Info:
-> rspec
-> karma start
-> ./selenium/start
-> protractor jasmine/e2e/config.js
+- rspec
+- karma start
+- ./selenium/start
+- protractor jasmine/e2e/config.js

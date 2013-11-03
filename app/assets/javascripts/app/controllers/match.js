@@ -19,7 +19,13 @@ angular.module('d3App.matchcontrollers', [])
 
     focus('focusMe');
 
+    $scope.gotLive = false
+
     $scope.settingsToggle = false
+
+    $scope.selectTeam = function(team) {
+        $scope.team = team
+    };
 
     $scope.team = $scope.$storage.favteam;
 
@@ -151,7 +157,16 @@ angular.module('d3App.matchcontrollers', [])
     var score = function() {
         var scorePromise = GeneralLiveData.scores()
         scorePromise.then(function(data) {
-            $scope.scores = data
+            $scope.results = data
+        })
+    }
+    var livescore = function() {
+        var scorePromise = GeneralLiveData.livescores()
+        scorePromise.then(function(data) {
+            if (data.length > 3) {
+                $scope.scores = data,
+                $scope.gotLive = true
+            };
         })
     }
 
@@ -161,7 +176,6 @@ angular.module('d3App.matchcontrollers', [])
             $scope.nextfixtures = data
         })
     }
-
 
     var table = function() {
         var table = GeneralLiveData.table()
@@ -258,6 +272,7 @@ angular.module('d3App.matchcontrollers', [])
             barshots(team);
             corners(team);
             scorer(team);
+            livescore();
             away(team);
             home(team);
             table();

@@ -19,6 +19,12 @@ angular.module('d3App.seasoncontrollers', [])
 
     focus('focusMe');
 
+    $scope.htmlTooltip = "I've been made <b>bold</b>!"
+
+    $scope.selectTeam = function(team) {
+        $scope.team = team
+    };
+
     $scope.settingsToggle = false
 
     $scope.team = $scope.$storage.favteam;
@@ -68,10 +74,10 @@ angular.module('d3App.seasoncontrollers', [])
         })
     }
 
-    var fullscore = function() {
-        var scorePromise = GeneralLiveData.fullscores();
+    var scores = function() {
+        var scorePromise = GeneralLiveData.scores();
         scorePromise.then(function(data) {
-            $scope.fullscores = data
+            $scope.results = data
         })
     }
 
@@ -82,12 +88,6 @@ angular.module('d3App.seasoncontrollers', [])
         })
     };
 
-    var scorer = function(team) {
-        var s = GeneralLiveData.scorers(team);
-        s.then(function(data) {
-            $scope.scorers = data;
-        })
-    };
 
     var fixt = function(team) {
         var fixture = GeneralLiveData.fixtures(team);
@@ -139,7 +139,6 @@ angular.module('d3App.seasoncontrollers', [])
     setInterval(function() {
         $scope.$apply(function() {
             preMatcher($scope.prematchArray);
-            score();
             table();
         })
     }, 10000);
@@ -156,11 +155,10 @@ angular.module('d3App.seasoncontrollers', [])
             formteam(team);
             optatext(team);
             formoppo(team);
-            scorer(team);
             away(team);
             home(team);
             fixt(team);
-            fullscore();
+            scores();
             table();
         }
     };

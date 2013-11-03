@@ -47,6 +47,15 @@ app.factory('GeneralLiveData', function($http, $q) {
         });
         return defer_scores.promise;
     }
+    methods.livescores = function() {
+        var defer_livescores = $q.defer();
+        $http.get('/livescoresjson/', {
+            cache: false
+        }).success(function(data) {
+            defer_livescores.resolve(data);
+        });
+        return defer_livescores.promise;
+    }
     // Quick fix
     methods.fullscores = function() {
         var defer_fullscores = $q.defer();
