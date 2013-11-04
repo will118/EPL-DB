@@ -100,7 +100,7 @@
                                 </td>
                             </tr>
                             </span>
-                            <table class="table table-hover color1" id="scorers">
+                            <table class="table color1" id="scorers">
                                 <tr>
                                     <th>Name</th>
                                     <th id="scorer-goals">Goals</th>
@@ -125,14 +125,14 @@
                                 </div>
                             </div>
                             <div class="row" id="teamrows">
-                            <table class="table table-hover color1" id="teams">
+                            <table class="table color1" id="teams">
                                 <tr>
                                 </tr>
                                 <tr ng-repeat="item in hometeam | limitTo:11">
                                     <td>{{item.player}}</td>
                                 </tr>
                             </table>
-                            <table class="table table-hover color1" id="teams">
+                            <table class="table color1" id="teams">
                                 <tr>
                                 </tr>
                                 <tr ng-repeat="item in awayteam | limitTo:11">
@@ -143,12 +143,12 @@
                         </span>
                         <span ng-if="$storage.subs">
                           <div class="row" id="teamrows">
-                            <table class="table table-hover color1" id="subs">
+                            <table class="table color1" id="subs">
                                 <tr ng-repeat="item in homesubs | limitTo:7" class="coloursubs">
                                     <td>{{item.player}}</td>
                                 </tr>
                             </table>
-                            <table class="table table-hover color1" id="subs">
+                            <table class="table color1" id="subs">
 
                                 <tr ng-repeat="item in awaysubs | limitTo:7" class="coloursubs">
                                     <td>{{item.player}}</td>
@@ -171,9 +171,9 @@
                                     <th>Points</th>
                                 </tr>
                                 <!-- <tr ng-repeat="t in premtable" ng-style="t.team == team && {'background-color': myColour}"> -->
-                                <tr ng-repeat="t in premtable" ng-class="{success: t.team==team}">
-                                    <td><a class="matchtablenames" href="#" ng-click="selectTeam(t.team)">{{t.team}}</a>
-                                    </td>
+                                
+                                <tr ng-repeat="t in premtable" ng-class="{success: t.team==team}"  ng-click="selectTeam(t.team)">
+                                    <td>{{t.team}}</td>
                                     <td class="table-points">{{t.played}}</td>
                                     <td class="table-points">{{t.won}}</td>
                                     <td class="table-points">{{t.drawn}}</td>
@@ -198,28 +198,31 @@
                                 </table>
                             </div>
                         </span>
-
                         <div class="livescores">
                          <span ng-if="gotLive">
                             <table class="table color1">
-
                                 <tr ng-repeat="score in scores" ng-class="{success: score.home==team || score.away==team}">
                                     <td>
-                                        {{score.home}} vs. {{score.away}} {{score.fulltime}}
+                                        {{score.home}} vs. {{score.away}} {{score.fulltime[0]}}-{{score.fulltime[1]}}
                                     </td>
                                 </tr>
-
                             </table>
                             </span>
+                            <script id="popover.html" type="text/ng-template">
+                                <table>
+                                    <tr ng-repeat="inci in score.incidents">
+                                        <td>{{inci[0]}}min. {{inci[3]}}<br/>
+                                        {{inci[1]}} <b>{{inci[2]}}</b><br/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </script>
                             <table class="table color1">
-
                                 <tr ng-repeat="score in results" ng-class="{success: score.home==team || score.away==team}">
-
                                     <td>
-                                        {{score.home}} vs. {{score.away}} {{score.fulltime}}
+                                    <button popover-placement="left" popover-template="popover.html" id="resultpops" class="btn"><span class="matchresults">{{score.home}} vs. {{score.away}} {{score.fulltime[0]}}-{{score.fulltime[1]}}</span></button>
                                     </td>
                                 </tr>
-
                             </table>
                         </div>
                         <span ng-if="$storage.nextFixtures">

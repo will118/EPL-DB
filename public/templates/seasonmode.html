@@ -1,5 +1,4 @@
-<body ng-controller="AppController">
-    <link rel="stylesheet" type="text/css" href="dash.css" />
+    <link rel="stylesheet" type="text/css" href="dashv1.css" />
     <nav class="navbar navbar-default navbar-fixed-top" id="topnavbarcol" role="navigation" style="background-color: {{myColour}}">
         <div class="navbar-header">
             <a class="navbar-brand">EPLDB</a>
@@ -56,8 +55,8 @@
                     <th>GD</th>
                     <th>Points</th>
                 </tr>
-                <tr ng-repeat="t in premtable" ng-class="{success: t.team==team}">
-                    <td><a href="#" ng-click="selectTeam(t.team)">{{t.team}}</a></td>
+                <tr ng-repeat="t in premtable" ng-class="{success: t.team==team}"  ng-click="selectTeam(t.team)">
+                    <td><a href="#">{{t.team}}</a></td>
                     <td class="table-points">{{t.played}}</td>
                     <td class="table-points">{{t.won}}</td>
                     <td class="table-points">{{t.drawn}}</td>
@@ -74,23 +73,22 @@
                     <div class="col-lg-3" id="fix-and-table">
                         <table class="table table-hover" id="fixturestable">
                             <tr ng-repeat="fix in fixtures | limitTo:8">
-                                <td>
-
-                              <a href="#" ng-click="selectForm(fix)">
-                                    <div style="height:100%;width:100%">
-                                {{fix.home}} vs. {{fix.away}}
+                                <td ng-click="selectForm(fix)">
+                            
+                                    
+                                        {{fix.home}} vs. {{fix.away}}
                                     <br />
-                                    <span class="fixdate">{{fix.date}}</span>
-                                    </div>
-                                  </a>
+                                    <span class="fixdate">{{fix.date}}</span>   
+                            
+                            
                               </td>
                             </tr>
                         </table>
                     </div>
 
                     <div class="col-lg-3" id="dash-form">
-                        <h2 ng-repeat="f in form" style="background-color: {{myColour}}" id="form-column">
-                            {{f.form}}
+                        <h2 style="background-color: {{myColour}}" id="form-column">
+                            {{form[0].form}}
                         </h2>
                         <span ng-if="$storage.prematch">
                             <div class="prematch">
@@ -98,21 +96,32 @@
                             </div>
                         </span>
                         <span ng-if="$storage.oppoform">
-                            <h2 ng-repeat="f in otherform" style="background-color: {{otherColour}}" id="other-form-column">
-                                {{f.form}}
+                            <h2 style="background-color: {{otherColour}}" id="other-form-column">
+                                {{otherform[0].form}}
                             </h2>
+                                <center>{{otherform[0].team}}</center>
                             <br>
                         </span>
+
                     </div>
                 </div>
             </div>
+            <script id="popover.html" type="text/ng-template">
+                <table>
+                    <tr ng-repeat="inci in score.incidents">
+                        <td>{{inci[0]}}min. {{inci[3]}}<br/>
+                        {{inci[1]}} <b>{{inci[2]}}</b><br/>
+                        </td>
+                    </tr>
+                </table>
+            </script>
             <div class="col-lg-3">
                 <div class="livescores">
                     <table class="table color1" id="bottom-table-scores">
 
                         <tr ng-repeat="score in results" ng-class="{success: score.home==team || score.away==team}">
                             <td>
-                                {{score.home}} vs. {{score.away}} {{score.fulltime[0]}}-{{score.fulltime[1]}}
+                            <button popover-placement="left" popover-template="popover.html" id="resultpops" class="btn btn-default">{{score.home}} vs. {{score.away}} {{score.fulltime[0]}}-{{score.fulltime[1]}}</button>
                             </td>
                         </tr>
 
@@ -122,4 +131,4 @@
             </div>
         </div>
     </div>
-</body>
+

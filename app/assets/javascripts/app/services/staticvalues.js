@@ -45,6 +45,33 @@ var colours = {
     'Fulham': '#000000'
 };
 
+var awaycolours = {
+    'Arsenal': '#edab0f',
+    'Chelsea': '#063381',
+    'West Bromwich Albion': '#090c41',
+    'Aston Villa': '#aa1f6d',
+    'Liverpool': '#8c8b8d',
+    'Tottenham Hotspur': '#16a8e8',
+    'Manchester United': '#ce000e',
+    'Stoke City': '#d62331',
+    'Cardiff City': '#e5001e',
+    'West Ham United': '#4c172d',
+    'Crystal Palace': '#06347c',
+    'Southampton': '#101010',
+    'Newcastle United': '#666666',
+    'Sunderland': '#e30021',
+    'Norwich City': '#14993e',
+    'Everton': '#073b8b',
+    'Manchester City': '#4db1e6',
+    'Swansea City': '#b4b4b4',
+    'Hull City': '#f79616',
+    'Fulham': '#000000'
+};
+
+function away_colour_for_graph(name) {
+    return awaycolours[name]
+}
+
 function team_colour(name) {
     return colours[name];
 };

@@ -141,7 +141,7 @@ angular.module('d3App.matchcontrollers', [])
     }; 
 
     $scope.sparkFunction = function() {
-        return function(d, i) {
+        return function(d) {
                 return '#bbbbbb'
         };
     };
@@ -155,7 +155,7 @@ angular.module('d3App.matchcontrollers', [])
     }
 
     var score = function() {
-        var scorePromise = GeneralLiveData.scores()
+        var scorePromise = GeneralLiveData.fullscores()
         scorePromise.then(function(data) {
             $scope.results = data
         })

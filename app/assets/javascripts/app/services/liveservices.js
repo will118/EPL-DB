@@ -38,15 +38,6 @@ app.factory('GeneralLiveData', function($http, $q) {
         return defer_table.promise;
     }
 
-    methods.scores = function() {
-        var defer_scores = $q.defer();
-        $http.get('/scoresjson/', {
-            cache: false
-        }).success(function(data) {
-            defer_scores.resolve(data);
-        });
-        return defer_scores.promise;
-    }
     methods.livescores = function() {
         var defer_livescores = $q.defer();
         $http.get('/livescoresjson/', {
@@ -56,7 +47,7 @@ app.factory('GeneralLiveData', function($http, $q) {
         });
         return defer_livescores.promise;
     }
-    // Quick fix
+   
     methods.fullscores = function() {
         var defer_fullscores = $q.defer();
         $http.get('/fullscoresjson/', {
@@ -139,7 +130,7 @@ app.factory('LiveStatsData', function($http, $q) {
     methods.colours = function(data, team) {
         var home_team = data[0]['key'];
         var away_team = data[1]['key'];
-        return [team_colour(home_team), team_colour(away_team)]
+        return [team_colour(home_team), away_colour_for_graph(away_team)]
     }
     return methods;
 });

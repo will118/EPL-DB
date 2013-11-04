@@ -25,10 +25,11 @@ angular.module('d3App.seasoncontrollers', [])
     
     $scope.selectForm = function(fix) {
             if (fix.home == $scope.team) {
-                $scope.desiredForm = fix.away
+                formoppo(fix.away);
             } else {
-                $scope.desiredForm = fix.home
+                formoppo(fix.home);
             };
+
         };
 
     $scope.settingsToggle = false
@@ -110,7 +111,7 @@ angular.module('d3App.seasoncontrollers', [])
     };
 
     var formoppo = function(team) {
-        var oppoform = TeamFormData.oppoform(team);
+        var oppoform = TeamFormData.teamform(team);
         oppoform.then(function(data) {
             $scope.otherform = data
             $scope.otherColour = team_colour(data[0]['team'])
@@ -160,7 +161,6 @@ angular.module('d3App.seasoncontrollers', [])
             getBadge(team);
             formteam(team);
             optatext(team);
-            formoppo(team);
             away(team);
             home(team);
             fixt(team);

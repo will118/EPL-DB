@@ -1,0 +1,161 @@
+a:hover, a:focus {
+text-decoration: none;
+}
+body,
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+}
+#home-nav-text>li>a {
+    color: #FFF544;
+}
+.navbar {
+  border: none;
+  background: #4e6561;
+  color: #ffffff;
+}
+.navbar.color1 {
+  background: #4e6561;
+  color: #ffffff;
+}
+.navbar.color2 {
+  background: #4e5765;
+  color: #ffffff;
+}
+.navbar.color3 {
+  background: #4e6550;
+  color: #ffffff;
+}
+.navbar.color4 {
+  background: #654e51;
+  color: #ffffff;
+}
+.navbar-default .navbar-brand {
+color: white;
+}
+.navbar-nav .active {
+  overflow-y: hidden;
+}
+.navbar-nav .active > a {
+  color: #ffffff;
+  background-color: #758280;
+}
+.navbar-nav .active > a:hover {
+  color: #ffffff;
+  background-color: #758280;
+}
+.navbar-nav li > a {
+  line-height: 25px;
+  z-index: 100;
+}
+.navbar-nav li > a:hover,
+.navbar-nav li > a:focus {
+  color: #ffffff;
+  background-color: #7f8c8a;
+}
+.navbar-nav.color1 .active > a {
+  color: #ffffff;
+  background-color: #758280;
+}
+.navbar-nav.color1 .active > a:hover {
+  color: #ffffff;
+  background-color: #758280;
+}
+.navbar-nav.color1 li > a {
+  line-height: 25px;
+  z-index: 100;
+}
+.navbar-nav.color1 li > a:hover,
+.navbar-nav.color1 li > a:focus {
+  color: #ffffff;
+  background-color: #7f8c8a;
+}
+.navbar-nav.color2 .active > a {
+  color: #ffffff;
+  background-color: #797e86;
+}
+.navbar-nav.color2 .active > a:hover {
+  color: #ffffff;
+  background-color: #797e86;
+}
+.navbar-nav.color2 li > a {
+  line-height: 25px;
+  z-index: 100;
+}
+.navbar-nav.color2 li > a:hover,
+.navbar-nav.color2 li > a:focus {
+  color: #ffffff;
+  background-color: #848990;
+}
+.navbar-nav.color3 .active > a {
+  color: #ffffff;
+  background-color: #79867a;
+}
+.navbar-nav.color3 .active > a:hover {
+  color: #ffffff;
+  background-color: #79867a;
+}
+.navbar-nav.color3 li > a {
+  line-height: 25px;
+  z-index: 100;
+}
+.navbar-nav.color3 li > a:hover,
+.navbar-nav.color3 li > a:focus {
+  color: #ffffff;
+  background-color: #849085;
+}
+.navbar-nav.color4 .active > a {
+  color: #ffffff;
+  background-color: #86797b;
+}
+.navbar-nav.color4 .active > a:hover {
+  color: #ffffff;
+  background-color: #86797b;
+}
+.navbar-nav.color4 li > a {
+  line-height: 25px;
+  z-index: 100;
+}
+.navbar-nav.color4 li > a:hover,
+.navbar-nav.color4 li > a:focus {
+  color: #ffffff;
+  background-color: #908486;
+}
+.navbar-fixed-top .navbar-inner,
+.navbar-fixed-bottom .navbar-inner {
+  padding: 0;
+}
+.navbar-toggle {
+  background-color: #758280;
+}
+.navbar-toggle:hover,
+.navbar-toggle:focus {
+  background-color: #7a8785;
+}
+.navbar-toggle:active,
+.navbar-toggle .active {
+  background-color: #707d7b;
+  border-top-color: #707d7b;
+}
+.navbar-toggle .icon-bar {
+  background-color: white;
+}
+.navbar-collapse {
+  border-top: none;
+}
+.form-horizontal {
+  font-size: 18px;
+}
+legend {
+  color: #ffffff;
+}
+.help-block {
+  color: #ffffff;
+}
+.color1 legend {
+  color: #ffffff;
+}
+.color1 .help-block {
+  color: #ffffff;
+}

@@ -5,6 +5,7 @@ Guardfile
 /tmp
 /spec/tmp
 /config/app_config.yml
+/config/newrelic.yml
 /lib/log
 
 /app/assets/javascripts/ga.js

@@ -1,5 +1,5 @@
 angular.module("ui.bootstrap", ["ui.bootstrap.tpls", "ui.bootstrap.transition","ui.bootstrap.collapse","ui.bootstrap.accordion","ui.bootstrap.alert","ui.bootstrap.bindHtml","ui.bootstrap.buttons","ui.bootstrap.carousel","ui.bootstrap.position","ui.bootstrap.datepicker","ui.bootstrap.dropdownToggle","ui.bootstrap.modal","ui.bootstrap.pagination","ui.bootstrap.tooltip","ui.bootstrap.popover","ui.bootstrap.progressbar","ui.bootstrap.rating","ui.bootstrap.tabs","ui.bootstrap.timepicker","ui.bootstrap.typeahead"]);
-angular.module("ui.bootstrap.tpls", ["template/accordion/accordion-group.html","template/accordion/accordion.html","template/alert/alert.html","template/carousel/carousel.html","template/carousel/slide.html","template/datepicker/datepicker.html","template/datepicker/popup.html","template/modal/backdrop.html","template/modal/window.html","template/pagination/pager.html","template/pagination/pagination.html","template/tooltip/tooltip-html-unsafe-popup.html","template/tooltip/tooltip-popup.html","template/popover/popover.html","template/progressbar/bar.html","template/progressbar/progress.html","template/rating/rating.html","template/tabs/tab.html","template/tabs/tabset-titles.html","template/tabs/tabset.html","template/timepicker/timepicker.html","template/typeahead/typeahead-match.html","template/typeahead/typeahead-popup.html"]);
+angular.module("ui.bootstrap.tpls", ["template/accordion/accordion-group.html","template/accordion/accordion.html","template/alert/alert.html","template/carousel/carousel.html","template/carousel/slide.html","template/datepicker/datepicker.html","template/datepicker/popup.html","template/modal/backdrop.html","template/modal/window.html","template/pagination/pager.html","template/pagination/pagination.html","template/tooltip/tooltip-html-unsafe-popup.html","template/tooltip/tooltip-popup.html","template/popover/popover.html","template/popover/popover-template.html","template/progressbar/bar.html","template/progressbar/progress.html","template/rating/rating.html","template/tabs/tab.html","template/tabs/tabset-titles.html","template/tabs/tabset.html","template/timepicker/timepicker.html","template/typeahead/typeahead-match.html","template/typeahead/typeahead-popup.html"]);
 angular.module('ui.bootstrap.transition', [])
 
 /**
@@ -635,6 +635,70 @@ angular.module('ui.bootstrap.carousel', ['ui.bootstrap.transition'])
     }
   };
 }])
+
+/**
+ * @ngdoc directive
+ * @name ui.bootstrap.carousel.directive:slide
+ * @restrict EA
+ *
+ * @description
+ * Creates a slide inside a {@link ui.bootstrap.carousel.directive:carousel carousel}.  Must be placed as a child of a carousel element.
+ *
+ * @param {boolean=} active Model binding, whether or not this slide is currently active.
+ *
+ * @example
+<example module="ui.bootstrap">
+  <file name="index.html">
+<div ng-controller="CarouselDemoCtrl">
+  <carousel>
+    <slide ng-repeat="slide in slides" active="slide.active">
+      <img ng-src="{{slide.image}}" style="margin:auto;">
+      <div class="carousel-caption">
+        <h4>Slide {{$index}}</h4>
+        <p>{{slide.text}}</p>
+      </div>
+    </slide>
+  </carousel>
+  <div class="row-fluid">
+    <div class="span6">
+      <ul>
+        <li ng-repeat="slide in slides">
+          <button class="btn btn-mini" ng-class="{'btn-info': !slide.active, 'btn-success': slide.active}" ng-disabled="slide.active" ng-click="slide.active = true">select</button>
+          {{$index}}: {{slide.text}}
+        </li>
+      </ul>
+      <a class="btn" ng-click="addSlide()">Add Slide</a>
+    </div>
+    <div class="span6">
+      Interval, in milliseconds: <input type="number" ng-model="myInterval">
+      <br />Enter a negative number to stop the interval.
+    </div>
+  </div>
+</div>
+  </file>
+  <file name="script.js">
+function CarouselDemoCtrl($scope) {
+  $scope.myInterval = 5000;
+  var slides = $scope.slides = [];
+  $scope.addSlide = function() {
+    var newWidth = 200 + ((slides.length + (25 * slides.length)) % 150);
+    slides.push({
+      image: 'http://placekitten.com/' + newWidth + '/200',
+      text: ['More','Extra','Lots of','Surplus'][slides.length % 4] + ' '
+        ['Cats', 'Kittys', 'Felines', 'Cutes'][slides.length % 4]
+    });
+  };
+  for (var i=0; i<4; i++) $scope.addSlide();
+}
+  </file>
+  <file name="demo.css">
+    .carousel-indicators {
+      top: auto;
+      bottom: 15px;
+    }
+  </file>
+</example>
+*/
 
 .directive('slide', ['$parse', function($parse) {
   return {
@@ -1858,9 +1922,9 @@ angular.module( 'ui.bootstrap.tooltip', [ 'ui.bootstrap.position', 'ui.bootstrap
    *     $tooltipProvider.options( { placement: 'left' } );
    *   });
    */
-	this.options = function( value ) {
-		angular.extend( globalOptions, value );
-	};
+  this.options = function( value ) {
+    angular.extend( globalOptions, value );
+  };
 
   /**
    * This allows you to extend the set of trigger mappings available. E.g.:
@@ -1924,6 +1988,7 @@ angular.module( 'ui.bootstrap.tooltip', [ 'ui.bootstrap.position', 'ui.bootstrap
           'placement="'+startSym+'tt_placement'+endSym+'" '+
           'animation="tt_animation()" '+
           'is-open="tt_isOpen"'+
+          'compile-scope="$parent"'+
           '>'+
         '</'+ directiveName +'-popup>';
 
@@ -2043,7 +2108,7 @@ angular.module( 'ui.bootstrap.tooltip', [ 'ui.bootstrap.position', 'ui.bootstrap
           }
           
           // Hide the tooltip popup element.
-          function hide() {
+          function hide( destroy ) {
             // First things first: we don't show it anymore.
             scope.tt_isOpen = false;
 
@@ -2054,9 +2119,17 @@ angular.module( 'ui.bootstrap.tooltip', [ 'ui.bootstrap.position', 'ui.bootstrap
             // need to wait for it to expire beforehand.
             // FIXME: this is a placeholder for a port of the transitions library.
             if ( angular.isDefined( scope.tt_animation ) && scope.tt_animation() ) {
-              transitionTimeout = $timeout( function () { tooltip.remove(); }, 500 );
+              transitionTimeout = $timeout( function () { remove( destroy ); }, 500 );
             } else {
+              remove( destroy );
+            }
+          }
+
+          function remove( destroy ) {
+            if ( destroy ) {
               tooltip.remove();
+            } else {
+              angular.forEach( tooltip, function( e ) { e.parentNode.removeChild( e ); } );
             }
           }
 
@@ -2121,9 +2194,9 @@ angular.module( 'ui.bootstrap.tooltip', [ 'ui.bootstrap.position', 'ui.bootstrap
           // Make sure tooltip is destroyed and removed.
           scope.$on('$destroy', function onDestroyTooltip() {
             if ( scope.tt_isOpen ) {
-              hide();
+              hide( true );
             } else {
-              tooltip.remove();
+              remove( true );
             }
           });
         }
@@ -2174,6 +2247,24 @@ angular.module( 'ui.bootstrap.popover', [ 'ui.bootstrap.tooltip' ] )
 })
 .directive( 'popover', [ '$compile', '$timeout', '$parse', '$window', '$tooltip', function ( $compile, $timeout, $parse, $window, $tooltip ) {
   return $tooltip( 'popover', 'popover', 'click' );
+}])
+.directive( 'popoverTemplatePopup', [ '$templateCache', '$compile', function ( $templateCache, $compile ) {
+  return {
+    restrict: 'EA',
+    replace: true,
+    scope: { title: '@', content: '@', placement: '@', animation: '&', isOpen: '&', compileScope: '&' },
+    templateUrl: 'template/popover/popover-template.html',
+    link: function( scope, iElement ) {
+      scope.$watch( 'content', function( value ) {
+        var contentEl = angular.element( iElement[0].querySelector( '.popover-content' ) );
+        contentEl.children().remove();
+        contentEl.append( $compile( $templateCache.get( value ).trim() )( scope.compileScope() ) );
+      });
+    }
+  };
+}])
+.directive( 'popoverTemplate', [ '$tooltip', function ( $tooltip ) {
+  return $tooltip( 'popoverTemplate', 'popover', 'click' );
 }]);
 
 
@@ -3320,16 +3411,16 @@ angular.module("template/datepicker/datepicker.html", []).run(["$templateCache",
 angular.module("template/datepicker/popup.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("template/datepicker/popup.html",
     "<ul class=\"dropdown-menu\" ng-style=\"{display: (isOpen && 'block') || 'none', top: position.top+'px', left: position.left+'px'}\" class=\"dropdown-menu\">\n" +
-    "	<li ng-transclude></li>\n" +
-    "	<li class=\"divider\"></li>\n" +
-    "	<li style=\"padding: 9px;\">\n" +
-    "		<span class=\"btn-group\">\n" +
-    "			<button class=\"btn btn-small btn-inverse\" ng-click=\"today()\">Today</button>\n" +
-    "			<button class=\"btn btn-small btn-info\" ng-click=\"showWeeks = ! showWeeks\" ng-class=\"{active: showWeeks}\">Weeks</button>\n" +
-    "			<button class=\"btn btn-small btn-danger\" ng-click=\"clear()\">Clear</button>\n" +
-    "		</span>\n" +
-    "		<button class=\"btn btn-small btn-success pull-right\" ng-click=\"isOpen = false\">Close</button>\n" +
-    "	</li>\n" +
+    " <li ng-transclude></li>\n" +
+    " <li class=\"divider\"></li>\n" +
+    " <li style=\"padding: 9px;\">\n" +
+    "   <span class=\"btn-group\">\n" +
+    "     <button class=\"btn btn-small btn-inverse\" ng-click=\"today()\">Today</button>\n" +
+    "     <button class=\"btn btn-small btn-info\" ng-click=\"showWeeks = ! showWeeks\" ng-class=\"{active: showWeeks}\">Weeks</button>\n" +
+    "     <button class=\"btn btn-small btn-danger\" ng-click=\"clear()\">Clear</button>\n" +
+    "   </span>\n" +
+    "   <button class=\"btn btn-small btn-success pull-right\" ng-click=\"isOpen = false\">Close</button>\n" +
+    " </li>\n" +
     "</ul>");
 }]);
 
@@ -3393,6 +3484,19 @@ angular.module("template/popover/popover.html", []).run(["$templateCache", funct
     "");
 }]);
 
+angular.module("template/popover/popover-template.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("template/popover/popover-template.html",
+    "<div class=\"popover {{placement}}\" ng-class=\"{ in: isOpen(), fade: animation() }\">\n" +
+    "  <div class=\"arrow\"></div>\n" +
+    "\n" +
+    "  <div class=\"popover-inner\">\n" +
+    "      <h3 class=\"popover-title\" ng-bind=\"title\" ng-show=\"title\"></h3>\n" +
+    "      <div class=\"popover-content\"></div>\n" +
+    "  </div>\n" +
+    "</div>\n" +
+    "");
+}]);
+
 angular.module("template/progressbar/bar.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("template/progressbar/bar.html",
     "<div class=\"bar\" ng-class='type && \"bar-\" + type'></div>");
@@ -3406,7 +3510,7 @@ angular.module("template/progressbar/progress.html", []).run(["$templateCache", 
 angular.module("template/rating/rating.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("template/rating/rating.html",
     "<span ng-mouseleave=\"reset()\">\n" +
-    "	<i ng-repeat=\"r in range\" ng-mouseenter=\"enter($index + 1)\" ng-click=\"rate($index + 1)\" ng-class=\"$index < val && (r.stateOn || 'icon-star') || (r.stateOff || 'icon-star-empty')\"></i>\n" +
+    " <i ng-repeat=\"r in range\" ng-mouseenter=\"enter($index + 1)\" ng-click=\"rate($index + 1)\" ng-class=\"$index < val && (r.stateOn || 'icon-star') || (r.stateOff || 'icon-star-empty')\"></i>\n" +
     "</span>");
 }]);
 
@@ -3464,24 +3568,24 @@ angular.module("template/tabs/tabset.html", []).run(["$templateCache", function(
 angular.module("template/timepicker/timepicker.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("template/timepicker/timepicker.html",
     "<table class=\"form-inline\">\n" +
-    "	<tr class=\"text-center\">\n" +
-    "		<td><a ng-click=\"incrementHours()\" class=\"btn btn-link\"><i class=\"icon-chevron-up\"></i></a></td>\n" +
-    "		<td>&nbsp;</td>\n" +
-    "		<td><a ng-click=\"incrementMinutes()\" class=\"btn btn-link\"><i class=\"icon-chevron-up\"></i></a></td>\n" +
-    "		<td ng-show=\"showMeridian\"></td>\n" +
-    "	</tr>\n" +
-    "	<tr>\n" +
-    "		<td class=\"control-group\" ng-class=\"{'error': invalidHours}\"><input type=\"text\" ng-model=\"hours\" ng-change=\"updateHours()\" class=\"span1 text-center\" ng-mousewheel=\"incrementHours()\" ng-readonly=\"readonlyInput\" maxlength=\"2\" /></td>\n" +
-    "		<td>:</td>\n" +
-    "		<td class=\"control-group\" ng-class=\"{'error': invalidMinutes}\"><input type=\"text\" ng-model=\"minutes\" ng-change=\"updateMinutes()\" class=\"span1 text-center\" ng-readonly=\"readonlyInput\" maxlength=\"2\"></td>\n" +
-    "		<td ng-show=\"showMeridian\"><button type=\"button\" ng-click=\"toggleMeridian()\" class=\"btn text-center\">{{meridian}}</button></td>\n" +
-    "	</tr>\n" +
-    "	<tr class=\"text-center\">\n" +
-    "		<td><a ng-click=\"decrementHours()\" class=\"btn btn-link\"><i class=\"icon-chevron-down\"></i></a></td>\n" +
-    "		<td>&nbsp;</td>\n" +
-    "		<td><a ng-click=\"decrementMinutes()\" class=\"btn btn-link\"><i class=\"icon-chevron-down\"></i></a></td>\n" +
-    "		<td ng-show=\"showMeridian\"></td>\n" +
-    "	</tr>\n" +
+    " <tr class=\"text-center\">\n" +
+    "   <td><a ng-click=\"incrementHours()\" class=\"btn btn-link\"><i class=\"icon-chevron-up\"></i></a></td>\n" +
+    "   <td>&nbsp;</td>\n" +
+    "   <td><a ng-click=\"incrementMinutes()\" class=\"btn btn-link\"><i class=\"icon-chevron-up\"></i></a></td>\n" +
+    "   <td ng-show=\"showMeridian\"></td>\n" +
+    " </tr>\n" +
+    " <tr>\n" +
+    "   <td class=\"control-group\" ng-class=\"{'error': invalidHours}\"><input type=\"text\" ng-model=\"hours\" ng-change=\"updateHours()\" class=\"span1 text-center\" ng-mousewheel=\"incrementHours()\" ng-readonly=\"readonlyInput\" maxlength=\"2\" /></td>\n" +
+    "   <td>:</td>\n" +
+    "   <td class=\"control-group\" ng-class=\"{'error': invalidMinutes}\"><input type=\"text\" ng-model=\"minutes\" ng-change=\"updateMinutes()\" class=\"span1 text-center\" ng-readonly=\"readonlyInput\" maxlength=\"2\"></td>\n" +
+    "   <td ng-show=\"showMeridian\"><button type=\"button\" ng-click=\"toggleMeridian()\" class=\"btn text-center\">{{meridian}}</button></td>\n" +
+    " </tr>\n" +
+    " <tr class=\"text-center\">\n" +
+    "   <td><a ng-click=\"decrementHours()\" class=\"btn btn-link\"><i class=\"icon-chevron-down\"></i></a></td>\n" +
+    "   <td>&nbsp;</td>\n" +
+    "   <td><a ng-click=\"decrementMinutes()\" class=\"btn btn-link\"><i class=\"icon-chevron-down\"></i></a></td>\n" +
+    "   <td ng-show=\"showMeridian\"></td>\n" +
+    " </tr>\n" +
     "</table>");
 }]);
 
