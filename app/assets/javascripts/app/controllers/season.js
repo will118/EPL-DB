@@ -16,21 +16,33 @@ angular.module('d3App.seasoncontrollers', [])
         "liveBars": true,
         "nextFixtures": true
     });
+    $scope.generalView = true
 
     focus('focusMe');
 
     $scope.selectTeam = function(team) {
         $scope.team = team
     };
-    
-    $scope.selectForm = function(fix) {
-            if (fix.home == $scope.team) {
-                formoppo(fix.away);
-            } else {
-                formoppo(fix.home);
-            };
 
+    $scope.seasonResults = function() {
+        recent($scope.team);
+        $scope.generalView = false
+    };
+
+    $scope.generalResults = function() {
+        $scope.generalView = true;
+        scores();
+    };
+
+    $scope.team = "Arsenal";
+
+    $scope.selectForm = function(fix) {
+        if (fix.home == $scope.team) {
+            formoppo(fix.away);
+        } else {
+            formoppo(fix.home);
         };
+    };
 
     $scope.settingsToggle = false
 
@@ -87,6 +99,12 @@ angular.module('d3App.seasoncontrollers', [])
             $scope.results = data
         })
     }
+    var recent = function(team) {
+        var recentPromise = GeneralLiveData.recent(team);
+        recentPromise.then(function(data) {
+            $scope.results = data
+        })
+    }
 
     var table = function() {
         var table = GeneralLiveData.table();
@@ -94,7 +112,6 @@ angular.module('d3App.seasoncontrollers', [])
             $scope.premtable = data
         })
     };
-
 
     var fixt = function(team) {
         var fixture = GeneralLiveData.fixtures(team);

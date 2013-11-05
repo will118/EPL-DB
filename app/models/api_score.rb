@@ -22,5 +22,5 @@ class ApiScore < ActiveRecord::Base
 			x['incidents'] = tooltip
 		end
 	end
-	
+
 end

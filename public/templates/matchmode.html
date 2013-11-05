@@ -112,7 +112,8 @@
                             </table>
                     </div>
 
-                    <div class="col-lg-3" id="fix-and-table2">
+            <span ng-if="$storage.teams || $storage.subs">
+                    <div class="col-lg-3" id="fix-and-table2" style="width: 100%;">
                         <span ng-if="$storage.teams">
                             <div id="hometeam">
                                 <div class="hometeam">
@@ -157,6 +158,7 @@
                            </div>
                         </span>
                     </div>
+            </span>
 
                     <span ng-if="$storage.leaguetable">
                         <div id="match-table-div">

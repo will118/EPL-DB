@@ -1,4 +1,4 @@
-    <link rel="stylesheet" type="text/css" href="dashv1.css" />
+    <link rel="stylesheet" type="text/css" href="dashv2.css" />
     <nav class="navbar navbar-default navbar-fixed-top" id="topnavbarcol" role="navigation" style="background-color: {{myColour}}">
         <div class="navbar-header">
             <a class="navbar-brand">EPLDB</a>
@@ -74,13 +74,9 @@
                         <table class="table table-hover" id="fixturestable">
                             <tr ng-repeat="fix in fixtures | limitTo:8">
                                 <td ng-click="selectForm(fix)">
-                            
-                                    
                                         {{fix.home}} vs. {{fix.away}}
                                     <br />
-                                    <span class="fixdate">{{fix.date}}</span>   
-                            
-                            
+                                <span class="fixdate">{{fix.date}}</span>   
                               </td>
                             </tr>
                         </table>
@@ -102,7 +98,6 @@
                                 <center>{{otherform[0].team}}</center>
                             <br>
                         </span>
-
                     </div>
                 </div>
             </div>
@@ -117,8 +112,10 @@
             </script>
             <div class="col-lg-3">
                 <div class="livescores">
+                <button class="btn btn-default" ng-click="generalResults()">Recent</button>
+                <button class="btn btn-default" ng-click="seasonResults()">{{team}}</button>
                     <table class="table color1" id="bottom-table-scores">
-                        <tr ng-repeat="score in results" ng-class="{success: score.home==team || score.away==team}">
+                        <tr ng-repeat="score in results" ng-class="{success: generalView && (score.home==team || score.away==team)}">
                             <td>
                             <button popover-placement="left" popover-template="popover.html" id="resultpops" class="btn btn-default">{{score.home}} vs. {{score.away}} {{score.fulltime[0]}}-{{score.fulltime[1]}}</button>
                             </td>

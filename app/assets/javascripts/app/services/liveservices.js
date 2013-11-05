@@ -57,6 +57,16 @@ app.factory('GeneralLiveData', function($http, $q) {
         });
         return defer_fullscores.promise;
     }
+   
+    methods.recent = function(team) {
+        var defer_recent = $q.defer();
+        $http.get('/pastresults/' + team, {
+            cache: false
+        }).success(function(data) {
+            defer_recent.resolve(data);
+        });
+        return defer_recent.promise;
+    }
 
     methods.nextfixtures = function() {
         var defer_nextfixtures = $q.defer();

@@ -73,6 +73,10 @@ class DataController < ApplicationController
     render :json => RemoteAPI.next_10_fixtures_countdown
   end
 
+  def pastresults
+    render :json => Result.past(params[:team])
+  end
+
 ## Graph JSONs ##
   def megajson
     render :json => GraphJSON.new.main(params[:team])
@@ -97,5 +101,4 @@ class DataController < ApplicationController
   def livefouljson
     render :json => GraphJSON.new.fouls(params[:team])
   end
-
 end
