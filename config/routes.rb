@@ -1,19 +1,7 @@
 EPLDB::Application.routes.draw do
   
   root to: 'welcome#index'
-
-  devise_for :users,
-  :controllers => {
-    :omniauth_callbacks => "users/omniauth_callbacks",
-    :registrations => "registrations"
-  }
-
-  devise_scope :user do
-    get '/api/current_user' => 'users/sessions#show_current_user', as: 'show_current_user'
-    post '/api/check/is_user' => 'users/users#is_user', as: 'is_user'
-    post '/api/settings' => 'users/users#update', as: 'settings'
-  end
-
+  
 ## Welcome/Login Page ##
   get '/user/sign_out' => 'welcome#index'
   get '/dashboard' => 'welcome#dashboard'

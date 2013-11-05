@@ -2054,6 +2054,8 @@ angular.module( 'ui.bootstrap.tooltip', [ 'ui.bootstrap.position', 'ui.bootstrap
             
             // Now we add it to the DOM because need some info about it. But it's not 
             // visible yet anyway.
+
+            angular.element(document.querySelector('.popover')).remove();
             if ( appendToBody ) {
                 $body = $body || $document.find( 'body' );
                 $body.append( tooltip );

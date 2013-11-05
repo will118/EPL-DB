@@ -243,9 +243,9 @@ angular.module('d3App.matchcontrollers', [])
     setInterval(function() {
         $scope.$apply(function() {
             preMatcher($scope.prematchArray);
-            score();
             nextfix();
             table();
+            livescore();
         })
     }, 10000);
 

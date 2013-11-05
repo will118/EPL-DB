@@ -3,20 +3,15 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.0.1'
 
-gem 'devise'
-gem 'omniauth'
-gem 'omniauth-github'
-gem 'uuidtools'
 gem 'nokogiri' 
-gem 'mechanize'
 gem 'httparty'
-gem 'capybara'
 gem 'selenium-webdriver'
-gem 'figaro'
-gem 'puma'
 gem 'clockwork'
 gem 'foreman'
+gem 'puma'
+gem 'figaro'
 gem 'newrelic_rpm'
+
 
 group :development, :test do
 	gem "rspec-rails", "~> 2.14.0"

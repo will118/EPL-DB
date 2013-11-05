@@ -38,7 +38,6 @@ I wanted marginally relevant information to have on my other/second screen durin
 - [Mike Bostock for actual D3](http://bost.ocks.org/mike/)
 - [Shout out to the HTTParty animals](https://github.com/jnunemaker/httparty/)
 - [William Playfair](http://en.wikipedia.org/wiki/William_Playfair)
-- [Tim Snell's](http://www.testmeat.co.uk/extra/1192/stadium-love) photo of the Emirates.
 
 ## Dependencies/Requirements/Setup:
 

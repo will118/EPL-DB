@@ -7,6 +7,10 @@
 .table>tbody>tr.success>td {
     background-color: rgba(223, 240, 216, 0.27);
 }
+.popover.left .arrow {
+border-left-color: rgba(0,0,0,0.25) !important;
+}
+
 .flex {
     width: 90%;
     border: none;
@@ -373,7 +377,7 @@ table.color4.table-hover tbody tr:hover > td, table.color4.table-hover tbody tr:
     color: #ffffff;
 }
 .sectional.color1 {
-    background: url(../images/bg2.jpg) no-repeat center center fixed;
+    background: url(../images/bg4.jpg) no-repeat center center fixed;
 
       background-size: cover;
 
