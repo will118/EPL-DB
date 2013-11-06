@@ -1,0 +1,43 @@
+{
+    "data": [{
+        "date": "20130817",
+        "MyTeam": 290,
+        "Opponent": 220
+    }, {
+        "date": "20130824",
+        "MyTeam": 265,
+        "Opponent": 255
+    }, {
+        "date": "20130901",
+        "MyTeam": 230,
+        "Opponent": 255
+    }, {
+        "date": "20130914",
+        "MyTeam": 310,
+        "Opponent": 215
+    }, {
+        "date": "20130922",
+        "MyTeam": 255,
+        "Opponent": 225
+    }, {
+        "date": "20130928",
+        "MyTeam": 220,
+        "Opponent": 215
+    }, {
+        "date": "20131006",
+        "MyTeam": 260,
+        "Opponent": 210
+    }, {
+        "date": "20131019",
+        "MyTeam": 275,
+        "Opponent": 240
+    }, {
+        "date": "20131026",
+        "MyTeam": 285,
+        "Opponent": 215
+    }, {
+        "date": "20131102",
+        "MyTeam": 265,
+        "Opponent": 255
+    }]
+}

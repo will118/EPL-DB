@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.0.1'
 
+gem 'redis'
 gem 'nokogiri' 
 gem 'httparty'
 gem 'selenium-webdriver'

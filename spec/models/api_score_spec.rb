@@ -1,5 +1,6 @@
 require 'spec_helper'
 
 describe ApiScore do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it 'saves to redis' do
+  end
 end

@@ -58,28 +58,32 @@ class DataController < ApplicationController
 
 ## Remote API ##
   def tablejson
-    render :json => RemoteAPI.table
+    render :json => ApiScore.league_table
   end
 
   def topscorers
-    render :json => RemoteAPI.top_scorers(params[:team])
+    render :json => ApiScore.top_scorers(params[:team])
   end
 
   def nextfixtures
-    render :json => RemoteAPI.next_10_fixtures
+    render :json => ApiScore.next_10_fixtures
   end
 
   def nextfixtures_countdown
-    render :json => RemoteAPI.next_10_fixtures_countdown
+    render :json => ApiScore.fixtures_countdown
   end
 
   def pastresults
-    render :json => Result.past(params[:team])
+    render :json => ApiScore.past_results(params[:team])
   end
 
 ## Graph JSONs ##
   def megajson
     render :json => GraphJSON.new.main(params[:team])
+  end
+
+  def diffjson
+    render :json => GraphJSON.new.diff(params[:teams])
   end
 
   def livepossjson

@@ -24,6 +24,7 @@ root to: 'welcome#index'
   get 'homesubs/:team' => 'data#homesubs'
   get 'awaysubs/:team' => 'data#awaysubs'
   get 'formjson/:team' => 'data#formjson'
+  get 'diffjson/:teams' => 'data#diffjson'
 ## Next Fixtures ##
   get 'nextfixtures/countdown' => 'data#nextfixtures_countdown'
   get 'nextfixtures/' => 'data#nextfixtures'

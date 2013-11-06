@@ -28,6 +28,22 @@ class GraphJSON
     end
   end
 
+  def diff(teams)
+    team1, team2 = teams.split("$")
+    if valid_team?(team1) == false
+      return nil
+    else
+      data = Supermodel.where(:teamname => team1)
+      data2 = Supermodel.where(:teamname => team2)
+      
+      final = data.each_with_index.map do |x, i| 
+        {"date" => x.date.strftime("%Y%m%d"), "MyTeam" => x.avgpossession, "Opponent" => data2[i].avgpossession}
+      end
+
+      final
+    end
+  end
+
   def x_axis_maker(input_array)
     array = []
     (input_array.length).times do |i|

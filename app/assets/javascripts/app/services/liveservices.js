@@ -31,7 +31,7 @@ app.factory('GeneralLiveData', function($http, $q) {
     methods.table = function() {
         var defer_table = $q.defer();
         $http.get('/tablejson/', {
-            cache: true
+            cache: false
         }).success(function(data) {
             defer_table.resolve(data);
         });
