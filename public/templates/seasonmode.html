@@ -1,3 +1,31 @@
+   <style>
+ 
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+ 
+.x.axis path {
+  display: none;
+}
+ 
+.area.above {
+  fill: rgb(252,141,89);
+}
+ 
+.area.below {
+  fill: rgb(145,207,96);
+}
+ 
+.line {
+  fill: none;
+  stroke: #000;
+  stroke-width: 1.5px;
+}
+ 
+</style>
     <link rel="stylesheet" type="text/css" href="dashv2.css" />
     <nav class="navbar navbar-default navbar-fixed-top" id="topnavbarcol" role="navigation" style="background-color: {{myColour}}">
         <div class="navbar-header">
@@ -38,10 +66,15 @@
             </div>
         </span>
         <div class="col-lg-6" id="mega-div">
-
+        <span ng-if="defaultChart">
             <nvd3-line-chart data="megajson" id="megajson" width="760" height="340" showXAxis="false" margin="{left:0,top:0,bottom:0,right:0}" showYAxis="false" interactive="true" tooltips="true" showLegend="true">
                 <svg id="megachart" viewBox="0 0 760 340" preserveAspectRatio="xMidYMid"></svg>
             </nvd3-line-chart>
+        </span>
+        <span ng-if="diffChart">
+            <div id="diffChart"></div>
+        </span>
+            
         </div>
 
         <div class="col-lg-3" id="dash-table-div">
@@ -98,6 +131,8 @@
                                 <center>{{otherform[0].team}}</center>
                             <br>
                         </span>
+                <!--             <button class="btn btn-default" ng-click="defaultCharter()">Default</button>
+                            <button class="btn btn-default" ng-click="diffCharter()">Diff</button> -->
                     </div>
                 </div>
             </div>

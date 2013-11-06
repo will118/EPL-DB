@@ -15,7 +15,7 @@
 }
 
 .progress .bar-liverpool {
-    background-image: linear-gradient(to bottom, #c3001e, #8e0118);
+    background-image: linear-gradient(to bottom, #bbbbbb, #a7a7a7);
 }
 
 .progress .bar-tottenham-hotspur {
@@ -43,7 +43,7 @@
 }
 
 .progress .bar-southampton {
-    background-image: linear-gradient(to bottom, #e5002e, #980020);
+    background-image: linear-gradient(to bottom, #1a1a1a, #2b2b2b);
 }
 
 .progress .bar-newcastle-united {

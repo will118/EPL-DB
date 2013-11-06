@@ -18,7 +18,22 @@ angular.module('d3App.seasoncontrollers', [])
     });
     $scope.generalView = true
 
+
+    $scope.defaultCharter = function() {
+        $scope.diffChart = false;
+        $scope.defaultChart = true
+    };
+    
+    $scope.diffCharter = function() {
+        $scope.defaultChart = false;
+        $scope.diffChart = true;
+        DrawDaDiff();
+    };
+    
+    $scope.defaultCharter();
+
     focus('focusMe');
+
 
     $scope.selectTeam = function(team) {
         $scope.team = team

@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>EPLDB</title>
+
+		<meta name="description" content="EPLDB Slides">
+		<meta name="author" content="Will Bartlett">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>EPL-DB</h1>
+					<h3>An AngularJS "SPA"</h3>
+					<p>
+						<small>Powered by Rails</small>
+					</p>
+				</section>
+
+				<section>
+					<h2>Started as a Rails App</h2>
+					<ul>
+							<li>Using Nokogiri to scrape articles off Arsenal.com</li>
+							<li>Entirely static</li>
+							<li>Kinda useful</li>
+							<li>Didn't really do much</li>
+					</ul>
+				</section>
+
+				<section>
+						<img width="960" height="600" src="parsenal.jpg" alt="Parsenal">
+				</section>
+				
+				<section>
+				<h1>...</h1>
+				</section>
+				
+				<section>
+					<h2>More data</h2>
+					<ul>
+						<ol>
+							<li>I wanted some data for visualtisations</li>
+							<li>Opta Sports have the best</li>
+							<li>Would only offer me access to a 4 year old German league XML</li>
+						</ol>
+					</ul>
+				</section>
+
+				<section>					
+						<h2>Scraping</h2>
+						<img width="580" height="120" src="nokogiri.png" alt="Nokogiri">
+						<img width="707" height="175" src="phantom.png" alt="Phantom">
+						<img width="1000" height="135" src="sources.png" alt="Sources">
+				</section>
+
+				<section>
+					<h2>Data</h2>
+					<ul>
+							<li>Tried out a few charting libraries</li>
+							<li>Settled on NVD3</li>
+							<li>Using D3 for a diff chart</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Client side JS?</h2>
+					<ul>
+						<ol>
+							<li>Never really knew what it meant</li>
+							<li>Soon learned it was necessary to do anything at all</li>
+							<li>Started with JQuery</li>
+						</ol>
+					</ul>
+				</section>
+
+				<section>
+						<img width="960" height="666" src="parsenaljquery.png" alt="Parsenal">
+				</section>
+				
+
+				<section>
+					<h2>JQuery Spaghetti</h2>
+					<p>
+						At least my code was, hundreds of lines in one js file. <br />
+						Mixed in with bits of Rails.
+					</p>
+					<p>
+						Jasmine test almost as long.
+					</p>
+				</section>
+
+
+				<section>
+					<img width="955" height="247" src="angularjs-logo.png" alt="Angular">
+					<li>Superheroic JavaScript MVW Framework</li>
+					<li>Makes JS an absolute pleasure.</li>
+					<li>Testing it likewise</li>
+				</section>
+
+				<section>
+					<h2>Rewrite</h2>
+					<ul>
+							<li>Full Angular app</li>
+							<li>Angular Router</li>
+							<li>A few bytes of JSONs every few seconds per client</li>
+							<li>Local Storage for settings</li>
+					</ul>
+				</section>
+				
+				<section>
+					<h2>Rails backend</h2>
+					<ul>
+						<li>Match Manager for fixtures: time control</li>
+						<li>Scripts for finding and recording the live data</li>
+						<li>Redis caching layer</li>
+						<li>Fair amount of AR models</li>
+						<li>JSON builders for graphs</li>
+					</ul>
+				</section>
+
+				<section>
+					<section>
+					<h2>Gemfile</h2>
+				    <pre><code data-trim>
+gem 'clockwork'
+gem 'redis'
+gem 'pg'
+gem 'httparty'
+gem 'nokogiri' 
+gem 'selenium-webdriver'
+gem 'foreman'
+gem 'puma'
+gem 'newrelic_rpm'
+gem 'figaro'
+				    </code></pre>
+					</section>
+				</section>
+
+				<section>
+					<h2>Test Coverage</h2>
+					<ul>
+						<li>RSpec on all of my ruby code, and some Rails models etc</li>
+						<li>Mainly Ptors</li>
+						<li>E2E much more important on the Angular app</li>
+						<li>Karma(Jasmine) unit tests</li>
+					</ul>
+				</section>
+
+
+			</div>
+
+		</div>
+	<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
