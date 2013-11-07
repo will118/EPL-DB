@@ -67,6 +67,16 @@ app.factory('GeneralLiveData', function($http, $q) {
         });
         return defer_recent.promise;
     }
+   
+    methods.diff = function(team1, team2, diffSetting) {
+        var defer_diff = $q.defer();
+        $http.get('/diffjson/' + team1 + '$' + team2 + '$' + diffSetting, {
+            cache: false
+        }).success(function(data) {
+            defer_diff.resolve(data);
+        });
+        return defer_diff.promise;
+    }
 
     methods.nextfixtures = function() {
         var defer_nextfixtures = $q.defer();

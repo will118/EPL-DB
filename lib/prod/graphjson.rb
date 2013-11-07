@@ -29,18 +29,48 @@ class GraphJSON
   end
 
   def diff(teams)
-    team1, team2 = teams.split("$")
-    if valid_team?(team1) == false
+    team1, team2, setting = teams.split("$")
+    if Supermodel.where(:teamname => team1).exists? == false
       return nil
     else
       data = Supermodel.where(:teamname => team1)
       data2 = Supermodel.where(:teamname => team2)
-      
+
+      if data2.length > data.length
+        data2.pop
+      elsif data.length > data2.length
+        data.pop
+      end
+      if setting == "avgpossession"
       final = data.each_with_index.map do |x, i| 
         {"date" => x.date.strftime("%Y%m%d"), "MyTeam" => x.avgpossession, "Opponent" => data2[i].avgpossession}
       end
-
-      final
+      elsif setting == "shotaccuracy"
+      final = data.each_with_index.map do |x, i| 
+        {"date" => x.date.strftime("%Y%m%d"), "MyTeam" => x.shotaccuracy, "Opponent" => data2[i].shotaccuracy}
+      end
+      elsif setting == "passaccuracy"
+      final = data.each_with_index.map do |x, i| 
+        {"date" => x.date.strftime("%Y%m%d"), "MyTeam" => x.passaccuracy, "Opponent" => data2[i].passaccuracy}
+      end
+      elsif setting == "attackscore"
+      final = data.each_with_index.map do |x, i| 
+        {"date" => x.date.strftime("%Y%m%d"), "MyTeam" => x.attackscore, "Opponent" => data2[i].attackscore}
+      end
+      elsif setting == "defencescore"
+      final = data.each_with_index.map do |x, i| 
+        {"date" => x.date.strftime("%Y%m%d"), "MyTeam" => x.defencescore, "Opponent" => data2[i].defencescore}
+      end
+      elsif setting == "possesionscore"
+      final = data.each_with_index.map do |x, i| 
+        {"date" => x.date.strftime("%Y%m%d"), "MyTeam" => x.possesionscore, "Opponent" => data2[i].possesionscore}
+      end
+      elsif setting == "optascore"
+      final = data.each_with_index.map do |x, i| 
+        {"date" => x.date.strftime("%Y%m%d"), "MyTeam" => x.optascore, "Opponent" => data2[i].optascore}
+      end
+      else return "No setting"
+      end
     end
   end
 

@@ -4,6 +4,10 @@ angular.module('d3App.seasoncontrollers', [])
 
 .controller('SeasonModeController', function($scope, $localStorage, $sessionStorage, $http, $timeout, focus, GeneralLiveData, TeamFormData, BigData, MatchDetails, HomeAwayTeam) {
 
+    $scope.diffTeam = "Chelsea";
+
+    $scope.diffSetting = "optascore";
+
     $scope.$storage = $localStorage.$default({
         "badge": true,
         "leaguetable": true,
@@ -18,7 +22,6 @@ angular.module('d3App.seasoncontrollers', [])
     });
     $scope.generalView = true
 
-
     $scope.defaultCharter = function() {
         $scope.diffChart = false;
         $scope.defaultChart = true
@@ -27,9 +30,8 @@ angular.module('d3App.seasoncontrollers', [])
     $scope.diffCharter = function() {
         $scope.defaultChart = false;
         $scope.diffChart = true;
-        DrawDaDiff();
     };
-    
+
     $scope.defaultCharter();
 
     focus('focusMe');
@@ -48,8 +50,6 @@ angular.module('d3App.seasoncontrollers', [])
         $scope.generalView = true;
         scores();
     };
-
-    $scope.team = "Arsenal";
 
     $scope.selectForm = function(fix) {
         if (fix.home == $scope.team) {
@@ -121,6 +121,7 @@ angular.module('d3App.seasoncontrollers', [])
         })
     }
 
+
     var table = function() {
         var table = GeneralLiveData.table();
         table.then(function(data) {
@@ -157,7 +158,16 @@ angular.module('d3App.seasoncontrollers', [])
             preMatcher(data);
         })
     };
-
+    var diff = function(team, diffTeam, setting) {
+        if ($scope.diffTeam == undefined) {
+            return null
+        } else {
+        var recentPromise = GeneralLiveData.diff(team, diffTeam, setting);
+        recentPromise.then(function(data) {
+            $scope.diffData = data;
+        })
+        };
+    };
 
     $scope.counter = 0;
     var preMatcher = function(data) {
@@ -172,15 +182,19 @@ angular.module('d3App.seasoncontrollers', [])
         $scope.badgehash = (team.replace(/ /g, "_") + ".png")
     };
 
-
     $scope.refershInterval = 5;
 
     setInterval(function() {
         $scope.$apply(function() {
             preMatcher($scope.prematchArray);
-            table();
         })
     }, 10000);
+
+    setInterval(function() {
+        $scope.$apply(function() {
+            table();
+        })
+    }, 100000);
 
     var updateTeamDependencies = function(team) {
         if (team == undefined) {
@@ -201,5 +215,7 @@ angular.module('d3App.seasoncontrollers', [])
         }
     };
     $scope.$watch('team', updateTeamDependencies);
-
+    $scope.$watchCollection('[team, diffTeam, diffSetting]', function(settings){
+        diff(settings[0], settings[1], settings[2]);
+    });
 });
