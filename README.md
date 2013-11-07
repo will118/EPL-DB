@@ -33,9 +33,9 @@ I wanted marginally relevant information to have on my other/second screen durin
 - [Angular.js](http://angularjs.org/)
 - [NVD3(D3.js)](https://github.com/novus/nvd3)
 - [NV directives](https://github.com/cmaurer/angularjs-nvd3-directives)
+- [Mike Bostock for actual D3](http://bost.ocks.org/mike/)
 - [Nokogiri I like.](http://nokogiri.org/) 
 - [Bootstrap](http://getbootstrap.com/)
-- [Mike Bostock for actual D3](http://bost.ocks.org/mike/)
 - [Shout out to the HTTParty animals](https://github.com/jnunemaker/httparty/)
 - [William Playfair](http://en.wikipedia.org/wiki/William_Playfair)
 
@@ -44,6 +44,7 @@ I wanted marginally relevant information to have on my other/second screen durin
 > Check the Procfile.dev for how I run it locally. And then you will see the clockwork clock being called too. Check that out as well.
 
 - PostgreSQL, I don't think I'm using any specific features though. 
+- Redis on default port.
 - PhantomJS running GhostDriver (phantomjs --webdriver=9134)
 - Pretty sure that's it. 
 - Bundle obviously.
@@ -73,13 +74,9 @@ What I'm doing next, in order:
 ### Tests
 
 Coverage:
-- RSpec ~90%
-- Karma Unit 0%
-- Karma E2E 0%
-
-Goals:
-- RSpec unit tests for Rails side.
-- Karma for the Angular side. E2E and Unit.
+- RSpec ~95%
+- Karma Unit ~40%
+- Karma E2E ~70%
 
 Info:
 - rspec

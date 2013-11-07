@@ -13,11 +13,11 @@ angular.module('differenceChart', []).
           var margin = {
               top: 0,
               right: 0,
-              bottom: 0,
+              bottom: 10,
               left: 20
           },
-              width = 800 - margin.left - margin.right,
-              height = 390 - margin.top - margin.bottom;
+              width = 830 - margin.left - margin.right,
+              height = 420 - margin.top - margin.bottom;
 
           var parseDate = d3.time.format("%Y%m%d").parse;
 

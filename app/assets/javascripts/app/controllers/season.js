@@ -158,6 +158,14 @@ angular.module('d3App.seasoncontrollers', [])
             preMatcher(data);
         })
     };
+
+    var nextfix = function() {
+        var nextfixes = GeneralLiveData.nextfixtures()
+        nextfixes.then(function(data) {
+            $scope.nextfixtures = data
+        })
+    };
+
     var diff = function(team, diffTeam, setting) {
         if ($scope.diffTeam == undefined) {
             return null
@@ -210,6 +218,7 @@ angular.module('d3App.seasoncontrollers', [])
             away(team);
             home(team);
             fixt(team);
+            nextfix();
             scores();
             table();
         }

@@ -1,25 +1,4 @@
-<style>
-.axis path, .axis line {
-    fill: none;
-    stroke: #000;
-    shape-rendering: crispEdges;
-}
-.x.axis path {
-    display: none;
-}
-.area.above {
-    fill: rgb(252, 141, 89);
-}
-.area.below {
-    fill: rgb(145, 207, 96);
-}
-.line {
-    fill: none;
-    stroke: #000;
-    stroke-width: 1.5px;
-}
-</style>
-<link rel="stylesheet" type="text/css" href="dashv2.css" />
+<link rel="stylesheet" type="text/css" href="dashv3.css" />
 <nav class="navbar navbar-default navbar-fixed-top" id="topnavbarcol" role="navigation" style="background-color: {{myColour}}">
     <div class="navbar-header">
         <a class="navbar-brand">EPLDB</a>
@@ -131,7 +110,7 @@
                     <button class="btn btn-default" ng-click="diffCharter()">Diff</button>
                     <div class="btn-group">
                             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                Setting
+                                {{diffSetting}}
                                 <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu" role="menu">
@@ -140,8 +119,6 @@
                                 <li><a href="#" ng-click="diffSetting = 'avgpossession'">Avg. Poss.</a>
                                 </li>
                                 <li><a href="#" ng-click="diffSetting = 'shotaccuracy'">Shot Acc.</a>
-                                </li>
-                                <li><a href="#" ng-click="diffSetting = 'passaccuracy'">Pass Acc.</a>
                                 </li>
                                 <li><a href="#" ng-click="diffSetting = 'attackscore'">Atk. Score</a>
                                 </li>
@@ -158,6 +135,18 @@
                     
                         <br />Oppo Team:
                         <input type="text" class="form-control" focus-on="focusMe" ng-model="diffTeam" typeahead="name for name in teamnames | filter:$viewValue" typeahead-editable="false">
+                        <div class="livescores" style="margin-top: 4%;">
+                                <table class="table" id="bottom-table-next-fix">
+                                    <tr ng-repeat="nextfix in nextfixtures| limitTo:3">
+                                        <td id="bottom-tr-next-fix">
+                                            <p class="lead" id="colour-lead2">{{nextfix.home}} vs. {{nextfix.away}}
+                                                <br />
+                                                <span class="score">{{nextfix.date}}</span>
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
                 </div>
             </div>
         </div>
