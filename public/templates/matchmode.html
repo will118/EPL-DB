@@ -138,7 +138,7 @@
                             </table>
                             </div>
                         <span ng-if="$storage.subs">
-                          <div class="row" id="teamrows">
+                          <div class="row" id="teamrows" style="padding-top: 0px;">
                             <table class="table color1" id="subs">
                                 <tr ng-repeat="item in homesubs | limitTo:7" class="coloursubs">
                                     <td>{{item.player}}</td>
@@ -202,7 +202,7 @@
                             </script>
                          <span ng-if="gotLive">
                             <table class="table color1">
-                                <tr ng-repeat="score in scores" ng-class="{success: score.home==team || score.away==team}">
+                                <tr ng-repeat="score in scores | orderBy:'home'" ng-class="{success: score.home==team || score.away==team}">
                                     <td>
                                     <button popover-placement="left" popover-template="popover.html" id="resultpops" class="btn"><span class="matchresults">{{score.home}} vs. {{score.away}} {{score.fulltime[0]}}-{{score.fulltime[1]}}</span></button>
                                     </td>
@@ -210,7 +210,7 @@
                             </table>
                             </span>
                             <table class="table color1">
-                                <tr ng-repeat="score in results" ng-class="{success: score.home==team || score.away==team}">
+                                <tr ng-repeat="score in results | orderBy:'home'" ng-class="{success: score.home==team || score.away==team}">
                                     <td>
                                     <button popover-placement="left" popover-template="popover.html" id="resultpops" class="btn"><span class="matchresults">{{score.home}} vs. {{score.away}} {{score.fulltime[0]}}-{{score.fulltime[1]}}</span></button>
                                     </td>
