@@ -22,6 +22,7 @@ angular.module('d3App.seasoncontrollers', [])
     });
     $scope.generalView = true
 
+
     $scope.defaultCharter = function() {
         $scope.diffChart = false;
         $scope.defaultChart = true
@@ -62,6 +63,8 @@ angular.module('d3App.seasoncontrollers', [])
     $scope.settingsToggle = false
 
     $scope.team = $scope.$storage.favteam;
+
+    
 
     // Filter on search, loaded from staticvalues 
     $scope.teamnames = teamnames;
@@ -221,6 +224,7 @@ angular.module('d3App.seasoncontrollers', [])
             nextfix();
             scores();
             table();
+            $scope.$storage.favteam = team;
         }
     };
     $scope.$watch('team', updateTeamDependencies);
