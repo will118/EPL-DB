@@ -4,7 +4,7 @@ angular.module('d3App.seasoncontrollers', [])
 
 .controller('SeasonModeController', function($scope, $localStorage, $sessionStorage, $http, $timeout, focus, GeneralLiveData, TeamFormData, BigData, MatchDetails, HomeAwayTeam) {
 
-    $scope.diffTeam = "Chelsea";
+    $scope.diffTeam = "Manchester United";
 
     $scope.diffSetting = "optascore";
 

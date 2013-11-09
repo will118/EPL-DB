@@ -188,16 +188,11 @@
                     </span>
                     <div class="col-lg-3" id="rightmostcol">
                         <span ng-if="$storage.liveposs">
-                            <div class="liveposs">
-                                <table class="table color1" id="live-poss">
-                                    <td>
+                            <div class="sectional color1a" style="padding-bottom: 6%;padding-right: 3%;">
                                         <nvd3-sparkline-chart data="liveposs" id="liveposs" width="350" height="150" margin="{left:10, top:20, bottom:10, right:45}" x="xFunction()" y="yFunction()" color="sparkFunction()">
-                                            <svg></svg>
+                                            <svg id="liveposschart" viewBox="0 0 295 120" preserveAspectRatio="xMidYMid"></svg>
                                         </nvd3-sparkline-chart>
                                         <p id="graphtitle" style="left: 9%; top: 16%;">Possession</p>
-                                    </td>
-                                    </tr>
-                                </table>
                             </div>
                         </span>
                         <div class="livescores">

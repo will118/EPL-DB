@@ -12,12 +12,12 @@ angular.module('differenceChart', []).
 
           var margin = {
               top: 0,
-              right: 0,
+              right: -50,
               bottom: 10,
               left: 20
           },
-              width = 830 - margin.left - margin.right,
-              height = 420 - margin.top - margin.bottom;
+              width = 800 - margin.left - margin.right,
+              height = 340 - margin.top - margin.bottom;
 
           var parseDate = d3.time.format("%Y%m%d").parse;
 
@@ -59,8 +59,10 @@ angular.module('differenceChart', []).
           var svg = d3.select(element[0]).append("svg")
               .attr("width", width + margin.left + margin.right)
               .attr("height", height + margin.top + margin.bottom)
-              .append("g")
-              .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+              .attr("viewBox", "0 0 740 360")
+              .attr("preserveAspectRatio", "xMinYMin meet")
+                .append("g")
+                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
           
               scope.diffData.forEach(function(d) {
