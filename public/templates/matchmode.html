@@ -35,7 +35,6 @@
                     <button type="button" class="btn btn-default color3" ng-model="$storage.leaguetable" btn-checkbox>PL Table</button>
                     <button type="button" class="btn btn-default color3" ng-model="$storage.liveposs" btn-checkbox>Live Possession</button>
                     <button type="button" class="btn btn-default color3" ng-model="$storage.oppoform" btn-checkbox>Oppo. Form</button>
-                    <button type="button" class="btn btn-default color3" ng-model="$storage.teams" btn-checkbox>Teams</button>
                     <button type="button" class="btn btn-default color3" ng-model="$storage.subs" btn-checkbox>Subs</button>
                     <button type="button" class="btn btn-default color3" ng-model="$storage.liveBars" btn-checkbox>Live Bars</button>
                     <button type="button" class="btn btn-default color3" ng-model="$storage.nextFixtures" btn-checkbox>Next Matches</button>
@@ -111,10 +110,7 @@
                                 </tr>
                             </table>
                     </div>
-
-            <span ng-if="$storage.teams || $storage.subs">
-                    <div class="col-lg-3" id="fix-and-table2" style="width: 100%;">
-                        <span ng-if="$storage.teams">
+                    <div class="col-lg-3">
                             <div id="hometeam">
                                 <div class="hometeam">
                                     <h4>{{hometeamname}}</h4>
@@ -141,7 +137,6 @@
                                 </tr>
                             </table>
                             </div>
-                        </span>
                         <span ng-if="$storage.subs">
                           <div class="row" id="teamrows">
                             <table class="table color1" id="subs">
@@ -186,7 +181,7 @@
                             </table>
                         </div>
                     </span>
-                    <div class="col-lg-3" id="rightmostcol">
+                    <div class="col-lg-3">
                         <span ng-if="$storage.liveposs">
                             <div class="sectional color1a" style="padding-bottom: 6%;padding-right: 3%;">
                                         <nvd3-sparkline-chart data="liveposs" id="liveposs" width="350" height="150" margin="{left:10, top:20, bottom:10, right:45}" x="xFunction()" y="yFunction()" color="sparkFunction()">
