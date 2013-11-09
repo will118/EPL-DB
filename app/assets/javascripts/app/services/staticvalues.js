@@ -48,7 +48,7 @@ var colours = {
 var awaycolours = {
     'Arsenal': '#edab0f',
     'Chelsea': '#063381',
-    'West Bromwich Albion': '#090c41',
+    'West Bromwich Albion': '#c53348',
     'Aston Villa': '#aa1f6d',
     'Liverpool': '#bbbbbb',
     'Tottenham Hotspur': '#16a8e8',
