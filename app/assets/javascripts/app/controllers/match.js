@@ -246,6 +246,12 @@ angular.module('d3App.matchcontrollers', [])
             nextfix();
             table();
             livescore();
+            barposs(team);
+            barshots(team);
+            awaybench(team);
+            homebench(team);
+            away(team);
+            home(team);
         })
     }, 10000);
 
@@ -263,6 +269,8 @@ angular.module('d3App.matchcontrollers', [])
             target(team);
             awaybench(team);
             homebench(team);
+            away(team);
+            home(team);
             formteam(team);
             optatext(team);
             formoppo(team);
@@ -273,8 +281,6 @@ angular.module('d3App.matchcontrollers', [])
             corners(team);
             scorer(team);
             livescore();
-            away(team);
-            home(team);
             table();
             score();
             nextfix();
