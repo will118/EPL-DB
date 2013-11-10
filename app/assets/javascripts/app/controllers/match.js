@@ -246,12 +246,12 @@ angular.module('d3App.matchcontrollers', [])
             nextfix();
             table();
             livescore();
-            barposs(team);
-            barshots(team);
-            awaybench(team);
-            homebench(team);
-            away(team);
-            home(team);
+            barposs($scope.team);
+            barshots($scope.team);
+            awaybench($scope.team);
+            homebench($scope.team);
+            away($scope.team);
+            home($scope.team);
         })
     }, 10000);
 
