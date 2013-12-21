@@ -18,6 +18,7 @@ class RemoteAPI
       else
         ApiScore.where(:live => true).delete_all
       end
+
       results.each do |x|
         api = ApiScore.where(:home => x['home'], :away => x['away'], :date => x['date'], :live => false).first_or_create
         api.status = x['status']

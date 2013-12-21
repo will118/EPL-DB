@@ -9,7 +9,7 @@ class BBCGetter
   def self.get_json(url)
     data = HTTParty.get(url).response.body
     final = data.delete('(').delete(');')
-    full = JSON.parse final 
+    full = JSON.parse final
     return full['data']['payload']['Match'].last['stats']
   end
 
@@ -21,7 +21,7 @@ class BBCGetter
       doc1 = doc.xpath('html/body/div[3]/div/div/div[1]')
       mentions = doc1.search "[text()*='#{team}']"
       match = mentions.first.parent.parent.parent.parent
-      link = match.css('a').last['href'] 
+      link = match.css('a').last['href']
       if is_valid_match?(link) == true
         json_link, lineup_link = hidden_links(link)
         fixture.link_save(link,lineup_link,json_link)

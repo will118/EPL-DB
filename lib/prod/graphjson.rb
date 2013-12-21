@@ -42,33 +42,33 @@ class GraphJSON
         data.pop
       end
       if setting == "avgpossession"
-      final = data.each_with_index.map do |x, i| 
-        {"date" => x.date.strftime("%Y%m%d"), "MyTeam" => x.send(setting.to_sym), "Opponent" => data2[i].avgpossession}
-      end
+        final = data.each_with_index.map do |x, i|
+          {"date" => x.date.strftime("%Y%m%d"), "MyTeam" => x.send(setting.to_sym), "Opponent" => data2[i].avgpossession}
+        end
       elsif setting == "shotaccuracy"
-      final = data.each_with_index.map do |x, i| 
-        {"date" => x.date.strftime("%Y%m%d"), "MyTeam" => x.shotaccuracy, "Opponent" => data2[i].shotaccuracy}
-      end
+        final = data.each_with_index.map do |x, i|
+          {"date" => x.date.strftime("%Y%m%d"), "MyTeam" => x.shotaccuracy, "Opponent" => data2[i].shotaccuracy}
+        end
       elsif setting == "passaccuracy"
-      final = data.each_with_index.map do |x, i| 
-        {"date" => x.date.strftime("%Y%m%d"), "MyTeam" => x.passaccuracy, "Opponent" => data2[i].passaccuracy}
-      end
+        final = data.each_with_index.map do |x, i|
+          {"date" => x.date.strftime("%Y%m%d"), "MyTeam" => x.passaccuracy, "Opponent" => data2[i].passaccuracy}
+        end
       elsif setting == "attackscore"
-      final = data.each_with_index.map do |x, i| 
-        {"date" => x.date.strftime("%Y%m%d"), "MyTeam" => x.attackscore, "Opponent" => data2[i].attackscore}
-      end
+        final = data.each_with_index.map do |x, i|
+          {"date" => x.date.strftime("%Y%m%d"), "MyTeam" => x.attackscore, "Opponent" => data2[i].attackscore}
+        end
       elsif setting == "defencescore"
-      final = data.each_with_index.map do |x, i| 
-        {"date" => x.date.strftime("%Y%m%d"), "MyTeam" => x.defencescore, "Opponent" => data2[i].defencescore}
-      end
+        final = data.each_with_index.map do |x, i|
+          {"date" => x.date.strftime("%Y%m%d"), "MyTeam" => x.defencescore, "Opponent" => data2[i].defencescore}
+        end
       elsif setting == "possesionscore"
-      final = data.each_with_index.map do |x, i| 
-        {"date" => x.date.strftime("%Y%m%d"), "MyTeam" => x.possesionscore, "Opponent" => data2[i].possesionscore}
-      end
+        final = data.each_with_index.map do |x, i|
+          {"date" => x.date.strftime("%Y%m%d"), "MyTeam" => x.possesionscore, "Opponent" => data2[i].possesionscore}
+        end
       elsif setting == "optascore"
-      final = data.each_with_index.map do |x, i| 
-        {"date" => x.date.strftime("%Y%m%d"), "MyTeam" => x.optascore, "Opponent" => data2[i].optascore}
-      end
+        final = data.each_with_index.map do |x, i|
+          {"date" => x.date.strftime("%Y%m%d"), "MyTeam" => x.optascore, "Opponent" => data2[i].optascore}
+        end
       else return "No setting"
       end
     end
@@ -77,7 +77,7 @@ class GraphJSON
   def x_axis_maker(input_array)
     array = []
     (input_array.length).times do |i|
-      array << [ i+1, input_array[i]]
+      array << [i+1, input_array[i]]
     end
     array
   end
@@ -95,13 +95,8 @@ class GraphJSON
         end
       end
 
-      live = poss_arr.drop(30)
       x_axis_array = * 1..(live.length)
-
-      array = [x_axis_array, live].transpose.map do |x, y|
-        [ x, y ]
-      end
-      return array
+      [x_axis_array, poss_arr.drop(30)].transpose.map {|x, y| [x, y]}
     end
   end
 
@@ -155,16 +150,8 @@ class GraphJSON
 
   def d3_data_builder(home, away, hometeam, awayteam)
     x_axis_array = * 1..(away.length)
-
-    home_array = [x_axis_array, home].transpose.map do |x_axis_array, home|
-      [x_axis_array, home]
-    end
-
-    away_array = [x_axis_array, away].transpose.map do |x_axis_array, away|
-      [x_axis_array, away]
-    end
-
-    return [{"key"=>hometeam, "values"=> home_array}, {"key"=>awayteam, "values"=> away_array}]
+    [{"key"=>hometeam, "values"=>[x_axis_array, home].transpose.map {|x, y| [x, y]}},
+     {"key"=>awayteam, "values"=>[x_axis_array, away].transpose.map {|x, y| [x, y]}}]
   end
 
 end

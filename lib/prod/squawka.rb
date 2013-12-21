@@ -8,9 +8,7 @@ class Squawka
   end
 
   def get(team)
-    id = squawka_id(team)
-    sqk = "http://www.squawka.com/wp-content/themes/squawka_web/stats_process.php?club_id=#{id}&team_type=all&min=1&max=100&competition_id=64"
-    json_get(sqk)
+    json_get "http://www.squawka.com/wp-content/themes/squawka_web/stats_process.php?club_id=#{squawka_id(team)}&team_type=all&min=1&max=100&competition_id=64"
   end
 
   def hasher
@@ -22,13 +20,11 @@ class Squawka
 
   def save
     ids = []
-
     @avgpos.each do |k, v|
       ids << k
     end
 
-    ids.each do
-      |key|
+    ids.each do |key|
       Supermodel.where(:teamname => @teamname, :matchid => key).first_or_create do |supermodel|
         poss = @passacc[key].fetch('success')
         poss2 = @passacc[key].fetch('unsuccess')

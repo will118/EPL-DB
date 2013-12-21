@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" data-ng-app="d3App">
   <head>
-  	<meta charset="utf-8">
+        <meta charset="utf-8">
 
-  	<title>EPL-DB</title>
+        <title>EPL-DB</title>
     <%= csrf_meta_tags %>
-  	<%= stylesheet_link_tag "application" %>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.3/angular.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
+        <%= stylesheet_link_tag "application" %>
+    <%# <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.3/angular.js"></script> %>
+    <%# <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script> %>
+    <script src="angular.js"></script>
+    <script src="angular-route.min.js"></script>
     <script src="d3.min.js"></script>
     <script src="nv.d3.min.js"></script>
     <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
-  </head>  
+  </head>
   <body>
       <div data-ng-view></div>
     <%= javascript_include_tag "application" %>

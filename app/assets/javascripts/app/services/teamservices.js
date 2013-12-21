@@ -46,7 +46,7 @@ app.factory('HomeAwayTeam', function($http, $q) {
     methods.home = function(team) {
         var defer_hometeam = $q.defer();
         $http.get('/hometeam/' + team, {
-            cache: true
+            cache: false
         }).success(function(data) {
             defer_hometeam.resolve(data);
         });
@@ -55,7 +55,7 @@ app.factory('HomeAwayTeam', function($http, $q) {
     methods.away = function(team) {
         var defer_awayteam = $q.defer();
         $http.get('/awayteam/' + team, {
-            cache: true
+            cache: false
         }).success(function(data) {
             defer_awayteam.resolve(data);
         })
@@ -64,7 +64,7 @@ app.factory('HomeAwayTeam', function($http, $q) {
     methods.awaysubs = function(team) {
         var defer_awaysubs = $q.defer();
         $http.get('/awaysubs/' + team, {
-            cache: true
+            cache: false
         }).success(function(data) {
             defer_awaysubs.resolve(data);
         })
@@ -73,7 +73,7 @@ app.factory('HomeAwayTeam', function($http, $q) {
     methods.homesubs = function(team) {
         var defer_homesubs = $q.defer();
         $http.get('/homesubs/' + team, {
-            cache: true
+            cache: false
         }).success(function(data) {
             defer_homesubs.resolve(data);
         })

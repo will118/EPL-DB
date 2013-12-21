@@ -10,11 +10,11 @@ describe Schedule do
   end
 
   it "saves fixtures to db" do
-  	homefix = Fixture.where(:hometeam => "West Bromwich Albion")
-  	expect(homefix.length).to be 0
-		Schedule.new("West Bromwich albion").save
-  	homefix = Fixture.where(:hometeam => "West Bromwich Albion")
-  	expect(homefix.length).to_not be 0
-	end
+    homefix = Fixture.where(:hometeam => "West Bromwich Albion")
+    expect(homefix.length).to be 0
+    Schedule.new("West Bromwich albion").save
+    homefix = Fixture.where(:hometeam => "West Bromwich Albion")
+    expect(homefix.length).to_not be 0
+  end
 
 end

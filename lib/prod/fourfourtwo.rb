@@ -19,16 +19,16 @@ class FourFourTwo
     links = doc.css('a').map { |link| link['href'] }
     every_matched_link = links.map {|l| /\/statszone\/8-2013\/matches(.*?)\/pre-match/.match(l) }
     @next_matches = (every_matched_link.reject { |e| e.nil? }).map {|x| x[0]}
-    return @next_matches 
+    return @next_matches
   end
-  
+
   def open_and_save
     @next_matches.each do |x|
       doc = Nokogiri::HTML(open(@uri+x))
       texts = doc.css('.pre-match').inner_text
       all_text = texts.split("\n").drop(1)
-      all_text.each do |x|
-        Prematch.where(:text => x, :hometeam => parse_team_name("home", doc), :awayteam => parse_team_name("away", doc)).first_or_create
+      all_text.each do |y|
+        Prematch.where(:text => y, :hometeam => parse_team_name("home", doc), :awayteam => parse_team_name("away", doc)).first_or_create
       end
     end
   end

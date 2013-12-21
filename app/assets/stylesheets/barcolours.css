@@ -1,80 +1,140 @@
 .progress .bar-arsenal {
-    background-image: linear-gradient(to bottom, #edab0f, #d89b0e);
+    background-image: linear-gradient(to bottom, #981633, #981633);
+}
+.progress .bar-arsenal-away {
+    background-image: linear-gradient(to bottom, #eade16, #eade16);
 }
 
 .progress .bar-chelsea {
-    background-image: linear-gradient(to bottom, #063381, #032660);
+    background-image: linear-gradient(to bottom, #2a4b80, #2a4b80);
+}
+.progress .bar-chelsea-away {
+    background-image: linear-gradient(to bottom, #f3f6f5, #f3f6f5);
 }
 
 .progress .bar-west-bromwich-albion {
-    background-image: linear-gradient(to bottom, #090c41, #06082e);
+    background-image: linear-gradient(to bottom, #262c42, #262c42);
+}
+.progress .bar-west-bromwich-albion-away {
+    background-image: linear-gradient(to bottom, #d70026, #d70026);
 }
 
 .progress .bar-aston-villa {
-    background-image: linear-gradient(to bottom, #5a0029, #4d0024);
+    background-image: linear-gradient(to bottom, #65022d, #65022d);
+}
+.progress .bar-aston-villa-away {
+    background-image: linear-gradient(to bottom, #8a3b6f, #8a3b6f);
 }
 
 .progress .bar-liverpool {
-    background-image: linear-gradient(to bottom, #bbbbbb, #a7a7a7);
+    background-image: linear-gradient(to bottom, #990f26, #990f26);
+}
+.progress .bar-liverpool-away {
+    background-image: linear-gradient(to bottom, #dfdee0, #dfdee0);
 }
 
 .progress .bar-tottenham-hotspur {
-    background-image: linear-gradient(to bottom, #051246, #030b2c);
+    background-image: linear-gradient(to bottom, #fefefe, #fefefe);
+}
+.progress .bar-tottenham-hotspur-away {
+    background-image: linear-gradient(to bottom, #2aafe8, #2aafe8);
 }
 
 .progress .bar-manchester-united {
-    background-image: linear-gradient(to bottom, #ce000e, #8d010c);
+    background-image: linear-gradient(to bottom, #b50a25, #b50a25);
+}
+.progress .bar-manchester-united-away {
+    background-image: linear-gradient(to bottom, #12233b, #12233b);
 }
 
 .progress .bar-stoke-city {
-    background-image: linear-gradient(to bottom, #d62331, #911823);
+    background-image: linear-gradient(to bottom, #ce1334, #ce1334);
+}
+.progress .bar-stoke-city-away {
+    background-image: linear-gradient(to bottom, #262930, #262930);
 }
 
 .progress .bar-cardiff-city {
-    background-image: linear-gradient(to bottom, #e5001e, #b10019);
+    background-image: linear-gradient(to bottom, #d9002a, #d9002a);
+}
+.progress .bar-cardiff-city-away {
+    background-image: linear-gradient(to bottom, #173284, #173284);
 }
 
 .progress .bar-west-ham-united {
-    background-image: linear-gradient(to bottom, #4c172d, #300f1d);
+    background-image: linear-gradient(to bottom, #501235, #501235);
+}
+.progress .bar-west-ham-united-away {
+    background-image: linear-gradient(to bottom, #cee8f7, #cee8f7);
 }
 
 .progress .bar-crystal-palace {
-    background-image: linear-gradient(to bottom, #06347c, #031e47);
+    background-image: linear-gradient(to bottom, #0a408e, #0a408e);
+}
+.progress .bar-crystal-palace-away {
+    background-image: linear-gradient(to bottom, #171516, #171516);
 }
 
 .progress .bar-southampton {
-    background-image: linear-gradient(to bottom, #1a1a1a, #2b2b2b);
+    background-image: linear-gradient(to bottom, #99182e, #99182e);
+}
+.progress .bar-southampton-away {
+    background-image: linear-gradient(to bottom, #181617, #181617);
 }
 
 .progress .bar-newcastle-united {
-    background-image: linear-gradient(to bottom, #666666, #414141);
+    background-image: linear-gradient(to bottom, #181415, #181415);
+}
+.progress .bar-newcastle-united-away {
+    background-image: linear-gradient(to bottom, #1a3b5f, #1a3b5f);
 }
 
 .progress .bar-sunderland {
-    background-image: linear-gradient(to bottom, #e30021, #a3021b);
+    background-image: linear-gradient(to bottom, #d60022, #d60022);
+}
+.progress .bar-sunderland-away {
+    background-image: linear-gradient(to bottom, #f5ee1b, #f5ee1b);
 }
 
 .progress .bar-norwich-city {
-    background-image: linear-gradient(to bottom, #14993e, #0d6328);
+    background-image: linear-gradient(to bottom, #0f7152, #0f7152);
+}
+.progress .bar-norwich-city-away {
+    background-image: linear-gradient(to bottom, #fcfcfc, #fcfcfc);
 }
 
 .progress .bar-everton {
-    background-image: linear-gradient(to bottom, #073b8b, #04265a);
+    background-image: linear-gradient(to bottom, #11367e, #11367e);
+}
+.progress .bar-everton-away {
+    background-image: linear-gradient(to bottom, #facc19, #facc19);
 }
 
 .progress .bar-manchester-city {
-    background-image: linear-gradient(to bottom, #4db1e6, #357aa0);
+    background-image: linear-gradient(to bottom, #4d8ecc, #4d8ecc);
+}
+.progress .bar-manchester-city-away {
+    background-image: linear-gradient(to bottom, #413d47, #413d47);
 }
 
 .progress .bar-swansea-city {
-    background-image: linear-gradient(to bottom, #b4b4b4, #8c8c8c);
+    background-image: linear-gradient(to bottom, #ffffff, #ffffff);
+}
+.progress .bar-swansea-city-away {
+    background-image: linear-gradient(to bottom, #21244c, #21244c);
 }
 
 .progress .bar-hull-city {
-    background-image: linear-gradient(to bottom, #f79616, #c87914);
+    background-image: linear-gradient(to bottom, #e38c1f, #e38c1f);
+}
+.progress .bar-hull-city-away {
+    background-image: linear-gradient(to bottom, #114381, #114381);
 }
 
 .progress .bar-fulham {
-    background-image: linear-gradient(to bottom, #000000, #2d2d2d);
+    background-image: linear-gradient(to bottom, #e2e2e4, #e2e2e4);
+}
+.progress .bar-fulham-away {
+    background-image: linear-gradient(to bottom, #360f14, #360f14);
 }
 

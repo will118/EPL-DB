@@ -1,8 +1,8 @@
 class TeamFactory
 
-	def initialize(fix)
-		@fixture = fix
-	end
+  def initialize(fix)
+    @fixture = fix
+  end
 
   def recorder
     x = @fixture
@@ -38,10 +38,8 @@ class TeamFactory
 
     home_xi = teams.css('.player-list>li')[0..10]
     away_xi = teams.css('.player-list>li')[11..21]
-    
     home_subs = teams.css('.subs-list>li')[0..6]
     away_subs = teams.css('.subs-list>li')[7..13]
-    
     Team.wipe_data_of(hometeam, awayteam)
 
     home_xi.each do |player|
