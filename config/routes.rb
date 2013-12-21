@@ -1,10 +1,6 @@
 EPLDB::Application.routes.draw do
-  
+
 root to: 'welcome#index'
-## Welcome/Login Page ##
-  get '/user/sign_out' => 'welcome#index'
-  get '/dashboard' => 'welcome#dashboard'
-  get '/settings' => 'welcome#dashboard'
 ## Custom JSONs ##
   get "/otherformjson/:team" => "data#otherformjson"
   get "/prematchjson/:team" => "data#prematchjson"
@@ -28,7 +24,7 @@ root to: 'welcome#index'
 ## Next Fixtures ##
   get 'nextfixtures/countdown' => 'data#nextfixtures_countdown'
   get 'nextfixtures/' => 'data#nextfixtures'
-## Generic JSONs ## 
+## Generic JSONs ##
   get 'livescoresjson' => 'data#livescores'
   get 'scoresjson' => 'data#scores'
   get 'fullscoresjson' => 'data#dashscores'

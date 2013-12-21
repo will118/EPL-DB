@@ -1,7 +1,7 @@
 class WelcomeController < ApplicationController
-	layout :choose_layout
+  layout :choose_layout
 
-	def choose_layout
-		"angular"
-	end
+  def choose_layout
+    "angular"
+  end
 end
