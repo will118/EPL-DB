@@ -64,8 +64,6 @@ angular.module('d3App.seasoncontrollers', [])
 
     $scope.team = $scope.$storage.favteam;
 
-    
-
     // Filter on search, loaded from staticvalues 
     $scope.teamnames = teamnames;
 

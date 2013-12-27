@@ -41,9 +41,10 @@ class GraphJSON
       elsif data.length > data2.length
         data.pop
       end
+
       if setting == "avgpossession"
         final = data.each_with_index.map do |x, i|
-          {"date" => x.date.strftime("%Y%m%d"), "MyTeam" => x.send(setting.to_sym), "Opponent" => data2[i].avgpossession}
+          {"date" => x.date.strftime("%Y%m%d"), "MyTeam" => x.avgpossession, "Opponent" => data2[i].avgpossession}
         end
       elsif setting == "shotaccuracy"
         final = data.each_with_index.map do |x, i|

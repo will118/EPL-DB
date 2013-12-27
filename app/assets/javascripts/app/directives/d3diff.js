@@ -1,9 +1,7 @@
 'use strict';
 
 angular.module('differenceChart', []).
-   
    directive('diffChart', function ($parse) {
-     
      var directiveDefinitionObject = {
          restrict: 'E',
          replace: false,
@@ -54,7 +52,7 @@ angular.module('differenceChart', []).
               });
 
           d3.selectAll("svg")
-                 .remove(); 
+                 .remove();
 
           var svg = d3.select(element[0]).append("svg")
               .attr("width", width + margin.left + margin.right)
@@ -64,9 +62,13 @@ angular.module('differenceChart', []).
                 .append("g")
                 .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-          
+
+              var county = 1
               scope.diffData.forEach(function(d) {
-                  d.date = parseDate(d.date);
+                  console.log(county);
+                  county++
+                console.log(d.date);
+                d.date = parseDate(d.date);
                   d["MyTeam"] = +d["MyTeam"];
                   d["Opponent"] = +d["Opponent"];
               });
@@ -116,11 +118,9 @@ angular.module('differenceChart', []).
                   .attr("class", "x axis")
                   .attr("transform", "translate(0," + height + ")")
                   .call(xAxis);
-         
            };
-           draw();
            scope.$watch('diffData',draw);
-         } 
+         }
       };
       return directiveDefinitionObject;
    });
