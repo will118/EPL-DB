@@ -63,11 +63,7 @@ angular.module('differenceChart', []).
                 .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
-              var county = 1
               scope.diffData.forEach(function(d) {
-                  console.log(county);
-                  county++
-                console.log(d.date);
                 d.date = parseDate(d.date);
                   d["MyTeam"] = +d["MyTeam"];
                   d["Opponent"] = +d["Opponent"];
