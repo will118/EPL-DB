@@ -95,8 +95,9 @@ class GraphJSON
         end
       end
 
+      live = poss_arr.drop(30)
       x_axis_array = * 1..(live.length)
-      [x_axis_array, poss_arr.drop(30)].transpose.map {|x, y| [x, y]}
+      [x_axis_array, live].transpose.map {|x, y| [x, y]}
     end
   end
 

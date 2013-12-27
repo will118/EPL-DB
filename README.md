@@ -20,7 +20,7 @@ I wanted marginally relevant information to have on my other/second screen durin
 
 ## Sources:
 
-- BBC Sport [Lol](http://www.bbc.co.uk/sport/0/24067715)  
+- BBC Sport [Lol](http://www.bbc.co.uk/sport/0/24067715)
 - Squawka/Opta
 - FourFourTwo/Opta
 - Stats FC API
@@ -34,7 +34,7 @@ I wanted marginally relevant information to have on my other/second screen durin
 - [NVD3(D3.js)](https://github.com/novus/nvd3)
 - [NV directives](https://github.com/cmaurer/angularjs-nvd3-directives)
 - [Mike Bostock for actual D3](http://bost.ocks.org/mike/)
-- [Nokogiri I like.](http://nokogiri.org/) 
+- [Nokogiri I like.](http://nokogiri.org/)
 - [Bootstrap](http://getbootstrap.com/)
 - [Shout out to the HTTParty animals](https://github.com/jnunemaker/httparty/)
 - [William Playfair](http://en.wikipedia.org/wiki/William_Playfair)
@@ -43,10 +43,10 @@ I wanted marginally relevant information to have on my other/second screen durin
 
 > Check the Procfile.dev for how I run it locally. And then you will see the clockwork clock being called too. Check that out as well.
 
-- PostgreSQL, I don't think I'm using any specific features though. 
+- PostgreSQL, I don't think I'm using any specific features though.
 - Redis on default port.
 - PhantomJS running GhostDriver (phantomjs --webdriver=9134)
-- Pretty sure that's it. 
+- Pretty sure that's it.
 - Bundle obviously.
 
 #### BBC Sport
@@ -57,9 +57,9 @@ So the situation here is bonafide-ish JSONs and CORS. The JSONs seem to be neste
 
 So while their API is great, docs were a bit confusing at first. 100-200ms+ response times too I'd say but that's just annecdotal. Happy customer still.
 
-#### Squawka 
+#### Squawka
 
-Don't really know what to say here, from their placement on Opta's own site and the data they show on their site it seems like they have Opta's data or data as good as. As far as I can tell... I have a few theories and no facts, surely whoever is responsible has been aware from when they first wrote it? Maybe I'm missing something but it seems pretty much like an open API. 
+Don't really know what to say here, from their placement on Opta's own site and the data they show on their site it seems like they have Opta's data or data as good as. As far as I can tell... I have a few theories and no facts, surely whoever is responsible has been aware from when they first wrote it? Maybe I'm missing something but it seems pretty much like an open API.
 
 This data has never been that useful but its quite nice to quickly compare recent form vaguely..
 
