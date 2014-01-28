@@ -1,5 +1,3 @@
-'use strict';
-
 var app = angular.module('d3App.mainGraph', [])
 
 app.factory('BigData', function($http, $q) {

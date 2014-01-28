@@ -1,5 +1,3 @@
-'use strict';
-
 var app = angular.module('d3App.teamservices', [])
 
 app.factory('TeamFormData', function($http, $q) {

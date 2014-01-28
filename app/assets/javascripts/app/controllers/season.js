@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('d3App.seasoncontrollers', [])
 
 .controller('SeasonModeController', function($scope, $localStorage, $sessionStorage, $http, $timeout, GeneralLiveData, TeamFormData, BigData, MatchDetails, HomeAwayTeam) {

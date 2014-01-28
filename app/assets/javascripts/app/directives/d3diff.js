@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('differenceChart', []).
    directive('diffChart', function ($parse) {
      var directiveDefinitionObject = {

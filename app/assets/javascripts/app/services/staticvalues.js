@@ -1,4 +1,3 @@
-'use strict';
 var teamnames = ["Arsenal",
     "Liverpool",
     "Chelsea",

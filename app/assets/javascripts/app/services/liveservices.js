@@ -1,5 +1,3 @@
-'use strict';
-
 var app = angular.module('d3App.liveservices', [])
 
 app.factory('LiveBars', function($http, $q) {

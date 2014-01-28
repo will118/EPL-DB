@@ -1,5 +1,3 @@
-'use strict';
-
 var d3App = angular.module('d3App', ['ngStorage', 'ngRoute', 'nvd3ChartDirectives', 'differenceChart', 'ui.bootstrap','ui.bootstrap.tpls', 'd3App.seasoncontrollers', 'd3App.matchcontrollers', 'd3App.liveservices', 'd3App.accountservices', 'd3App.teamservices', 'd3App.mainGraph'])
 
 .config(function($routeProvider, $locationProvider) {

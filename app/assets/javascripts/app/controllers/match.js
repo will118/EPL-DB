@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('d3App.matchcontrollers', [])
 
 .controller('MatchModeController', function($scope, $localStorage, $sessionStorage, $http, $timeout, GeneralLiveData, LiveStatsData, TeamFormData, LiveBars, BigData, MatchDetails, HomeAwayTeam) {
