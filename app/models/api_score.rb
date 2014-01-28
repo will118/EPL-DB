@@ -41,6 +41,8 @@ class ApiScore < ActiveRecord::Base
               date = Time.parse(fixture['date'])
               time = date - Time.now.utc
               fixture['date'] = distance_of_time_in_words_to_now(Time.now.utc + time)
+              fix = Fixture.get_channel(fixture['home'], fixture['away'])
+              fixture['channel'] = fix.channel unless fix == nil
             end
           end
         end

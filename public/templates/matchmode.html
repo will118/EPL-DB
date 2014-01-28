@@ -19,7 +19,7 @@
         <div id="epl_navbar_nav">
             <form class="navbar-form navbar-left" role="search">
                 <div class="form-group">
-                    <input type="text" class="form-control" focus-on="focusMe" ng-model="team" typeahead="name for name in teamnames | filter:$viewValue" typeahead-editable="false">
+                    <input type="text" class="form-control" tooltip="Choose Team"  tooltip-trigger="focus" tooltip-placement="bottom" ng-model="team" typeahead="name for name in teamnames | filter:$viewValue" typeahead-editable="false">
                 </div>
             </form>
             <ul class="nav navbar-nav">
@@ -225,6 +225,8 @@
                                             <p class="lead" id="colour-lead2">{{nextfix.home}} vs. {{nextfix.away}}
                                                 <br />
                                                 <span class="score">{{nextfix.date}}</span>
+                                               <br />
+                                                {{nextfix.channel}}
                                             </p>
                                         </td>
                                     </tr>

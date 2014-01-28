@@ -2,7 +2,7 @@
 
 angular.module('d3App.matchcontrollers', [])
 
-.controller('MatchModeController', function($scope, $localStorage, $sessionStorage, $http, $timeout, focus, GeneralLiveData, LiveStatsData, TeamFormData, LiveBars, BigData, MatchDetails, HomeAwayTeam) {
+.controller('MatchModeController', function($scope, $localStorage, $sessionStorage, $http, $timeout, GeneralLiveData, LiveStatsData, TeamFormData, LiveBars, BigData, MatchDetails, HomeAwayTeam) {
 
     $scope.$storage = $localStorage.$default({
         "badge": true,
@@ -16,8 +16,6 @@ angular.module('d3App.matchcontrollers', [])
         "liveBars": true,
         "nextFixtures": true
     });
-
-    focus('focusMe');
 
     $scope.gotLive = false
 

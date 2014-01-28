@@ -57,6 +57,10 @@ class Fixture < ActiveRecord::Base
       where(:hometeam => team1.titleize, :awayteam => team2.titleize).order(:kickoff).first
     end
 
+    def self.get_channel(team1, team2)
+      where(:hometeam => team1.titleize, :awayteam => team2.titleize).order(:kickoff).first
+    end
+
     def self.by_team(team)
       Fixture.involving(team).order(:kickoff).map do |x|
         {"home" => x.hometeam,

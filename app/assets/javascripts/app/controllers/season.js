@@ -2,7 +2,7 @@
 
 angular.module('d3App.seasoncontrollers', [])
 
-.controller('SeasonModeController', function($scope, $localStorage, $sessionStorage, $http, $timeout, focus, GeneralLiveData, TeamFormData, BigData, MatchDetails, HomeAwayTeam) {
+.controller('SeasonModeController', function($scope, $localStorage, $sessionStorage, $http, $timeout, GeneralLiveData, TeamFormData, BigData, MatchDetails, HomeAwayTeam) {
 
     $scope.diffTeam = "Manchester United";
 
@@ -34,9 +34,6 @@ angular.module('d3App.seasoncontrollers', [])
     };
 
     $scope.defaultCharter();
-
-    focus('focusMe');
-
 
     $scope.selectTeam = function(team) {
         $scope.team = team
