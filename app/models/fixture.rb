@@ -53,11 +53,16 @@ class Fixture < ActiveRecord::Base
       where(["awayteam = ? or hometeam = ?", team.titleize, team.titleize]).order(:kickoff).first
     end
 
+    def self.next_1_involving_both(team1, team2)
+      where(:hometeam => team1.titleize, :awayteam => team2.titleize).order(:kickoff).first
+    end
+
     def self.by_team(team)
       Fixture.involving(team).order(:kickoff).map do |x|
         {"home" => x.hometeam,
-          "away" => x.awayteam,
-          "date" => x.kickoff.to_formatted_s(:long_ordinal).gsub(/2013\s/, "")}
+         "channel" => x.channel,
+         "away" => x.awayteam,
+         "date" => x.kickoff.to_formatted_s(:long_ordinal).gsub(/2013\s/, "")}
       end
     end
 end

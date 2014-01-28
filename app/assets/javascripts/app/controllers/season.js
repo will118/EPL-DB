@@ -27,7 +27,7 @@ angular.module('d3App.seasoncontrollers', [])
         $scope.diffChart = false;
         $scope.defaultChart = true
     };
-    
+
     $scope.diffCharter = function() {
         $scope.defaultChart = false;
         $scope.diffChart = true;

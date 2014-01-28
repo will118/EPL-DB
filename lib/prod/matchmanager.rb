@@ -1,9 +1,8 @@
 class MatchManager
-  
+
   def self.run
     Fixture.next_8.each do |fixture|
       match_timer = MatchTime.new(fixture.kickoff)
-      rec = TeamFactory.new(fixture)
       if match_timer.halftime? && fixture.got_json?
         puts "Half Time"
       elsif match_timer.pre_match? && fixture.missing_link?
@@ -11,6 +10,7 @@ class MatchManager
       elsif match_timer.match_over?
         fixture.delete
       elsif match_timer.live_match? && fixture.have_json_link?
+        rec = TeamFactory.new(fixture)
         rec.recorder
         RemoteAPI.api_save
         if match_timer.live_match? && fixture.out_of_date_teams?
@@ -19,6 +19,7 @@ class MatchManager
         else puts "Teams still fresh"
         end
       elsif match_timer.match_soon? && fixture.no_team?
+        rec = TeamFactory.new(fixture)
         rec.teams
       elsif match_timer.match_on_soon_or_just_ended?
         Form.form_get
