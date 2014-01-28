@@ -1,5 +1,9 @@
 class DataController < ApplicationController
 
+  def index
+    "angular"
+  end
+
 ## Teams ##
   def hometeam
     render :json => Teams.home_team(params[:team])

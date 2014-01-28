@@ -1,6 +1,6 @@
 EPLDB::Application.routes.draw do
 
-root to: 'welcome#index'
+root to: 'data#index'
 ## Custom JSONs ##
   get "/otherformjson/:team" => "data#otherformjson"
   get "/prematchjson/:team" => "data#prematchjson"
@@ -30,5 +30,5 @@ root to: 'welcome#index'
   get 'fullscoresjson' => 'data#dashscores'
   get 'tablejson' => 'data#tablejson'
 ## Catch-all ##
-  get "*path" => 'welcome#index'
+  get "*path" => 'data#index'
 end
