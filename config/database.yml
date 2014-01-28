@@ -1,10 +1,10 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: epldb_dev
+  database: aaaamilne_development
   host: localhost
   pool: 16
-  username: postgres
+  username: aaaamilne
   password: 
 
 test: &test
