@@ -218,6 +218,7 @@ angular.module('d3App.seasoncontrollers', [])
             scores();
             table();
             $scope.$storage.favteam = team;
+            $scope.team = team;
         }
     };
     $scope.$watch('team', updateTeamDependencies);

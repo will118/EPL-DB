@@ -15,17 +15,17 @@ angular.module('d3App.matchcontrollers', [])
         "nextFixtures": true
     });
 
-    $scope.gotLive = false
+    $scope.gotLive = false;
 
-    $scope.settingsToggle = false
+    $scope.settingsToggle = false;
 
     $scope.selectTeam = function(team) {
-        $scope.team = team
+        $scope.team = team;
     };
 
     $scope.team = $scope.$storage.favteam;
 
-    // Filter on search, loaded from staticvalues 
+    // Filter on search, loaded from staticvalues
     $scope.teamnames = teamnames;
 
     // Generic default values for instantiation
@@ -47,174 +47,173 @@ angular.module('d3App.matchcontrollers', [])
     var barposs = function(team) {
         LiveBars.poss(team).then(function(data) {
             $scope.possBar = data;
-        })
-    }
+        });
+    };
     var barshots = function(team) {
         LiveBars.shots(team).then(function(data) {
             $scope.shotsBar = data;
-        })
-    }
+        });
+    };
 
     var home = function(team) {
         var hometeam = HomeAwayTeam.home(team);
         hometeam.then(function(data) {
-            if (data && data[0] != undefined) {
+            if (data && data[0] !== undefined) {
                 $scope.hometeam = data;
-                $scope.hometeamname = data[0].teamname
+                $scope.hometeamname = data[0].teamname;
             }
-        })
-    }
+        });
+    };
 
     var away = function(team) {
         var awayteam = HomeAwayTeam.away(team);
         awayteam.then(function(data) {
-            if (data && data[0] != undefined) {
+            if (data && data[0] !== undefined) {
                 $scope.awayteam = data;
-                $scope.awayteamname = data[0].teamname
+                $scope.awayteamname = data[0].teamname;
             }
-        })
-    }
+        });
+    };
 
     var homebench = function(team) {
         var homesubs = HomeAwayTeam.homesubs(team);
         homesubs.then(function(data) {
             $scope.homesubs = data;
-        })
-    }
+        });
+    };
 
     var awaybench = function(team) {
         var awaysubs = HomeAwayTeam.awaysubs(team);
         awaysubs.then(function(data) {
             $scope.awaysubs = data;
-        })
-    }
+        });
+    };
 
     var target = function(team) {
         LiveStatsData.targets(team).then(function(data) {
             $scope.livetargets = data;
             $scope.colourArray = LiveStatsData.colours(data, team);
-        })
-    }
+        });
+    };
 
     var corners = function(team) {
-        var corner = LiveStatsData.corner(team)
+        var corner = LiveStatsData.corner(team);
         corner.then(function(data) {
-            $scope.livecorners = data
-        })
-    }
+            $scope.livecorners = data;
+        });
+    };
 
     var liveshot = function(team) {
         var liveshots = LiveStatsData.shot(team);
         liveshots.then(function(data) {
-            $scope.liveshots = data
-        })
+            $scope.liveshots = data;
+        });
     };
-    
+
     $scope.xFunction = function(){
                 return function(d){
                     return d[0];
-                }
-            }
+                };
+            };
     $scope.yFunction = function(){
         return function(d){
             return d[1];
-        }
-    }
+        };
+    };
 
     var liveposs = function(team) {
         var poss = LiveStatsData.poss(team);
         poss.then(function(data) {
-            $scope.liveposs = data
-        })
+            $scope.liveposs = data;
+        });
     };
 
-    $scope.colourArray = ['#e8000b', '#051246']
+    $scope.colourArray = ['#e8000b', '#051246'];
 
     $scope.colorFunction = function() {
         return function(d, i) {
                 return $scope.colourArray[i];
         };
-    }; 
+    };
 
     $scope.sparkFunction = function() {
         return function(d) {
-                return '#bbbbbb'
+                return '#bbbbbb';
         };
     };
 
-
     var squawkajson = function(team) {
-        var megajson = BigData.squawka(team)
+        var megajson = BigData.squawka(team);
         megajson.then(function(data) {
-            $scope.megajson = data
-        })
-    }
+            $scope.megajson = data;
+        });
+    };
 
     var score = function() {
-        var scorePromise = GeneralLiveData.fullscores()
+        var scorePromise = GeneralLiveData.fullscores();
         scorePromise.then(function(data) {
-            $scope.results = data
-        })
-    }
+            $scope.results = data;
+        });
+    };
     var livescore = function() {
-        var scorePromise = GeneralLiveData.livescores()
+        var scorePromise = GeneralLiveData.livescores();
         scorePromise.then(function(data) {
             if (data.length > 3) {
-                $scope.scores = data,
-                $scope.gotLive = true
+                $scope.scores = data;
+                $scope.gotLive = true;
             };
-        })
-    }
+        });
+    };
 
     var nextfix = function() {
-        var nextfixes = GeneralLiveData.nextfixtures()
+        var nextfixes = GeneralLiveData.nextfixtures();
         nextfixes.then(function(data) {
-            $scope.nextfixtures = data
-        })
-    }
+            $scope.nextfixtures = data;
+        });
+    };
 
     var table = function() {
-        var table = GeneralLiveData.table()
+        var table = GeneralLiveData.table();
         table.then(function(data) {
-            $scope.premtable = data
-        })
+            $scope.premtable = data;
+        });
     };
 
     var scorer = function(team) {
         var s = GeneralLiveData.scorers(team);
         s.then(function(data) {
             $scope.scorers = data;
-        })
+        });
     };
 
     var fixt = function(team) {
         var fixture = GeneralLiveData.fixtures(team);
         fixture.then(function(data) {
-            $scope.fixtures = data
-        })
+            $scope.fixtures = data;
+        });
     };
 
     var formteam = function(team) {
         var teamform = TeamFormData.teamform(team);
         teamform.then(function(data) {
-            $scope.form = data
-        })
+            $scope.form = data;
+        });
     };
 
     var formoppo = function(team) {
         var oppoform = TeamFormData.oppoform(team);
         oppoform.then(function(data) {
-            $scope.otherform = data
-            $scope.otherColour = team_colour(data[0]['team'])
-        })
+            $scope.otherform = data;
+            $scope.otherColour = team_colour(data[0]['team']);
+        });
     };
 
     var optatext = function(team) {
         var prematch = MatchDetails.prematch(team);
         prematch.then(function(data) {
-            $scope.prematchArray = data
+            $scope.prematchArray = data;
             preMatcher(data);
-        })
+        });
     };
 
     var livestats = function() {
@@ -229,7 +228,7 @@ angular.module('d3App.matchcontrollers', [])
     var preMatcher = function(data) {
         $scope.prematchsing = data[$scope.counter];
         if ($scope.counter == 9) {
-            $scope.counter = 0
+            $scope.counter = 0;
         }
         $scope.counter++;
     };
@@ -258,10 +257,12 @@ angular.module('d3App.matchcontrollers', [])
     }, 4200);
 
     var updateTeamDependencies = function(team) {
-        if (team == undefined) {
-            return null
+        if (team === undefined) {
+            return null;
         } else {
             $scope.myColour = team_colour(team);
+            $scope.team = team;
+            $scope.$storage.favteam = team;
             target(team);
             awaybench(team);
             homebench(team);
@@ -280,8 +281,10 @@ angular.module('d3App.matchcontrollers', [])
             table();
             score();
             nextfix();
+            console.log(team);
         }
     };
     $scope.$watch('team', updateTeamDependencies);
+
 
 });
