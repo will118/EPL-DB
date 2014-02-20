@@ -4,7 +4,7 @@ development:
   database: epldb_dev
   host: localhost
   pool: 16
-  username: aaaamilne
+  username: postgres
   password:
 
 test: &test
