@@ -6,6 +6,11 @@ class TvCoverage
       add_to_fixture_db(filter_data(filter_table(scrape)))
     end
 
+    def run_debug
+      add_to_fixture_db(filter_data_debug(filter_table(scrape)))
+    end
+
+
     def scrape
       Nokogiri::HTML(open("http://www.wheresthematch.com/barclays-premier-league/"))
     end
@@ -18,6 +23,13 @@ class TvCoverage
         hashes << entry unless entry[0][:data].empty?
       end
       hashes
+    end
+
+    def filter_data_debug(table)
+      table.map do |x|
+        data, date = x[0][:data], x[0][:date]
+        {data: data.text.gsub(/(\r|\n).*/, ''), channel: data.text.match(/(?<=pm\son\s)(.*)(?=Claim)/)[1], date: date.text.gsub(/\r\n|\r|\n/, '').gsub(/\s{2,}/, '').gsub(/2014/, '2014 ')}
+      end
     end
 
     def filter_data(table)

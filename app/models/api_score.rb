@@ -25,25 +25,45 @@ class ApiScore < ActiveRecord::Base
     end
 
     def self.league_table
-      RedisService.set_if_expired(:table,60) do
-        json_get "http://api.statsfc.com/#{ENV["COMP"]}/table.json?key=#{ENV["STATS_KEY"]}"
+      RedisService.set_if_expired(:table,160) do
+        league_bbc
       end
+    end
+
+    def self.league_bbc
+      doc = nokophantom_get "http://www.bbc.co.uk/sport/football/tables"
+      table = doc.css ".table-stats"
+      nodes = table[0]
+      teams = nodes.css(".team-name").map{|x| x.inner_text}
+      played = nodes.css(".played").map{|x| x.inner_text}
+      won = nodes.css(".won").map{|x| x.inner_text}
+      drawn = nodes.css(".drawn").map{|x| x.inner_text}
+      lost = nodes.css(".lost").map{|x| x.inner_text}
+      difference = nodes.css(".goal-difference").map{|x| x.inner_text}
+      points = nodes.css(".points").map{|x| x.inner_text}
+
+      output = []
+      20.times do |i|
+        i += 1
+        output << {"team" => teams[i], "played" => played[i], "won" => won[i], "drawn" => drawn[i],
+                   "lost" => lost[i], "difference" => difference[i],"points" => points[i]}
+      end
+      output
     end
 
     class << self
      include ActionView::Helpers::DateHelper
         def fixtures_countdown
-          RedisService.set_if_expired(:fixcountdown,300) do
-            from_date = Date.today.strftime("%Y-%m-%d")
-            to_date = 2.months.from_now.strftime("%Y-%m-%d")
-            result = json_get "http://api.statsfc.com/#{ENV["COMP"]}/fixtures.json?key=#{ENV["STATS_KEY"]}&from=#{from_date}&to=#{to_date}&timezone=#{ENV["TIMEZONE"]}&limit=10"
-            result.each do |fixture|
-              date = Time.parse(fixture['date'])
-              time = date - Time.now.utc
-              fixture['date'] = distance_of_time_in_words_to_now(Time.now.utc + time)
-              fix = Fixture.get_channel(fixture['home'], fixture['away'])
-              fixture['channel'] = fix.channel unless fix == nil
+          RedisService.set_if_expired(:fixcountdown,30) do
+            fixes = Fixture.where("kickoff > ?", Time.now).order(:kickoff).take(7)
+            out = []
+            fixes.each do |fixture|
+              date = fixture.kickoff
+              time = date - (Time.now.utc + 1.hour)
+              fixture_date_diff = distance_of_time_in_words_to_now(Time.now.utc + time)
+               out << {"home" => fixture.hometeam, "away" => fixture.awayteam, "date" => fixture_date_diff, "channel" => fixture.channel}
             end
+            out
           end
         end
     end

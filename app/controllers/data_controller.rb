@@ -78,7 +78,8 @@ class DataController < ApplicationController
   end
 
   def pastresults
-    render :json => ApiScore.past_results(params[:team])
+    # render :json => ApiScore.past_results(params[:team])
+    render :json => {"api-closed" => true}
   end
 
 ## Graph JSONs ##

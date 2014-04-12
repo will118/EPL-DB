@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140128151906) do
+ActiveRecord::Schema.define(version: 20140411205923) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -130,6 +130,27 @@ ActiveRecord::Schema.define(version: 20140128151906) do
     t.string   "name"
     t.integer  "number"
     t.string   "subbed"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "megamodels", force: true do |t|
+    t.string   "home"
+    t.string   "away"
+    t.integer  "home_ht_score"
+    t.integer  "away_ht_score"
+    t.integer  "home_ft_score"
+    t.integer  "away_ft_score"
+    t.integer  "home_shots"
+    t.integer  "away_shots"
+    t.integer  "home_targets"
+    t.integer  "away_targets"
+    t.integer  "home_corners"
+    t.integer  "away_corners"
+    t.integer  "home_fouls"
+    t.integer  "away_fouls"
+    t.float    "home_possession"
+    t.float    "away_possession"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
